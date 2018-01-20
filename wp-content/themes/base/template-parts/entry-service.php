@@ -12,15 +12,13 @@ $image = get_the_post_thumbnail( null, 'entry' );
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-   <?php
-   if ( $image ) {
-      echo '<figure>' . $image . '</figure>';
-   } else {
-      echo '<figure class="noimage"></figure>';
-   }
-   ?>
+   <?php if ( $image ): ?>
+      <figure><a href="<?php the_permalink(); ?>"><?php echo $image; ?></a></figure>
+   <?php else: ?>
+      <figure class="noimage"></figure>
+   <?php endif; ?>
    <header class="entry-header">
-      <h3 class="entry-title"><?php the_title(); ?></h3>
+      <h3 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
    </header><!-- .entry-header -->
    <?php the_excerpt() ?>
 </article>

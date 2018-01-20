@@ -36,12 +36,28 @@ function base_entry_image_responsive_sizes( $sizes, $size ) {
 add_filter( 'wp_calculate_image_sizes', 'base_entry_image_responsive_sizes', 10 , 2 );
 
 /**
+ * Add a 'read more' link to the excerpt
+ */
+function base_excerpt( $excerpt ) {
+	return $excerpt . ' <a href="'.get_permalink().'" class="more-link">' . esc_html__( 'Read more', 'base' ) . '</a>';
+}
+add_filter( 'get_the_excerpt', 'base_excerpt' );
+
+/**
  * Change excerpt length
  */
 function base_excerpt_length( $length ) {
 	return 20;
 }
 add_filter( 'excerpt_length', 'base_excerpt_length', 999 );
+
+/**
+ * Change excerpt ellispis
+ */
+function base_excerpt_more( $more ) {
+	return '…';
+}
+add_filter( 'excerpt_more', 'base_excerpt_more' );
 
 /**
  * Adds custom classes to the array of body classes.

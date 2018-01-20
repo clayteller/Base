@@ -349,6 +349,15 @@ input[type="submit"],
 	@mixin button-stretch;
 }
 
+.search-form {
+	margin-bottom: $space-section;
+	margin-top: $space-section;
+}
+
+.search-submit {
+	margin-left: 0.5em;
+}
+
 /*--------------------------------------------------------------
 # Icons
 --------------------------------------------------------------*/
@@ -1096,6 +1105,11 @@ nav ul {
 	}
 }
 
+.more-link {
+	font-size: $font-size-meta;
+	text-transform: uppercase;
+}
+
 /* Entry Meta
 ----------------------------------*/
 
@@ -1209,6 +1223,14 @@ nav ul {
 	@media (min-width: $tablet) {
 		.wrap {
 			@mixin flexbox row, wrap, space-between, center;
+
+			> * {
+				width: 32%;
+			}
+		}
+
+		.contact-info {
+			justify-content: flex-end;
 		}
 	}
 
