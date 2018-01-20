@@ -1,0 +1,249 @@
+/*--------------------------------------------------------------
+# Background image color overlay
+--------------------------------------------------------------*/
+
+@define-mixin background-image-overlay $background-color {
+	position: relative;
+
+	&::after {
+		background: $background-color;
+		content: '';
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		z-index: 10;
+	}
+
+	.wrap {
+		position: relative;
+		z-index: 20;
+	}
+}
+
+/*--------------------------------------------------------------
+# Border
+--------------------------------------------------------------*/
+
+@define-mixin border $margin-adjust: 0rem, $padding-adjust: 0rem {
+	border-top: 1px solid $color-border;
+	margin-top: resolve( $space-border + $margin-adjust );
+	padding-top: resolve( $space-border + $padding-adjust );
+}
+
+/*--------------------------------------------------------------
+# Box
+--------------------------------------------------------------*/
+
+@define-mixin box $type: default, $space: $space-box {
+	$box-padding: 15px;
+	background: #fff;
+	box-shadow: $box-shadow;
+	margin-bottom: $space;
+
+	@if $type != linked {
+		padding: $box-padding;
+	}
+
+	text-align: center;
+	transition: $transition;
+
+	@if $type == linked {
+		&:hover {
+			box-shadow: $box-shadow-on;
+			transform: translateY( -1px );
+		}
+
+		> a {
+			padding: $box-padding;
+		}
+	}
+}
+
+/*--------------------------------------------------------------
+# Button
+--------------------------------------------------------------*/
+
+@define-mixin button {
+	background: $background-button;
+	border-radius: $border-radius;
+	border: 0;
+	box-shadow: none;
+	color: rgba(255, 255, 255, 0.9);
+	cursor: pointer;
+	display: inline-block;
+	font-family: $font-family-heading;
+	font-size: $font-size-button;
+	font-weight: $font-weight-heading;
+	line-height: 1;
+	padding: 0.8em 1em 0.7em;
+	text-decoration: none;
+	text-shadow: $text-shadow;
+	text-transform: uppercase;
+	white-space: nowrap;
+	width: auto;
+
+	&:hover,
+	&:focus {
+		background: $background-button-hover;
+		color: #fff;
+	}
+
+	&:active {
+		background: $background-button-active;
+		color: #fff;
+	}
+}
+
+@define-mixin button-outline $type: default {
+	background: transparent;
+
+	@if $type == light {
+		box-shadow: inset 0 0 0 2px color( $color-white a(60%) );
+		color: color( $color-white a(90%) );
+	} @else {
+		box-shadow: inset 0 0 0 2px $background-button;
+		color: $background-button;
+	}
+
+	&:hover,
+	&:focus {
+		@if $type == light {
+			background: color( $background-button lightness(+6) );
+		} @else {
+			background: $background-button;
+		}
+		color: #fff;
+	}
+}
+
+@define-mixin button-big {
+	font-size: resolve( $font-size-button + 0.1em );
+}
+
+@define-mixin button-plain {
+	background: $background-button-plain;
+
+	&:hover,
+	&:focus,
+	&:active {
+		background: $background-button-plain-hover;
+	}
+}
+
+@define-mixin button-stretch {
+		text-align: center;
+		width: 100%;
+}
+
+/*--------------------------------------------------------------
+# Flexbox
+--------------------------------------------------------------*/
+
+@define-mixin flexbox $direction: row, $wrap: wrap, $justify: space-between, $align: normal {
+	display: flex;
+	flex-flow: $direction $wrap;
+	justify-content: $justify;
+
+	@if $align != normal {
+		align-items: $align;
+	}
+}
+
+/*--------------------------------------------------------------
+# Heading
+--------------------------------------------------------------*/
+
+@define-mixin heading $level {
+	color: $color-heading;
+	font-family: $font-family-heading;
+	font-weight: $font-weight-heading;
+	line-height: $line-height-heading;
+	margin-bottom: $space-heading;
+	margin-top: 0;
+
+	@if $level == h1 {
+		font-size: $font-size-h1;
+	}
+	@if $level == h2 {
+		font-size: $font-size-h2;
+		margin-bottom: $space-h2;
+	}
+	@if $level == h3 {
+		font-size: $font-size-h3;
+	}
+	@if $level == h4 {
+		font-size: $font-size-h4;
+	}
+	@if $level == h5 {
+		font-size: $font-size-h5;
+	}
+
+	a {
+		color: $color-heading;
+		text-decoration: none;
+	}
+}
+
+@define-mixin title {
+	color: $color-title;
+	font-family: $font-family-heading;
+	font-size: $font-size-h1;
+	font-weight: $font-weight-heading;
+	margin-bottom: 0;
+	line-height: $line-height-title;
+	text-shadow: $text-shadow;
+}
+
+/*--------------------------------------------------------------
+# Image replacement
+--------------------------------------------------------------*/
+
+@define-mixin image-replacement $height: auto, $width: auto  {
+	display: block;
+	height: $height;
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
+	width: $width;
+}
+
+/*--------------------------------------------------------------
+# Link
+--------------------------------------------------------------*/
+
+@define-mixin link $color: $color-link, $color-hover: $color-link-hover, $decoration: none  {
+	color: $color;
+	text-decoration: $decoration;
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: $color-hover;
+	}
+}
+
+/*--------------------------------------------------------------
+# Remove bottom space
+--------------------------------------------------------------*/
+
+@define-mixin remove-bottom-space {
+	> *:last-child {
+	    margin-bottom: 0 !important;
+	}
+}
+
+/*--------------------------------------------------------------
+# Section
+--------------------------------------------------------------*/
+
+@define-mixin section $top-adjust: 0rem, $bottom-adjust: 0rem {
+	padding-top: resolve( $space-section + $top-adjust );
+	padding-bottom: resolve( $space-section + $bottom-adjust );
+
+	@media (min-width: $tablet) {
+		padding-top: resolve( $space-section-desktop + $top-adjust );
+		padding-bottom: resolve( $space-section-desktop + $bottom-adjust );
+	}
+}

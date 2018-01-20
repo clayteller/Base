@@ -1,0 +1,35 @@
+{
+   "name": "base",
+   "version": "1.0.0",
+   "description": "[![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)",
+   "main": "index.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "author": "Clay Teller",
+   "license": "ISC",
+   "devDependencies": {
+      "autoprefixer": "^7.2.4",
+      "browser-sync": "^2.23.5",
+      "gulp": "^3.9.1",
+      "gulp-changed": "^3.2.0",
+      "gulp-cssnano": "^2.1.2",
+      "gulp-ignore": "^2.0.2",
+      "gulp-imagemin": "^4.1.0",
+      "gulp-plumber": "^1.2.0",
+      "gulp-postcss": "^7.0.1",
+      "gulp-rename": "^1.2.2",
+      "gulp-sourcemaps": "^2.6.3",
+      "gulp-uglify": "^3.0.0",
+      "gulp-util": "^3.0.8",
+      "imagemin-pngquant": "^5.0.1",
+      "postcss-cssnext": "^3.0.2",
+      "postcss-math": "0.0.10",
+      "postcss-responsive-type": "^1.0.0",
+      "precss": "^2.0.0"
+   },
+   "dependencies": {
+      "postcss": "^6.0.16",
+      "postcss-advanced-variables": "^2.3.0"
+   }
+}

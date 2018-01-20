@@ -1,0 +1,1496 @@
+/*
+Theme Name: Base
+Theme URI: http://underscores.me/
+Author: Clay Teller
+Author URI: http://clayteller.com
+Description: Clay Teller's base theme.
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Tags:
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+
+Base is based on Underscores http://underscores.me/, (C) 2012-2016 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+*/
+
+@import "css/_variables.css";
+@import "css/_mixins.css";
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS
+----------------------------------------------------------------
+# Elements
+# Typography
+# Links
+# Forms
+# Icons
+# Classes
+# Layout
+# Masthead
+# Navigation
+# Header
+# Sections
+# Entries
+# Footer
+# Accessibility
+# WORDPRESS
+# Widgets
+# Posts and pages
+# Comments
+# Media
+# PLUGINS
+# Contact Form 7
+# CONTENT
+# Home Page
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Elements
+--------------------------------------------------------------*/
+
+html {
+	box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after { /* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+	box-sizing: inherit;
+}
+
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+	content: "";
+}
+
+blockquote,
+q {
+	quotes: "" "";
+}
+
+hr {
+	background-color: $color-border;
+	border: 0;
+	height: 1px;
+	margin-bottom: 1.5em;
+}
+
+ul,
+ol {
+	margin: 0;
+	padding: 0;
+}
+
+ul {
+	list-style: none;
+}
+
+ol {
+	list-style: decimal;
+}
+
+li > ul,
+li > ol {
+	margin-bottom: 0;
+	margin-left: 1.5em;
+}
+
+dt {
+	font-weight: bold;
+}
+
+dd {
+	margin: 0 1.5em 1.5em;
+}
+
+img {
+	height: auto; /* Make sure images are scaled correctly. */
+	max-width: 100%; /* Adhere to container width. */
+}
+
+figure {
+	margin: 0; /* Extra wide images within figure tags don't overflow the content area. */
+}
+
+table {
+	margin: 0 0 1.5em;
+	width: 100%;
+}
+
+/*--------------------------------------------------------------
+# Typography
+--------------------------------------------------------------*/
+
+html {
+	/* postcss-responsive-type (next 2 lines) */
+	font-size: responsive $responsive-type-font-min $responsive-type-font-max; /* min-size, max-size */
+   font-range: $responsive-type-screen-min $responsive-type-screen-max; /* viewport widths between which font-size is fluid */
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+	color: $color-text;
+	font-family: $font-family;
+	font-size: $font-size;
+	font-weight: $font-weight;
+	line-height: $line-height;
+}
+
+h1 {
+	@mixin heading h1;
+}
+
+h2 {
+	@mixin heading h2;
+}
+
+h3 {
+	@mixin heading h3;
+}
+
+h4 {
+	@mixin heading h4;
+}
+
+h5 {
+	@mixin heading h5;
+}
+
+h6 {
+	@mixin heading h6;
+}
+
+p {
+	margin: 0 0 $space-text;
+
+	&.intro {
+		font-size: $font-size-large;
+	}
+}
+
+strong {
+	color: $color-strong;
+	font-weight: $font-weight-bold;
+}
+
+.site-main {
+	ul,
+	ol {
+		margin: 0 0 $space-text;
+		padding-left: 2.5em;
+	}
+
+	ul {
+		list-style: disc;
+	}
+
+	li > ul,
+	li > ol {
+		margin-bottom: 0;
+		margin-left: 1.5em;
+	}
+
+	dt {
+		font-weight: bold;
+	}
+
+	dd {
+		margin: 0 1.5em 1.5em;
+	}
+}
+
+dfn,
+cite,
+em,
+i {
+	font-style: italic;
+}
+
+blockquote {
+	margin: 0 1.5em;
+}
+
+address {
+	margin: 0 0 1.5em;
+}
+
+pre {
+	background: #eee;
+	font-family: "Courier 10 Pitch", Courier, monospace;
+	font-size: 15px;
+	font-size: 0.9375rem;
+	line-height: 1.6;
+	margin-bottom: 1.6em;
+	max-width: 100%;
+	overflow: auto;
+	padding: 1.6em;
+}
+
+code,
+kbd,
+tt,
+var {
+	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+	font-size: 15px;
+	font-size: 0.9375rem;
+}
+
+abbr,
+acronym {
+	border-bottom: 1px dotted #666;
+	cursor: help;
+}
+
+mark,
+ins {
+	background: #fff9c0;
+	text-decoration: none;
+}
+
+big {
+	font-size: 125%;
+}
+
+/*--------------------------------------------------------------
+# Links
+--------------------------------------------------------------*/
+
+a,
+button,
+input:focus,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+textarea:focus,
+.button {
+	transition: $transition;
+}
+
+a {
+	@mixin link;
+
+	&:focus {
+		outline: thin dotted;
+	}
+
+	&:hover,
+	&:active {
+		outline: 0;
+	}
+}
+
+/*--------------------------------------------------------------
+# Forms
+--------------------------------------------------------------*/
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"],
+textarea {
+	color: #444;
+	border: 1px solid #ccc;
+	border-radius: $border-radius-field;
+	font-family: $font-family;
+	font-size: 1em;
+	max-width: 100%;
+	padding: 10px 15px;
+}
+
+select {
+	border: 1px solid #ccc;
+}
+
+textarea {
+	width: 100%;
+}
+
+:focus::placeholder {
+	color: #bbb;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+.button {
+	@mixin button;
+}
+
+.button-big {
+	@mixin button-big;
+}
+
+.button-stretch {
+	@mixin button-stretch;
+}
+
+/*--------------------------------------------------------------
+# Icons
+--------------------------------------------------------------*/
+
+[class*="icon-"] {
+	fill: currentColor;
+	height: 0.95em;
+	vertical-align: -0.15em;
+	width: 0.95em;
+}
+
+/*--------------------------------------------------------------
+# Classes
+--------------------------------------------------------------*/
+
+.branding {
+	a {
+		@mixin flexbox row, wrap, start, center;
+	}
+
+	.logo {
+		margin-right: 0.4rem;
+		height: 2.2rem;
+	}
+
+	.logo-inner {
+		fill: color( $color-primary lightness(+10) );
+	}
+
+	.logo-outer {
+		fill: color( $color-primary hue(-20) lightness(+10) );
+	}
+
+	.site-title {
+		font-family: $font-family-heading;
+		font-size: 1.6em;
+		font-weight: $font-weight-heading-light;
+		margin: 0;
+	}
+}
+
+.contact-info {
+	@mixin flexbox row, wrap, center;
+	list-style: none !important;
+	padding-left: 0 !important;
+
+	.phone,
+	.email {
+		flex: 0 0 100%;
+	}
+
+	.icon {
+		@mixin image-replacement auto, 45px;
+		background: currentColor;
+	}
+
+	.facebook .icon {
+		mask: url(icons/facebook.svg) no-repeat 50% 50%/24px;
+	}
+
+	.twitter .icon {
+		mask: url(icons/twitter.svg) no-repeat 50% 50%/24px;
+	}
+
+	.googleplus .icon {
+		mask: url(icons/google+.svg) no-repeat 50% 50%/24px;
+	}
+
+	.linkedin .icon {
+		mask: url(icons/linkedin.svg) no-repeat 50% 50%/24px;
+	}
+}
+
+/*--------------------------------------------------------------
+# Layout
+--------------------------------------------------------------*/
+
+html, body, .site {
+	min-height: 100vh;
+}
+
+.wrap {
+	margin: 0 auto;
+	max-width: $max-width;
+	padding-left: $gutter;
+	padding-right: $gutter;
+
+	.home &,
+	.site-header &,
+	.site-footer &,
+	.colophon & {
+		max-width: $max-width-wide;
+	}
+
+	.masthead & {
+		max-width: 100%;
+	}
+
+	.two-column .site-main & {
+		max-width: resolve($max-width - $sidebar-width);
+		padding: 0;
+	}
+}
+
+body:not(.home) .site-main {
+	@mixin section;
+}
+
+/* CSS grid
+----------------------------------*/
+
+.site {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr auto;
+	grid-template-areas:
+		"header"
+		"main"
+		"footer";
+}
+
+.site-header {
+	grid-area: header;
+}
+
+.site-main {
+	grid-area: main;
+}
+
+.site-footer {
+	grid-area: footer;
+}
+
+/* Overlap the bottom of the footer with the colophon */
+.colophon {
+	grid-column-start: footer-start;
+   grid-row-start: footer-start;
+	align-self: end;
+	z-index: 30;
+}
+
+/* When a sidebar is displayed */
+.two-column {
+	.site {
+		grid-template-rows: auto 1fr auto auto;
+		grid-template-areas:
+			"header"
+			"main"
+			"aside"
+			"footer";
+
+		@media (min-width: $tablet) {
+			grid-template-columns: 1fr $sidebar-width;
+			grid-template-areas:
+				"header header"
+				"main aside"
+				"footer footer";
+		}
+	}
+
+	.site-aside {
+		grid-area: aside;
+	}
+
+	.colophon {
+		@media (min-width: $tablet) {
+			grid-column-end: aside-end;
+		}
+	}
+}
+
+/* Alignments
+----------------------------------*/
+
+.alignleft {
+	display: inline;
+	float: left;
+	margin-right: 1.5em;
+}
+
+.alignright {
+	display: inline;
+	float: right;
+	margin-left: 1.5em;
+}
+
+.aligncenter {
+	clear: both;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Clearings
+----------------------------------*/
+
+.clear::before,
+.clear::after {
+	content: "";
+	display: table;
+	table-layout: fixed;
+}
+
+.clear::after {
+	clear: both;
+}
+
+/*--------------------------------------------------------------
+# Masthead
+--------------------------------------------------------------*/
+
+.masthead {
+	background: rgba(255, 255, 255, 0.92);
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 100;
+	.wrap {
+		@mixin flexbox;
+		height: $masthead-height;
+	}
+
+	.branding a {
+		height: $masthead-height;
+	}
+}
+
+/* 'Sticky' masthead on desktop */
+@media (pointer: fine) and (hover: hover), (min-width: $tablet) {
+	.site-header {
+		padding-top: $mastehead-height;
+	}
+
+	.masthead {
+		position: fixed;
+		transition: all ease-out 400ms;
+
+		.scrolldown & {
+			top: -5em;
+		}
+	}
+}
+
+/*--------------------------------------------------------------
+# Navigation
+--------------------------------------------------------------*/
+
+nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.site-nav {
+	li {
+		position: relative;
+	}
+
+	a {
+		color: $color-nav;
+		display: block;
+		font-family: $font-family-heading;
+		font-weight: $font-weight-heading;
+		font-size: $font-size-nav;
+		line-height: 1;
+		text-decoration: none;
+		text-transform: uppercase;
+
+		&:hover,
+		&:focus,
+		&:active {
+			color: $color-nav-hover;
+		}
+	}
+
+	ul ul {
+		display: none;
+
+		a {
+			text-transform: none;
+		}
+	}
+}
+
+.site-nav .current-menu-item > a {
+	color: $color-nav-active;
+	cursor: default;
+}
+
+/* Site nav – mobile
+----------------------------------*/
+
+.menu-toggle {
+	background: none !important;
+	color: rgba(140, 140, 140, 1) !important;
+	position: absolute;
+	text-shadow: none;
+	top: resolve($masthead-height * 0.15);
+	right: $gutter;
+
+	/* Hide 'Menu' text */
+	span {
+		display: none;
+	}
+}
+
+/* Menu toggle button clone, fixed to bottom of screen. */
+.menu-toggle-clone {
+	background: rgba(255, 255, 255, 0.8);
+	border-radius: $border-radius;
+	/* Hide initially */
+	bottom: -3.4rem;
+	box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.2);
+	color: $color-heading;
+	font-size: $font-size-nav-mobile;
+	left: 50%;
+	outline: none;
+	position: fixed;
+	text-shadow: none;
+	transform: translate(-50%);
+	transition: all ease-out 400ms;
+	z-index: 100;
+
+	&:hover,
+	&:focus,
+	&:active {
+		background: rgba(255, 255, 255, 1);
+		color: $color-heading;
+	}
+
+	/* Show on upward scroll */
+	.scrollup & {
+		bottom: 0.9rem;
+	}
+
+	/* Make sure the button doesn't hide when menu is open. */
+	.toggled & {
+		bottom: 0.9rem;
+	}
+
+	.icon-menu {
+		margin-right: 0.3em;
+	}
+}
+
+.site-nav {
+	@media (max-width: $_tablet) {
+		.site-menu {
+			background: rgba(255, 255, 255, 1);
+			bottom: -530px;
+			box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.13);
+			left: 0;
+			padding: 1em 0 4.7em;
+			position: fixed;
+			text-align: center;
+			transition: all 0.7s cubic-bezier(0.075, 0.82, 0.165, 1);
+			width: 100%;
+			z-index: 1;
+		}
+
+		&.toggled .site-menu {
+			bottom: 0;
+		}
+
+		a {
+			font-size: $font-size-nav-mobile;
+			line-height: 3;
+		}
+
+		ul ul a {
+			font-size: resolve($font-size-nav-mobile - 0.1rem);
+		}
+	}
+} /* .site-nav */
+
+.no-js .site-nav ul ul {
+	display: block;
+}
+
+.dropdown-toggle {
+	background: transparent;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	height: 22px;
+	padding: 0;
+	position: absolute;
+	text-transform: lowercase; /* Stop screen readers to read the text as capital letters */
+	top: 20px;
+	right: 10px;
+	width: 22px;
+
+	.icon-chevron {
+		vertical-align: middle;
+		width: 66%;
+		fill: none;
+		stroke: color($color-nav lightness(+ 15%));
+		stroke-width: 2px;
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		background: transparent;
+
+		.icon-chevron {
+			stroke: $color-link;
+		}
+	}
+
+	&:focus {
+		outline: 1px solid rgba(51, 51, 51, 0.3);
+	}
+}
+
+/* Don't show fixed menu toggle button if not a touch device */
+@media (pointer: fine) and (hover: hover) {
+	.menu-toggle-clone {
+		display: none;
+	}
+
+	.site-nav .site-menu {
+		padding-bottom: 1em;
+	}
+}
+
+/* Site nav - desktop
+----------------------------------*/
+
+.site-nav {
+	@media (min-width: $tablet) {
+		.menu-toggle,
+		.menu-toggle-clone {
+			display: none;
+		}
+
+		ul {
+			display: block;
+		}
+
+		li {
+			display: inline-block;
+		}
+
+		a {
+			line-height: $masthead-height;
+			padding-left: 12px;
+			padding-right: 12px;
+		}
+
+		.menu-item-has-children > a {
+			padding-right: 40px;
+		}
+
+		.home {
+			display: none;
+		}
+
+		/* Dropdown menu */
+
+		ul ul {
+			position: absolute;;
+		}
+	}
+} /* .site-nav */
+
+/* Footer nav
+----------------------------------*/
+
+.footer-nav {
+	li {
+		display: inline-block;
+		margin: 0 0.6em 1em 0;
+	}
+
+	a {
+		background: rgba(255, 255, 255, 0.1);
+		border-radius: $border-radius;
+		color: $color-footer-link;
+		padding: 0.6em 1em 0.5em;
+		display: block;
+		font-family: $font-family-heading;
+		font-weight: $font-weight-heading;
+		font-size: $font-size-nav;
+		line-height: 1;
+		text-decoration: none;
+		text-transform: uppercase;
+
+		&:hover,
+		&:focus,
+		&:active {
+			color: $color-footer-link-hover;
+		}
+	}
+}
+
+/* Misc nav
+----------------------------------*/
+
+.comment-navigation,
+.posts-navigation,
+.post-navigation {
+	margin: 0 0 $space-text;
+
+	.nav-links {
+		display: flex;
+	}
+}
+
+.nav-previous,
+.nav-next {
+	max-width: 48%;
+
+	a {
+		@mixin button;
+		@mixin button-big;
+	}
+
+	.icon-chevron {
+		fill: none;
+		position: relative;
+		stroke: currentColor;
+		stroke-width: 3px;
+		top: 1.7px;
+		width: 0.7em;
+	}
+}
+
+.nav-previous {
+	a {
+		padding-left: 0.8em;
+	}
+
+	.icon-chevron {
+		transform: rotate(.25turn);
+	}
+}
+
+.nav-next {
+	margin: 0 0 0 auto;
+	text-align: right;
+
+	a {
+		padding-right: 0.8em;
+	}
+
+	.icon-chevron {
+		margin-left: 0.1em;
+		transform: rotate(.75turn);
+	}
+}
+
+/* Pagination
+----------------------------------*/
+
+.pagination {
+	flex: 0 0 100%;
+	margin: 1rem 0 0;
+	text-align: center;
+
+	.page-numbers {
+		@mixin button;
+		@mixin button-big;
+		margin-right: .3rem;
+		margin-bottom: 1rem;
+
+		&.current {
+			background-color: $background-button-active;
+		}
+	}
+}
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+
+.site-header {
+	@mixin background-image-overlay $background-header;
+	/* background-image is set inline (functions.php) with WordPress */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	flex-flow: column;
+	height: 11rem;
+	justify-content: space-around;
+	padding-top: $masthead-height;
+
+	.home & {
+		height: 22rem;
+		text-align: center;
+
+		.button {
+			@mixin button-big;
+		}
+	}
+}
+
+.page-title {
+	@mixin title;
+
+	.home & {
+		font-size: resolve($font-size-h1 + 0.2em);
+		margin-bottom: 0.6em;
+	}
+}
+
+/*--------------------------------------------------------------
+# Sections
+--------------------------------------------------------------*/
+
+.section {
+	@mixin section;
+}
+
+.section-title {
+	@mixin heading h1;
+	/* Offset the top line-height spacing */
+	margin-top: -0.7rem;
+}
+
+.section-button {
+	.button {
+		@media (max-width: $_phone) {
+			@mixin button-stretch;
+		}
+	}
+}
+
+/* Partner logos section
+----------------------------------*/
+.section-partners {
+	background: color( $background-section-dark lightness(+8) );
+	padding-bottom: resolve( $space-section - 0.8rem );
+	padding-top: resolve( $space-section + 0.2rem );
+
+	.section-title {
+		color: color( $color-text lightness(+20) );
+	}
+
+	.logos {
+		@mixin flexbox row, wrap, center, center;
+		text-align: center;
+
+		/* Logo image */
+		> * {
+			fill: hsl(0, 0%, 65%);
+			height: 1.7rem;
+			margin: 0.4rem 1rem 1.3rem;
+			max-width: 100%;
+		}
+	}
+}
+
+/* Message section
+----------------------------------*/
+.section-message {
+	background: $background-section-primary;
+	padding-bottom: resolve( $space-section + 0.8rem );
+	padding-top: resolve( $space-section + 0.8rem );
+
+	.section-title {
+		color: color( $color-white a(90%) );
+		font-size: $font-size-h2;
+		font-weight: $font-weight;
+		margin-bottom: $space-section;
+		margin-top: -0.2rem;
+	}
+
+	.section-text {
+		color: color( $color-primary hue(-7) saturation(+25) lightness(+30) );
+		font-size: $font-size-medium;
+		margin-bottom: $space-section;
+		margin-top: -0.2rem;
+	}
+
+	.button {
+		@mixin button-outline light;
+	}
+
+	/* One-line layout if no description text */
+	&.notext {
+		@media (min-width: $tablet) {
+			.wrap {
+				@mixin flexbox row, nowrap, space-between, center;
+			}
+
+			.section-title {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+/*--------------------------------------------------------------
+# Entries
+--------------------------------------------------------------*/
+
+/* Entries section/archive */
+.entries {
+	/* Entry */
+	.hentry {
+		@mixin remove-bottom-space;
+		margin: 0 0 $space-entry;
+
+		figure {
+			margin-bottom: 1rem;
+
+			img {
+				display: block;
+				width: 100%;
+			}
+
+			&.noimage {
+				background: $color-neutral;
+				height: 12rem;
+				width: 100%;
+			}
+		}
+	}
+
+	@media (min-width: $phone) {
+		@mixin flexbox row, wrap, center;
+		margin: 0 resolve($space-entry / 2 * -1);
+		text-align: center;
+
+		/* Entry */
+		.hentry {
+			margin-left: resolve($space-entry / 2);
+			margin-right: resolve($space-entry / 2);
+			width: calc( 33.333% - resolve($space-entry) );
+		}
+
+		/* 2 entries */
+		&.count-2 .hentry,
+		&.count-4 .hentry {
+			width: calc( 50% - resolve($space-entry) );
+		}
+	}
+
+	@media (min-width: $desktop) {
+		/* 4 entries */
+		&.count-4 .hentry {
+			width: calc( 25% - resolve($space-entry) );
+		}
+	}
+}
+
+/* Entry Meta
+----------------------------------*/
+
+.entry-meta {
+	color: $color-meta;
+	font-size: $font-size-meta;
+	line-height: 1.5;
+	margin: -0.2em 0 $space-text;
+	text-transform: uppercase;
+
+	> span {
+		&:not(:first-of-type) {
+			margin-left: 0.9em;
+		}
+	}
+
+	a {
+		color: $color-meta-link;
+
+		&:hover,
+		&:focus,
+		&:active {
+			color: $color-meta-link-hover;
+		}
+	}
+
+	[class*="icon-"] {
+		margin-right: 0.1em;
+	}
+
+	.facebook {
+		mask: url(icons/facebook.svg) no-repeat 50% 50%/24px;
+	}
+}
+
+.post-categories {
+	@mixin flexbox row, wrap, center;
+	list-style: none !important;
+	padding-left: 0 !important;
+
+	a {
+		background: $color-secondary;
+		border-radius: 5px;
+		color: #fff;
+		font-size: 0.7em;
+		padding: 0.3em 0.5em;
+		margin: .3em;
+		text-transform: uppercase;
+	}
+}
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+
+.site-footer {
+	/* Extra padding on bottom for colophon to overlap */
+	@mixin section 0rem, 12rem;
+	@mixin background-image-overlay $background-footer;
+	color: $color-footer;
+	text-align: center;
+
+	@media (min-width: $tablet) {
+		@mixin section 0rem, 7rem;
+		text-align: left;
+
+		.wrap {
+			@mixin flexbox;
+
+			> * {
+				width: 32%;
+			}
+		}
+	}
+}
+
+.footer-summary {
+	margin-bottom: $space-section;
+}
+
+/*--------------------------------------------------------------
+# Colophon
+--------------------------------------------------------------*/
+
+.colophon {
+	@mixin section;
+	background: $background-colophon;
+	color: $color-footer;
+	text-align: center;
+
+	a {
+		@mixin link $color-footer-link, $color-footer-link-hover;
+	}
+
+	.site-title {
+		color: $color-footer;
+	}
+
+	@media (max-width: $_tablet) {
+		.branding {
+			a {
+				justify-content: center;
+			}
+		}
+
+		.copyright {
+			margin: 1.3em 0;
+		}
+	}
+
+	@media (min-width: $tablet) {
+		.wrap {
+			@mixin flexbox row, wrap, space-between, center;
+		}
+	}
+
+}
+
+/*--------------------------------------------------------------
+# Accessibility
+--------------------------------------------------------------*/
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	word-wrap: normal !important; /* Many screen reader and browser combinations announce broken words as they would appear visually. */
+
+	&:focus {
+		background-color: #f1f1f1;
+		border-radius: 3px;
+		box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+		clip: auto !important;
+		color: #21759b;
+		display: block;
+		font-size: 14px;
+		font-size: 0.875rem;
+		font-weight: bold;
+		height: auto;
+		left: 5px;
+		line-height: normal;
+		padding: 15px 23px 14px;
+		text-decoration: none;
+		top: 5px;
+		width: auto;
+		z-index: 100000; /* Above WP toolbar. */
+	}
+}
+
+/* Do not show the outline on the skip link target. */
+#content[tabindex="-1"]:focus {
+	outline: 0;
+}
+
+/*--------------------------------------------------------------
+# WORDPRESS
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Widgets
+--------------------------------------------------------------*/
+
+.widget {
+	margin: 0 0 1.5em;
+
+	/* Make sure select elements fit in widgets. */
+	select {
+		max-width: 100%;
+	}
+}
+
+/*--------------------------------------------------------------
+# Posts and pages
+--------------------------------------------------------------*/
+
+.sticky {
+	display: block;
+}
+
+.byline,
+.updated:not(.published) {
+	display: none;
+}
+
+.single .byline,
+.group-blog .byline {
+	display: inline;
+}
+
+.page-links {
+	clear: both;
+	margin: 0 0 1.5em;
+}
+
+/*--------------------------------------------------------------
+# Comments
+--------------------------------------------------------------*/
+
+.comment-content a {
+	word-wrap: break-word;
+}
+
+.bypostauthor {
+	display: block;
+}
+
+/*--------------------------------------------------------------
+# Media
+--------------------------------------------------------------*/
+
+.page-content .wp-smiley,
+.entry-content .wp-smiley,
+.comment-content .wp-smiley {
+	border: none;
+	margin-bottom: 0;
+	margin-top: 0;
+	padding: 0;
+}
+
+/* Make sure embeds and iframes fit their containers. */
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+.size-full {
+	margin-bottom: $space-text;
+}
+
+/* Captions
+----------------------------------*/
+
+.wp-caption {
+	margin-bottom: 1.5em;
+	max-width: 100%;
+
+	img[class*="wp-image-"] {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.wp-caption-text {
+		margin: 0.8075em 0;
+	}
+}
+
+.wp-caption-text {
+	text-align: center;
+}
+
+/* Galleries
+----------------------------------*/
+
+.gallery {
+	margin-bottom: 1.5em;
+}
+
+.gallery-item {
+	display: inline-block;
+	text-align: center;
+	vertical-align: top;
+	width: 100%;
+}
+
+.gallery-columns-2 .gallery-item {
+	max-width: 50%;
+}
+
+.gallery-columns-3 .gallery-item {
+	max-width: 33.33%;
+}
+
+.gallery-columns-4 .gallery-item {
+	max-width: 25%;
+}
+
+.gallery-columns-5 .gallery-item {
+	max-width: 20%;
+}
+
+.gallery-columns-6 .gallery-item {
+	max-width: 16.66%;
+}
+
+.gallery-columns-7 .gallery-item {
+	max-width: 14.28%;
+}
+
+.gallery-columns-8 .gallery-item {
+	max-width: 12.5%;
+}
+
+.gallery-columns-9 .gallery-item {
+	max-width: 11.11%;
+}
+
+.gallery-caption {
+	display: block;
+}
+
+/*--------------------------------------------------------------
+# PLUGINS
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Contact Form 7
+--------------------------------------------------------------*/
+
+/* Add space to the top of the form if it follows a text */
+p + .wpcf7 {
+	margin-top: 3.5rem;
+}
+
+/* Message displayed under each input field */
+span.wpcf7-not-valid-tip {
+	margin-top: .5em;
+}
+
+/* Message displayed at the bottom of the form */
+div.wpcf7-response-output {
+	border: 0;
+	margin: 0;
+	padding: .4em .8em;
+	background: #f1f1f1;
+	border-radius: 5px;
+}
+
+/* Success message */
+div.wpcf7-mail-sent-ok::before {
+	content: "👍";
+	font-size: 1.8em;
+	padding-right: 0.3em;
+}
+
+/* Error message */
+div.wpcf7-validation-errors::before {
+	content: "☹️";
+	font-size: 1.5em;
+	padding-right: 0.3em;
+}
+
+/*--------------------------------------------------------------
+# CONTENT
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Home Page
+--------------------------------------------------------------*/
+
+.home {
+	/* When page hasn't been scrolled down at all */
+	&:not(.scrolled) {
+		.masthead {
+			background: rgba(255, 255, 255, 0);
+			box-shadow: none;
+		}
+
+		.branding .site-title {
+			color: $color-white;
+			text-shadow: $text-shadow;
+		}
+
+		.menu-toggle {
+			color: rgba(255, 255, 255, 1) !important;
+		}
+
+		.site-nav a {
+			@media (min-width: $tablet) {
+				color: $color-white;
+				text-shadow: $text-shadow;
+			}
+		}
+	}
+
+	.section {
+		text-align: center;
+	}
+
+	.section-services {
+		background: $background-section;
+		border-top: 1px solid $color-border;
+	}
+
+	.section-testimonials {
+		background: $background-section;
+		border-bottom: 1px solid $color-border;
+		border-top: 1px solid $color-border;
+	}
+}
+
+/*--------------------------------------------------------------
+# Employees
+--------------------------------------------------------------*/
