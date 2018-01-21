@@ -3,7 +3,8 @@
  * Template part for displaying an entries section, which may be 'posts', 'employees', 'services', etc.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
- *
+ * @uses Advanced Custom Fields Pro
+ * 
  * @package Base
  * @since 1.0.1
  */
