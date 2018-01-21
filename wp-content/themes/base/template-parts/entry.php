@@ -2,7 +2,6 @@
 /**
  * Template part for displaying a blog entry
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
  * @uses Advanced Custom Fields Pro
  *
  * @package Base

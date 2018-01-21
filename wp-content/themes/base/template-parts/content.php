@@ -2,8 +2,6 @@
 /**
  * Template part for displaying posts
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
  * @package Base
  * @since 1.0.1
  */

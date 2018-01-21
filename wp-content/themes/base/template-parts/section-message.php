@@ -2,9 +2,8 @@
 /**
  * Template part for displaying a brief message section
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
  * @uses Advanced Custom Fields Pro
- * 
+ *
  * @package Base
  * @since 1.0.1
  */
