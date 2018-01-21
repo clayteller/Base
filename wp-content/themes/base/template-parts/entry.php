@@ -25,16 +25,12 @@
       <?php
       endif;
    endif;
-   ?>
 
-   <?php
    // Entry header (for all entries except testimonials)
    if ( 'testimonial' != $entry_type ) :
    ?>
       <header class="entry-header">
-
          <h3 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-
          <?php
          // Display job title for employees
          if ( 'employee' == $entry_type ) :
@@ -45,13 +41,10 @@
             <?php
             endif;
          endif;
-
          // Entry meta (for posts)
          if ( 'post' == $entry_type ) :
          ?>
-
             <p class="entry-meta"><span class="author"><?php base_svg_icon( 'person' ); the_author(); ?></span><span class="date"><?php base_svg_icon( 'clock' ); echo get_the_date( 'M j, Y' ); ?></span></p>
-
             <?php
             // Post categories
             $categories = get_the_category();
@@ -70,26 +63,38 @@
                </ul>
             <?php
             endif;
-
          endif;
          ?>
-
       </header><!-- .entry-header -->
-
    <?php
    endif;
 
-   // Entry content
+   // Entry content (for all entries except employees)
+   if ( 'employee' != $entry_type ) :
+   ?>
+      <div class="entry-content">
+         <?php
+         if ( 'testimonial' == $entry_type ) :
+            the_content();
+            ?>
+            <h3 class="entry-title"><?php the_title(); ?></h3>
+            <?php
+         else :
+            the_excerpt();
+         endif;
+         ?>
+      </div><!-- .entry-content -->
+   <?php
+   endif;
+
+   // Entry footer (for employees)
    if ( 'employee' == $entry_type ) :
-      base_contact_info();
-   elseif ( 'testimonial' == $entry_type ) :
-      the_content();
-      ?>
-      <h3 class="entry-title"><?php the_title(); ?></h3>
-      <?php
-   else :
-      the_excerpt();
+   ?>
+   	<footer class="entry-footer">
+   		<?php base_contact_info(); ?>
+   	</footer><!-- .entry-footer -->
+   <?php
    endif;
    ?>
 
-</article>
+</article><!-- #post-<?php the_ID(); ?> -->

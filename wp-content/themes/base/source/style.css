@@ -186,7 +186,10 @@ strong {
 	font-weight: $font-weight-bold;
 }
 
-.site-main {
+.entry-content {
+	a {
+		text-decoration: underline;
+	}
 	ul,
 	ol {
 		margin: 0 0 $space-text;
@@ -1187,7 +1190,9 @@ nav ul {
 }
 
 .footer-summary {
-	margin-bottom: $space-section;
+	@media (max-width: $_tablet) {
+		margin-bottom: $space-section;
+	}
 }
 
 /*--------------------------------------------------------------
@@ -1433,7 +1438,7 @@ object {
 
 /* Add space to the top of the form if it follows a text */
 p + .wpcf7 {
-	margin-top: 3.5rem;
+	margin-top: $space-section;
 }
 
 /* Message displayed under each input field */
