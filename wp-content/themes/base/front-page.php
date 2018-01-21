@@ -3,6 +3,7 @@
  * The template for displaying the home page.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
+ * @uses Advanced Custom Fields Pro
  *
  * @package Base
  * @since 1.0.1
@@ -14,7 +15,7 @@ get_header();
 <main id="site-main" class="site-main">
 
 	<?php
-	// Loop through ACF 'flexible content'
+	// Loop through 'flexible content' custom field
 	if ( have_rows( 'section' ) ):
 
 		while ( have_rows( 'section' ) ): the_row();

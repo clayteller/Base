@@ -18,7 +18,7 @@ function base_is_blog() {
 /**
  * Are we displaying a sidebar on this page?
  *
- * @return bool True if we're displaying a sidebar.
+ * @return bool True if 'show_sidebar' custom field is true or this is the 'Contact' page.
  */
 function base_has_sidebar() {
 	return get_field( 'show_sidebar' ) || is_page( 'contact' );

@@ -11,6 +11,8 @@
 /**
  * Display or retrieve the logo image.
  *
+ * @uses Advanced Custom Fields Pro
+ *
  * @param string $field_name Optional. Name of the custom field.
  * @param string $css_class  Optional. CSS class name.
  * @param bool   $echo       Optional. Whether to echo or return the title. Default true.
@@ -32,6 +34,8 @@ function base_logo( $field_name = 'logo', $css_class = 'logo', $echo = true ) {
 /**
  * Display or retrieve the site title.
  *
+ * @uses Advanced Custom Fields Pro
+ *
  * @param bool $echo Optional. Whether to echo or return the title. Default true.
  * @return string Site title if $echo is false.
  */
@@ -50,6 +54,8 @@ function base_site_title( $echo = true ) {
 
 /**
  * Display or retrieve the page title.
+ *
+ * @uses Advanced Custom Fields
  *
  * @param string $before Optional. Markup to prepend to the title. Default empty.
  * @param string $after  Optional. Markup to append to the title. Default empty.
@@ -85,7 +91,9 @@ function base_page_title( $before = '', $after = '', $echo = true ) {
 }
 
 /**
- * Display or retrieve button html using ACF.
+ * Display or retrieve button html.
+ *
+ * @uses Advanced Custom Fields Pro
  *
  * @param string $field_name Name of the ACF field.
  * @param string $acf_get    Optional. ACF function name to retrieve button data. Default 'get_field'.
@@ -120,7 +128,9 @@ function base_button( $field_name, $acf_get = 'get_field', $css_id = null, $befo
 }
 
 /**
- * Display or retrieve contact info html using ACF.
+ * Display or retrieve contact info html.
+ *
+ * @uses Advanced Custom Fields Pro
  *
  * @param string $post_id Optional. The post we're targeting. Default false for current post.
  * @param bool   $echo    Optional. Whether to echo or return the title. Default true.

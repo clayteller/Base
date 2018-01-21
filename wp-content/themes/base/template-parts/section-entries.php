@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying a section of entries, which may be 'posts', 'employees', 'services', etc.
+ * Template part for displaying an entries section, which may be 'posts', 'employees', 'services', etc.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
@@ -9,14 +9,14 @@
  */
 
 /**
- * The 'entries_type' ACF value determines which type of entries we're displaying and if we're displaying the 'latest' entries or a 'custom' set.
+ * The 'entries_type' custom field determines which type of entries we're displaying and if we're displaying the 'latest' entries or a 'custom' set.
  *
  * @var string Possible values are 'posts_latest', 'employees_custom', 'services_custom', etc.
  */
 $entries_type_field = get_sub_field( 'entries_type' );
 
 /**
- * Explode the 'entries_type' ACF value into entry type and display type.
+ * Explode the 'entries_type' custom field value into entry type and display type.
  *
  * @var array
  */
@@ -51,7 +51,7 @@ $display_type = $entries_type_parts[1];
  */
 global $entries_count;
 
-// Custom set of entries retrieved from ACF 'relationship' field
+// Custom set of entries retrieved from 'relationship' custom field.
 if ( 'custom' == $display_type ) {
 	$entries = get_sub_field( 'entries_' . $entries_type );
 	$entries_count = count( $entries );
