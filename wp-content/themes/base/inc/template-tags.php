@@ -22,7 +22,7 @@ function base_logo( $field_name = 'logo', $css_class = 'logo', $echo = true ) {
 	// If requested logo can't be retrieved, use header logo ('logo') as fallback
 	$logo = get_field( $field_name, 'option' ) ? get_field( $field_name, 'option' ) : get_field( 'logo', 'option' );
 
-	// Bail if we can't retrieve logo
+	// Bail if there's no logo
 	if ( ! $logo ) return;
 
 	if ( $echo )
@@ -43,7 +43,7 @@ function base_site_title( $echo = true ) {
 	// If a 'Site Title' (custom field) was set in our Theme Settings page, use that instead of default WordPress 'Site Title'
 	$title = get_field( 'site_title', 'option' ) ? get_field( 'site_title', 'option' ) : bloginfo( 'name' );
 
-	// Bail if we can't retrieve title
+	// Bail if there's no title
 	if ( ! $title ) return;
 
 	if ( $echo )
@@ -79,7 +79,7 @@ function base_page_title( $before = '', $after = '', $echo = true ) {
 		$title = get_field( 'page_title' ) ? get_field( 'page_title' ) : get_the_title();
 	}
 
-	// Bail if we can't retrieve title
+	// Bail if there's no title
 	if ( ! $title ) return;
 
 	$title = $before . $title . $after;
@@ -116,7 +116,7 @@ function base_button( $field_name, $acf_get = 'get_field', $css_id = null, $befo
 		$button_link = $button[ 'link_external' ];
 	}
 
-	// Bail if we can't retrieve button label and button link
+	// Bail if there's no button label and button link
 	if ( ! $button_label && ! $button_link ) return;
 
 	$html = sprintf( '%1$s<a class="button"%2$s href="%3$s">%4$s</a>%5$s', $before, $css_id, $button_link, $button_label, $after );
@@ -137,7 +137,7 @@ function base_button( $field_name, $acf_get = 'get_field', $css_id = null, $befo
  * @return string Button html if $echo is false.
  */
 function base_contact_info( $post_id = false, $echo = true ) {
-	// Bail if we can't retrieve contact info
+	// Bail if there's no contact info
 	if ( ! have_rows( 'contact_info', $post_id ) ) return;
 
    $html = '<ul class="contact-info">';

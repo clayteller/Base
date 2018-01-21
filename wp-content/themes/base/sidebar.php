@@ -8,7 +8,7 @@
  * @since 1.0.1
  */
 
-// Bail if we can't retrieve the sidebar
+// Bail if there's no sidebar
 if ( ! is_active_sidebar( 'site-aside' ) ) return;
 ?>
 
