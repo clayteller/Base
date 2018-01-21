@@ -19,19 +19,17 @@ get_header();
 
 		while ( have_rows( 'section' ) ): the_row();
 
-			if ( 'entries' == get_row_layout() ):
-
-				get_template_part( 'template-parts/section', 'entries' );
-
-			elseif ( 'partners' == get_row_layout() ):
-
-				get_template_part( 'template-parts/section', 'partners' );
-
-			elseif ( 'message' == get_row_layout() ):
-
-				get_template_part( 'template-parts/section', 'message' );
-
-			endif;
+			switch( get_row_layout() ) {
+				case 'entries':
+					get_template_part( 'template-parts/section', 'entries' );
+			   	break;
+				case 'partners':
+					get_template_part( 'template-parts/section', 'partners' );
+			   	break;
+				case 'message':
+					get_template_part( 'template-parts/section', 'message' );
+			   	break;
+			}
 
 		endwhile;
 
