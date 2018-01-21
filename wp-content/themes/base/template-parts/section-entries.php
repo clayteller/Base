@@ -34,7 +34,7 @@ $entries_type = $entries_type_parts[0];
  *
  * @var string
  */
-$entries_type_singular = rtrim( $entries_type, 's');
+$entry_type = rtrim( $entries_type, 's');
 
 /**
  * Type of display.
@@ -60,7 +60,7 @@ if ( 'custom' == $display_type ) {
 	$entries_count = get_sub_field( 'entries_count' );
 	$args = array(
 		'posts_per_page' => $entries_count,
-		'post_type'      => $entries_type_singular,
+		'post_type'      => $entry_type,
 	);
 	$entries = get_posts( $args );
 }
@@ -74,7 +74,8 @@ if ( 'custom' == $display_type ) {
 				<?php
 				foreach ( $entries as $post ): // variable must be called $post (IMPORTANT)
 					setup_postdata( $post );
-					get_template_part( 'template-parts/entry', $entries_type_singular );
+					// Not using get_template_part here because we need to access variables from this file in the template part.
+					include( locate_template( 'template-parts/entry.php' ) );
 				endforeach;
 				wp_reset_postdata();
 				?>
