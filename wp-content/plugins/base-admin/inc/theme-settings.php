@@ -35,4 +35,16 @@ if( function_exists( 'acf_add_options_page' ) ) {
 		'parent_slug'	=> 'starter-theme-settings',
 	));
 
+	acf_add_options_sub_page( array(
+		'page_title' 	=> 'Company Contact',
+		'menu_title'	=> 'Company Contact',
+		'parent_slug'	=> 'starter-theme-settings',
+	));
+
+	acf_add_options_sub_page( array(
+		'page_title' 	=> 'Partner Logos',
+		'menu_title'	=> 'Partner Logos',
+		'parent_slug'	=> 'starter-theme-settings',
+	));
+
 }
