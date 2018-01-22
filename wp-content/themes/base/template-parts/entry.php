@@ -91,7 +91,20 @@
    if ( 'employee' == $entry_type ) :
    ?>
    	<footer class="entry-footer">
-   		<?php base_contact_info(); ?>
+   		<?php
+         // Phone
+         $phone = get_field( 'phone' );
+         if ( $phone ) {
+            echo '<div class="phone">' . get_field( 'phone' ) . '</div>';
+         }
+         // Email
+      	$email = get_field( 'email' );
+         if ( $email ) {
+   			printf( '<div class="email"><a href="mailto:%s">%s</a></div>', $email, $email );
+         }
+         // Social links
+         base_social_links();
+         ?>
    	</footer><!-- .entry-footer -->
    <?php
    endif;

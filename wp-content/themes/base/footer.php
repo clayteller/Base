@@ -43,7 +43,7 @@ get_template_part( 'template-parts/section', 'subscribe' );
 				</a>
 			</div><!-- .branding -->
 			<div class="copyright">&copy; 2017 Base Theme</div>
-			<?php base_contact_info( 'option' ); ?>
+			<?php base_social_links( 'option' ); ?>
 		</div><!-- .wrap -->
 	</section><!-- #colophon -->
 

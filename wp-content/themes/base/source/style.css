@@ -402,18 +402,11 @@ input[type="submit"],
 	}
 }
 
-.contact-info {
+.social-links {
 	@mixin flexbox row, wrap, center;
-	list-style: none !important;
-	padding-left: 0 !important;
-
-	.phone,
-	.email {
-		flex: 0 0 100%;
-	}
 
 	.icon {
-		@mixin image-replacement auto, 45px;
+		@mixin image-replacement auto, 40px;
 		background: currentColor;
 	}
 
@@ -1239,6 +1232,15 @@ nav ul {
 	}
 }
 
+/* Employee entry
+----------------------------------*/
+
+.type-employee {
+	.social-links {
+		margin-top: 1.1rem;
+	}
+}
+
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
@@ -1308,7 +1310,7 @@ nav ul {
 			}
 		}
 
-		.contact-info {
+		.social-links {
 			justify-content: flex-end;
 		}
 	}

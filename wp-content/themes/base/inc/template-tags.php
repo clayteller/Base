@@ -136,23 +136,14 @@ function base_button( $field_name, $acf_get = 'get_field', $css_id = null, $befo
  * @param bool   $echo    Optional. Whether to echo or return the title. Default true.
  * @return string Button html if $echo is false.
  */
-function base_contact_info( $post_id = false, $echo = true ) {
+function base_social_links( $post_id = false, $echo = true ) {
 	// Bail if there's no contact info
-	if ( ! have_rows( 'contact_info', $post_id ) ) return;
+	if ( ! have_rows( 'social_links', $post_id ) ) return;
 
-   $html = '<ul class="contact-info">';
-      while ( have_rows( 'contact_info', $post_id ) ): the_row();
-         if ( 'phone' == get_row_layout() ):
-            $html .= '<li class="phone">' . get_sub_field( 'phone_number' ) . '</li>';
-         elseif ( 'email' == get_row_layout() ):
-				$email = get_sub_field( 'email_address' );
-				$html .= sprintf( '<li class="email"><a href="mailto:%s">%s</a></li>', $email, $email );
-
-			// If it's not phone or email, it's a social site link
-			else:
-				$social_site = get_row_layout();
-				$html .= sprintf( '<li class="%1$s"><a class="icon" href="%2$s">%1$s</a></li>', $social_site, get_sub_field( $social_site . '_url' ) );
-         endif;
+   $html = '<ul class="social-links">';
+      while ( have_rows( 'social_links', $post_id ) ): the_row();
+			$social_site = get_row_layout();
+			$html .= sprintf( '<li class="%1$s"><a class="icon" href="%2$s">%1$s</a></li>', $social_site, get_sub_field( $social_site . '_url' ) );
       endwhile;
    $html .= '</ul>';
 
