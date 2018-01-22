@@ -12,10 +12,12 @@ $message_text = get_sub_field( 'message_text' );
 $css_class = ( $message_text ) ? '' : ' notext';
 ?>
 
-<section class="section section-message<?php echo $css_class; ?>">
+<section class="section section-cta section-message<?php echo $css_class; ?>">
 	<div class="wrap">
 		<h2 class="section-title"><?php the_sub_field( 'message_title' ); ?></h2>
-		<?php if ( $message_text ) : ?>
+		<?php
+		if ( $message_text ) :
+		?>
 			<div class="section-text"><?php echo $message_text; ?></div>
 		<?php
 		endif;
