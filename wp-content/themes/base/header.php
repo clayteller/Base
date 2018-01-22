@@ -4,7 +4,7 @@
  *
  * Displays the <head> section and everything up until <main>
  *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ * @uses Advanced Custom Fields Pro
  *
  * @package Base
  * @since 1.0.1

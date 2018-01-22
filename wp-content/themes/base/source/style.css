@@ -486,6 +486,12 @@ html, body, .site {
 
 .site-footer {
 	grid-area: footer;
+	/* Extra padding on bottom for colophon to overlap */
+	padding-bottom: resolve($space-section + 11rem) !important;
+
+	@media (min-width: $tablet) {
+		padding-bottom: resolve($space-section + 7rem) !important;
+	}
 }
 
 /* Overlap the bottom of the footer with the colophon */

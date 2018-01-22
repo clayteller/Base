@@ -15,7 +15,7 @@ get_header();
 	<div class="wrap">
 
 		<h2><?php _e( 'Sorry, that page couldn&rsquo;t be found.', 'base' ); ?></h2>
-		<p><?php _e( 'Perhaps it&rsquo;s been retired or moved. Maybe try searching below?', 'base' ); ?></p>
+		<p><?php _e( 'It&rsquo;s possible the page was moved or retired. Maybe try searching below?', 'base' ); ?></p>
 
 		<?php	get_search_form(); ?>
 
