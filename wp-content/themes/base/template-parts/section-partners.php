@@ -2,36 +2,35 @@
 /**
  * Template part for displaying a partner logos section
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * @uses Advanced Custom Fields Pro
  *
  * @package Base
  * @since 1.0.1
  */
 
-$title = get_sub_field( 'section_title' );
-$images = get_sub_field( 'logos' );
-$size = 'full';
+$images = get_field( 'partner_logos_images', 'option' );
 
-if( $images ):
+// Bail if there's no logo images
+if ( ! $images ) return;
+
+$title = get_field( 'partner_logos_title', 'option' );
+$size = 'full';
 ?>
 
-	<section class="section section-partners">
-		<div class="wrap">
+<section class="section section-partners">
+	<div class="wrap">
 
-			<?php if ( $title ) : ?>
-				<h2 class="section-title"><?php echo $title; ?></h2>
-			<?php endif; ?>
+		<?php if ( $title ) : ?>
+			<h2 class="section-title"><?php echo $title; ?></h2>
+		<?php endif; ?>
 
-			<div class="logos">
-				<?php
-				foreach( $images as $image ):
-					echo wp_get_attachment_image( $image['ID'], $size );
-				endforeach;
-				?>
-			</div>
+		<div class="logos">
+			<?php
+			foreach( $images as $image ):
+				echo wp_get_attachment_image( $image['ID'], $size );
+			endforeach;
+			?>
+		</div>
 
-		</div><!-- .wrap -->
-	</section><!-- .section-<?php echo $entries_type; ?> -->
-
-<?php
-endif;
+	</div><!-- .wrap -->
+</section><!-- .section-partners -->
