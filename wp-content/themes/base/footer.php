@@ -4,13 +4,16 @@
  *
  * Contains the closing of the <main> tag and all content after.
  *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ * @uses Advanced Custom Fields Pro
  *
  * @package Base
  * @since 1.0.1
  */
 
 $footer_summary = get_field( 'site_summary', 'option' ) ? get_field( 'site_summary', 'option' ) : get_bloginfo( 'description' );
+
+// Subscribe form section
+get_template_part( 'template-parts/section', 'subscribe' );
 ?>
 
 	<footer id="site-footer" class="site-footer" role="contentinfo">

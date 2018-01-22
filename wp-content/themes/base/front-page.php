@@ -15,20 +15,26 @@ get_header();
 <main id="site-main" class="site-main">
 
 	<?php
+	// Partner logos
+	get_template_part( 'template-parts/section', 'partners' );
+
 	// Loop through 'flexible content' custom field
 	if ( have_rows( 'section' ) ):
 
 		while ( have_rows( 'section' ) ): the_row();
 
 			switch( get_row_layout() ) {
+				// Entries section – possible types are 'employees', 'services', 'testimonials' and 'posts'
 				case 'entries':
 					get_template_part( 'template-parts/section', 'entries' );
 			   	break;
-				case 'partners':
-					get_template_part( 'template-parts/section', 'partners' );
-			   	break;
+				// Message section
 				case 'message':
 					get_template_part( 'template-parts/section', 'message' );
+			   	break;
+				// Subscribe form section
+				case 'subscribe':
+					get_template_part( 'template-parts/section', 'subscribe' );
 			   	break;
 			}
 

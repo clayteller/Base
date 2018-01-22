@@ -6,7 +6,7 @@
  * @since 1.0.1
  */
 
-if( function_exists( 'acf_add_options_page' ) ) {
+if ( function_exists( 'acf_add_options_page' ) ) {
 
 	acf_add_options_page( array(
 		'page_title' 	=> 'Base Theme Settings',
@@ -38,6 +38,12 @@ if( function_exists( 'acf_add_options_page' ) ) {
 	acf_add_options_sub_page( array(
 		'page_title' 	=> 'Company Contact',
 		'menu_title'	=> 'Company Contact',
+		'parent_slug'	=> 'starter-theme-settings',
+	));
+
+	acf_add_options_sub_page( array(
+		'page_title' 	=> 'Subscribe Form',
+		'menu_title'	=> 'Subscribe Form',
 		'parent_slug'	=> 'starter-theme-settings',
 	));
 

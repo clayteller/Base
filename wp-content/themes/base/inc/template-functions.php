@@ -66,6 +66,8 @@ add_filter( 'excerpt_more', 'base_excerpt_more' );
  * @return array
  */
 function base_body_classes( $classes ) {
+	$show_subscribe = get_field( 'show_subscribe', 'option' );
+
 	// Adds a class of 'hfeed' to non-singular pages.
 	if ( ! is_singular() ) {
 		$classes[] = 'hfeed';
@@ -74,6 +76,11 @@ function base_body_classes( $classes ) {
 	// Adds a class of 'two-column' to two-column pages.
 	if ( base_has_sidebar() ) {
 		$classes[] = 'two-column';
+	}
+
+	// Adds a class of 'has-subscribe' to pages with subscribe form.
+	if ( $show_subscribe ) {
+		$classes[] = 'has-subscribe';
 	}
 
 	return $classes;

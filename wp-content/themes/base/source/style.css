@@ -358,7 +358,7 @@ input[type="submit"],
 }
 
 .search-submit {
-	margin-left: 0.5em;
+	margin-left: $space-button-left;
 }
 
 /*--------------------------------------------------------------
@@ -438,10 +438,6 @@ input[type="submit"],
 # Layout
 --------------------------------------------------------------*/
 
-html, body, .site {
-	min-height: 100vh;
-}
-
 .wrap {
 	margin: 0 auto;
 	max-width: $max-width;
@@ -471,6 +467,11 @@ body:not(.home) .site-main {
 
 /* CSS grid
 ----------------------------------*/
+
+/* For 'sticky' footer */
+html, body, .site {
+	min-height: 100vh;
+}
 
 .site {
 	display: grid;
@@ -528,6 +529,44 @@ body:not(.home) .site-main {
 	.colophon {
 		@media (min-width: $tablet) {
 			grid-column-end: aside-end;
+		}
+	}
+}
+
+/* When the subscribe form is displayed */
+.has-subscribe {
+	.site {
+		grid-template-rows: auto 1fr auto auto;
+		grid-template-areas:
+			"header"
+			"main"
+			"subscribe"
+			"footer";
+	}
+
+	.section-subscribe {
+		grid-area: subscribe;
+	}
+}
+
+/* When a sidebar AND subscribe form is displayed */
+.two-column.has-subscribe {
+	.site {
+		grid-template-rows: auto 1fr auto auto auto;
+		grid-template-areas:
+			"header"
+			"main"
+			"aside"
+			"subscribe"
+			"footer";
+
+		@media (min-width: $tablet) {
+			grid-template-columns: 1fr $sidebar-width;
+			grid-template-areas:
+				"header header"
+				"main aside"
+				"subscribe subscribe"
+				"footer footer";
 		}
 	}
 }
@@ -989,8 +1028,66 @@ nav ul {
 	}
 }
 
+/* CTA section
+----------------------------------*/
+
+.section-cta {
+	background: $background-section-primary;
+	padding-bottom: resolve( $space-section + 0.8rem );
+	padding-top: resolve( $space-section + 0.8rem );
+	text-align: center;
+
+	.section-title {
+		color: color( $color-white a(90%) );
+		font-size: $font-size-h2;
+		font-weight: $font-weight;
+		margin-bottom: resolve($space-section - 0.5rem);
+		margin-top: -0.2rem;
+	}
+
+	.section-text {
+		@mixin remove-bottom-space;
+		color: color( $color-primary hue(-7) saturation(+25) lightness(+40) );
+		font-size: $font-size-medium;
+		margin-bottom: $space-section;
+	}
+
+	.button,
+	input[type=submit] {
+		@mixin button-outline light;
+	}
+}
+
+/* Subscribe form section
+----------------------------------*/
+
+.section-subscribe {
+	.wpcf7 {
+		p {
+			margin: 0;
+		}
+	}
+
+	@media (max-width: $_tablet) {
+		.wpcf7-submit {
+			margin-top: 1.5rem;
+		}
+	}
+
+	@media (min-width: $tablet) {
+		p {
+			display: inline-block;
+		}
+
+		.wpcf7-submit {
+			margin-left: $space-button-left;
+		}
+	}
+}
+
 /* Partner logos section
 ----------------------------------*/
+
 .section-partners {
 	background: color( $background-section-dark lightness(+8) );
 	padding-bottom: resolve( $space-section - 0.8rem );
@@ -1016,30 +1113,8 @@ nav ul {
 
 /* Message section
 ----------------------------------*/
+
 .section-message {
-	background: $background-section-primary;
-	padding-bottom: resolve( $space-section + 0.8rem );
-	padding-top: resolve( $space-section + 0.8rem );
-
-	.section-title {
-		color: color( $color-white a(90%) );
-		font-size: $font-size-h2;
-		font-weight: $font-weight;
-		margin-bottom: $space-section;
-		margin-top: -0.2rem;
-	}
-
-	.section-text {
-		color: color( $color-primary hue(-7) saturation(+25) lightness(+30) );
-		font-size: $font-size-medium;
-		margin-bottom: $space-section;
-		margin-top: -0.2rem;
-	}
-
-	.button {
-		@mixin button-outline light;
-	}
-
 	/* One-line layout if no description text */
 	&.notext {
 		@media (min-width: $tablet) {
@@ -1169,8 +1244,7 @@ nav ul {
 --------------------------------------------------------------*/
 
 .site-footer {
-	/* Extra padding on bottom for colophon to overlap */
-	@mixin section 0rem, 12rem;
+	@mixin section;
 	@mixin background-image-overlay $background-footer;
 	color: $color-footer;
 	text-align: center;

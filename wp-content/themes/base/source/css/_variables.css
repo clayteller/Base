@@ -95,14 +95,15 @@ $background-colophon: color( $color-dark a(90%) );
 # Layout
 --------------------------------------------------------------*/
 
-$gutter:         4%;
-$max-width:      1000px;
-$max-width-wide: 1300px;
-$space-section:  1.8rem;
-$space-section-desktop:  2.2rem;
-$space-entry:    1.6rem;
-$space-box:      1.3rem;
-$space-border:   2rem;
+$gutter:            4%;
+$max-width:         1000px;
+$max-width-wide:    1300px;
+$space-section:     2rem;
+$space-section-desktop:  2.4rem;
+$space-entry:       1.6rem;
+$space-box:         1.3rem;
+$space-border:      2rem;
+$space-button-left: 0.5em;
 
 $masthead-height: 4.2rem;
 $sidebar-width:   300px;
