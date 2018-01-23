@@ -22,6 +22,7 @@ $font-size-medium:     resolve($font-size + 0.2em);
 $font-size-meta:       0.8em;
 $font-size-nav:        19px;
 $font-size-nav-mobile: 1.2em;
+$font-size-field:      resolve($font-size + 0.1em);;
 $font-size-button:     1.2em;
 
 $font-weight:               400;
@@ -106,7 +107,7 @@ $space-border:      2rem;
 $space-button-left: 0.5em;
 
 $masthead-height: 4.2rem;
-$sidebar-width:   300px;
+$aside-width:   300px;
 
 /*--------------------------------------------------------------
 # Media Queries
@@ -118,6 +119,7 @@ $_phone:        resolve($phone - 1px);
 $tablet:        768px;
 $_tablet:       resolve($tablet - 1px);
 $desktop:       992px;
+$_desktop:      resolve($desktop - 1px);
 $large-desktop: 1200px;
 
 /*--------------------------------------------------------------

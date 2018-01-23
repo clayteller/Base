@@ -34,6 +34,7 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 # Header
 # Sections
 # Entries
+# Aside
 # Footer
 # Accessibility
 # WORDPRESS
@@ -315,12 +316,12 @@ input[type="datetime"],
 input[type="datetime-local"],
 input[type="color"],
 textarea {
+	@mixin full-width;
 	color: #444;
 	border: 1px solid #ccc;
 	border-radius: $border-radius-field;
 	font-family: $font-family;
-	font-size: 1em;
-	max-width: 100%;
+	font-size: $font-size-field;
 	padding: 10px 15px;
 }
 
@@ -348,8 +349,8 @@ input[type="submit"],
 	@mixin button-big;
 }
 
-.button-stretch {
-	@mixin button-stretch;
+.full-width {
+	@mixin full-width;
 }
 
 .search-form {
@@ -431,12 +432,14 @@ input[type="submit"],
 # Layout
 --------------------------------------------------------------*/
 
+/* Limit the width of site sections and center on screen  */
 .wrap {
 	margin: 0 auto;
 	max-width: $max-width;
 	padding-left: $gutter;
 	padding-right: $gutter;
 
+	/* Wide spread */
 	.home &,
 	.site-header &,
 	.site-footer &,
@@ -444,18 +447,15 @@ input[type="submit"],
 		max-width: $max-width-wide;
 	}
 
+	/* Full width */
 	.masthead & {
 		max-width: 100%;
 	}
-
-	.two-column .site-main & {
-		max-width: resolve($max-width - $sidebar-width);
-		padding: 0;
-	}
 }
 
+/* Non-home page main content areas need section spacing  */
 body:not(.home) .site-main {
-	@mixin section;
+	@mixin section-space;
 }
 
 /* CSS grid
@@ -468,22 +468,34 @@ html, body, .site {
 
 .site {
 	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: auto 1fr auto;
-	grid-template-areas:
-		"header"
-		"main"
-		"footer";
+	grid:
+		"header" auto
+		"main" 1fr
+		"footer" auto
+		/ 1fr;
 }
 
+/* Site header */
 .site-header {
 	grid-area: header;
 }
 
+/* Main content area */
 .site-main {
 	grid-area: main;
 }
 
+/* Aside */
+.site-aside {
+	grid-area: aside;
+}
+
+/* Subscribe form */
+.section-subscribe {
+	grid-area: subscribe;
+}
+
+/* Site footer */
 .site-footer {
 	grid-area: footer;
 	/* Extra padding on bottom for colophon to overlap */
@@ -494,40 +506,59 @@ html, body, .site {
 	}
 }
 
-/* Overlap the bottom of the footer with the colophon */
+/* Colophon, overlaps the bottom of the footer */
 .colophon {
-	grid-column-start: footer-start;
+	grid-column: footer-start / span 1;
    grid-row-start: footer-start;
 	align-self: end;
 	z-index: 30;
 }
 
-/* When a sidebar is displayed */
+/* When an aside is displayed */
 .two-column {
 	.site {
-		grid-template-rows: auto 1fr auto auto;
-		grid-template-areas:
-			"header"
-			"main"
-			"aside"
-			"footer";
+		grid:
+			"header" auto
+			"main" 1fr
+			"aside" auto
+			"footer" auto
+			/ 1fr;
+	}
 
-		@media (min-width: $tablet) {
-			grid-template-columns: 1fr $sidebar-width;
-			grid-template-areas:
-				"header header"
-				"main aside"
-				"footer footer";
+	@media (min-width: $desktop) {
+		/* .wrap {
+			max-width: resolve($desktop - 60px);
+			padding-left: 0;
+			padding-right: 0;
+		} */
+
+		.site {
+			grid:
+				"header header header header" auto
+				"main main aside aside" 1fr
+				"footer footer footer footer" auto
+				/ 1fr 630px 300px 1fr;
 		}
-	}
 
-	.site-aside {
-		grid-area: aside;
-	}
+		.site-main {
+			justify-self: end;
 
-	.colophon {
-		@media (min-width: $tablet) {
-			grid-column-end: aside-end;
+			.wrap {
+				max-width: 100%;
+				padding-left: calc(100% - 630px);
+				padding-right: 20px;
+			}
+		}
+
+		.site-aside {
+			.wrap {
+				padding-left: 20px;
+				padding-right: calc(100% - $aside-width);
+			}
+		}
+
+		.colophon {
+			grid-column-end: span 4;
 		}
 	}
 }
@@ -535,37 +566,35 @@ html, body, .site {
 /* When the subscribe form is displayed */
 .has-subscribe {
 	.site {
-		grid-template-rows: auto 1fr auto auto;
-		grid-template-areas:
-			"header"
-			"main"
-			"subscribe"
-			"footer";
-	}
-
-	.section-subscribe {
-		grid-area: subscribe;
+		grid:
+			"header" auto
+			"main" 1fr
+			"subscribe" auto
+			"footer" auto
+			/ 1fr;
 	}
 }
 
-/* When a sidebar AND subscribe form is displayed */
+/* When an aside AND subscribe form is displayed */
 .two-column.has-subscribe {
 	.site {
-		grid-template-rows: auto 1fr auto auto auto;
-		grid-template-areas:
-			"header"
-			"main"
-			"aside"
-			"subscribe"
-			"footer";
+		grid:
+			"header" auto
+			"main" 1fr
+			"aside" auto
+			"subscribe" auto
+			"footer" auto
+			/ 1fr;
+	}
 
-		@media (min-width: $tablet) {
-			grid-template-columns: 1fr $sidebar-width;
-			grid-template-areas:
-				"header header"
-				"main aside"
-				"subscribe subscribe"
-				"footer footer";
+	@media (min-width: $desktop) {
+		.site {
+			grid:
+				"header header header header" auto
+				"main main aside aside" 1fr
+				"subscribe subscribe subscribe subscribe" auto
+				"footer footer footer footer" auto
+				/ 1fr 630px 300px 1fr;
 		}
 	}
 }
@@ -1010,7 +1039,7 @@ nav ul {
 --------------------------------------------------------------*/
 
 .section {
-	@mixin section;
+	@mixin section-space;
 }
 
 .section-title {
@@ -1021,9 +1050,7 @@ nav ul {
 
 .section-button {
 	.button {
-		@media (max-width: $_phone) {
-			@mixin button-stretch;
-		}
+		@mixin full-width;
 	}
 }
 
@@ -1054,6 +1081,7 @@ nav ul {
 	.button,
 	input[type=submit] {
 		@mixin button-outline light;
+		@mixin full-width;
 	}
 }
 
@@ -1067,19 +1095,28 @@ nav ul {
 		}
 	}
 
-	@media (max-width: $_tablet) {
-		.wpcf7-submit {
-			margin-top: 1.5rem;
-		}
+	.wpcf7-submit {
+		margin-top: 1.5rem;
 	}
 
-	@media (min-width: $tablet) {
+	@media (min-width: $phone) {
 		p {
 			display: inline-block;
 		}
 
+		.wpcf7-text {
+			width: 330px;
+		}
+
 		.wpcf7-submit {
 			margin-left: $space-button-left;
+			margin-top: 0;
+		}
+	}
+
+	@media (min-width: $tablet) {
+		.wpcf7-text {
+			width: 420px;
 		}
 	}
 }
@@ -1248,17 +1285,26 @@ nav ul {
 }
 
 /*--------------------------------------------------------------
+# Aside
+--------------------------------------------------------------*/
+
+.site-aside {
+	@media (max-width: $_desktop) {
+		@mixin section-background $background-section;
+	}
+}
+
+/*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
 
 .site-footer {
-	@mixin section;
+	@mixin section-space;
 	@mixin background-image-overlay $background-footer;
 	color: $color-footer;
 	text-align: center;
 
 	@media (min-width: $tablet) {
-		@mixin section 0rem, 7rem;
 		text-align: left;
 
 		.wrap {
@@ -1282,7 +1328,7 @@ nav ul {
 --------------------------------------------------------------*/
 
 .colophon {
-	@mixin section;
+	@mixin section-space;
 	background: $background-colophon;
 	color: $color-footer;
 	text-align: center;
@@ -1589,14 +1635,11 @@ div.wpcf7-validation-errors::before {
 	}
 
 	.section-services {
-		background: $background-section;
-		border-top: 1px solid $color-border;
+		@mixin section-background $background-section;
 	}
 
 	.section-testimonials {
-		background: $background-section;
-		border-bottom: 1px solid $color-border;
-		border-top: 1px solid $color-border;
+		@mixin section-background $background-section;
 	}
 }
 

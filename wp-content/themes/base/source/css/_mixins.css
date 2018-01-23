@@ -132,11 +132,6 @@
 	}
 }
 
-@define-mixin button-stretch {
-		text-align: center;
-		width: 100%;
-}
-
 /*--------------------------------------------------------------
 # Flexbox
 --------------------------------------------------------------*/
@@ -148,6 +143,17 @@
 
 	@if $align != normal {
 		align-items: $align;
+	}
+}
+
+/*--------------------------------------------------------------
+# Full field
+--------------------------------------------------------------*/
+
+@define-mixin full-width $text-align: center  {
+	@media (max-width: $_phone) {
+		text-align: $text-align;
+		width: 100%;
 	}
 }
 
@@ -235,10 +241,10 @@
 }
 
 /*--------------------------------------------------------------
-# Section
+# Section vertical spacing
 --------------------------------------------------------------*/
 
-@define-mixin section $top-adjust: 0rem, $bottom-adjust: 0rem {
+@define-mixin section-space $top-adjust: 0rem, $bottom-adjust: 0rem {
 	padding-top: resolve( $space-section + $top-adjust );
 	padding-bottom: resolve( $space-section + $bottom-adjust );
 
@@ -246,4 +252,14 @@
 		padding-top: resolve( $space-section-desktop + $top-adjust );
 		padding-bottom: resolve( $space-section-desktop + $bottom-adjust );
 	}
+}
+
+/*--------------------------------------------------------------
+# Section background
+--------------------------------------------------------------*/
+
+@define-mixin section-background $background {
+	background: $background;
+	border-bottom: 1px solid $color-border;
+	border-top: 1px solid $color-border;
 }
