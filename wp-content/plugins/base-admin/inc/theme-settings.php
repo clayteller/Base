@@ -30,12 +30,6 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 	));
 
 	acf_add_options_sub_page( array(
-		'page_title' 	=> 'Site Content',
-		'menu_title'	=> 'Site Content',
-		'parent_slug'	=> 'starter-theme-settings',
-	));
-
-	acf_add_options_sub_page( array(
 		'page_title' 	=> 'Company Contact',
 		'menu_title'	=> 'Company Contact',
 		'parent_slug'	=> 'starter-theme-settings',
