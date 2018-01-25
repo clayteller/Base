@@ -1,6 +1,8 @@
 <?php
 /**
- * Template part for displaying an entries section, which may be 'posts', 'employees', 'services', etc.
+ * Template part for displaying an entries (posts) section.
+ *
+ * Post types include 'post', 'employee', 'service' and 'testimonial'.
  *
  * @uses Advanced Custom Fields Pro
  *
@@ -9,9 +11,9 @@
  */
 
 /**
- * The 'entries_type' custom field determines which type of entries we're displaying and if we're displaying the 'latest' entries or a 'custom' set.
+ * The 'entries_type' custom field determines which post type we're displaying and if we're displaying the 'latest' entries or a 'custom' set.
  *
- * @var string Possible values are 'posts_latest', 'employees_custom', 'services_custom', etc.
+ * @var string Conveys the post type and display type separated by '_'. For example, 'employee_custom' or 'post_latest'.
  */
 $entries_type_field = get_sub_field( 'entries_type' );
 

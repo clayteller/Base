@@ -25,4 +25,4 @@ $css_class = ( $message_text ) ? '' : ' notext';
 		base_button( 'message_button', 'get_sub_field', $button_css_id, '<div class="section-button">', '</div>' );
 		?>
 	</div><!-- .wrap -->
-</section><!-- .section-<?php echo $entries_type; ?> -->
+</section><!-- .section-message -->

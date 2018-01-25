@@ -147,10 +147,10 @@
 }
 
 /*--------------------------------------------------------------
-# Full field
+# Full width
 --------------------------------------------------------------*/
 
-@define-mixin full-width $text-align: center  {
+@define-mixin full-width-phone $text-align: center  {
 	@media (max-width: $_phone) {
 		text-align: $text-align;
 		width: 100%;

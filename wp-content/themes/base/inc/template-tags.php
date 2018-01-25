@@ -4,6 +4,8 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
+ * @uses Advanced Custom Fields Pro
+ *
  * @package Base
  * @since 1.0.1
  */
@@ -70,9 +72,15 @@ function base_page_title( $before = '', $after = '', $echo = true ) {
 	// Archive
 	} elseif ( is_archive() ) {
 		$title = get_the_archive_title();
+	// Single
+	} elseif ( is_singular() ) {
+		$title = get_the_title();
+	// Search
+	} elseif ( is_search() ) {
+		$title = sprintf( esc_html__( 'Search Results for "%s"', 'base' ), '<span>' . get_search_query() . '</span>' );
 	// 404
 	} elseif ( is_404() ) {
-		$title = esc_html__( 'Oops!', 'base' );
+		$title = __( 'Oops!', 'base' );
 	// All other pages
 	} elseif ( is_page() || is_home() ) {
 		// If 'Page Title' (custom field) was set, use that instead of default WordPress page title
@@ -154,11 +162,11 @@ function base_social_links( $post_id = false, $echo = true ) {
 }
 
 
-if ( ! function_exists( 'base_posted_on' ) ) :
+if ( ! function_exists( 'base_entry_meta' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time and author.
 	 */
-	function base_posted_on() {
+	function base_entry_meta() {
 		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
 			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
@@ -171,20 +179,13 @@ if ( ! function_exists( 'base_posted_on' ) ) :
 			esc_html( get_the_modified_date() )
 		);
 
-		$posted_on = sprintf(
-			/* translators: %s: post date. */
-			esc_html_x( 'Posted on %s', 'post date', 'clayteller' ),
-			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
-		);
+		$posted_on = base_svg_icon( 'clock' ) . $time_string;
 
 		$byline = sprintf(
-			/* translators: %s: post author. */
-			esc_html_x( 'by %s', 'post author', 'clayteller' ),
-			'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+			'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . base_svg_icon( 'person' ) . esc_html( get_the_author() ) . '</a></span>'
 		);
 
 		echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
-
 	}
 endif;
 
@@ -196,17 +197,17 @@ if ( ! function_exists( 'base_entry_footer' ) ) :
 		// Hide category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 			/* translators: used between list items, there is a space after the comma */
-			$categories_list = get_the_category_list( esc_html__( ', ', 'clayteller' ) );
+			$categories_list = get_the_category_list( esc_html__( ', ', 'base' ) );
 			if ( $categories_list ) {
 				/* translators: 1: list of categories. */
-				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'clayteller' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'base' ) . '</span>', $categories_list ); // WPCS: XSS OK.
 			}
 
 			/* translators: used between list items, there is a space after the comma */
-			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'clayteller' ) );
+			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'base' ) );
 			if ( $tags_list ) {
 				/* translators: 1: list of tags. */
-				printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'clayteller' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+				printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'base' ) . '</span>', $tags_list ); // WPCS: XSS OK.
 			}
 		}
 
@@ -216,7 +217,7 @@ if ( ! function_exists( 'base_entry_footer' ) ) :
 				sprintf(
 					wp_kses(
 						/* translators: %s: post title */
-						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'clayteller' ),
+						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'base' ),
 						array(
 							'span' => array(
 								'class' => array(),
@@ -233,7 +234,7 @@ if ( ! function_exists( 'base_entry_footer' ) ) :
 			sprintf(
 				wp_kses(
 					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Edit <span class="screen-reader-text">%s</span>', 'clayteller' ),
+					__( 'Edit <span class="screen-reader-text">%s</span>', 'base' ),
 					array(
 						'span' => array(
 							'class' => array(),

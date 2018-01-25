@@ -24,7 +24,7 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 ----------------------------------------------------------------
 # Elements
 # Typography
-# Links
+# Links/Buttons
 # Forms
 # Icons
 # Classes
@@ -46,6 +46,7 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 # Contact Form 7
 # CONTENT
 # Home Page
+# 404
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
@@ -124,7 +125,7 @@ table {
 }
 
 /*--------------------------------------------------------------
-# Typography
+	# Typography
 --------------------------------------------------------------*/
 
 html {
@@ -269,7 +270,7 @@ big {
 }
 
 /*--------------------------------------------------------------
-# Links
+# Links/Buttons
 --------------------------------------------------------------*/
 
 a,
@@ -296,6 +297,24 @@ a {
 	}
 }
 
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+.button {
+	@mixin button;
+}
+
+.button-big {
+	@mixin button-big;
+}
+
+.section .button,
+.form-button input,
+input.search-submit {
+	@mixin full-width-phone;
+}
+
 /*--------------------------------------------------------------
 # Forms
 --------------------------------------------------------------*/
@@ -316,7 +335,7 @@ input[type="datetime"],
 input[type="datetime-local"],
 input[type="color"],
 textarea {
-	@mixin full-width;
+	@mixin full-width-phone;
 	color: #444;
 	border: 1px solid #ccc;
 	border-radius: $border-radius-field;
@@ -337,29 +356,89 @@ textarea {
 	color: #bbb;
 }
 
-button,
-input[type="button"],
-input[type="reset"],
-input[type="submit"],
-.button {
-	@mixin button;
+.field {
+	margin-bottom: $space-text;
 }
 
-.button-big {
-	@mixin button-big;
-}
-
-.full-width {
-	@mixin full-width;
-}
+/* Search form
+----------------------------------*/
 
 .search-form {
 	margin-bottom: $space-section;
 	margin-top: $space-section;
 }
 
-.search-submit {
-	margin-left: $space-button-left;
+.site-main {
+	@media (max-width: $_phone) {
+		.search-field {
+			margin-bottom: $space-text;
+		}
+	}
+
+	@media (min-width: $phone) {
+		.search-field {
+			width: 330px;
+		}
+
+		.search-submit {
+			margin-left: $space-button-left;
+		}
+	}
+
+	@media (min-width: $tablet) {
+		.search-field {
+			width: 420px;
+		}
+	}
+}
+
+.site-aside {
+	.search-field {
+		margin-bottom: 1.2em;
+	}
+
+	@media (min-width: $phone) and (max-width: $_desktop) {
+		.search-field {
+			margin-bottom: 0;
+		}
+
+		.search-submit {
+			margin-left: $space-button-left;
+		}
+	}
+
+	@media (min-width: $desktop) {
+		.search-field {
+			width: 100%;
+		}
+	}
+}
+
+/* Subscribe form
+----------------------------------*/
+
+.section-subscribe {
+	@media (min-width: $phone) {
+		.field,
+		.form-button {
+			display: inline-block;
+			margin: 0;
+		}
+
+		.field input {
+			width: 330px;
+		}
+
+		.form-button {
+			margin-left: $space-button-left;
+		}
+	}
+
+	@media (min-width: $tablet) {
+		.field input {
+			width: 420px;
+		}
+	}
 }
 
 /*--------------------------------------------------------------
@@ -546,13 +625,13 @@ html, body, .site {
 			.wrap {
 				max-width: 100%;
 				padding-left: calc(100% - 630px);
-				padding-right: 20px;
+				padding-right: 30px;
 			}
 		}
 
 		.site-aside {
 			.wrap {
-				padding-left: 20px;
+				padding-left: 30px;
 				padding-right: calc(100% - $aside-width);
 			}
 		}
@@ -1032,6 +1111,10 @@ nav ul {
 		font-size: resolve($font-size-h1 + 0.2em);
 		margin-bottom: 0.6em;
 	}
+
+	.search & {
+		font-size: resolve($font-size-h1 - 0.2em);
+	}
 }
 
 /*--------------------------------------------------------------
@@ -1048,12 +1131,6 @@ nav ul {
 	margin-top: -0.7rem;
 }
 
-.section-button {
-	.button {
-		@mixin full-width;
-	}
-}
-
 /* CTA section
 ----------------------------------*/
 
@@ -1067,7 +1144,7 @@ nav ul {
 		color: color( $color-white a(90%) );
 		font-size: $font-size-h2;
 		font-weight: $font-weight;
-		margin-bottom: resolve($space-section - 0.5rem);
+		margin-bottom: resolve($space-section - 0.6rem);
 		margin-top: -0.2rem;
 	}
 
@@ -1079,45 +1156,8 @@ nav ul {
 	}
 
 	.button,
-	input[type=submit] {
+	input[type="submit"] {
 		@mixin button-outline light;
-		@mixin full-width;
-	}
-}
-
-/* Subscribe form section
-----------------------------------*/
-
-.section-subscribe {
-	.wpcf7 {
-		p {
-			margin: 0;
-		}
-	}
-
-	.wpcf7-submit {
-		margin-top: 1.5rem;
-	}
-
-	@media (min-width: $phone) {
-		p {
-			display: inline-block;
-		}
-
-		.wpcf7-text {
-			width: 330px;
-		}
-
-		.wpcf7-submit {
-			margin-left: $space-button-left;
-			margin-top: 0;
-		}
-	}
-
-	@media (min-width: $tablet) {
-		.wpcf7-text {
-			width: 420px;
-		}
 	}
 }
 
@@ -1169,26 +1209,31 @@ nav ul {
 # Entries
 --------------------------------------------------------------*/
 
-/* Entries section/archive */
-.entries {
+/* Entry in a section/archive or search page  */
+.entries,
+.search {
 	/* Entry */
 	.hentry {
 		@mixin remove-bottom-space;
 		margin: 0 0 $space-entry;
+	}
+}
 
-		figure {
-			margin-bottom: 1rem;
+/* Entries section/archive */
+.entries {
+	/* Featured image */
+	figure {
+		margin-bottom: 1rem;
 
-			img {
-				display: block;
-				width: 100%;
-			}
+		img {
+			display: block;
+			width: 100%;
+		}
 
-			&.noimage {
-				background: $color-neutral;
-				height: 12rem;
-				width: 100%;
-			}
+		&.noimage {
+			background: $color-neutral;
+			height: 12rem;
+			width: 100%;
 		}
 	}
 
@@ -1222,6 +1267,7 @@ nav ul {
 .more-link {
 	font-size: $font-size-meta;
 	text-transform: uppercase;
+	white-space: nowrap;
 }
 
 /* Entry Meta
@@ -1231,7 +1277,7 @@ nav ul {
 	color: $color-meta;
 	font-size: $font-size-meta;
 	line-height: 1.5;
-	margin: -0.2em 0 $space-text;
+	margin: 0 0 $space-text;
 	text-transform: uppercase;
 
 	> span {
@@ -1261,18 +1307,25 @@ nav ul {
 
 .post-categories {
 	@mixin flexbox row, wrap, center;
-	list-style: none !important;
-	padding-left: 0 !important;
+	margin: -0.7em 0 resolve($space-text - 0.4em);
 
 	a {
 		background: $color-secondary;
 		border-radius: 5px;
 		color: #fff;
+		display: inline-block;
 		font-size: 0.7em;
-		padding: 0.3em 0.5em;
-		margin: .3em;
+		padding: 0.2em 0.5em;
+		margin: 0.4em;
 		text-transform: uppercase;
 	}
+}
+
+/* Entry content
+----------------------------------*/
+
+.entry-content {
+	@mixin remove-bottom-space;
 }
 
 /* Employee entry
@@ -1289,8 +1342,16 @@ nav ul {
 --------------------------------------------------------------*/
 
 .site-aside {
-	@media (max-width: $_desktop) {
-		@mixin section-background $background-section;
+	@mixin section-space;
+	@mixin section-background $background-section;
+
+	.address {
+		margin-top: $space-text;
+	}
+
+	@media (min-width: $desktop) {
+		background: $background-section;
+		border-left: 1px solid $color-border;
 	}
 }
 
@@ -1433,14 +1494,8 @@ nav ul {
 	display: block;
 }
 
-.byline,
 .updated:not(.published) {
 	display: none;
-}
-
-.single .byline,
-.group-blog .byline {
-	display: inline;
 }
 
 .page-links {
@@ -1644,5 +1699,11 @@ div.wpcf7-validation-errors::before {
 }
 
 /*--------------------------------------------------------------
-# Employees
+# 404
 --------------------------------------------------------------*/
+
+.error404 {
+	.site-main {
+		text-align: center;
+	}
+}

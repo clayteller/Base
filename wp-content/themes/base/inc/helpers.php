@@ -2,9 +2,21 @@
 /**
  * Helper functions for this theme.
  *
+ * @uses Advanced Custom Fields Pro
+ *
  * @package Base
  * @since 1.0.1
  */
+
+/**
+ * Is $type the current post type?
+ *
+ * @param string $type e.g. 'post'
+ * @return bool True if $type is the current post type.
+ */
+function base_is_post_type( $type ) {
+	return $type == get_post_type();
+}
 
 /**
  * Is the query for the posts page (when 'Homepage' and 'Posts page' are static pages)?
@@ -18,10 +30,10 @@ function base_is_blog() {
 /**
  * Are we displaying a sidebar on this page?
  *
- * @return bool True if 'show_sidebar' custom field is true or this is the 'Contact' page.
+ * @return bool True if 'show_sidebar' custom field is true.
  */
 function base_has_sidebar() {
-	return get_field( 'show_sidebar' ) || is_page( 'contact' );
+	return get_field( 'show_sidebar' );
 }
 
 /**
@@ -83,10 +95,11 @@ function base_get_background_image_css( $css_class, $field_name, $field_name_pos
 }
 
 /**
- * Require SVG icon file.
+ * Reads SVG icon file and returns it as a string.
  *
- * @param string $name Name of icon.
+ * @param string $name Name of icon file.
+ * @return string SVG code.
  */
 function base_svg_icon( $name ) {
-	require THEME_PATH . '/icons/' . $name . '.svg';
+	return file_get_contents( THEME_PATH . '/icons/' . $name . '.svg' );
 }

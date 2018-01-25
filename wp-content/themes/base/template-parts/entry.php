@@ -1,6 +1,8 @@
 <?php
 /**
- * Template part for displaying a blog entry
+ * Template part for displaying an entry (post) in an archive or entries section
+ *
+ * Displays relevant content for each post type. Post types include 'post', 'employee', 'service' and 'testimonial'.
  *
  * @uses Advanced Custom Fields Pro
  *
@@ -13,27 +15,27 @@
 
    <?php
    // Featured image (for all entries except testimonials)
-   if ( 'testimonial' != $entry_type ) :
+   if ( ! base_is_post_type( 'testimonial' ) ) :
       $image = get_the_post_thumbnail( null, 'entry' );
       if ( $image ) :
       ?>
          <figure><a href="<?php the_permalink(); ?>"><?php echo $image; ?></a></figure>
-         <?php
-         else:
-         ?>
+      <?php
+      else:
+      ?>
          <figure class="noimage"></figure>
       <?php
       endif;
    endif;
 
    // Entry header (for all entries except testimonials)
-   if ( 'testimonial' != $entry_type ) :
+   if ( ! base_is_post_type( 'testimonial' ) ) :
    ?>
       <header class="entry-header">
          <h3 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
          <?php
          // Display job title for employees
-         if ( 'employee' == $entry_type ) :
+         if ( base_is_post_type( 'employee' ) ) :
             $subtitle = get_field( 'job_title' );
             if ( $subtitle ):
             ?>
@@ -42,9 +44,9 @@
             endif;
          endif;
          // Entry meta (for posts)
-         if ( 'post' == $entry_type ) :
+         if ( base_is_post_type( 'post' ) ) :
          ?>
-            <p class="entry-meta"><span class="author"><?php base_svg_icon( 'person' ); the_author(); ?></span><span class="date"><?php base_svg_icon( 'clock' ); echo get_the_date( 'M j, Y' ); ?></span></p>
+            <p class="entry-meta"><?php base_entry_meta(); ?></p>
             <?php
             // Post categories
             $categories = get_the_category();
@@ -70,11 +72,11 @@
    endif;
 
    // Entry content (for all entries except employees)
-   if ( 'employee' != $entry_type ) :
+   if ( ! base_is_post_type( 'employee' ) ) :
    ?>
       <div class="entry-content">
          <?php
-         if ( 'testimonial' == $entry_type ) :
+         if ( base_is_post_type( 'testimonial' ) ) :
             the_content();
             ?>
             <h3 class="entry-title"><?php the_title(); ?></h3>
@@ -88,19 +90,19 @@
    endif;
 
    // Entry footer (for employees)
-   if ( 'employee' == $entry_type ) :
+   if ( base_is_post_type( 'employee' ) ) :
    ?>
    	<footer class="entry-footer">
    		<?php
          // Phone
          $phone = get_field( 'phone' );
          if ( $phone ) {
-            echo '<div class="phone">' . get_field( 'phone' ) . '</div>';
+            echo '<div class="phone">' . $phone . '</div>';
          }
          // Email
       	$email = get_field( 'email' );
          if ( $email ) {
-   			printf( '<div class="email"><a href="mailto:%s">%s</a></div>', $email, $email );
+   			printf( '<div class="email"><a href="mailto:%1$s">%1$s</a></div>', $email );
          }
          // Social links
          base_social_links();

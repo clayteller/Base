@@ -33,7 +33,7 @@ $line-height:         1.65;
 $line-height-title:   1.2;
 $line-height-heading: 1.3;
 
-$space-text:    1em;
+$space-text:    1.5em;
 $space-heading: 0.4em;
 $space-h2:      0.6em;
 
@@ -44,7 +44,7 @@ $space-h2:      0.6em;
 $color-primary:   hsl(200, 67%, 51%);
 $color-secondary: hsl(21, 65%, 62%);
 $color-white:     hsl(0, 0%, 100%);
-$color-neutral:   hsl(60, 4%, 95%);
+$color-neutral:   hsl(60, 3%, 95%);
 $color-dark:      hsl(210, 5%, 21%);
 
 $color-text:     hsl(0, 0%, 20%);

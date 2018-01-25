@@ -2,12 +2,6 @@
 /**
  * The template for displaying all pages
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site may use a
- * different template.
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  * @uses base_body_classes() in template-functions.php
  *
  * @package Base
@@ -30,5 +24,7 @@ get_header();
 <?php
 if ( base_has_sidebar() ) {
 	get_sidebar();
+} elseif ( is_page( 'contact' ) ) {
+	get_template_part( 'template-parts/sidebar', 'contact' );
 }
 get_footer();

@@ -2,6 +2,8 @@
 /**
  * Functions which enhance the theme by hooking into WordPress
  *
+ * @uses Advanced Custom Fields Pro
+ *
  * @package Base
  * @since 1.0.1
  */
@@ -74,7 +76,7 @@ function base_body_classes( $classes ) {
 	}
 
 	// Adds a class of 'two-column' to two-column pages.
-	if ( base_has_sidebar() ) {
+	if ( base_has_sidebar() || is_page( 'contact' ) ) {
 		$classes[] = 'two-column';
 	}
 

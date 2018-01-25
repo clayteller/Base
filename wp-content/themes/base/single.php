@@ -2,8 +2,6 @@
 /**
  * The template for displaying all single posts
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
- *
  * @package Base
  * @since 1.0.1
  */
@@ -33,7 +31,7 @@ get_header();
 </main><!-- #site-main -->
 
 <?php
-if ( get_field( 'show_sidebar' ) ) {
+if ( base_has_sidebar() ) {
 	get_sidebar();
 }
 get_footer();
