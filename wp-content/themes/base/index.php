@@ -13,7 +13,17 @@
  * @since 1.0.1
  */
 
-get_header(); ?>
+/**
+ * Fix the issue of 'blog' page using this template instead of the archive template.
+ *
+ * @todo Figure out why 'blog' page doesn't use archive template.
+ */
+if ( base_is_blog() ) {
+	load_template( get_archive_template() );
+	return;
+}
+
+get_header();
 ?>
 
 <main id="site-main" class="site-main">
@@ -22,15 +32,7 @@ get_header(); ?>
 		<?php
 		if ( have_posts() ) :
 
-			if ( base_is_blog() ) :
-				?>
-				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
-				<?php
-			endif;
 
-			/* Start the Loop */
 			while ( have_posts() ) : the_post();
 
 				/*

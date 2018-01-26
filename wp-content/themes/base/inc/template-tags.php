@@ -43,7 +43,7 @@ function base_logo( $field_name = 'logo', $css_class = 'logo', $echo = true ) {
  */
 function base_site_title( $echo = true ) {
 	// If a 'Site Title' (custom field) was set in our Theme Settings page, use that instead of default WordPress 'Site Title'
-	$title = get_field( 'site_title', 'option' ) ? get_field( 'site_title', 'option' ) : bloginfo( 'name' );
+	$title = get_field( 'site_title', 'option' ) ? get_field( 'site_title', 'option' ) : get_bloginfo( 'name' );
 
 	// Bail if there's no title
 	if ( ! $title ) return;
@@ -69,6 +69,9 @@ function base_page_title( $before = '', $after = '', $echo = true ) {
 	if ( is_front_page() ) {
 		// If 'Page Title' (custom field) was set, use that instead of  WordPress site description
 		$title = get_field( 'page_title' ) ? get_field( 'page_title' ) : get_bloginfo( 'description' );
+	// Blog
+	} elseif ( is_home() ) {
+		$title = __( 'Blog', 'base' );
 	// Archive
 	} elseif ( is_archive() ) {
 		$title = get_the_archive_title();
@@ -82,9 +85,11 @@ function base_page_title( $before = '', $after = '', $echo = true ) {
 	} elseif ( is_404() ) {
 		$title = __( 'Oops!', 'base' );
 	// All other pages
-	} elseif ( is_page() || is_home() ) {
+	} elseif ( is_page() ) {
 		// If 'Page Title' (custom field) was set, use that instead of default WordPress page title
 		$title = get_field( 'page_title' ) ? get_field( 'page_title' ) : get_the_title();
+	} else {
+		$title = base_site_title( false );
 	}
 
 	// Bail if there's no title
