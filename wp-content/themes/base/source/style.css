@@ -1626,16 +1626,27 @@ p + .wpcf7 {
 	margin-top: $space-section;
 }
 
-/* Message displayed under each input field */
+/* Invalid form field */
+.wpcf7-not-valid {
+	box-shadow: inset 0	0 0 2px color( $color-error a(70%) );
+}
+
+/* Message displayed under invalid form field */
 span.wpcf7-not-valid-tip {
+	color: $color-error;
 	margin-top: .5em;
+}
+
+/* Prevent layout break when 'span.not-valid-tip' is displayed */
+.wpcf7-form .form-button {
+	vertical-align: top;
 }
 
 /* Message displayed at the bottom of the form */
 div.wpcf7-response-output {
 	border: 0;
-	margin: 0;
-	padding: .4em .8em;
+	margin: $space-section 0 0;
+	padding: $space-box;
 	background: #f1f1f1;
 	border-radius: 5px;
 }
@@ -1648,7 +1659,8 @@ div.wpcf7-mail-sent-ok::before {
 }
 
 /* Error message */
-div.wpcf7-validation-errors::before {
+div.wpcf7-validation-errors::before,
+div.wpcf7-mail-sent-ng::before {
 	content: "☹️";
 	font-size: 1.5em;
 	padding-right: 0.3em;

@@ -56,6 +56,8 @@ $color-subtitle: color( $color-text lightness(+8) );
 $color-border:   hsl(0, 0%, 88%);
 $color-footer:   rgba(255, 255, 255, 0.8);
 
+$color-error: hsl(343, 100%, 38%);
+
 /* Links
 ----------------------------------*/
 
