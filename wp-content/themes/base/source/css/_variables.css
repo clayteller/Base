@@ -62,8 +62,8 @@ $color-link-hover:        color( $color-link lightness(+5) );
 $color-nav:               $color-text;
 $color-nav-hover:         color( $color-primary lightness(-5) saturation(+5) );
 $color-nav-active:        $color-nav-hover;
-$color-meta-link:         $color-link;
-$color-meta-link-hover:   $color-link-hover;
+$color-meta-link:         $color-meta;
+$color-meta-link-hover:   $color-link;
 $color-footer-link:       color( $color-footer lightness(+10) );
 $color-footer-link-hover: color( $color-footer-link lightness(-10) );
 
