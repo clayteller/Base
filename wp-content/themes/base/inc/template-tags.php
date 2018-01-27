@@ -166,10 +166,9 @@ function base_social_links( $post_id = false, $echo = true ) {
 		return $html;
 }
 
-
 if ( ! function_exists( 'base_entry_meta' ) ) :
 	/**
-	 * Prints HTML with meta information for the current post-date/time and author.
+	 * Prints HTML with meta information for the current post date/time and author.
 	 */
 	function base_entry_meta() {
 		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';

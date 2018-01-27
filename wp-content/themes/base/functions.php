@@ -162,6 +162,11 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-functions.php';
 
 /**
+ * Functions which enhance the comments by hooking into WordPress.
+ */
+require get_template_directory() . '/inc/comments-functions.php';
+
+/**
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';

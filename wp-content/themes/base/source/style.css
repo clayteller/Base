@@ -9,9 +9,6 @@ License: GNU General Public License v2 or later
 License URI: LICENSE
 Tags:
 
-This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned with others.
-
 Base is based on Underscores http://underscores.me/, (C) 2012-2016 Automattic, Inc.
 Underscores is distributed under the terms of the GNU GPL v2 or later.
 */
@@ -364,8 +361,7 @@ textarea {
 ----------------------------------*/
 
 .search-form {
-	margin-bottom: $space-section;
-	margin-top: $space-section;
+	@mixin section-space;
 }
 
 .site-main {
@@ -381,7 +377,7 @@ textarea {
 		}
 
 		.search-submit {
-			margin-left: $space-button-left;
+			margin-left: $space-button;
 		}
 	}
 
@@ -403,7 +399,7 @@ textarea {
 		}
 
 		.search-submit {
-			margin-left: $space-button-left;
+			margin-left: $space-button;
 		}
 	}
 
@@ -430,7 +426,7 @@ textarea {
 		}
 
 		.form-button {
-			margin-left: $space-button-left;
+			margin-left: $space-button;
 		}
 	}
 
@@ -458,7 +454,7 @@ textarea {
 
 .branding {
 	a {
-		@mixin flexbox row, wrap, start, center;
+		@mixin flexbox row, wrap, flex-start, center;
 	}
 
 	.logo {
@@ -522,7 +518,9 @@ textarea {
 	.home &,
 	.site-header &,
 	.site-footer &,
-	.colophon & {
+	.colophon &,
+	.archive .site-main &,
+	.blog .site-main & {
 		max-width: $max-width-wide;
 	}
 
@@ -535,6 +533,10 @@ textarea {
 /* Non-home page main content areas need section spacing  */
 body:not(.home) .site-main {
 	@mixin section-space;
+
+	> .wrap {
+		@mixin remove-bottom-space;
+	}
 }
 
 /* CSS grid
@@ -881,7 +883,7 @@ nav ul {
 			font-size: resolve($font-size-nav-mobile - 0.1rem);
 		}
 	}
-} /* .site-nav */
+}
 
 .no-js .site-nav ul ul {
 	display: block;
@@ -970,7 +972,7 @@ nav ul {
 			position: absolute;;
 		}
 	}
-} /* .site-nav */
+}
 
 /* Footer nav
 ----------------------------------*/
@@ -983,9 +985,9 @@ nav ul {
 
 	a {
 		background: rgba(255, 255, 255, 0.1);
-		border-radius: $border-radius;
+		border-radius: $border-radius-field;
 		color: $color-footer-link;
-		padding: 0.6em 1em 0.5em;
+		padding: 0.6em 0.6em 0.5em;
 		display: block;
 		font-family: $font-family-heading;
 		font-weight: $font-weight-heading;
@@ -1002,28 +1004,48 @@ nav ul {
 	}
 }
 
-/* Misc nav
+/* Pagination / Posts nav
 ----------------------------------*/
 
-.comment-navigation,
-.posts-navigation,
+/* numbered page links */
+.pagination,
+/* page name links */
 .post-navigation {
-	margin: 0 0 $space-text;
+	@mixin section-margin-bottom;
+}
 
-	.nav-links {
-		display: flex;
+.nav-links {
+	@mixin flexbox row, wrap, center, center;
+
+	> * {
+		@mixin sibling-space $space-button;
+	}
+
+	a,
+	span {
+		@mixin button;
+		@mixin button-outline;
+		@mixin button-small;
+		border-radius: $border-radius-field;
+	}
+
+	span {
+		cursor: default;
+	}
+
+	.current {
+		background: $background-button;
+		color: $color-white;
+	}
+
+	.dots:hover {
+		background: transparent;
+		color: $background-button;;
 	}
 }
 
 .nav-previous,
 .nav-next {
-	max-width: 48%;
-
-	a {
-		@mixin button;
-		@mixin button-big;
-	}
-
 	.icon-chevron {
 		fill: none;
 		position: relative;
@@ -1035,46 +1057,15 @@ nav ul {
 }
 
 .nav-previous {
-	a {
-		padding-left: 0.8em;
-	}
-
 	.icon-chevron {
 		transform: rotate(.25turn);
 	}
 }
 
 .nav-next {
-	margin: 0 0 0 auto;
-	text-align: right;
-
-	a {
-		padding-right: 0.8em;
-	}
-
 	.icon-chevron {
 		margin-left: 0.1em;
 		transform: rotate(.75turn);
-	}
-}
-
-/* Pagination
-----------------------------------*/
-
-.pagination {
-	flex: 0 0 100%;
-	margin: 1rem 0 0;
-	text-align: center;
-
-	.page-numbers {
-		@mixin button;
-		@mixin button-big;
-		margin-right: .3rem;
-		margin-bottom: 1rem;
-
-		&.current {
-			background-color: $background-button-active;
-		}
 	}
 }
 
@@ -1136,8 +1127,7 @@ nav ul {
 
 .section-cta {
 	background: $background-section-primary;
-	padding-bottom: resolve( $space-section + 0.8rem );
-	padding-top: resolve( $space-section + 0.8rem );
+	@mixin section-space 0.8rem, 0.8rem;
 	text-align: center;
 
 	.section-title {
@@ -1165,9 +1155,8 @@ nav ul {
 ----------------------------------*/
 
 .section-partners {
+	@mixin section-space 0rem, -0.8rem;
 	background: color( $background-section-dark lightness(+8) );
-	padding-bottom: resolve( $space-section - 0.8rem );
-	padding-top: resolve( $space-section + 0.2rem );
 
 	.section-title {
 		color: color( $color-text lightness(+20) );
@@ -1209,17 +1198,13 @@ nav ul {
 # Entries
 --------------------------------------------------------------*/
 
-/* Entry in a section/archive or search page  */
-.entries,
-.search {
-	/* Entry */
-	.hentry {
-		@mixin remove-bottom-space;
-		margin: 0 0 $space-entry;
-	}
+/* Entry, in all contexts, archive or single  */
+.hentry {
+	@mixin remove-bottom-space;
+	margin: 0 0 resolve($space-entry + 1rem);
 }
 
-/* Entries section/archive */
+/* Entries in a section/archive */
 .entries {
 	/* Featured image */
 	figure {
@@ -1237,6 +1222,7 @@ nav ul {
 		}
 	}
 
+	/* Multi-column */
 	@media (min-width: $phone) {
 		@mixin flexbox row, wrap, center;
 		margin: 0 resolve($space-entry / 2 * -1);
@@ -1246,20 +1232,33 @@ nav ul {
 		.hentry {
 			margin-left: resolve($space-entry / 2);
 			margin-right: resolve($space-entry / 2);
-			width: calc( 33.333% - resolve($space-entry) );
+			width: calc(50% - $space-entry);
 		}
 
-		/* 2 entries */
+		/* 3 entries */
+		&.count-3 .hentry {
+			width: calc(33.333% - $space-entry);
+		}
+
+		/* 2 or 4 entries */
 		&.count-2 .hentry,
 		&.count-4 .hentry {
-			width: calc( 50% - resolve($space-entry) );
+			width: calc(50% - $space-entry);
+		}
+
+		.post-categories {
+			justify-content: center;
 		}
 	}
 
 	@media (min-width: $desktop) {
+		.hentry {
+			width: calc(33.333% - $space-entry);
+		}
+
 		/* 4 entries */
 		&.count-4 .hentry {
-			width: calc( 25% - resolve($space-entry) );
+			width: calc( 25% - $space-entry );
 		}
 	}
 }
@@ -1281,6 +1280,9 @@ nav ul {
 	text-transform: uppercase;
 
 	> span {
+		display: inline-block;
+		white-space: nowrap;
+
 		&:not(:first-of-type) {
 			margin-left: 0.9em;
 		}
@@ -1306,18 +1308,22 @@ nav ul {
 }
 
 .post-categories {
-	@mixin flexbox row, wrap, center;
-	margin: -0.7em 0 resolve($space-text - 0.4em);
+	margin: -0.5em 0 resolve($space-text - 0.7em);
+
+	li {
+		@mixin sibling-space 0.5em;
+		display: inline-block;
+		margin: 0 0 0.8em;
+	}
 
 	a {
 		background: $color-secondary;
-		border-radius: 5px;
+		border-radius: $border-radius-field;
 		color: #fff;
-		display: inline-block;
+		display: block;
 		font-size: 0.7em;
 		line-height: 1;
-		padding: 0.5em;
-		margin: 0.4em;
+		padding: 0.6em 0.6em 0.5em;
 		text-transform: uppercase;
 		white-space: nowrap;
 	}
@@ -1438,32 +1444,7 @@ nav ul {
 
 /* Text meant only for screen readers. */
 .screen-reader-text {
-	clip: rect(1px, 1px, 1px, 1px);
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	word-wrap: normal !important; /* Many screen reader and browser combinations announce broken words as they would appear visually. */
-
-	&:focus {
-		background-color: #f1f1f1;
-		border-radius: 3px;
-		box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
-		clip: auto !important;
-		color: #21759b;
-		display: block;
-		font-size: 14px;
-		font-size: 0.875rem;
-		font-weight: bold;
-		height: auto;
-		left: 5px;
-		line-height: normal;
-		padding: 15px 23px 14px;
-		text-decoration: none;
-		top: 5px;
-		width: auto;
-		z-index: 100000; /* Above WP toolbar. */
-	}
+	@mixin screen-reader-text;
 }
 
 /* Do not show the outline on the skip link target. */
@@ -1508,6 +1489,16 @@ nav ul {
 /*--------------------------------------------------------------
 # Comments
 --------------------------------------------------------------*/
+
+.comment-form {
+	label {
+		@mixin screen-reader-text;
+	}
+
+	textarea {
+		height: 8rem;
+	}
+}
 
 .comment-content a {
 	word-wrap: break-word;

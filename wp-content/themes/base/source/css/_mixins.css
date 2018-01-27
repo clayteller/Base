@@ -65,8 +65,8 @@
 # Button
 --------------------------------------------------------------*/
 
-@define-mixin button {
-	background: $background-button;
+@define-mixin button $background: $background-button {
+	background: $background;
 	border-radius: $border-radius;
 	border: 0;
 	box-shadow: none;
@@ -103,8 +103,9 @@
 		box-shadow: inset 0 0 0 2px color( $color-white a(60%) );
 		color: color( $color-white a(90%) );
 	} @else {
-		box-shadow: inset 0 0 0 2px $background-button;
+		box-shadow: inset 0 0 0 2px color( $background-button a(80%) );
 		color: $background-button;
+		text-shadow: none;
 	}
 
 	&:hover,
@@ -120,6 +121,11 @@
 
 @define-mixin button-big {
 	font-size: resolve( $font-size-button + 0.1em );
+}
+
+@define-mixin button-small {
+	font-size: resolve( $font-size-button - 0.1em );
+	padding: 0.7em 0.9em 0.6em;
 }
 
 @define-mixin button-plain {
@@ -241,16 +247,34 @@
 }
 
 /*--------------------------------------------------------------
-# Section vertical spacing
+# Screen reader text
 --------------------------------------------------------------*/
+@define-mixin screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	word-wrap: normal !important; /* Many screen reader and browser combinations announce broken words as they would appear visually. */
 
-@define-mixin section-space $top-adjust: 0rem, $bottom-adjust: 0rem {
-	padding-top: resolve( $space-section + $top-adjust );
-	padding-bottom: resolve( $space-section + $bottom-adjust );
-
-	@media (min-width: $tablet) {
-		padding-top: resolve( $space-section-desktop + $top-adjust );
-		padding-bottom: resolve( $space-section-desktop + $bottom-adjust );
+	&:focus {
+		background-color: #f1f1f1;
+		border-radius: 3px;
+		box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+		clip: auto !important;
+		color: #21759b;
+		display: block;
+		font-size: 14px;
+		font-size: 0.875rem;
+		font-weight: bold;
+		height: auto;
+		left: 5px;
+		line-height: normal;
+		padding: 15px 23px 14px;
+		text-decoration: none;
+		top: 5px;
+		width: auto;
+		z-index: 100000; /* Above WP toolbar. */
 	}
 }
 
@@ -262,4 +286,36 @@
 	background: $background;
 	border-bottom: 1px solid $color-border;
 	border-top: 1px solid $color-border;
+}
+
+/*--------------------------------------------------------------
+# Section vertical spacing
+--------------------------------------------------------------*/
+
+@define-mixin section-space $top-adjust: 0rem, $bottom-adjust: 0rem {
+	padding-bottom: resolve( $space-section + $bottom-adjust );
+	padding-top: resolve( $space-section + $top-adjust );
+
+	@media (min-width: $tablet) {
+		padding-bottom: resolve( $space-section-desktop + $bottom-adjust );
+		padding-top: resolve( $space-section-desktop + $top-adjust );
+	}
+}
+
+@define-mixin section-margin-bottom $adjust: 0rem {
+	margin-bottom: resolve( $space-section + $adjust );
+
+	@media (min-width: $tablet) {
+		margin-bottom: resolve( $space-section-desktop + $adjust );
+	}
+}
+
+/*--------------------------------------------------------------
+# Sibling space
+--------------------------------------------------------------*/
+
+@define-mixin sibling-space $space {
+	&:not(:first-child) {
+		margin-left: $space;
+	}
 }

@@ -23,8 +23,4 @@
 		<?php the_excerpt(); ?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
-		<?php base_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
-
 </article><!-- #post-<?php the_ID(); ?> -->

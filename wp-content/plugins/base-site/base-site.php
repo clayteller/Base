@@ -38,3 +38,13 @@ function base_archive_title( $title ) {
    return preg_replace('/^\w+: /', '', $title);
 }
 add_filter( 'get_the_archive_title', 'base_archive_title' );
+
+/**
+ * Don't paginate custom post types archives
+ */
+function base_cpt_posts_per_page( $query ) {
+  if ( $query->is_main_query() && is_post_type_archive() ) {
+    $query->set( 'posts_per_page', '-1' );
+  }
+}
+add_action( 'pre_get_posts', 'base_cpt_posts_per_page' );

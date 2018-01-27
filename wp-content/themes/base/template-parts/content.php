@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying a post
+ * Template part for displaying a post on a single page
  *
  * @package Base
  * @since 1.0.1

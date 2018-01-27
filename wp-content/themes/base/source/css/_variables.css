@@ -33,10 +33,6 @@ $line-height:         1.65;
 $line-height-title:   1.2;
 $line-height-heading: 1.3;
 
-$space-text:    1.5em;
-$space-heading: 0.4em;
-$space-h2:      0.6em;
-
 /*--------------------------------------------------------------
 # Color
 --------------------------------------------------------------*/
@@ -98,15 +94,20 @@ $background-colophon: color( $color-dark a(90%) );
 # Layout
 --------------------------------------------------------------*/
 
-$gutter:            4%;
-$max-width:         1000px;
-$max-width-wide:    1300px;
-$space-section:     2rem;
-$space-section-desktop:  2.4rem;
-$space-entry:       1.6rem;
-$space-box:         1.3rem;
-$space-border:      2rem;
-$space-button-left: 0.5em;
+$gutter:         4%;
+$max-width:      1000px;
+$max-width-wide: 1300px;
+
+$space-text:    1.5em;
+$space-heading: 0.4em;
+$space-h2:      0.6em;
+$space-button:  0.5em;
+
+$space-section: 2rem;
+$space-section-desktop: 2.4rem;
+$space-entry:   1.6rem;
+$space-box:     1.3rem;
+$space-border:  2rem;
 
 $masthead-height: 4.2rem;
 $aside-width:   300px;
@@ -129,7 +130,7 @@ $large-desktop: 1200px;
 --------------------------------------------------------------*/
 
 $border-radius: 999px;
-$border-radius-field: 10px;
+$border-radius-field: 8px;
 $box-shadow:    0 0 5px 0 rgba(0, 0, 0, 0.1);
 $box-shadow-on: 0 0 15px 0 rgba(0, 0, 0, 0.13);
 $text-shadow:   1px 1px rgba(0, 0, 0, 0.2);
