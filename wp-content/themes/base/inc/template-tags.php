@@ -95,7 +95,15 @@ function base_page_title( $before = '', $after = '', $echo = true ) {
 	// Bail if there's no title
 	if ( ! $title ) return;
 
+	/**
+	 * Filters the page title.
+	 *
+	 * @param string $title
+	 */
+	$title = apply_filters( 'base_page_title', $title );
+
 	$title = $before . $title . $after;
+
 
 	if ( $echo )
 		echo $title;
