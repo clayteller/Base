@@ -159,12 +159,7 @@ require get_template_directory() . '/inc/template-tags.php';
 /**
  * Functions which enhance the theme by hooking into WordPress.
  */
-require get_template_directory() . '/inc/template-functions.php';
-
-/**
- * Functions which enhance the comments by hooking into WordPress.
- */
-require get_template_directory() . '/inc/comments-functions.php';
+require get_template_directory() . '/inc/theme-functions.php';
 
 /**
  * Customizer additions.

@@ -9,6 +9,13 @@
  */
 
  /**
+ * Include files
+ */
+ foreach ( glob( plugin_dir_path( __FILE__ ) . "theme-functions/*.php" ) as $file ) {
+ 	require $file;
+ }
+
+ /**
   * Set responsive image sizes for entry featured images.
   *
   * @uses $entries_count
