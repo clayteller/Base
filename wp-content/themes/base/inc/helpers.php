@@ -103,3 +103,18 @@ function base_get_background_image_css( $css_class, $field_name, $field_name_pos
 function base_svg_icon( $name ) {
 	return file_get_contents( THEME_PATH . '/icons/' . $name . '.svg' );
 }
+
+/**
+ * Insert a string into another string at a given point.
+ *
+ * @param string $original_string String we want to alter.
+ * @param string $add_string      String we're adding.
+ * @param string $find_in_string  Optional. Substring in the original string in which we're inserting new string.
+ * @param bool   $insert_after    Optional. True if want to insert after $find_in_string. Default false.
+ * @return string String containing the new added string.
+ */
+function base_add_string( $original_string, $add_string, $find_in_string = null, $insert_after = false ) {
+	$offset = ( $insert_after ) ? strlen( $find_in_string ) : 0;
+	$insertion_point = ( $find_in_string ) ? strpos( $original_string, $find_in_string ) + $offset : 0;
+	return substr_replace( $original_string, $add_string, $insertion_point, 0 );
+}

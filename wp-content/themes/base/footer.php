@@ -16,6 +16,7 @@ $footer_summary = get_field( 'site_summary', 'option' ) ? get_field( 'site_summa
 get_template_part( 'template-parts/section', 'subscribe' );
 ?>
 
+	<?php do_action ( 'base_before_footer' ); ?>
 	<footer id="site-footer" class="site-footer" role="contentinfo">
 		<div class="wrap">
 			<div class="footer-summary">

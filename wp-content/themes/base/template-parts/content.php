@@ -10,9 +10,7 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php	if ( 'post' === get_post_type() ) : ?>
 		<header class="entry-header">
-			<div class="entry-meta">
-				<?php base_entry_meta(); ?>
-			</div><!-- .entry-meta -->
+			<p class="entry-meta"><?php base_entry_meta(); ?></p>
 		</header><!-- .entry-header -->
 	<?php endif; ?>
 
@@ -39,6 +37,9 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php base_entry_footer(); ?>
+		<?php
+		base_entry_categories();
+		base_entry_tags();
+		?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

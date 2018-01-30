@@ -19,7 +19,7 @@ $font-size-h5:         $font-size;
 $font-size-subtitle:   resolve($font-size + 0.4em);
 $font-size-large:      resolve($font-size + 0.4em);
 $font-size-medium:     resolve($font-size + 0.2em);
-$font-size-meta:       0.8em;
+$font-size-meta:       0.85em;
 $font-size-nav:        19px;
 $font-size-nav-mobile: 1.2em;
 $font-size-field:      resolve($font-size + 0.1em);;
@@ -129,7 +129,7 @@ $large-desktop: 1200px;
 # Effects
 --------------------------------------------------------------*/
 
-$border-radius: 999px;
+$border-radius: 8px;
 $border-radius-field: 8px;
 $box-shadow:    0 0 5px 0 rgba(0, 0, 0, 0.1);
 $box-shadow-on: 0 0 15px 0 rgba(0, 0, 0, 0.13);

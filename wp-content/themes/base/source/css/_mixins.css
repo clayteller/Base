@@ -65,19 +65,19 @@
 # Button
 --------------------------------------------------------------*/
 
-@define-mixin button $background: $background-button {
+@define-mixin button $background: $background-button,  $background-hover: $background-button-hover, $background-active: $background-button-active {
 	background: $background;
 	border-radius: $border-radius;
 	border: 0;
 	box-shadow: none;
-	color: rgba(255, 255, 255, 0.9);
+	color: color( $color-white a(90%) );
 	cursor: pointer;
 	display: inline-block;
 	font-family: $font-family-heading;
 	font-size: $font-size-button;
 	font-weight: $font-weight-heading;
 	line-height: 1;
-	padding: 0.8em 1em 0.7em;
+	padding: 0.8em 0.9em 0.7em;
 	text-decoration: none;
 	text-shadow: $text-shadow;
 	text-transform: uppercase;
@@ -86,13 +86,13 @@
 
 	&:hover,
 	&:focus {
-		background: $background-button-hover;
-		color: #fff;
+		background: $background-hover;
+		color: $color-white;
 	}
 
 	&:active {
-		background: $background-button-active;
-		color: #fff;
+		background: $background-active;
+		color: $color-white;
 	}
 }
 
@@ -125,7 +125,7 @@
 
 @define-mixin button-small {
 	font-size: resolve( $font-size-button - 0.1em );
-	padding: 0.7em 0.9em 0.6em;
+	padding: 0.7em 0.9em 0.7em;
 }
 
 @define-mixin button-plain {

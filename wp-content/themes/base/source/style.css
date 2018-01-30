@@ -300,16 +300,15 @@ input[type="reset"],
 input[type="submit"],
 .button {
 	@mixin button;
+
+	.site-main &,
+	.section-cta & {
+		@mixin full-width-phone;
+	}
 }
 
 .button-big {
 	@mixin button-big;
-}
-
-.section .button,
-.form-button input,
-input.search-submit {
-	@mixin full-width-phone;
 }
 
 /*--------------------------------------------------------------
@@ -985,7 +984,7 @@ nav ul {
 
 	a {
 		background: rgba(255, 255, 255, 0.1);
-		border-radius: $border-radius-field;
+		border-radius: $border-radius;
 		color: $color-footer-link;
 		padding: 0.6em 0.6em 0.5em;
 		display: block;
@@ -1026,7 +1025,6 @@ nav ul {
 		@mixin button;
 		@mixin button-outline;
 		@mixin button-small;
-		border-radius: $border-radius-field;
 	}
 
 	span {
@@ -1046,6 +1044,16 @@ nav ul {
 
 .nav-previous,
 .nav-next {
+	@media (max-width: $_phone) {
+		flex: 0 0 100%;
+		margin: $space-button 0 !important;
+
+		a {
+			text-align: center;
+			width: 100%;
+		}
+	}
+
 	.icon-chevron {
 		fill: none;
 		position: relative;
@@ -1204,6 +1212,16 @@ nav ul {
 	margin: 0 0 resolve($space-entry + 1rem);
 }
 
+.entry-header,
+.entry-content {
+	@mixin remove-bottom-space;
+	margin-bottom: 1rem;
+
+	.single & {
+		margin-bottom: $space-entry;
+	}
+}
+
 /* Entries in a section/archive */
 .entries {
 	/* Featured image */
@@ -1220,6 +1238,11 @@ nav ul {
 			height: 12rem;
 			width: 100%;
 		}
+	}
+
+	/* Hide tags in section/archive */
+	.post-tags {
+		display: none;
 	}
 
 	/* Multi-column */
@@ -1276,7 +1299,7 @@ nav ul {
 	color: $color-meta;
 	font-size: $font-size-meta;
 	line-height: 1.5;
-	margin: 0 0 $space-text;
+	margin: 0 0 $space-heading;
 	text-transform: uppercase;
 
 	> span {
@@ -1307,33 +1330,36 @@ nav ul {
 	}
 }
 
-.post-categories {
-	margin: -0.5em 0 resolve($space-text - 0.7em);
-
-	li {
-		@mixin sibling-space 0.5em;
-		display: inline-block;
-		margin: 0 0 0.8em;
-	}
-
-	a {
-		background: $color-secondary;
-		border-radius: $border-radius-field;
-		color: #fff;
-		display: block;
-		font-size: 0.7em;
-		line-height: 1;
-		padding: 0.6em 0.6em 0.5em;
-		text-transform: uppercase;
-		white-space: nowrap;
-	}
-}
-
 /* Entry content
 ----------------------------------*/
 
 .entry-content {
 	@mixin remove-bottom-space;
+}
+
+/* Entry footer
+----------------------------------*/
+
+.post-categories,
+.post-tags {
+	color: $color-meta;
+	margin: 0 0 resolve($space-text - 0.7em);
+
+	li {
+		@mixin sibling-space 0.5em;
+		display: inline-block;
+		margin: 0.4em 0;
+	}
+
+	a {
+		@mixin button $color-secondary, $color-secondary, $color-secondary;
+		font-size: 0.75em;
+		padding: 0.6em 0.6em 0.5em;
+	}
+}
+
+.post-categories + .post-tags {
+	margin-top: -0.8em;
 }
 
 /* Employee entry

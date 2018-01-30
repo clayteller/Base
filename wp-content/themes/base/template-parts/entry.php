@@ -48,23 +48,8 @@
          ?>
             <p class="entry-meta"><?php base_entry_meta(); ?></p>
             <?php
-            // Post categories
-            $categories = get_the_category();
-            if ( $categories ):
-            ?>
-               <ul class="post-categories">
-                  <?php
-                  foreach ( $categories as $category ) {
-                     printf(
-                        '<li class="category-%1$s"><a href="%2$s">%1$s</a></li>',
-                        esc_html( $category->name ),
-                        esc_url( get_category_link( $category->term_id ) )
-                     );
-                  }
-                  ?>
-               </ul>
-            <?php
-            endif;
+      		base_entry_categories();
+      		base_entry_tags();
          endif;
          ?>
       </header><!-- .entry-header -->
