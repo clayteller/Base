@@ -1240,11 +1240,6 @@ nav ul {
 		}
 	}
 
-	/* Hide tags in section/archive */
-	.post-tags {
-		display: none;
-	}
-
 	/* Multi-column */
 	@media (min-width: $phone) {
 		@mixin flexbox row, wrap, center;

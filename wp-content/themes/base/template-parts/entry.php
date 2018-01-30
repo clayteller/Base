@@ -49,7 +49,6 @@
             <p class="entry-meta"><?php base_entry_meta(); ?></p>
             <?php
       		base_entry_categories();
-      		base_entry_tags();
          endif;
          ?>
       </header><!-- .entry-header -->

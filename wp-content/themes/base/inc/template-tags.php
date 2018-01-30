@@ -203,15 +203,6 @@ function base_entry_meta() {
  * Output HTML with the categories.
  */
 function base_entry_categories() {
-	/**
-	 * Add a category icon to the category list.
-	 *
-	 * @uses base_add_string()
-	 */
-	function base_add_category_icon( $category_list ) {
-		return base_add_string( $category_list, base_svg_icon( 'folder' ), '<li' );
-	}
-	add_filter( 'the_category', 'base_add_category_icon' );
 
 	echo get_the_category_list();
 }
@@ -220,7 +211,8 @@ function base_entry_categories() {
  * Output HTML with the tags.
  */
 function base_entry_tags() {
-	$icon = base_svg_icon( 'tag' );
+	// If single, add tag icon.
+	$icon = ( is_single() ) ? base_svg_icon( 'tag' ) : '';
 	echo get_the_tag_list('<ul class="post-tags">' . $icon . '<li>','</li><li>','</li></ul>');
 }
 

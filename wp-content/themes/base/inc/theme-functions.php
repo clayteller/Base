@@ -25,7 +25,7 @@
   * @return string Sizes attribute.
   */
 function base_entry_image_responsive_sizes( $sizes, $size ) {
-	if ( is_front_page() ) {
+	if ( is_front_page() || is_archive()  ) {
 		global $entries_count;
 
 		if ( 2 == $entries_count ) {
@@ -95,6 +95,19 @@ function base_body_classes( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'base_body_classes' );
+
+/**
+* Add a category icon to the category list.
+*
+* @uses base_add_string()
+*/
+function base_add_category_icon( $category_list ) {
+   // If not single, don't add category icon.
+   if ( ! is_single() ) return $category_list;
+
+   return base_add_string( $category_list, base_svg_icon( 'folder' ), '<li' );
+}
+add_filter( 'the_category', 'base_add_category_icon' );
 
 /**
  * Add a pingback url auto-discovery header for singularly identifiable articles.
