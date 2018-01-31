@@ -177,3 +177,8 @@ if ( defined( 'JETPACK__VERSION' ) ) {
  * Helper functions for this theme.
  */
 require get_template_directory() . '/inc/helpers.php';
+
+/**
+ * Register shortcodes for this theme.
+ */
+require get_template_directory() . '/inc/shortcodes.php';
