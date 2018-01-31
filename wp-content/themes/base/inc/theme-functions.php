@@ -71,15 +71,23 @@ add_filter( 'excerpt_more', 'base_excerpt_more' );
 /**
  * Adds custom classes to the array of body classes.
  *
+ * @uses Advanced Custom Fields Pro
+ *
  * @param array $classes Classes for the body element.
  * @return array
  */
 function base_body_classes( $classes ) {
+   global $post;
 	$show_subscribe = get_field( 'show_subscribe', 'option' );
 
 	// Adds a class of 'hfeed' to non-singular pages.
 	if ( ! is_singular() ) {
 		$classes[] = 'hfeed';
+	}
+
+   // Adds a class for pages
+	if ( is_page() ) {
+		$classes[] = 'page-' . $post->post_name;
 	}
 
 	// Adds a class of 'two-column' to two-column pages.
