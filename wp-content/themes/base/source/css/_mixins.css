@@ -180,7 +180,6 @@
 	}
 	@if $level == h2 {
 		font-size: $font-size-h2;
-		margin-bottom: $space-h2;
 	}
 	@if $level == h3 {
 		font-size: $font-size-h3;

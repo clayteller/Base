@@ -78,17 +78,8 @@
    ?>
    	<footer class="entry-footer">
    		<?php
-         // Phone
-         $phone = get_field( 'phone' );
-         if ( $phone ) {
-            echo '<div class="phone">' . $phone . '</div>';
-         }
-         // Email
-      	$email = get_field( 'email' );
-         if ( $email ) {
-   			printf( '<div class="email"><a href="mailto:%1$s">%1$s</a></div>', $email );
-         }
-         // Social links
+         base_phone( '<p class="phone">', '</p>', null, false );
+   		base_email( '<p class="email">', '</p>', null, false );
          base_social_links();
          ?>
    	</footer><!-- .entry-footer -->

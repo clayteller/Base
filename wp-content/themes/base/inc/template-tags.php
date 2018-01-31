@@ -17,7 +17,7 @@
  *
  * @param string $field_name Optional. Name of the custom field.
  * @param string $css_class  Optional. CSS class name.
- * @param bool   $echo       Optional. Whether to echo or return the title. Default true.
+ * @param bool   $echo       Optional. Whether to echo or return string. Default true.
  * @return string Logo image object if $echo is false.
  */
 function base_logo( $field_name = 'logo', $css_class = 'logo', $echo = true ) {
@@ -38,7 +38,7 @@ function base_logo( $field_name = 'logo', $css_class = 'logo', $echo = true ) {
  *
  * @uses Advanced Custom Fields Pro
  *
- * @param bool $echo Optional. Whether to echo or return the title. Default true.
+ * @param bool $echo Optional. Whether to echo or return string. Default true.
  * @return string Site title if $echo is false.
  */
 function base_site_title( $echo = true ) {
@@ -61,7 +61,7 @@ function base_site_title( $echo = true ) {
  *
  * @param string $before Optional. Markup to prepend to the title. Default empty.
  * @param string $after  Optional. Markup to append to the title. Default empty.
- * @param bool   $echo   Whether to echo or return the title. Default true.
+ * @param bool   $echo   Whether to echo or return string. Default true.
  * @return string Page title if $echo is false.
  */
 function base_page_title( $before = '', $after = '', $echo = true ) {
@@ -121,8 +121,8 @@ function base_page_title( $before = '', $after = '', $echo = true ) {
  * @param string $css_id     Optional. CSS id attribute. Allows Google Tag Manager to track button clicks.
  * @param string $before     Optional. Markup to prepend to the title. Default empty.
  * @param string $after      Optional. Markup to append to the title. Default empty.
- * @param bool   $echo       Optional. Whether to echo or return the title. Default true.
- * @return string Button HTML if $echo is false.
+ * @param bool   $echo       Optional. Whether to echo or return string. Default true.
+ * @return string HTML if $echo is false.
  */
 function base_button( $field_name, $acf_get = 'get_field', $css_id = null, $before = '', $after = '', $echo = true ) {
 	$button = $acf_get( $field_name );
@@ -149,15 +149,15 @@ function base_button( $field_name, $acf_get = 'get_field', $css_id = null, $befo
 }
 
 /**
- * Output or return contact info HTML.
+ * Output or return social links HTML.
  *
  * @uses Advanced Custom Fields Pro
  *
- * @param string $post_id Optional. The post we're targeting. Default false for current post.
- * @param bool   $echo    Optional. Whether to echo or return the title. Default true.
- * @return string Button HTML if $echo is false.
+ * @param string $post_id Optional. The post we're targeting. Default null for current post.
+ * @param bool   $echo    Optional. Whether to echo or return string. Default true.
+ * @return string HTML if $echo is false.
  */
-function base_social_links( $post_id = false, $echo = true ) {
+function base_social_links( $post_id = null, $echo = true ) {
 	// Bail if there's no contact info
 	if ( ! have_rows( 'social_links', $post_id ) ) return;
 
@@ -213,6 +213,7 @@ function base_entry_categories() {
 function base_entry_tags() {
 	// If single, add tag icon.
 	$icon = ( is_single() ) ? base_svg_icon( 'tag' ) : '';
+
 	echo get_the_tag_list('<ul class="post-tags">' . $icon . '<li>','</li><li>','</li></ul>');
 }
 
@@ -245,4 +246,110 @@ function base_post_thumbnail() {
 		</a>
 	<?php
 	endif;
+}
+
+/**
+ * Output or return email address link.
+ *
+ * @uses Advanced Custom Fields Pro
+ *
+ * @param string $before  Optional. Markup to prepend to the email link. Default empty.
+ * @param string $after   Optional. Markup to append to the email link. Default empty.
+ * @param string $post_id Optional. The post we're targeting. Default null for current post.
+ * @param bool   $icon    Optional. Whether to show icon. Default true.
+ * @param bool   $echo    Optional. Whether to echo or return string. Default true.
+ * @return string Email link if $echo is false.
+ */
+function base_email( $before = '', $after = '', $post_id = null, $icon = true, $echo = true ) {
+ 	$email = get_field( 'email', $post_id );
+	$icon = ( $icon ) ? base_svg_icon( 'mail' ) : null;
+
+ 	// Bail if there's no email
+ 	if ( ! $email ) return;
+
+    $email_link = sprintf( '<a href="mailto:%1$s" itemprop="email">%2$s%1$s</a>',
+ 		$email,
+ 		$icon
+ 	);
+
+	/**
+	 * Filters the email link.
+	 *
+	 * @param string $email_link
+	 */
+	$email_link = apply_filters( 'base_email', $email_link );
+
+	$email_link = $before . $email_link . $after;
+
+ 	if ( $echo )
+ 		echo $email_link;
+ 	else
+ 		return $email_link;
+}
+
+/**
+ * Output or return phone link.
+ *
+ * @uses Advanced Custom Fields Pro
+ *
+ * @param string $before  Optional. Markup to prepend to the phone link. Default empty.
+ * @param string $after   Optional. Markup to append to the phone link. Default empty.
+ * @param string $post_id Optional. The post we're targeting. Default null for current post.
+ * @param bool   $icon    Optional. Whether to show icon. Default true.
+ * @param bool   $echo    Optional. Whether to echo or return string. Default true.
+ * @return string Phone link if $echo is false.
+ */
+function base_phone( $before = '', $after = '', $post_id = null, $icon = true, $echo = true ) {
+ 	$phone = get_field( 'phone', $post_id );
+	$icon = ( $icon ) ? base_svg_icon( 'phone' ) : null;
+
+ 	// Bail if there's no phone
+ 	if ( ! $phone ) return;
+
+    $phone_link = sprintf( '<a href="tel:%1$s" itemprop="telephone">%2$s%1$s</a>',
+ 		$phone,
+ 		$icon
+ 	);
+
+	/**
+	 * Filters the phone link.
+	 *
+	 * @param string $phone_link
+	 */
+	$phone_link = apply_filters( 'base_phone', $phone_link );
+
+	$phone_link = $before . $phone_link . $after;
+
+ 	if ( $echo )
+ 		echo $phone_link;
+ 	else
+ 		return $phone_link;
+}
+
+/**
+ * Output or return physical address link (Google map link).
+ *
+ * @uses Advanced Custom Fields Pro
+ *
+ * @param bool $icon Optional. Whether to show icon. Default true.
+ * @param bool $echo Optional. Whether to echo or return string. Default true.
+ * @return string HTML if $echo is false.
+ */
+function base_address( $icon = true, $echo = true ) {
+ 	$address = get_field( 'address', 'option' );
+	$icon = ( $icon ) ? base_svg_icon( 'pin' ) : null;
+
+ 	// Bail if there's no address
+ 	if ( ! $address ) return;
+
+    $html = sprintf( '<p class="address"><a href="https://www.google.com/maps/place/%1$s" target="_blank" itemprop="address">%2$s%3$s</a></p>',
+		 urlencode( strip_tags( $address ) ),
+		 $icon,
+		 $address
+	 );
+
+ 	if ( $echo )
+ 		echo $html;
+ 	else
+ 		return $html;
 }

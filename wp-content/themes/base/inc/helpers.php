@@ -101,7 +101,13 @@ function base_get_background_image_css( $css_class, $field_name, $field_name_pos
  * @return string SVG code.
  */
 function base_svg_icon( $name ) {
-	return file_get_contents( THEME_PATH . '/icons/' . $name . '.svg' );
+	// Use @ to suppress warning if no file exists
+	$file = @file_get_contents( THEME_PATH . '/icons/' . $name . '.svg' );
+
+	// Bail if there's no file
+	if ( ! $file ) return;
+
+	return $file;
 }
 
 /**

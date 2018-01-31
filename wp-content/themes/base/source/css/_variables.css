@@ -12,12 +12,12 @@ $responsive-type-screen-max: 1280px;
 
 $font-size:            1em;
 $font-size-h1:         2.2em;
-$font-size-h2:         1.7em;
+$font-size-h2:         1.8em;
 $font-size-h3:         1.3em;
 $font-size-h4:         $font-size;
 $font-size-h5:         $font-size;
-$font-size-subtitle:   resolve($font-size + 0.4em);
-$font-size-large:      resolve($font-size + 0.4em);
+$font-size-subtitle:   resolve($font-size + 0.35em);
+$font-size-large:      $font-size-subtitle;
 $font-size-medium:     resolve($font-size + 0.2em);
 $font-size-meta:       0.85em;
 $font-size-nav:        19px;
@@ -48,9 +48,9 @@ $color-strong:   color( $color-text lightness(+5) );
 $color-heading:  $color-text;
 $color-meta:     color( $color-text lightness(+28) );
 $color-title:    color( $color-white a(95%) );
-$color-subtitle: color( $color-text lightness(+8) );
+$color-subtitle: color( $color-text lightness(+10) );
 $color-border:   hsl(0, 0%, 88%);
-$color-footer:   rgba(255, 255, 255, 0.8);
+$color-footer:   color( $color-white a(80%) );
 
 $color-error: hsl(343, 100%, 38%);
 
@@ -64,8 +64,8 @@ $color-nav-hover:         color( $color-primary lightness(-5) saturation(+5) );
 $color-nav-active:        $color-nav-hover;
 $color-meta-link:         $color-meta;
 $color-meta-link-hover:   $color-link;
-$color-footer-link:       color( $color-footer lightness(+10) );
-$color-footer-link-hover: color( $color-footer-link lightness(-10) );
+$color-footer-link:       color( $color-footer a(+10%) );
+$color-footer-link-hover: color( $color-footer-link a(+10%) );
 
 /* Backgrounds
 ----------------------------------*/
@@ -99,8 +99,7 @@ $max-width:      1000px;
 $max-width-wide: 1300px;
 
 $space-text:    1.5em;
-$space-heading: 0.4em;
-$space-h2:      0.6em;
+$space-heading: 0.5em;
 $space-button:  0.5em;
 
 $space-section: 2rem;

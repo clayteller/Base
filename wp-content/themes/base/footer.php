@@ -21,7 +21,10 @@ get_template_part( 'template-parts/section', 'subscribe' );
 		<div class="wrap">
 			<div class="footer-summary">
 				<p><?php echo $footer_summary; ?></p>
-				<p><?php the_field( 'phone', 'option' ); ?></p>
+				<?php
+				base_phone( '<p class="phone">', '</p>', 'option' );
+				base_email( '<p class="email">', '</p>', 'option' );
+				?>
 			</div>
 			<nav id="footer-nav" class="footer-nav">
 				<?php

@@ -66,12 +66,17 @@ if ( 'custom' == $display_type ) {
 	);
 	$entries = get_posts( $args );
 }
+
+$subtitle = get_sub_field( 'section_subtitle' );
 ?>
 
 <section class="section section-<?php echo $entries_type; ?>">
 	<div class="wrap">
 		<h2 class="section-title"><?php the_sub_field( 'section_title' ); ?></h2>
-		<?php if ( $entries ): ?>
+		<?php if ( $subtitle ) : ?>
+			<p class="subtitle"><?php echo $subtitle; ?></p>
+		<?php endif; ?>
+		<?php if ( $entries ) : ?>
 			<div class="entries count-<?php echo $entries_count; ?>">
 				<?php
 				foreach ( $entries as $post ): // variable must be called $post (IMPORTANT)
