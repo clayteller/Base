@@ -43,7 +43,8 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 # Contact Form 7
 # CONTENT
 # Home Page
-# 404
+# Contact Page
+# 404 Page
 # Misc
 --------------------------------------------------------------*/
 
@@ -1733,7 +1734,23 @@ div.wpcf7-mail-sent-ng::before {
 }
 
 /*--------------------------------------------------------------
-# 404
+# Contact Page
+--------------------------------------------------------------*/
+
+.page-contact {
+	.site-aside {
+		a {
+			color: $color-text;
+
+			&:hover {
+				color: $color-link;
+			}
+		}
+	}
+}
+
+/*--------------------------------------------------------------
+# 404 Page
 --------------------------------------------------------------*/
 
 .error404 {
