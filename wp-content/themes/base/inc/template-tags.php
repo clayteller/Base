@@ -80,7 +80,10 @@ function base_page_title( $before = '', $after = '', $echo = true ) {
 		$title = get_the_title();
 	// Search
 	} elseif ( is_search() ) {
-		$title = sprintf( esc_html__( 'Search Results for "%s"', 'base' ), '<span>' . get_search_query() . '</span>' );
+		$title = sprintf(
+			esc_html__( 'Search Results for "%s"', 'base' ),
+			'<span>' . get_search_query() . '</span>'
+		);
 	// 404
 	} elseif ( is_404() ) {
 		$title = __( 'Oops!', 'base' );
@@ -140,7 +143,14 @@ function base_button( $field_name, $acf_get = 'get_field', $css_id = null, $befo
 	// Bail if there's no button label and button link
 	if ( ! $button_label && ! $button_link ) return;
 
-	$html = sprintf( '%1$s<a class="button"%2$s href="%3$s">%4$s</a>%5$s', $before, $css_id, $button_link, $button_label, $after );
+	$html = sprintf(
+		'%1$s<a class="button"%2$s href="%3$s">%4$s</a>%5$s',
+		$before,
+		$css_id,
+		$button_link,
+		$button_label,
+		$after
+	);
 
 	if ( $echo )
 		echo $html;
@@ -164,7 +174,10 @@ function base_social_links( $post_id = null, $echo = true ) {
    $html = '<ul class="social-links">';
       while ( have_rows( 'social_links', $post_id ) ): the_row();
 			$social_site = get_row_layout();
-			$html .= sprintf( '<li class="%1$s"><a class="icon" href="%2$s">%1$s</a></li>', $social_site, get_sub_field( $social_site . '_url' ) );
+			$html .= sprintf(
+				'<li class="%1$s"><a class="icon" href="%2$s">%1$s</a></li>', $social_site,
+				get_sub_field( $social_site . '_url' )
+			);
       endwhile;
    $html .= '</ul>';
 
@@ -183,7 +196,8 @@ function base_entry_meta() {
 		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
 	}
 
-	$time_string = sprintf( $time_string,
+	$time_string = sprintf(
+		$time_string,
 		esc_attr( get_the_date( 'c' ) ),
 		esc_html( get_the_date() ),
 		esc_attr( get_the_modified_date( 'c' ) ),
@@ -267,7 +281,8 @@ function base_email( $before = '', $after = '', $post_id = null, $icon = true, $
  	// Bail if there's no email
  	if ( ! $email ) return;
 
-    $email_link = sprintf( '<a href="mailto:%1$s" itemprop="email">%2$s%1$s</a>',
+   $email_link = sprintf(
+		'<a href="mailto:%1$s" itemprop="email">%2$s%1$s</a>',
  		$email,
  		$icon
  	);
@@ -306,7 +321,8 @@ function base_phone( $before = '', $after = '', $post_id = null, $icon = true, $
  	// Bail if there's no phone
  	if ( ! $phone ) return;
 
-    $phone_link = sprintf( '<a href="tel:%1$s" itemprop="telephone">%2$s%1$s</a>',
+   $phone_link = sprintf(
+		'<a href="tel:%1$s" itemprop="telephone">%2$s%1$s</a>',
  		$phone,
  		$icon
  	);
@@ -342,11 +358,12 @@ function base_address( $icon = true, $echo = true ) {
  	// Bail if there's no address
  	if ( ! $address ) return;
 
-    $html = sprintf( '<p class="address"><a href="https://www.google.com/maps/place/%1$s" target="_blank" itemprop="address">%2$s%3$s</a></p>',
-		 urlencode( strip_tags( $address ) ),
-		 $icon,
-		 $address
-	 );
+	$html = sprintf(
+		'<p class="address"><a href="https://www.google.com/maps/place/%1$s" target="_blank" itemprop="address">%2$s%3$s</a></p>',
+		urlencode( strip_tags( $address ) ),
+		$icon,
+		$address
+	);
 
  	if ( $echo )
  		echo $html;

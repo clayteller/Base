@@ -91,7 +91,7 @@ function base_body_classes( $classes ) {
 	}
 
 	// Adds a class of 'two-column' to two-column pages.
-	if ( base_has_sidebar() || is_page( 'contact' ) ) {
+	if ( base_show_sidebar() || is_page( 'contact' ) ) {
 		$classes[] = 'two-column';
 	}
 
@@ -105,9 +105,66 @@ function base_body_classes( $classes ) {
 add_filter( 'body_class', 'base_body_classes' );
 
 /**
+ * Are we displaying a sidebar on this page?
+ *
+ * @return bool True if 'show_sidebar' custom field is true.
+ */
+function base_show_sidebar() {
+	return get_field( 'show_sidebar' );
+}
+
+/**
+* Add inline CSS to display a background image.
+*
+* @param string $css_class          CSS class of element being assigned a background image.
+* @param string $field_name         Field name of background image custom field.
+* @param bool   $field_name_post_id Optional. Post id of custom field.
+* @return string Inline CSS rules.
+*/
+function base_get_background_image_css( $css_class, $field_name, $field_name_post_id = false ) {
+	// If there's no 'page' background image, use the 'site' background image
+	$image = get_field( $field_name, $field_name_post_id ) ? get_field( $field_name, $field_name_post_id ) : get_field( $field_name, 'option' );
+
+	// Bail if there's no image
+	if ( ! $image ) return;
+
+	// Image size for small screens
+	$image_url = $image['sizes'][ 'medium_large' ];
+	// Image size for desktop screens
+	$image_url_desktop = $image['url'];
+
+	return "
+	.{$css_class} {
+		background-image: url({$image_url});
+	}
+	@media (min-width: 768px) {
+		.{$css_class} {
+			background-image: url({$image_url_desktop});
+		}
+	}";
+}
+
+/**
+ * Reads SVG icon file and returns it as a string.
+ *
+ * @param string $name Name of icon file.
+ * @return string SVG code.
+ */
+function base_svg_icon( $name ) {
+	// Use @ to suppress warning if no file exists
+	$file = @file_get_contents( THEME_PATH . '/icons/' . $name . '.svg' );
+
+	// Bail if there's no file
+	if ( ! $file ) return;
+
+	return $file;
+}
+
+/**
 * Add a category icon to the category list.
 *
 * @uses base_add_string()
+* @uses base_svg_icon()
 */
 function base_add_category_icon( $category_list ) {
    // If not single, don't add category icon.

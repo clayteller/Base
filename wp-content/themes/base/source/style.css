@@ -34,6 +34,11 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 # Aside
 # Footer
 # Accessibility
+# CONTENT
+# Components
+# Home
+# Contact
+# 404
 # WORDPRESS
 # Widgets
 # Posts and pages
@@ -41,11 +46,7 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 # Media
 # PLUGINS
 # Contact Form 7
-# CONTENT
-# Home Page
-# Contact Page
-# 404 Page
-# Misc
+
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
@@ -454,56 +455,6 @@ textarea {
 # Classes
 --------------------------------------------------------------*/
 
-.branding {
-	a {
-		@mixin flexbox row, wrap, flex-start, center;
-	}
-
-	.logo {
-		margin-right: 0.4rem;
-		height: 2.2rem;
-	}
-
-	.logo-inner {
-		fill: color( $color-primary lightness(+10) );
-	}
-
-	.logo-outer {
-		fill: color( $color-primary hue(-20) lightness(+10) );
-	}
-
-	.site-title {
-		font-family: $font-family-heading;
-		font-size: 1.6em;
-		font-weight: $font-weight-heading-light;
-		margin: 0;
-	}
-}
-
-.social-links {
-	@mixin flexbox row, wrap, center;
-
-	.icon {
-		@mixin image-replacement auto, 40px;
-		background: currentColor;
-	}
-
-	.facebook .icon {
-		mask: url(icons/facebook.svg) no-repeat 50% 50%/24px;
-	}
-
-	.twitter .icon {
-		mask: url(icons/twitter.svg) no-repeat 50% 50%/24px;
-	}
-
-	.googleplus .icon {
-		mask: url(icons/google+.svg) no-repeat 50% 50%/24px;
-	}
-
-	.linkedin .icon {
-		mask: url(icons/linkedin.svg) no-repeat 50% 50%/24px;
-	}
-}
 
 /*--------------------------------------------------------------
 # Layout
@@ -1375,10 +1326,6 @@ nav ul {
 	@mixin section-space;
 	@mixin section-background $background-section;
 
-	.address {
-		margin-top: $space-text;
-	}
-
 	@media (min-width: $desktop) {
 		background: $background-section;
 		border-left: 1px solid $color-border;
@@ -1480,6 +1427,177 @@ nav ul {
 /* Do not show the outline on the skip link target. */
 #content[tabindex="-1"]:focus {
 	outline: 0;
+}
+
+/*--------------------------------------------------------------
+# CONTENT
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Components
+--------------------------------------------------------------*/
+
+/* Logo and site title */
+.branding {
+	a {
+		@mixin flexbox row, wrap, flex-start, center;
+	}
+
+	.logo {
+		margin-right: 0.4rem;
+		height: 2.2rem;
+	}
+
+	.logo-inner {
+		fill: color( $color-primary lightness(+10) );
+	}
+
+	.logo-outer {
+		fill: color( $color-primary hue(-20) lightness(+10) );
+	}
+
+	.site-title {
+		font-family: $font-family-heading;
+		font-size: 1.6em;
+		font-weight: $font-weight-heading-light;
+		margin: 0;
+	}
+}
+
+.type-employee {
+	.phone + .email {
+		margin-top: -$space-text;
+	}
+}
+
+/* Make space for svg icon */
+.address {
+	padding-left: 1.3rem;
+	text-indent: -1.3rem;
+}
+
+.social-links {
+	@mixin flexbox row, wrap, center;
+
+	.icon {
+		@mixin image-replacement auto, 40px;
+		background: currentColor;
+	}
+
+	.facebook .icon {
+		mask: url(icons/facebook.svg) no-repeat 50% 50%/24px;
+	}
+
+	.twitter .icon {
+		mask: url(icons/twitter.svg) no-repeat 50% 50%/24px;
+	}
+
+	.googleplus .icon {
+		mask: url(icons/google+.svg) no-repeat 50% 50%/24px;
+	}
+
+	.linkedin .icon {
+		mask: url(icons/linkedin.svg) no-repeat 50% 50%/24px;
+	}
+}
+
+/*--------------------------------------------------------------
+# Home
+--------------------------------------------------------------*/
+
+.home {
+	/* When page hasn't been scrolled down at all */
+	&:not(.scrolled) {
+		.masthead {
+			background: rgba(255, 255, 255, 0);
+			box-shadow: none;
+		}
+
+		.branding .site-title {
+			color: $color-white;
+			text-shadow: $text-shadow;
+		}
+
+		.menu-toggle {
+			color: rgba(255, 255, 255, 1) !important;
+		}
+
+		.site-nav a {
+			@media (min-width: $tablet) {
+				color: $color-white;
+				text-shadow: $text-shadow;
+			}
+		}
+	}
+
+	.section {
+		text-align: center;
+	}
+
+	.section-services {
+		@mixin section-background $background-section;
+	}
+
+	.section-testimonials {
+		@mixin section-background $background-section;
+	}
+}
+
+/*--------------------------------------------------------------
+# Contact
+--------------------------------------------------------------*/
+
+.page-contact {
+	.contact-info {
+		a {
+			color: $color-text;
+
+			&:hover {
+				color: $color-link;
+			}
+		}
+	}
+
+	.site-aside {
+		a {
+			color: $color-text;
+
+			&:hover {
+				color: $color-link;
+			}
+		}
+
+		.map {
+			height: 0;
+			overflow: hidden;
+			padding-bottom: 350px;
+			position: relative;
+
+			& iframe {
+				height: 100%;
+				left: 0;
+				position: absolute;
+				top: 0;
+				width: 100%;
+			}
+		}
+
+		@media (min-width: $tablet) and (max-width: $_desktop) {
+			.contact-info {
+				@mixin flexbox;
+			}
+		}
+	}
+}
+
+/*--------------------------------------------------------------
+# 404
+--------------------------------------------------------------*/
+
+.error404 {
+	.site-main {
+		text-align: center;
+	}
 }
 
 /*--------------------------------------------------------------
@@ -1685,95 +1803,4 @@ div.wpcf7-mail-sent-ng::before {
 	content: "☹️";
 	font-size: 1.5em;
 	padding-right: 0.3em;
-}
-
-/*--------------------------------------------------------------
-# CONTENT
---------------------------------------------------------------*/
-
-/*--------------------------------------------------------------
-# Home Page
---------------------------------------------------------------*/
-
-.home {
-	/* When page hasn't been scrolled down at all */
-	&:not(.scrolled) {
-		.masthead {
-			background: rgba(255, 255, 255, 0);
-			box-shadow: none;
-		}
-
-		.branding .site-title {
-			color: $color-white;
-			text-shadow: $text-shadow;
-		}
-
-		.menu-toggle {
-			color: rgba(255, 255, 255, 1) !important;
-		}
-
-		.site-nav a {
-			@media (min-width: $tablet) {
-				color: $color-white;
-				text-shadow: $text-shadow;
-			}
-		}
-	}
-
-	.section {
-		text-align: center;
-	}
-
-	.section-services {
-		@mixin section-background $background-section;
-	}
-
-	.section-testimonials {
-		@mixin section-background $background-section;
-	}
-}
-
-/*--------------------------------------------------------------
-# Contact Page
---------------------------------------------------------------*/
-
-.page-contact {
-	.site-aside {
-		a {
-			color: $color-text;
-
-			&:hover {
-				color: $color-link;
-			}
-		}
-	}
-}
-
-/*--------------------------------------------------------------
-# 404 Page
---------------------------------------------------------------*/
-
-.error404 {
-	.site-main {
-		text-align: center;
-	}
-}
-
-/*--------------------------------------------------------------
-# Misc
---------------------------------------------------------------*/
-
-/* Contact info
-----------------------------------*/
-
-.type-employee {
-	.phone + .email {
-		margin-top: -$space-text;
-	}
-}
-
-/* Make space for svg icon */
-.address {
-	padding-left: 1.3rem;
-	text-indent: -1.3rem;
 }

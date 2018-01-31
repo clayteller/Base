@@ -31,7 +31,7 @@ get_header();
 </main><!-- #site-main -->
 
 <?php
-if ( base_has_sidebar() ) {
+if ( base_show_sidebar() ) {
 	get_sidebar();
 }
 get_footer();
