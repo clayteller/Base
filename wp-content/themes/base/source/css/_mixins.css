@@ -123,9 +123,9 @@
 	font-size: resolve( $font-size-button + 0.1em );
 }
 
-@define-mixin button-small {
-	font-size: resolve( $font-size-button - 0.1em );
-	padding: 0.7em 0.9em 0.7em;
+@define-mixin button-small $font-reduce: 0.1em {
+	font-size: resolve( $font-size-button - $font-reduce );
+	padding: 0.6em 0.7em 0.6em;
 }
 
 @define-mixin button-plain {
@@ -232,6 +232,16 @@
 	&:focus,
 	&:active {
 		color: $color-hover;
+	}
+}
+
+@define-mixin link-imitate  {
+	color: $color-text;
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: $color-link;
 	}
 }
 

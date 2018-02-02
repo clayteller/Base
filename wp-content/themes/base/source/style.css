@@ -1550,21 +1550,13 @@ nav ul {
 .page-contact {
 	.contact-info {
 		a {
-			color: $color-text;
-
-			&:hover {
-				color: $color-link;
-			}
+			@mixin link-imitate;
 		}
 	}
 
 	.site-aside {
 		a {
-			color: $color-text;
-
-			&:hover {
-				color: $color-link;
-			}
+			@mixin link-imitate;
 		}
 
 		.map {
@@ -1638,6 +1630,81 @@ nav ul {
 # Comments
 --------------------------------------------------------------*/
 
+/* Parent container of comments list and comment form */
+.comments-area {
+	@mixin border;
+}
+
+.comment-reply-link,
+#cancel-comment-reply-link {
+	@mixin button;
+	@mixin button-outline;
+	@mixin button-small 0.2em;
+}
+
+/* Comments list
+----------------------------------*/
+
+/* Comments list title */
+.comments-title {
+	margin-bottom: 1em;
+}
+
+/* Comments list */
+.comment-list {
+	list-style: none;
+
+	/* Commenter photo */
+	.avatar {
+		float: left;
+		margin-right: 1rem;
+	}
+}
+
+/* Comments author and date */
+.comment-meta {
+	margin-bottom: $space-text;
+
+	a {
+		@mixin link-imitate;
+	}
+}
+
+.comment-metadata {
+	color: $color-meta;
+
+	a {
+		color: $color-meta;
+	}
+}
+
+.comment-awaiting-moderation {
+	font-weight: $font-weight-bold;
+	margin-top: $space-text;
+}
+
+/* The comment */
+.comment-body {
+	@mixin section-margin-bottom;
+}
+
+.comment-content a {
+	word-wrap: break-word;
+}
+
+.bypostauthor {
+	display: block;
+}
+
+/* Comment form
+----------------------------------*/
+
+/* Parent container of comment form */
+.comment-respond {
+	@mixin border;
+}
+
+/* Comment form */
 .comment-form {
 	label {
 		@mixin screen-reader-text;
@@ -1648,12 +1715,14 @@ nav ul {
 	}
 }
 
-.comment-content a {
-	word-wrap: break-word;
+/* Cancel reply link wrapper */
+.comment-reply-title small {
+	font-size: 1rem;
 }
 
-.bypostauthor {
-	display: block;
+/* Cancel reply link  */
+#cancel-comment-reply-link {
+	float: right;
 }
 
 /*--------------------------------------------------------------
