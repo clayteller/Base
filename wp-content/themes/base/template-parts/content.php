@@ -5,15 +5,30 @@
  * @package Base
  * @since 1.0.1
  */
+
+$image = get_the_post_thumbnail( null, 'featured' );
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<?php	if ( 'post' === get_post_type() ) : ?>
+	<?php
+	if ( $image ) :
+	?>
+		<figure><?php echo $image; ?></figure>
+	<?php
+	else:
+	?>
+		<figure class="noimage"></figure>
+	<?php
+	endif;
+	if ( 'post' === get_post_type() ) :
+	?>
 		<header class="entry-header">
 			<p class="entry-meta"><?php base_entry_meta(); ?></p>
 		</header><!-- .entry-header -->
-	<?php endif; ?>
-
+	<?php
+	endif;
+	?>
+	
 	<div class="entry-content">
 		<?php
 		the_content( sprintf(

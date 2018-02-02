@@ -95,7 +95,8 @@ $background-colophon: color( $color-dark a(90%) );
 --------------------------------------------------------------*/
 
 $gutter:         4%;
-$max-width:      1000px;
+$max-width:      750px;
+/* $max-width:      1000px; */
 $max-width-wide: 1300px;
 
 $space-text:    1.5em;
@@ -132,5 +133,5 @@ $border-radius: 8px;
 $border-radius-field: 8px;
 $box-shadow:    0 0 5px 0 rgba(0, 0, 0, 0.1);
 $box-shadow-on: 0 0 15px 0 rgba(0, 0, 0, 0.13);
-$text-shadow:   1px 1px rgba(0, 0, 0, 0.2);
+$text-shadow:   1px 1px rgba(0, 0, 0, 0.15);
 $transition:    all 0.3s;

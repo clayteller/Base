@@ -31,7 +31,7 @@ add_filter( 'cancel_comment_reply_link', 'base_comment_cancel_reply', 10, 3 );
  * @uses base_add_string()
  */
 function base_comment_textarea( $field_html ) {
-	$placeholder = ' placeholder="' . __( 'Your comment…', 'base' ) . '" ';
+	$placeholder = ' placeholder="' . __( '*Your comment…', 'base' ) . '" ';
 	return base_add_string( $field_html, $placeholder, 'textarea', true );
 }
 add_filter( 'comment_form_field_comment', 'base_comment_textarea' );

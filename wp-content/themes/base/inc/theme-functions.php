@@ -18,29 +18,49 @@
  /**
   * Set responsive image sizes for entry featured images.
   *
-  * @uses $entries_count
+  * @uses global $entries_count
   *
   * @param  string       $sizes
   * @param  array|string $size
   * @return string Sizes attribute.
   */
 function base_entry_image_responsive_sizes( $sizes, $size ) {
-	if ( is_front_page() || is_archive()  ) {
+   $mobile_width = '(max-width: 649px) 100vw';
+
+   // Home page
+	if ( is_front_page() ) {
 		global $entries_count;
 
-		if ( 2 == $entries_count ) {
-			$viewport_width = '49vw';
-		} elseif ( 3 == $entries_count ) {
-			$viewport_width = '32vw';
-		} elseif ( 4 == $entries_count ) {
-			$viewport_width = '24vw';
-		// Otherwise, bail
-		} else {
-			return;
-		}
+      // Set responsive image widths for multi-column display.
+      switch( $entries_count ) {
+         // 2 columns
+         case 2:
+            $desktop_width = '49vw';
+            break;
+         // 3 columns
+         case 3:
+            $desktop_width = '32vw';
+            break;
+         // 4 columns
+         case 4:
+            $desktop_width = '24vw';
+            break;
+         // Otherwise, bail
+         default:
+            return;
+      }
 
-		return '(max-width: 649px) 100vw, ' . $viewport_width;
-	}
+      $sizes = $mobile_width . ', ' . $desktop_width;
+   // Archive
+	} elseif ( is_archive() ) {
+      // 3 columns
+      $sizes = $mobile_width . ', 32vw';
+   // Single pages
+   } elseif ( is_single() ) {
+      $sizes = '(max-width: 749px) 100vw, 750px';
+   }
+
+   return $sizes;
 }
 add_filter( 'wp_calculate_image_sizes', 'base_entry_image_responsive_sizes', 10 , 2 );
 

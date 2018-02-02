@@ -8,8 +8,11 @@
  * @since 1.0.1
  */
 
- define( 'THEME_URL', get_stylesheet_directory_uri() );
- define( 'THEME_PATH', get_stylesheet_directory() );
+/**
+ * Constants used in this theme.
+ */
+define( 'THEME_URL', get_stylesheet_directory_uri() );
+define( 'THEME_PATH', get_stylesheet_directory() );
 
 if ( ! function_exists( 'base_setup' ) ) :
 	/**
@@ -50,6 +53,10 @@ if ( ! function_exists( 'base_setup' ) ) :
       // Add image sizes for entries
 		add_image_size( 'entry', 450, 350, true );
 		add_image_size( 'entry@2x', 900, 700, true );
+
+      // Add image sizes for featured images
+		add_image_size( 'featured', 600, 330, true );
+		add_image_size( 'featured@2x', 1200, 660, true );
 
 		// This theme uses wp_nav_menu().
 		register_nav_menus( array(

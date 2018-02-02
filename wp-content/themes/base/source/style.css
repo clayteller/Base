@@ -362,11 +362,11 @@ textarea {
 /* Search form
 ----------------------------------*/
 
-.search-form {
-	@mixin section-space;
-}
-
 .site-main {
+	.search-form {
+		@mixin section-space;
+	}
+
 	@media (max-width: $_phone) {
 		.search-field {
 			margin-bottom: $space-text;
@@ -391,6 +391,10 @@ textarea {
 }
 
 .site-aside {
+	.search-form {
+		@mixin section-margin-bottom;
+	}
+
 	.search-field {
 		margin-bottom: 1.2em;
 	}
@@ -454,7 +458,6 @@ textarea {
 /*--------------------------------------------------------------
 # Classes
 --------------------------------------------------------------*/
-
 
 /*--------------------------------------------------------------
 # Layout
@@ -560,12 +563,6 @@ html, body, .site {
 	}
 
 	@media (min-width: $desktop) {
-		/* .wrap {
-			max-width: resolve($desktop - 60px);
-			padding-left: 0;
-			padding-right: 0;
-		} */
-
 		.site {
 			grid:
 				"header header header header" auto
@@ -1167,32 +1164,35 @@ nav ul {
 # Entries
 --------------------------------------------------------------*/
 
-/* Entry, in all contexts, archive or single  */
+/* Entry in section, archive and single pages
+----------------------------------*/
+
 .hentry {
 	@mixin remove-bottom-space;
 	margin: 0 0 resolve($space-entry + 1rem);
-}
 
-.entry-header,
-.entry-content {
-	@mixin remove-bottom-space;
-	margin-bottom: 1.2rem;
-
-	.single & {
-		margin-bottom: $space-entry;
-	}
-}
-
-/* Entries in a section/archive */
-.entries {
 	/* Featured image */
 	figure {
-		margin-bottom: 1.2rem;
-
 		img {
 			display: block;
 			width: 100%;
 		}
+	}
+}
+
+/* Entry in section, archive
+----------------------------------*/
+
+.entries {
+	.entry-header,
+	.entry-content {
+		@mixin remove-bottom-space;
+		margin-bottom: 1.2rem;
+	}
+
+	/* Featured image */
+	figure {
+		margin-bottom: 1.2rem;
 
 		&.noimage {
 			background: $color-neutral;
@@ -1246,6 +1246,20 @@ nav ul {
 	font-size: $font-size-meta;
 	text-transform: uppercase;
 	white-space: nowrap;
+}
+
+/* Entry in single pages
+----------------------------------*/
+
+.single {
+	.entry-header,
+	.entry-content {
+		margin-bottom: $space-entry;
+	}
+
+	figure {
+		margin-bottom: $space-section;
+	}
 }
 
 /* Entry Meta
@@ -1632,7 +1646,9 @@ nav ul {
 
 /* Parent container of comments list and comment form */
 .comments-area {
-	@mixin border;
+	ol {
+		list-style: none;
+	}
 }
 
 .comment-reply-link,
@@ -1647,17 +1663,25 @@ nav ul {
 
 /* Comments list title */
 .comments-title {
-	margin-bottom: 1em;
+	@mixin border;
+	margin-bottom: $space-text;
 }
 
 /* Comments list */
 .comment-list {
-	list-style: none;
-
 	/* Commenter photo */
 	.avatar {
 		float: left;
 		margin-right: 1rem;
+	}
+
+	/* Nested comment replies */
+	.children {
+		margin-left: 50px;
+
+		& .children {
+			margin-left: 0;
+		}
 	}
 }
 
