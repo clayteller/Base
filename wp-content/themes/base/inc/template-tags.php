@@ -217,7 +217,6 @@ function base_entry_meta() {
  * Output HTML with the categories.
  */
 function base_entry_categories() {
-
 	echo get_the_category_list();
 }
 

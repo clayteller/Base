@@ -19,12 +19,23 @@ function base_is_post_type( $type ) {
 }
 
 /**
- * Is the query for the posts page (when 'Homepage' and 'Posts page' are static pages)?
+ * Is the query for the blog page?
  *
- * @return bool True if 'Posts page' is a static page.
+ * To be used when 'Homepage' and 'Posts page' are set to static pages in 'Settings > Reading'.
+ *
+ * @return bool
  */
 function base_is_blog() {
 	return is_home() && ! is_front_page();
+}
+
+/**
+ * Is the query for a non-home and non-blog page?
+ *
+ * @return bool
+ */
+function base_is_page() {
+	return is_page() && ! is_front_page() && ! is_home();
 }
 
 /**

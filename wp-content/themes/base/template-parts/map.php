@@ -7,11 +7,11 @@
  * @package Base
  * @since 1.0.1
  */
- $address = get_field( 'address', 'option' );
- $show_map = get_field( 'show_map' );
 
- // Bail if there's no address or 'show_map' custom field is false
- if ( ! $address || ! $show_map ) return;
+$address = get_field( 'address', 'option' );
+
+// Bail if there's no address
+if ( ! $address ) return;
 ?>
 
 <div class="map">

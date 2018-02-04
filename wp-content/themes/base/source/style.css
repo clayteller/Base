@@ -37,7 +37,6 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 # CONTENT
 # Components
 # Home
-# Contact
 # 404
 # WORDPRESS
 # Widgets
@@ -305,6 +304,7 @@ input[type="submit"],
 	@mixin button;
 
 	.site-main &,
+	.site-aside &,
 	.section-cta & {
 		@mixin full-width-phone;
 	}
@@ -334,7 +334,7 @@ input[type="datetime"],
 input[type="datetime-local"],
 input[type="color"],
 textarea {
-	@mixin full-width-phone;
+	@mixin full-width-phone left;
 	color: #444;
 	border: 1px solid #ccc;
 	border-radius: $border-radius-field;
@@ -362,6 +362,10 @@ textarea {
 /* Search form
 ----------------------------------*/
 
+.search-submit {
+	margin-left: $space-button;
+}
+
 .site-main {
 	.search-form {
 		@mixin section-space;
@@ -377,41 +381,11 @@ textarea {
 		.search-field {
 			width: 330px;
 		}
-
-		.search-submit {
-			margin-left: $space-button;
-		}
 	}
 
 	@media (min-width: $tablet) {
 		.search-field {
 			width: 420px;
-		}
-	}
-}
-
-.site-aside {
-	.search-form {
-		@mixin section-margin-bottom;
-	}
-
-	.search-field {
-		margin-bottom: 1.2em;
-	}
-
-	@media (min-width: $phone) and (max-width: $_desktop) {
-		.search-field {
-			margin-bottom: 0;
-		}
-
-		.search-submit {
-			margin-left: $space-button;
-		}
-	}
-
-	@media (min-width: $desktop) {
-		.search-field {
-			width: 100%;
 		}
 	}
 }
@@ -930,7 +904,7 @@ nav ul {
 .footer-nav {
 	li {
 		display: inline-block;
-		margin: 0 0.6em 1em 0;
+		margin: 0 $space-button-half $space-button-vertical;
 	}
 
 	a {
@@ -968,7 +942,7 @@ nav ul {
 	@mixin flexbox row, wrap, center, center;
 
 	> * {
-		@mixin sibling-space $space-button;
+		margin: 0 $space-button-half $space-button-vertical;
 	}
 
 	a,
@@ -989,20 +963,18 @@ nav ul {
 
 	.dots:hover {
 		background: transparent;
-		color: $background-button;;
+		color: $background-button;
 	}
 }
 
 .nav-previous,
 .nav-next {
-	@media (max-width: $_phone) {
-		flex: 0 0 100%;
-		margin: $space-button 0 !important;
-
-		a {
-			text-align: center;
-			width: 100%;
-		}
+	a {
+		display: block;
+		max-width: 600px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.icon-chevron {
@@ -1012,6 +984,14 @@ nav ul {
 		stroke-width: 3px;
 		top: 1.7px;
 		width: 0.7em;
+	}
+
+	@media (max-width: $_phone) {
+		flex: 0 0 100%;
+
+		a {
+			@mixin full-width;
+		}
 	}
 }
 
@@ -1168,6 +1148,7 @@ nav ul {
 ----------------------------------*/
 
 .hentry {
+	@mixin flexbox column, nowrap, flex-start;
 	@mixin remove-bottom-space;
 	margin: 0 0 resolve($space-entry + 1rem);
 
@@ -1187,12 +1168,12 @@ nav ul {
 	.entry-header,
 	.entry-content {
 		@mixin remove-bottom-space;
-		margin-bottom: 1.2rem;
+		margin-bottom: $space-entry-child;
 	}
 
 	/* Featured image */
 	figure {
-		margin-bottom: 1.2rem;
+		margin-bottom: $space-entry-child;
 
 		&.noimage {
 			background: $color-neutral;
@@ -1274,11 +1255,8 @@ nav ul {
 
 	> span {
 		display: inline-block;
+		margin: 0.2em 0.4em;
 		white-space: nowrap;
-
-		&:not(:first-of-type) {
-			margin-left: 0.9em;
-		}
 	}
 
 	a {
@@ -1316,9 +1294,8 @@ nav ul {
 	margin: 0 0 resolve($space-text - 0.7em);
 
 	li {
-		@mixin sibling-space 0.5em;
 		display: inline-block;
-		margin: 0.4em 0;
+		margin: 0.4em 0.15em;
 	}
 
 	a {
@@ -1332,6 +1309,20 @@ nav ul {
 	margin-top: -0.8em;
 }
 
+/* Testimonial entry
+----------------------------------*/
+
+/* Move entry-header underneath entry-content */
+.type-testimonial {
+	flex-direction: column-reverse;
+	justify-content: flex-end;
+
+	.entry-header {
+		margin-bottom: 0;
+		margin-top: $space-entry-child;
+	}
+}
+
 /*--------------------------------------------------------------
 # Aside
 --------------------------------------------------------------*/
@@ -1340,9 +1331,60 @@ nav ul {
 	@mixin section-space;
 	@mixin section-background $background-section;
 
+	.search-form {
+		@mixin section-margin-bottom;
+	}
+
+	.search-field {
+		margin-bottom: 1.2em;
+	}
+
+	.contact-info {
+		a {
+			@mixin link-imitate;
+		}
+	}
+
+	.map {
+		height: 0;
+		overflow: hidden;
+		padding-bottom: 350px;
+		position: relative;
+
+		& iframe {
+			height: 100%;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
+	}
+
+	@media (min-width: $phone) and (max-width: $_desktop) {
+		.search-field {
+			margin-bottom: 0;
+		}
+
+		.contact-info {
+			@mixin flexbox;
+		}
+	}
+
 	@media (min-width: $desktop) {
 		background: $background-section;
 		border-left: 1px solid $color-border;
+
+		.widget-title {
+			font-size: $font-size-h3;
+		}
+
+		.search-field {
+			width: 100%;
+		}
+
+		.search-submit {
+			@mixin full-width;
+		}
 	}
 }
 
@@ -1554,45 +1596,6 @@ nav ul {
 
 	.section-testimonials {
 		@mixin section-background $background-section;
-	}
-}
-
-/*--------------------------------------------------------------
-# Contact
---------------------------------------------------------------*/
-
-.page-contact {
-	.contact-info {
-		a {
-			@mixin link-imitate;
-		}
-	}
-
-	.site-aside {
-		a {
-			@mixin link-imitate;
-		}
-
-		.map {
-			height: 0;
-			overflow: hidden;
-			padding-bottom: 350px;
-			position: relative;
-
-			& iframe {
-				height: 100%;
-				left: 0;
-				position: absolute;
-				top: 0;
-				width: 100%;
-			}
-		}
-
-		@media (min-width: $tablet) and (max-width: $_desktop) {
-			.contact-info {
-				@mixin flexbox;
-			}
-		}
 	}
 }
 

@@ -101,13 +101,17 @@ $max-width-wide: 1300px;
 
 $space-text:    1.5em;
 $space-heading: 0.5em;
-$space-button:  0.5em;
 
-$space-section: 2rem;
+$space-button:          0.6em;
+$space-button-half:     resolve($space-button / 2);
+$space-button-vertical: 1em;
+
+$space-section:         2rem;
 $space-section-desktop: 2.4rem;
-$space-entry:   1.6rem;
-$space-box:     1.3rem;
-$space-border:  2rem;
+$space-entry:           1.6rem;
+$space-entry-child:     1.2rem;
+$space-box:             1.3rem;
+$space-border:          2rem;
 
 $masthead-height: 4.2rem;
 $aside-width:   300px;

@@ -92,15 +92,25 @@ function base_content_width() {
 add_action( 'after_setup_theme', 'base_content_width', 0 );
 
 /**
- * Register widget area.
+ * Register widget areas.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
 function base_widgets_init() {
 	register_sidebar( array(
 		'name'          => esc_html__( 'Sidebar', 'base' ),
-		'id'            => 'site-aside',
-		'description'   => esc_html__( 'Add widgets here.', 'base' ),
+		'id'            => 'sidebar',
+		'description'   => esc_html__( 'This sidebar is displayed on pages and posts. It\'s not displayed on Home, Blog or Contact page.', 'base' ),
+		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	) );
+
+	register_sidebar( array(
+		'name'          => esc_html__( 'Sidebar – Contact', 'base' ),
+		'id'            => 'sidebar-contact',
+		'description'   => esc_html__( 'This sidebar is displayed on the Contact page.', 'base' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
 		'before_title'  => '<h2 class="widget-title">',

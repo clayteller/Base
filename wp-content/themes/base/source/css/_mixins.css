@@ -78,6 +78,7 @@
 	font-weight: $font-weight-heading;
 	line-height: 1;
 	padding: 0.8em 0.9em 0.7em;
+	text-align: center;
 	text-decoration: none;
 	text-shadow: $text-shadow;
 	text-transform: uppercase;
@@ -156,10 +157,15 @@
 # Full width
 --------------------------------------------------------------*/
 
+@define-mixin full-width $text-align: center  {
+	margin-left: 0;
+	text-align: $text-align;
+	width: 100%;
+}
+
 @define-mixin full-width-phone $text-align: center  {
 	@media (max-width: $_phone) {
-		text-align: $text-align;
-		width: 100%;
+		@mixin full-width $text-align;
 	}
 }
 
@@ -316,15 +322,5 @@
 
 	@media (min-width: $tablet) {
 		margin-bottom: resolve( $space-section-desktop + $adjust );
-	}
-}
-
-/*--------------------------------------------------------------
-# Sibling space
---------------------------------------------------------------*/
-
-@define-mixin sibling-space $space {
-	&:not(:first-child) {
-		margin-left: $space;
 	}
 }

@@ -15,10 +15,6 @@ $image = get_the_post_thumbnail( null, 'featured' );
 	?>
 		<figure><?php echo $image; ?></figure>
 	<?php
-	else:
-	?>
-		<figure class="noimage"></figure>
-	<?php
 	endif;
 	if ( 'post' === get_post_type() ) :
 	?>
@@ -28,7 +24,7 @@ $image = get_the_post_thumbnail( null, 'featured' );
 	<?php
 	endif;
 	?>
-	
+
 	<div class="entry-content">
 		<?php
 		the_content( sprintf(

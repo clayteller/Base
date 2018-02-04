@@ -22,9 +22,5 @@ get_header();
 </main><!-- #site-main -->
 
 <?php
-if ( base_show_sidebar() ) {
-	get_sidebar();
-} elseif ( is_page( 'contact' ) ) {
-	get_template_part( 'template-parts/sidebar', 'contact' );
-}
+get_sidebar();
 get_footer();
