@@ -789,6 +789,7 @@ html, body, .site {
 		transform-origin: right top;
 		/* @link http://easings.net/#easeInOutQuint */
 		transition: all 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+		visibility: hidden;
 		z-index: $z-site-menu;
 
 		/* Launch from bottom when bottom menu toggle is present */
@@ -800,6 +801,7 @@ html, body, .site {
 		.toggled & {
 			opacity: 1;
 			transform: scale(1);
+			visibility: visible;
 		}
 
 		a {
@@ -846,12 +848,35 @@ html, body, .site {
 			display: none;
 		}
 
-		/* Dropdown menu */
-		.sub-menu {
-			display: none;
-			left: 50px;
+		/* Top-level sub-menu */
+		> .menu-item > .sub-menu {
+			background: color( $color-white a(95%) );
+			left: 0;
+			opacity: 0;
+			padding-bottom: 0.6em;
+			padding-top: 0.6em;
 			position: absolute;
-			top: 50px;
+			top: $masthead-height;
+			transition: all 0.3s;
+			visibility: hidden;
+			width: $submenu-width;
+
+			a {
+				line-height: 1.4;
+				padding-bottom: 0.6em;
+				padding-top: 0.6em;
+			}
+
+			/* 2nd-level sub-menu */
+			.sub-menu a::before {
+				content: '– ';
+			}
+		}
+
+		/* Show sub-menu */
+		> .menu-item:hover > .sub-menu {
+			opacity: 1;
+			visibility: visible;
 		}
 	}
 }
