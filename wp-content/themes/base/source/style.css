@@ -675,15 +675,18 @@ html, body, .site {
 # Navigation
 --------------------------------------------------------------*/
 
+/* Site nav – all screen sizes
+----------------------------------*/
+
 .site-menu {
 	@mixin flexbox column, nowrap, center;
 
-	/* All list items */
+	/* Menu list item */
 	.menu-item {
 		position: relative;
 	}
 
-	/* All links */
+	/* Menu link */
 	a {
 		color: $color-nav;
 		display: block;
@@ -699,7 +702,7 @@ html, body, .site {
 		}
 	}
 
-	/* Top-level links */
+	/* Top-level link */
 	> .menu-item > a {
 		text-transform: uppercase;
 	}
@@ -782,7 +785,6 @@ html, body, .site {
 		padding: 1em 0 4.7em;
 		position: fixed;
 		right: 0;
-		text-align: center;
 		top: 0;
 		transform: scale(0);
 		/* Launch from top right */
@@ -809,11 +811,16 @@ html, body, .site {
 			font-size: $font-size-nav-mobile;
 			line-height: 3;
 			margin: 0 auto;
-			width: 88%;
+			width: 320px;
 		}
 
 		> .menu-item:last-of-type > a {
 			border: 0;
+		}
+
+		/* 2nd-level link */
+		.sub-menu a::before {
+			content: '– ';
 		}
 	}
 }
@@ -822,6 +829,11 @@ html, body, .site {
 @media (pointer: fine) and (hover: hover) {
 	.menu-toggle-clone {
 		display: none;
+	}
+
+	.site-menu {
+		/* Launch from top right */
+		transform-origin: right top !important;
 	}
 }
 
@@ -867,7 +879,7 @@ html, body, .site {
 				padding-top: 0.6em;
 			}
 
-			/* 2nd-level sub-menu */
+			/* 2nd-level link */
 			.sub-menu a::before {
 				content: '– ';
 			}
