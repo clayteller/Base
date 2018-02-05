@@ -1371,6 +1371,7 @@ html, body, .site {
 
 		.widget-title {
 			font-size: $font-size-h3;
+			margin-bottom: 0.7em;
 		}
 
 		.search-field {
