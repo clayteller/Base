@@ -14,8 +14,8 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
    <?php
-   // Featured image (for all entries except testimonials)
-   if ( ! base_is_post_type( 'testimonial' ) ) :
+   // Featured image (for all types except testimonial)
+   if ( 'testimonial' !== get_post_type() ) :
       $image = get_the_post_thumbnail( null, 'entry' );
       if ( $image ) :
       ?>
@@ -30,28 +30,31 @@
    ?>
 
    <header class="entry-header">
-      <h3 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-
       <?php
-      $subtitle = null;
+      // Entry title (permalink for all types except testimonial)
+      if ( 'testimonial' === get_post_type() ) :
+         base_entry_title( false );
+      else :
+         base_entry_title();
+      endif;
 
       // Get subtitle for employee
-      if ( base_is_post_type( 'employee' ) ) :
+      if ( 'employee' === get_post_type() ) :
          $subtitle = get_field( 'job_title' );
       // Get subtitle for testimonial
-      elseif ( base_is_post_type( 'testimonial' ) ) :
+      elseif ( 'testimonial' === get_post_type() ) :
          $subtitle = get_field( 'testimonial_subtitle' );
       endif;
 
-      // Subtitle (for employees and testimonials)
-      if ( $subtitle ):
+      // Subtitle (for employee and testimonial)
+      if ( isset( $subtitle ) ):
       ?>
          <p class="entry-meta"><?php echo $subtitle; ?></p>
       <?php
       endif;
 
-      // Entry meta (for posts)
-      if ( base_is_post_type( 'post' ) ) :
+      // Entry meta (for post)
+      if ( 'post' === get_post_type() ) :
       ?>
          <p class="entry-meta"><?php base_entry_meta(); ?></p>
          <?php
@@ -61,12 +64,12 @@
    </header><!-- .entry-header -->
 
    <?php
-   // Entry content (for all entries except employees)
-   if ( ! base_is_post_type( 'employee' ) ) :
+   // Entry content (for all types except employee)
+   if ( 'employee' !== get_post_type() ) :
    ?>
       <div class="entry-content">
          <?php
-         if ( base_is_post_type( 'testimonial' ) ) :
+         if ( 'testimonial' === get_post_type() ) :
             the_content();
          else :
             the_excerpt();
@@ -76,8 +79,8 @@
    <?php
    endif;
 
-   // Entry footer (for employees)
-   if ( base_is_post_type( 'employee' ) ) :
+   // Entry footer (for employee)
+   if ( 'employee' === get_post_type() ) :
    ?>
    	<footer class="entry-footer">
    		<?php

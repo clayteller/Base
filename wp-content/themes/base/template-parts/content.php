@@ -27,16 +27,9 @@ $image = get_the_post_thumbnail( null, 'featured' );
 
 	<div class="entry-content">
 		<?php
+		/* translators: %s: Name of current post */
 		the_content( sprintf(
-			wp_kses(
-				/* translators: %s: Name of current post. Only visible to screen readers */
-				__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'base' ),
-				array(
-					'span' => array(
-						'class' => array(),
-					),
-				)
-			),
+			__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'base' ),
 			get_the_title()
 		) );
 
@@ -46,11 +39,12 @@ $image = get_the_post_thumbnail( null, 'featured' );
 		) );
 		?>
 	</div><!-- .entry-content -->
-
-	<footer class="entry-footer">
-		<?php
-		base_entry_categories();
-		base_entry_tags();
-		?>
-	</footer><!-- .entry-footer -->
+	<?php if ( 'post' === get_post_type() ) : ?>
+		<footer class="entry-footer">
+			<?php
+			base_entry_categories();
+			base_entry_tags();
+			?>
+		</footer><!-- .entry-footer -->
+	<?php endif; ?>
 </article><!-- #post-<?php the_ID(); ?> -->

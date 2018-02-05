@@ -115,6 +115,46 @@ function base_page_title( $before = '', $after = '', $echo = true ) {
 }
 
 /**
+ * Output or return the entry title.
+ *
+ * @param string $permalink Optional. Whether to add permalink. Default true.
+ * @param string $before    Optional. Markup to prepend to the title. Default empty.
+ * @param string $after     Optional. Markup to append to the title. Default empty.
+ * @param bool   $echo      Whether to echo or return string. Default true.
+ * @return string Entry title if $echo is false.
+ */
+function base_entry_title( $permalink = true, $before = '<h3 class="entry-title">', $after = '</h3>', $echo = true ) {
+	$title = get_the_title();
+
+	// Bail if there's no title
+	if ( ! $title  ) return;
+
+	// Link the title
+	if ( $permalink ) {
+		$title = sprintf(
+			'<a href="%1$s">%2$s</a>',
+			get_permalink(),
+			$title
+		);
+	}
+
+	/**
+	 * Filters the entry title.
+	 *
+	 * @param string $title
+	 */
+	$title = apply_filters( 'base_entry_title', $title );
+
+	$title = $before . $title . $after;
+
+
+	if ( $echo )
+		echo $title;
+	else
+		return $title;
+}
+
+/**
  * Output or return button HTML.
  *
  * @uses Advanced Custom Fields Pro

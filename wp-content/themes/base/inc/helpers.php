@@ -9,16 +9,6 @@
  */
 
 /**
- * Is $type the current post type?
- *
- * @param string $type e.g. 'post'
- * @return bool True if $type is the current post type.
- */
-function base_is_post_type( $type ) {
-	return $type == get_post_type();
-}
-
-/**
  * Is the query for the blog page?
  *
  * To be used when 'Homepage' and 'Posts page' are set to static pages in 'Settings > Reading'.
