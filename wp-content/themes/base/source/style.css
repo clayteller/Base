@@ -95,12 +95,6 @@ ol {
 	list-style: decimal;
 }
 
-li > ul,
-li > ol {
-	margin-bottom: 0;
-	margin-left: 1.5em;
-}
-
 dt {
 	font-weight: bold;
 }
@@ -522,7 +516,7 @@ html, body, .site {
 	grid-column: footer-start / span 1;
    grid-row-start: footer-start;
 	align-self: end;
-	z-index: 30;
+	z-index: $z-colophon;
 }
 
 /* When an aside is displayed */
@@ -645,12 +639,12 @@ html, body, .site {
 --------------------------------------------------------------*/
 
 .masthead {
-	background: rgba(255, 255, 255, 0.92);
+	background: color( $color-white a(92%) );
 	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 	position: absolute;
 	top: 0;
 	width: 100%;
-	z-index: 100;
+	z-index: $z-masthead;
 	.wrap {
 		@mixin flexbox;
 		height: $masthead-height;
@@ -681,17 +675,15 @@ html, body, .site {
 # Navigation
 --------------------------------------------------------------*/
 
-nav ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
+.site-menu {
+	@mixin flexbox column, nowrap, center;
 
-.site-nav {
-	li {
+	/* All list items */
+	.menu-item {
 		position: relative;
 	}
 
+	/* All links */
 	a {
 		color: $color-nav;
 		display: block;
@@ -699,8 +691,6 @@ nav ul {
 		font-weight: $font-weight-heading;
 		font-size: $font-size-nav;
 		line-height: 1;
-		text-decoration: none;
-		text-transform: uppercase;
 
 		&:hover,
 		&:focus,
@@ -709,141 +699,120 @@ nav ul {
 		}
 	}
 
-	ul ul {
-		display: none;
-
-		a {
-			text-transform: none;
-		}
+	/* Top-level links */
+	> .menu-item > a {
+		text-transform: uppercase;
 	}
-}
 
-.site-nav .current-menu-item > a {
-	color: $color-nav-active;
-	cursor: default;
+	/* Link to current page */
+	.current-menu-item > a {
+		color: $color-nav-active;
+		cursor: default;
+	}
 }
 
 /* Site nav – mobile
 ----------------------------------*/
 
-.menu-toggle {
-	background: none !important;
-	color: rgba(140, 140, 140, 1) !important;
-	position: absolute;
-	text-shadow: none;
-	top: resolve($masthead-height * 0.15);
-	right: $gutter;
+@media (max-width: $_tablet) {
+	.menu-toggle {
+		background: none !important;
+		color: rgba(140, 140, 140, 1) !important;
+		position: absolute;
+		text-shadow: none;
+		top: resolve($masthead-height * 0.15);
+		right: $gutter;
+		z-index: $z-menu-toggle;
 
-	/* Hide 'Menu' text */
-	span {
-		display: none;
-	}
-}
-
-/* Menu toggle button clone, fixed to bottom of screen. */
-.menu-toggle-clone {
-	background: rgba(255, 255, 255, 0.8);
-	border-radius: $border-radius;
-	/* Hide initially */
-	bottom: -3.4rem;
-	box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.2);
-	color: $color-heading;
-	font-size: $font-size-nav-mobile;
-	left: 50%;
-	outline: none;
-	position: fixed;
-	text-shadow: none;
-	transform: translate(-50%);
-	transition: all ease-out 400ms;
-	z-index: 100;
-
-	&:hover,
-	&:focus,
-	&:active {
-		background: rgba(255, 255, 255, 1);
-		color: $color-heading;
-	}
-
-	/* Show on upward scroll */
-	.scrollup & {
-		bottom: 0.9rem;
-	}
-
-	/* Make sure the button doesn't hide when menu is open. */
-	.toggled & {
-		bottom: 0.9rem;
-	}
-
-	.icon-menu {
-		margin-right: 0.3em;
-	}
-}
-
-.site-nav {
-	@media (max-width: $_tablet) {
-		.site-menu {
-			background: rgba(255, 255, 255, 1);
-			bottom: -530px;
-			box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.13);
-			left: 0;
-			padding: 1em 0 4.7em;
-			position: fixed;
-			text-align: center;
-			transition: all 0.7s cubic-bezier(0.075, 0.82, 0.165, 1);
-			width: 100%;
-			z-index: 1;
+		/* Hide 'Menu' text */
+		span {
+			display: none;
 		}
 
-		&.toggled .site-menu {
-			bottom: 0;
+		.toggled & {
+			position: fixed;
+		}
+	}
+
+	/* Menu toggle button clone, fixed to bottom of screen. */
+	.menu-toggle-clone {
+		background: color( $color-white a(80%) );
+		border-radius: $border-radius;
+		/* Hide initially */
+		bottom: -3.4rem;
+		box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.2);
+		color: $color-heading;
+		left: 50%;
+		outline: none;
+		padding: 0.6em;
+		position: fixed;
+		text-shadow: none;
+		transform: translate(-50%);
+		transition: all ease-out 400ms;
+		z-index: $z-menu-toggle;
+
+		&:hover,
+		&:focus,
+		&:active {
+			background: color( $color-white a(100%) );
+			color: $color-heading;
+		}
+
+		/* Show on upward scroll */
+		.scrollup & {
+			bottom: 0.9rem;
+		}
+
+		/* Make sure the button doesn't hide when menu is open. */
+		.toggled & {
+			bottom: 0.9rem;
+		}
+
+		.icon-menu {
+			margin-right: 0.2em;
+		}
+	}
+
+	.site-menu {
+		background: color( $color-white a(95%) );
+		bottom: 0;
+		box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.13);
+		left: 0;
+		opacity: 0;
+		padding: 1em 0 4.7em;
+		position: fixed;
+		right: 0;
+		text-align: center;
+		top: 0;
+		transform: scale(0);
+		/* Launch from top right */
+		transform-origin: right top;
+		/* @link http://easings.net/#easeInOutQuint */
+		transition: all 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+		z-index: $z-site-menu;
+
+		/* Launch from bottom when bottom menu toggle is present */
+		.scrollup & {
+			transform-origin: bottom;
+		}
+
+		/* Show menu */
+		.toggled & {
+			opacity: 1;
+			transform: scale(1);
 		}
 
 		a {
+			border-bottom: 1px solid $color-border;
 			font-size: $font-size-nav-mobile;
 			line-height: 3;
+			margin: 0 auto;
+			width: 88%;
 		}
 
-		ul ul a {
-			font-size: resolve($font-size-nav-mobile - 0.1rem);
+		> .menu-item:last-of-type > a {
+			border: 0;
 		}
-	}
-}
-
-.no-js .site-nav ul ul {
-	display: block;
-}
-
-.dropdown-toggle {
-	background: transparent;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	height: 22px;
-	padding: 0;
-	position: absolute;
-	text-transform: lowercase; /* Stop screen readers to read the text as capital letters */
-	top: 20px;
-	right: 10px;
-	width: 22px;
-
-	.icon-chevron {
-		vertical-align: middle;
-		width: 66%;
-		fill: none;
-		stroke: color($color-nav lightness(+ 15%));
-		stroke-width: 2px;
-	}
-
-	&:hover,
-	&:focus,
-	&:active {
-		background: transparent;
-
-		.icon-chevron {
-			stroke: $color-link;
-		}
-	}
-
-	&:focus {
-		outline: 1px solid rgba(51, 51, 51, 0.3);
 	}
 }
 
@@ -852,29 +821,20 @@ nav ul {
 	.menu-toggle-clone {
 		display: none;
 	}
-
-	.site-nav .site-menu {
-		padding-bottom: 1em;
-	}
 }
 
 /* Site nav - desktop
 ----------------------------------*/
 
-.site-nav {
-	@media (min-width: $tablet) {
-		.menu-toggle,
-		.menu-toggle-clone {
-			display: none;
-		}
+@media (min-width: $tablet) {
+	/* Menu toggles */
+	.menu-toggle,
+	.menu-toggle-clone {
+		display: none;
+	}
 
-		ul {
-			display: block;
-		}
-
-		li {
-			display: inline-block;
-		}
+	.site-menu {
+		flex-direction: row;
 
 		a {
 			line-height: $masthead-height;
@@ -882,18 +842,16 @@ nav ul {
 			padding-right: 12px;
 		}
 
-		.menu-item-has-children > a {
-			padding-right: 40px;
-		}
-
 		.home {
 			display: none;
 		}
 
 		/* Dropdown menu */
-
-		ul ul {
-			position: absolute;;
+		.sub-menu {
+			display: none;
+			left: 50px;
+			position: absolute;
+			top: 50px;
 		}
 	}
 }
