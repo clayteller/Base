@@ -9,7 +9,7 @@
 /**
  *  Register custom post types.
  */
-function base_register_cpt() {
+function base_register_post_type() {
 	/**
 	 * Array of custom post types to register.
 	 * @var array
@@ -58,4 +58,4 @@ function base_register_cpt() {
 		register_post_type( $cpt, $args );
 	}
 }
-add_action( 'init', 'base_register_cpt' );
+add_action( 'init', 'base_register_post_type' );

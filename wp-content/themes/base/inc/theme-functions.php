@@ -207,7 +207,7 @@ function base_show_sidebar() {
    if ( is_page( 'contact' ) ) {
       return ( is_active_sidebar( 'sidebar-contact' ) && base_check_show_sidebar_field() );
    // Pages and posts
-} elseif ( ( base_is_page() || is_singular( 'post' ) ) && ! is_page( 'contact' ) ) {
+   } elseif ( ( base_is_page() || is_singular( 'post' ) ) && ! is_page( 'contact' ) ) {
       return ( is_active_sidebar( 'sidebar' ) && base_check_show_sidebar_field() );
    } else {
       return false;

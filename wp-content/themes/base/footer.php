@@ -10,33 +10,23 @@
  * @since 1.0.1
  */
 
-$footer_summary = get_field( 'site_summary', 'option' ) ? get_field( 'site_summary', 'option' ) : get_bloginfo( 'description' );
-
 // Subscribe form section
 get_template_part( 'template-parts/section', 'subscribe' );
 ?>
 
 	<?php do_action ( 'base_before_footer' ); ?>
-	<footer id="site-footer" class="site-footer" role="contentinfo">
-		<div class="wrap">
-			<div class="footer-summary">
-				<p><?php echo $footer_summary; ?></p>
-				<?php
-				base_phone( '<p class="phone">', '</p>', 'option' );
-				base_email( '<p class="email">', '</p>', 'option' );
-				?>
+	<?php if ( is_active_sidebar( 'footer-left' ) || is_active_sidebar( 'footer-right' ) ) : ?>
+		<footer id="site-footer" class="site-footer" role="contentinfo">
+			<div class="wrap">
+				<section class="footer-left">
+					<?php dynamic_sidebar( 'footer-left' ); ?>
+				</section>
+				<section class="footer-right">
+					<?php dynamic_sidebar( 'footer-right' ); ?>
+				</section>
 			</div>
-			<nav id="footer-nav" class="footer-nav">
-				<?php
-					wp_nav_menu( array(
-						'container'      => '',
-						'menu_class'     => 'footer-menu',
-						'theme_location' => 'menu-footer'
-					) );
-				?>
-			</nav><!-- #footer-nav -->
-		</div>
-	</footer><!-- #site-footer -->
+		</footer><!-- #site-footer -->
+	<?php endif; ?>
 
 	<section id="colophon" class="colophon">
 		<div class="wrap">

@@ -232,7 +232,10 @@
 
 @define-mixin link $color: $color-link, $color-hover: $color-link-hover, $decoration: none  {
 	color: $color;
-	text-decoration: $decoration;
+
+	@if $decoration != none {
+		text-decoration: $decoration;
+	}
 
 	&:hover,
 	&:focus,
@@ -252,10 +255,10 @@
 }
 
 /*--------------------------------------------------------------
-# Remove bottom space
+# Correct bottom space
 --------------------------------------------------------------*/
 
-@define-mixin remove-bottom-space {
+@define-mixin correct-bottom-space {
 	> *:last-child {
 	    margin-bottom: 0 !important;
 	}

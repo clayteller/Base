@@ -185,6 +185,7 @@ strong {
 	a {
 		text-decoration: underline;
 	}
+
 	ul,
 	ol {
 		margin: 0 0 $space-text;
@@ -279,6 +280,7 @@ textarea:focus,
 
 a {
 	@mixin link;
+	text-decoration: none;
 
 	&:focus {
 		outline: thin dotted;
@@ -459,7 +461,7 @@ body:not(.home) .site-main {
 	@mixin section-space;
 
 	> .wrap {
-		@mixin remove-bottom-space;
+		@mixin correct-bottom-space;
 	}
 }
 
@@ -504,10 +506,10 @@ html, body, .site {
 .site-footer {
 	grid-area: footer;
 	/* Extra padding on bottom for colophon to overlap */
-	padding-bottom: resolve($space-section + 11rem) !important;
+	padding-bottom: resolve($space-section + 10rem) !important;
 
 	@media (min-width: $tablet) {
-		padding-bottom: resolve($space-section + 7rem) !important;
+		padding-bottom: resolve($space-section + 5.5rem) !important;
 	}
 }
 
@@ -688,18 +690,12 @@ html, body, .site {
 
 	/* Menu link */
 	a {
-		color: $color-nav;
+		@mixin link $color-nav, $color-nav-hover;
 		display: block;
 		font-family: $font-family-heading;
 		font-weight: $font-weight-heading;
 		font-size: $font-size-nav;
 		line-height: 1;
-
-		&:hover,
-		&:focus,
-		&:active {
-			color: $color-nav-hover;
-		}
 	}
 
 	/* Top-level link */
@@ -896,16 +892,16 @@ html, body, .site {
 /* Footer nav
 ----------------------------------*/
 
-.footer-nav {
+.site-footer .widget_nav_menu {
 	li {
 		display: inline-block;
 		margin: 0 $space-button-half $space-button-vertical;
 	}
 
 	a {
+		@mixin link $color-footer-link, $color-footer-link-hover;
 		background: rgba(255, 255, 255, 0.1);
 		border-radius: $border-radius;
-		color: $color-footer-link;
 		padding: 0.6em 0.6em 0.5em;
 		display: block;
 		font-family: $font-family-heading;
@@ -914,12 +910,6 @@ html, body, .site {
 		line-height: 1;
 		text-decoration: none;
 		text-transform: uppercase;
-
-		&:hover,
-		&:focus,
-		&:active {
-			color: $color-footer-link-hover;
-		}
 	}
 }
 
@@ -1067,8 +1057,8 @@ html, body, .site {
 ----------------------------------*/
 
 .section-cta {
-	background: $background-section-primary;
 	@mixin section-space 0.8rem, 0.8rem;
+	background: $background-section-primary;
 	text-align: center;
 
 	.section-title {
@@ -1080,7 +1070,7 @@ html, body, .site {
 	}
 
 	.section-text {
-		@mixin remove-bottom-space;
+		@mixin correct-bottom-space;
 		color: color( $color-primary hue(-7) saturation(+25) lightness(+40) );
 		font-size: $font-size-large;
 		margin-bottom: $space-section;
@@ -1144,7 +1134,7 @@ html, body, .site {
 
 .hentry {
 	@mixin flexbox column, nowrap, flex-start;
-	@mixin remove-bottom-space;
+	@mixin correct-bottom-space;
 	margin: 0 0 resolve($space-entry + 1rem);
 
 	/* Featured image */
@@ -1159,13 +1149,18 @@ html, body, .site {
 /* Entry in section, archive
 ----------------------------------*/
 
-.entries {
-	.entry-header,
-	.entry-content {
-		@mixin remove-bottom-space;
-		margin-bottom: $space-entry-child;
-	}
+.entry-header,
+.entry-content {
+	margin-bottom: $space-entry-child;
+}
 
+.entry-header,
+.entry-content,
+.entry-footer {
+	@mixin correct-bottom-space;
+}
+
+.entries {
 	/* Featured image */
 	figure {
 		margin-bottom: $space-entry-child;
@@ -1255,13 +1250,7 @@ html, body, .site {
 	}
 
 	a {
-		color: $color-meta-link;
-
-		&:hover,
-		&:focus,
-		&:active {
-			color: $color-meta-link-hover;
-		}
+		@mixin link $color-meta-link, $color-meta-link-hover;
 	}
 
 	.facebook {
@@ -1272,16 +1261,8 @@ html, body, .site {
 /* Entry content
 ----------------------------------*/
 
-.entry-content {
-	@mixin remove-bottom-space;
-}
-
 /* Entry footer
 ----------------------------------*/
-
-.entry-footer {
-	@mixin remove-bottom-space;
-}
 
 .post-categories,
 .post-tags {
@@ -1389,10 +1370,15 @@ html, body, .site {
 --------------------------------------------------------------*/
 
 .site-footer {
-	@mixin section-space;
 	@mixin background-image-overlay $background-footer;
+	@mixin section-space;
 	color: $color-footer;
 	text-align: center;
+
+	/* Footer sections */
+	.wrap > * {
+		margin-bottom: $space-section;
+	}
 
 	a {
 		color: $color-footer-link;
@@ -1402,22 +1388,23 @@ html, body, .site {
 		}
 	}
 
+	.widget-title {
+		color: $color-footer;
+		font-size: $font-size-h3;
+		margin-bottom: 0.7em;
+	}
+
 	@media (min-width: $tablet) {
 		text-align: left;
 
 		.wrap {
 			@mixin flexbox;
 
+			/* Footer sections */
 			> * {
-				width: 32%;
+				width: 48%;
 			}
 		}
-	}
-}
-
-.footer-summary {
-	@media (max-width: $_tablet) {
-		margin-bottom: $space-section;
 	}
 }
 
@@ -1517,9 +1504,25 @@ html, body, .site {
 }
 
 .type-employee {
+	.email,
+	.phone {
+		a {
+			@mixin link-imitate;
+		}
+	}
+
 	.phone + .email {
 		margin-top: -$space-text;
 	}
+
+	.social-links a {
+		@mixin link color( $color-meta lightness(+20) ), $color-meta;
+	}
+}
+
+.contact-info {
+	@mixin correct-bottom-space;
+	margin-bottom: $space-entry;
 }
 
 /* Make space for svg icon */
@@ -1614,7 +1617,8 @@ html, body, .site {
 --------------------------------------------------------------*/
 
 .widget {
-	margin: 0 0 1.5em;
+	@mixin correct-bottom-space;
+	margin: 0 0 $space-entry;
 
 	/* Make sure select elements fit in widgets. */
 	select {
