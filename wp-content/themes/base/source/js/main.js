@@ -6,7 +6,7 @@
  */
 
 /* Tell eslint about global variables */
-/* global themeDir, TimelineMax, Power4 */
+/* global TimelineMax, Power4 */
 
 ;( function( $ ) {
 	'use strict';
@@ -31,10 +31,10 @@
 			.removeClass( "menu-toggle" )
 			.addClass( "menu-toggle-clone" ),
 
-		$menuIconBar1 = $siteMenuButtonClone.find( 'rect:nth-child(1)' ),
-		$menuIconBar2 = $siteMenuButtonClone.find( 'rect:nth-child(2)' ),
-		$menuIconBar3 = $siteMenuButtonClone.find( 'rect:nth-child(3)' ),
-		$menuIconBar4 = $siteMenuButtonClone.find( 'rect:nth-child(4)' ),
+		$menuIconBar1 = $siteNav.find( 'rect:nth-child(1)' ),
+		$menuIconBar2 = $siteNav.find( 'rect:nth-child(2)' ),
+		$menuIconBar3 = $siteNav.find( 'rect:nth-child(3)' ),
+		$menuIconBar4 = $siteNav.find( 'rect:nth-child(4)' ),
 
 		scrollPosition,
 		scrollDirection,

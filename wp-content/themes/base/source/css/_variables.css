@@ -122,6 +122,7 @@ $aside-width:   300px;
 --------------------------------------------------------------*/
 
 $small-phone:   400px;
+$_small-phone:  resolve($small-phone - 1px);
 $phone:         560px;
 $_phone:        resolve($phone - 1px);
 $tablet:        768px;
@@ -135,6 +136,7 @@ $large-desktop: 1200px;
 --------------------------------------------------------------*/
 
 $border-radius: 8px;
+$border-radius-circle: 999px;
 $border-radius-field: 8px;
 $box-shadow:    0 0 5px 0 rgba(0, 0, 0, 0.1);
 $box-shadow-on: 0 0 15px 0 rgba(0, 0, 0, 0.13);

@@ -713,37 +713,43 @@ html, body, .site {
 /* Site nav – mobile
 ----------------------------------*/
 
+@media (max-width: $_small-phone) {
+	/* Hide 'Menu' text */
+	.menu-toggle span {
+		display: none;
+	}
+}
+
 @media (max-width: $_tablet) {
 	.menu-toggle {
+		@mixin link $color-meta-link, $color-meta-link-hover;
 		background: none !important;
-		color: rgba(140, 140, 140, 1) !important;
 		position: absolute;
 		text-shadow: none;
 		top: resolve($masthead-height * 0.15);
 		right: $gutter;
 		z-index: $z-menu-toggle;
 
-		/* Hide 'Menu' text */
-		span {
-			display: none;
-		}
-
 		.toggled & {
 			position: fixed;
+		}
+
+		.icon-menu {
+			margin-right: 0.2em;
 		}
 	}
 
 	/* Menu toggle button clone, fixed to bottom of screen. */
 	.menu-toggle-clone {
 		background: color( $color-white a(80%) );
-		border-radius: $border-radius;
+		border-radius: $border-radius-circle;
 		/* Hide initially */
 		bottom: -3.4rem;
 		box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.2);
 		color: $color-heading;
 		left: 50%;
 		outline: none;
-		padding: 0.6em;
+		padding: 0.7em;
 		position: fixed;
 		text-shadow: none;
 		transform: translate(-50%);
@@ -768,7 +774,12 @@ html, body, .site {
 		}
 
 		.icon-menu {
-			margin-right: 0.2em;
+			margin-right: 0;
+		}
+
+		/* Hide 'Menu' text */
+		span {
+			display: none;
 		}
 	}
 
@@ -1307,6 +1318,11 @@ html, body, .site {
 	@mixin section-space;
 	@mixin section-background $background-section;
 
+	.widget-title {
+		font-size: $font-size-h3;
+		margin-bottom: 0.7em;
+	}
+
 	.search-form {
 		@mixin section-margin-bottom;
 	}
@@ -1349,11 +1365,6 @@ html, body, .site {
 	@media (min-width: $desktop) {
 		background: $background-section;
 		border-left: 1px solid $color-border;
-
-		.widget-title {
-			font-size: $font-size-h3;
-			margin-bottom: 0.7em;
-		}
 
 		.search-field {
 			width: 100%;
