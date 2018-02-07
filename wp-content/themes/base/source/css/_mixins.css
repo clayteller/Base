@@ -1,4 +1,23 @@
 /*--------------------------------------------------------------
+>>> TABLE OF CONTENTS
+----------------------------------------------------------------
+# Background image color overlay
+# Border
+# Bottom space correction
+# Box
+# Button
+# Column
+# Flexbox
+# Full width
+# Heading
+# Image replacement
+# Link
+# Screen reader text
+# Section background
+# Section vertical spacing
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
 # Background image color overlay
 --------------------------------------------------------------*/
 
@@ -30,6 +49,16 @@
 	border-top: 1px solid $color-border;
 	margin-top: resolve( $space-border + $margin-adjust );
 	padding-top: resolve( $space-border + $padding-adjust );
+}
+
+/*--------------------------------------------------------------
+# Bottom space correction
+--------------------------------------------------------------*/
+
+@define-mixin correct-bottom-space {
+	> *:last-child {
+	    margin-bottom: 0 !important;
+	}
 }
 
 /*--------------------------------------------------------------
@@ -137,6 +166,24 @@
 	&:active {
 		background: $background-button-plain-hover;
 	}
+}
+
+/*--------------------------------------------------------------
+# Column
+--------------------------------------------------------------*/
+
+@define-mixin column $count: 3, $space: 0  {
+	$width: resolve(100 / $count);
+	@if $space == 0 {
+		width: $width%;
+	} @else {
+		width: calc($width% - $space);
+	}
+}
+
+@define-mixin column-space $space {
+	margin-left: resolve($space / 2);
+	margin-right: resolve($space / 2);
 }
 
 /*--------------------------------------------------------------
@@ -251,16 +298,6 @@
 	&:focus,
 	&:active {
 		color: $color-link;
-	}
-}
-
-/*--------------------------------------------------------------
-# Correct bottom space
---------------------------------------------------------------*/
-
-@define-mixin correct-bottom-space {
-	> *:last-child {
-	    margin-bottom: 0 !important;
 	}
 }
 

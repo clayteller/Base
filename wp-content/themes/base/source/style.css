@@ -13,9 +13,6 @@ Base is based on Underscores http://underscores.me/, (C) 2012-2016 Automattic, I
 Underscores is distributed under the terms of the GNU GPL v2 or later.
 */
 
-@import "css/_variables.css";
-@import "css/_mixins.css";
-
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS
 ----------------------------------------------------------------
@@ -45,8 +42,10 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 # Media
 # PLUGINS
 # Contact Form 7
-
 --------------------------------------------------------------*/
+
+@import "css/_variables.css";
+@import "css/_mixins.css";
 
 /*--------------------------------------------------------------
 # Elements
@@ -1191,20 +1190,13 @@ html, body, .site {
 
 		/* Entry */
 		.hentry {
-			margin-left: resolve($space-entry / 2);
-			margin-right: resolve($space-entry / 2);
-			width: calc(50% - $space-entry);
+			@mixin column-space $space-entry;
+			@mixin column 2, $space-entry;
 		}
 
 		/* 3 entries */
 		&.count-3 .hentry {
-			width: calc(33.333% - $space-entry);
-		}
-
-		/* 2 or 4 entries */
-		&.count-2 .hentry,
-		&.count-4 .hentry {
-			width: calc(50% - $space-entry);
+			@mixin column 3, $space-entry;
 		}
 
 		.post-categories {
@@ -1214,12 +1206,17 @@ html, body, .site {
 
 	@media (min-width: $desktop) {
 		.hentry {
-			width: calc(33.333% - $space-entry);
+			@mixin column 3, $space-entry;
+		}
+
+		/* 2 entries */
+		&.count-2 .hentry {
+			@mixin column 2, $space-entry;
 		}
 
 		/* 4 entries */
 		&.count-4 .hentry {
-			width: calc( 25% - $space-entry );
+			@mixin column 4, $space-entry;
 		}
 	}
 }
@@ -1813,46 +1810,45 @@ object {
 ----------------------------------*/
 
 .gallery {
-	margin-bottom: 1.5em;
+	@mixin flexbox row, wrap, center;
+	margin-bottom: $space-entry;
 }
 
 .gallery-item {
-	display: inline-block;
 	text-align: center;
-	vertical-align: top;
 	width: 100%;
-}
 
-.gallery-columns-2 .gallery-item {
-	max-width: 50%;
-}
+	.gallery-columns-2 & {
+		@mixin column 2;
+	}
 
-.gallery-columns-3 .gallery-item {
-	max-width: 33.33%;
-}
+	.gallery-columns-3 & {
+		@mixin column 3;
+	}
 
-.gallery-columns-4 .gallery-item {
-	max-width: 25%;
-}
+	.gallery-columns-4 & {
+		@mixin column 4;
+	}
 
-.gallery-columns-5 .gallery-item {
-	max-width: 20%;
-}
+	.gallery-columns-5 & {
+		@mixin column 5;
+	}
 
-.gallery-columns-6 .gallery-item {
-	max-width: 16.66%;
-}
+	.gallery-columns-6 & {
+		@mixin column 6;
+	}
 
-.gallery-columns-7 .gallery-item {
-	max-width: 14.28%;
-}
+	.gallery-columns-7 & {
+		@mixin column 7;
+	}
 
-.gallery-columns-8 .gallery-item {
-	max-width: 12.5%;
-}
+	.gallery-columns-8 & {
+		@mixin column 8;
+	}
 
-.gallery-columns-9 .gallery-item {
-	max-width: 11.11%;
+	.gallery-columns-9 & {
+		@mixin column 9;
+	}
 }
 
 .gallery-caption {
