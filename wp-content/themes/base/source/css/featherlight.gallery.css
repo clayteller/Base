@@ -1,0 +1,113 @@
+/**
+ * Featherlight Gallery – an extension for the ultra slim jQuery lightbox
+ * Version 1.7.9 - http://noelboss.github.io/featherlight/
+ *
+ * Copyright 2017, Noël Raoul Bossart (http://www.noelboss.com)
+ * MIT Licensed.
+**/
+
+@import "_variables.css";
+@import "_mixins.css";
+
+@media all {
+	/* Previous/next containers */
+	.featherlight-next,
+	.featherlight-previous {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 84%;
+		cursor: pointer;
+		/* preventing text selection */
+		user-select: none;
+		/* IE9 hack, otherwise navigation doesn't appear */
+		background: rgba(0,0,0,0);
+	}
+
+	.featherlight-previous {
+		left: 0;
+		right: 84%;
+	}
+
+	/* Previous/next inner container */
+	.featherlight-next span,
+	.featherlight-previous span {
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.3s;
+
+		/* dimensions */
+		font-size: 1.8em;
+
+		/* position: center */
+		position: absolute;
+		left: 60%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+
+		/* styling */
+		color: hsla(0, 0%, 100%, 0.9);
+	}
+
+	.featherlight-previous span {
+		left: 40%;
+	}
+
+	.featherlight-previous .icon-chevron {
+		filter: drop-shadow(0 0 2px #222);
+		transform: rotate(.25turn);
+	}
+
+	.featherlight-next .icon-chevron {
+		transform: rotate(.75turn);
+	}
+
+	.featherlight-next:hover span,
+	.featherlight-previous:hover span {
+		left: 55%;
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.featherlight-previous:hover span {
+		left: 45%;
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.featherlight-swipe-aware .featherlight-next,
+	.featherlight-swipe-aware .featherlight-previous {
+		display: none;
+	}
+
+	/* Hide navigation while loading */
+	.featherlight-loading .featherlight-previous,
+	.featherlight-loading .featherlight-next {
+		display: none;
+	}
+
+	/* Hide navigation in case of single image */
+	.featherlight-first-slide.featherlight-last-slide .featherlight-previous,
+	.featherlight-first-slide.featherlight-last-slide .featherlight-next {
+		display: none;
+	}
+}
+
+/* Always display arrows on touch devices */
+@media only screen and (max-device-width: 1024px){
+	.featherlight-next span,
+	.featherlight-previous span {
+		opacity: 0.8;
+		visibility: visible;
+	}
+}
+
+/* Large screens */
+@media only screen and (min-width: 768px) {
+	.featherlight-next span,
+	.featherlight-previous span {
+		/* dimensions */
+		font-size: 2.2em;
+	}
+}

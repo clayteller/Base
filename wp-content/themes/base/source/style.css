@@ -424,6 +424,13 @@ textarea {
 	width: 0.95em;
 }
 
+.icon-chevron {
+	fill: none;
+	margin: 0;
+	stroke: currentColor;
+	stroke-width: 3px;
+}
+
 /*--------------------------------------------------------------
 # Classes
 --------------------------------------------------------------*/
@@ -641,7 +648,7 @@ html, body, .site {
 
 .masthead {
 	background: color( $color-white a(92%) );
-	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+	box-shadow: 0 3px 8px hsla(0, 0%, 0%, 0.08);
 	position: absolute;
 	top: 0;
 	width: 100%;
@@ -721,7 +728,7 @@ html, body, .site {
 
 @media (max-width: $_tablet) {
 	.menu-toggle {
-		@mixin link $color-meta-link, $color-meta-link-hover;
+		@mixin link $color-button-overlay, $color-button-overlay;
 		background: none !important;
 		position: absolute;
 		text-shadow: none;
@@ -740,12 +747,12 @@ html, body, .site {
 
 	/* Menu toggle button clone, fixed to bottom of screen. */
 	.menu-toggle-clone {
-		background: color( $color-white a(80%) );
+		background: $background-button-overlay;
 		border-radius: $border-radius-circle;
 		/* Hide initially */
 		bottom: -3.4rem;
-		box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.2);
-		color: $color-heading;
+		box-shadow: 0 1px 5px 2px hsla(0, 0%, 0%, 0.25);
+		color: $color-button-overlay;
 		left: 50%;
 		outline: none;
 		padding: 0.7em;
@@ -758,7 +765,7 @@ html, body, .site {
 		&:hover,
 		&:focus,
 		&:active {
-			background: color( $color-white a(100%) );
+			background: $background-button-overlay-hover;
 			color: $color-heading;
 		}
 
@@ -773,7 +780,7 @@ html, body, .site {
 		}
 
 		.icon-menu {
-			margin-right: 0;
+			margin: 0;
 		}
 
 		/* Hide 'Menu' text */
@@ -785,7 +792,7 @@ html, body, .site {
 	.site-menu {
 		background: color( $color-white a(95%) );
 		bottom: 0;
-		box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.13);
+		box-shadow: 0 1px 5px 2px hsla(0, 0%, 0%, 0.13);
 		left: 0;
 		opacity: 0;
 		padding: 1em 0 4.7em;
@@ -910,7 +917,7 @@ html, body, .site {
 
 	a {
 		@mixin link $color-footer-link, $color-footer-link-hover;
-		background: rgba(255, 255, 255, 0.1);
+		background: hsla(0, 0%, 100%, 0.1);
 		border-radius: $border-radius;
 		padding: 0.6em 0.6em 0.5em;
 		display: block;
@@ -926,13 +933,14 @@ html, body, .site {
 /* Pagination / Posts nav
 ----------------------------------*/
 
-/* numbered page links */
+/* Archive pagination */
 .pagination,
-/* page name links */
+/* Single post navigation */
 .post-navigation {
 	@mixin section-margin-bottom;
 }
 
+/* Both archive and single post pagination/navigation */
 .nav-links {
 	@mixin flexbox row, wrap, center, center;
 
@@ -947,6 +955,28 @@ html, body, .site {
 		@mixin button-small;
 	}
 
+	.icon-chevron {
+		width: 0.8em;
+	}
+
+	.prev,
+	.nav-previous {
+		.icon-chevron {
+			transform: rotate(.25turn);
+		}
+	}
+
+	.next,
+	.nav-next {
+		.icon-chevron {
+			margin-left: 0.1em;
+			transform: rotate(.75turn);
+		}
+	}
+}
+
+/* Archive pagination */
+.pagination {
 	span {
 		cursor: default;
 	}
@@ -962,8 +992,8 @@ html, body, .site {
 	}
 }
 
-.nav-previous,
-.nav-next {
+/* Single post navigation */
+.post-navigation {
 	a {
 		display: block;
 		max-width: 600px;
@@ -972,34 +1002,12 @@ html, body, .site {
 		white-space: nowrap;
 	}
 
-	.icon-chevron {
-		fill: none;
-		position: relative;
-		stroke: currentColor;
-		stroke-width: 3px;
-		top: 1.7px;
-		width: 0.7em;
-	}
-
 	@media (max-width: $_phone) {
 		flex: 0 0 100%;
 
 		a {
 			@mixin full-width;
 		}
-	}
-}
-
-.nav-previous {
-	.icon-chevron {
-		transform: rotate(.25turn);
-	}
-}
-
-.nav-next {
-	.icon-chevron {
-		margin-left: 0.1em;
-		transform: rotate(.75turn);
 	}
 }
 
@@ -1236,7 +1244,7 @@ html, body, .site {
 		margin-bottom: $space-entry;
 	}
 
-	figure {
+	.attachment-featured {
 		margin-bottom: $space-section;
 	}
 }
@@ -1572,7 +1580,7 @@ html, body, .site {
 	/* When page hasn't been scrolled down at all */
 	&:not(.scrolled) {
 		.masthead {
-			background: rgba(255, 255, 255, 0);
+			background: hsla(0, 0%, 100%, 0);
 			box-shadow: none;
 		}
 
@@ -1582,7 +1590,7 @@ html, body, .site {
 		}
 
 		.menu-toggle {
-			color: rgba(255, 255, 255, 1) !important;
+			color: $color-white !important;
 		}
 
 		.site-nav a {
@@ -1811,6 +1819,7 @@ object {
 
 .gallery {
 	@mixin flexbox row, wrap, center;
+	@mixin section-space -1rem;
 	margin-bottom: $space-entry;
 }
 
@@ -1848,6 +1857,14 @@ object {
 
 	.gallery-columns-9 & {
 		@mixin column 9;
+	}
+
+	a {
+		cursor: zoom-in;
+	}
+
+	.size-full {
+		margin: 0;
 	}
 }
 

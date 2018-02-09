@@ -33,7 +33,10 @@ get_header();
 			</div>
 			<?php
 
-			the_posts_pagination();
+			the_posts_pagination( array(
+				'prev_text' => base_svg_icon( 'chevron' ) . __( 'Previous', 'base' ),
+            'next_text' => __( 'Next', 'base' ) . base_svg_icon( 'chevron' )
+			) );
 
 		else :
 

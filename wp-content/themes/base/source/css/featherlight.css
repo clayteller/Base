@@ -1,0 +1,180 @@
+/**
+ * Featherlight – ultra slim jQuery lightbox
+ * Version 1.7.9 - http://noelboss.github.io/featherlight/
+ *
+ * Copyright 2017, Noël Raoul Bossart (http://www.noelboss.com)
+ * MIT Licensed.
+**/
+
+@import "_variables.css";
+@import "_mixins.css";
+
+@media all {
+	html.with-featherlight {
+		/* disable global scrolling when featherlights are visible */
+		overflow: hidden;
+	}
+
+	/* Lightbox background */
+	.featherlight {
+		display: none;
+
+		/* dimensions: spanning the background from edge to edge */
+		position: fixed;
+		top: 0; right: 0; bottom: 0; left: 0;
+		z-index: 2147483647; /* z-index needs to be >= elements on the site. */
+
+		/* position: centering content */
+		text-align: center;
+
+		/* insures that the ::before pseudo element doesn't force wrap with fixed width content; */
+		white-space: nowrap;
+
+		/* styling */
+		cursor: zoom-out;
+		background: hsla(0, 0%, 0%, 0.75);
+
+		/* support for nested featherlights. Does not work in IE8 (use JS to fix) */
+		&:last-of-type {
+			background: hsla(0, 0%, 0%, 0.75);
+		}
+
+		/* position: trick to center content vertically */
+		&::before {
+			content: '';
+			display: inline-block;
+			height: 100%;
+			vertical-align: middle;
+		}
+	}
+
+	/* Lightbox window */
+	.featherlight-content {
+		/* contain positioned elements (close button) */
+		position: relative;
+
+		/* position: centering vertical and horizontal */
+		text-align: left;
+		vertical-align: middle;
+		display: inline-block;
+
+		/* dimensions: cut off images */
+		overflow: auto;
+
+		/* dimensions: handling large content */
+		margin-left: 5%;
+		margin-right: 5%;
+		max-height: 90%;
+
+		/* styling */
+		background: #fff;
+		box-shadow: 0 0 0 3px hsla(0, 0%, 100%, 1);
+
+		/* reset white-space wrapping */
+		white-space: normal;
+	}
+
+	/* Contains the content */
+	.featherlight-inner {
+		/* make sure its visible */
+		display: block;
+	}
+
+	/* don't show these though */
+	.featherlight script.featherlight-inner,
+	.featherlight link.featherlight-inner,
+	.featherlight style.featherlight-inner {
+		display: none;
+	}
+
+	/* 'Close' button */
+	.featherlight-close-icon {
+		/* position */
+		position: absolute;
+		top: 7px;
+		right: 6px;
+		z-index: 9999;
+
+		/* dimensions */
+		line-height: 44px;
+		width: 44px;
+
+		/* styling */
+		background: hsla(0, 0%, 100%, 0);
+		border: none;
+		border-radius: 50%;
+		color: hsla(0, 0%, 100%, 0.8);
+		font-size: 1.3rem;
+		padding: 0;
+		text-align: center;
+		text-shadow: 0 0 1px #444;
+
+		&:hover,
+		&:focus {
+			background: hsla(0, 0%, 100%, 0.1);
+			color: hsla(0, 0%, 100%, 0.9);
+		}
+	}
+
+	/* See http://stackoverflow.com/questions/16077341/how-to-reset-all-default-styles-of-the-html5-button-element */
+	.featherlight .featherlight-close-icon::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
+
+	.featherlight .featherlight-image {
+		/* Clay: Now that we're using javascript (portfolio.js) to trigger close by clicking image, use "zoom-out" cursor on image */
+		cursor: zoom-out;
+		height: auto !important;
+		width: auto !important;
+	}
+
+
+	.featherlight-iframe .featherlight-content {
+		/* removed the border for image croping since iframe is edge to edge */
+		border-bottom: 0;
+		padding: 0;
+		-webkit-overflow-scrolling: touch;
+		overflow-y: scroll;
+	}
+
+	.featherlight iframe {
+		/* styling */
+		border: none;
+	}
+
+	.featherlight * { /* See https://github.com/noelboss/featherlight/issues/42 */
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+}
+
+/* Small screens */
+@media only screen and (max-width: 767px) {
+	.featherlight-content {
+		/* dimensions: maximize lightbox width for small screens */
+		margin-left: 3px;
+		margin-right: 3px;
+		max-height: 98%;
+	}
+}
+
+/* Large screens */
+@media only screen and (min-width: 768px) {
+	/* 'Close' button */
+	.featherlight-close-icon {
+		position: fixed;
+		top: 2%;
+		right: 2%;
+	}
+}
+
+/* Hide non featherlight items when printing */
+@media print {
+	@page {size: landscape}
+
+	html.with-featherlight > * > :not(.featherlight) {
+		display: none;
+	}
+}

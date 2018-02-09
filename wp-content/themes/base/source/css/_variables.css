@@ -67,14 +67,22 @@ $color-meta-link-hover:   $color-link;
 $color-footer-link:       color( $color-footer a(+10%) );
 $color-footer-link-hover: color( $color-footer-link a(+10%) );
 
-/* Backgrounds
+/* Buttons
 ----------------------------------*/
 
-$background-button:             $color-primary;
-$background-button-hover:       color( $background-button saturation(-5) lightness(+5) );
-$background-button-active:      color( $background-button saturation(-5) lightness(+5) );
+$background-button:        $color-primary;
+$background-button-hover:  color( $background-button saturation(-5) lightness(+5) );
+$background-button-active: color( $background-button saturation(-5) lightness(+5) );
+
 $background-button-plain:       hsl(180, 4%, 43%);
 $background-button-plain-hover: color( $background-button-plain lightness(+4) );
+
+$color-button-overlay:            hsl(0, 0%, 40%);
+$background-button-overlay:       color( $color-white a(90%) );
+$background-button-overlay-hover: $color-white;
+
+/* Backgrounds
+----------------------------------*/
 
 $bgh-gradient-light: color( $color-primary lightness(10) a(20%) );
 $bgh-gradient-dark:  color( $color-primary lightness(10) a(50%) );
@@ -87,7 +95,7 @@ $bsp-gradient-light: color( $color-primary hue(+4) );
 $bsp-gradient-dark: color( $color-primary hue(-4) );
 $background-section-primary: linear-gradient( 135deg, $bsp-gradient-light 0%, $bsp-gradient-dark 80% );
 
-$background-footer:   linear-gradient( to bottom, rgba(0, 0, 0, 0.7) 20%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.7) 80%);
+$background-footer:   linear-gradient( to bottom, hsla(0, 0%, 0%, 0.7) 20%, hsla(0, 0%, 0%, 0.7) 50%, hsla(0, 0%, 0%, 0.7) 80%);
 $background-colophon: color( $color-dark a(90%) );
 
 /*--------------------------------------------------------------
@@ -138,9 +146,9 @@ $large-desktop: 1200px;
 $border-radius: 8px;
 $border-radius-circle: 999px;
 $border-radius-field: 8px;
-$box-shadow:    0 0 5px 0 rgba(0, 0, 0, 0.1);
-$box-shadow-on: 0 0 15px 0 rgba(0, 0, 0, 0.13);
-$text-shadow:   1px 1px rgba(0, 0, 0, 0.15);
+$box-shadow:    0 0 5px 0 hsla(0, 0%, 0%, 0.1);
+$box-shadow-on: 0 0 15px 0 hsla(0, 0%, 0%, 0.13);
+$text-shadow:   1px 1px hsla(0, 0%, 0%, 0.15);
 $transition:    all 0.3s;
 
 /*--------------------------------------------------------------
