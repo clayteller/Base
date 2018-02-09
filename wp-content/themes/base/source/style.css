@@ -452,7 +452,8 @@ textarea {
 	.site-footer &,
 	.colophon &,
 	.archive .site-main &,
-	.blog .site-main & {
+	.blog .site-main &,
+	.section-cta & {
 		max-width: $max-width-wide;
 	}
 
@@ -483,7 +484,7 @@ html, body, .site {
 	display: grid;
 	grid:
 		"header" auto
-		"main" 1fr
+		"main"   1fr
 		"footer" auto
 		/ 1fr;
 }
@@ -532,8 +533,8 @@ html, body, .site {
 	.site {
 		grid:
 			"header" auto
-			"main" 1fr
-			"aside" auto
+			"main"   1fr
+			"aside"  auto
 			"footer" auto
 			/ 1fr;
 	}
@@ -542,9 +543,9 @@ html, body, .site {
 		.site {
 			grid:
 				"header header header header" auto
-				"main main aside aside" 1fr
+				"main   main   aside  aside"  1fr
 				"footer footer footer footer" auto
-				/ 1fr 630px 300px 1fr;
+				/ 1fr $grid-main-width $grid-aside-width 1fr;
 		}
 
 		.site-main {
@@ -552,7 +553,7 @@ html, body, .site {
 
 			.wrap {
 				max-width: 100%;
-				padding-left: calc(100% - 630px);
+				padding-left: calc(100% - $grid-main-width);
 				padding-right: 30px;
 			}
 		}
@@ -560,7 +561,7 @@ html, body, .site {
 		.site-aside {
 			.wrap {
 				padding-left: 30px;
-				padding-right: calc(100% - $aside-width);
+				padding-right: calc(100% - $grid-aside-width);
 			}
 		}
 
@@ -574,10 +575,10 @@ html, body, .site {
 .has-subscribe {
 	.site {
 		grid:
-			"header" auto
-			"main" 1fr
+			"header"    auto
+			"main"      1fr
 			"subscribe" auto
-			"footer" auto
+			"footer"    auto
 			/ 1fr;
 	}
 }
@@ -586,22 +587,22 @@ html, body, .site {
 .two-column.has-subscribe {
 	.site {
 		grid:
-			"header" auto
-			"main" 1fr
-			"aside" auto
+			"header"    auto
+			"main"      1fr
+			"aside"     auto
 			"subscribe" auto
-			"footer" auto
+			"footer"    auto
 			/ 1fr;
 	}
 
 	@media (min-width: $desktop) {
 		.site {
 			grid:
-				"header header header header" auto
-				"main main aside aside" 1fr
+				"header    header    header    header"    auto
+				"main      main      aside     aside"     1fr
 				"subscribe subscribe subscribe subscribe" auto
-				"footer footer footer footer" auto
-				/ 1fr 630px 300px 1fr;
+				"footer    footer    footer    footer"    auto
+				/ 1fr $grid-main-width $grid-aside-width 1fr;
 		}
 	}
 }
@@ -1598,6 +1599,11 @@ html, body, .site {
 				color: $color-white;
 				text-shadow: $text-shadow;
 			}
+		}
+
+		/* Top-level sub-menu */
+		.site-menu > .menu-item > .sub-menu {
+			background: color( $color-dark a(55%) );
 		}
 	}
 
