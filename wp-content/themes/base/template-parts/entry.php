@@ -40,16 +40,16 @@
 
       // Get subtitle for employee
       if ( 'employee' === get_post_type() ) :
-         $subtitle = get_field( 'job_title' );
+         $entry_subtitle = get_field( 'job_title' );
       // Get subtitle for testimonial
       elseif ( 'testimonial' === get_post_type() ) :
-         $subtitle = get_field( 'testimonial_subtitle' );
+         $entry_subtitle = get_field( 'testimonial_subtitle' );
       endif;
 
       // Subtitle (for employee and testimonial)
-      if ( isset( $subtitle ) ):
+      if ( isset( $entry_subtitle ) ):
       ?>
-         <p class="entry-meta"><?php echo $subtitle; ?></p>
+         <p class="entry-meta"><?php echo $entry_subtitle; ?></p>
       <?php
       endif;
 
