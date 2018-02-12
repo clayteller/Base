@@ -30,16 +30,18 @@
 			.insertAfter( $siteMenuButton )
 			.removeClass( "menu-toggle" )
 			.addClass( "menu-toggle-clone" ),
-
+		// Menu icon bars (to be animated)
 		$menuIconBar1 = $siteNav.find( 'rect:nth-child(1)' ),
 		$menuIconBar2 = $siteNav.find( 'rect:nth-child(2)' ),
 		$menuIconBar3 = $siteNav.find( 'rect:nth-child(3)' ),
 		$menuIconBar4 = $siteNav.find( 'rect:nth-child(4)' ),
 
+		// Scrolling
 		scrollPosition,
 		scrollDirection,
 		previous,
 
+		// Menu icon animation timeline
 		tlMenuIcon = new TimelineMax( {
 			// delay: 0.3, why isn't this working?
 			paused:   true,
@@ -48,13 +50,13 @@
 
 		toggleMenu = function() {
 			// Hide menu
-			if ( $siteNav.hasClass( 'toggled' ) ) {
-				$siteNav.removeClass( 'toggled' );
+			if ( $body.hasClass( 'menu-on' ) ) {
+				$body.removeClass( 'menu-on' );
 				$siteMenuButton.attr( 'aria-expanded', 'false' );
 				$siteMenu.attr( 'aria-expanded', 'false' );
 			// Show menu
 			} else {
-				$siteNav.addClass( 'toggled' );
+				$body.addClass( 'menu-on' );
 				$siteMenuButton.attr( 'aria-expanded', 'true' );
 				$siteMenu.attr( 'aria-expanded', 'true' );
 			}
@@ -95,8 +97,10 @@
 		// Slow animation down a bit
 		.totalDuration( 0.4 );
 
+	// Toggle menu on and off
 	$siteMenuButton.on( 'click', toggleMenu );
 	$siteMenuButton.on( 'click', animateMenuIcon );
+
 	// Make the clone button click trigger the original button
 	$siteMenuButtonClone.on( 'click', function() {
 			$siteMenuButton.click();

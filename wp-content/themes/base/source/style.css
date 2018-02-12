@@ -693,7 +693,7 @@ html, body, .site {
 		right: $gutter;
 		z-index: $z-menu-toggle;
 
-		.toggled & {
+		.menu-on & {
 			position: fixed;
 		}
 
@@ -732,7 +732,7 @@ html, body, .site {
 		}
 
 		/* Make sure the button doesn't hide when menu is open. */
-		.toggled & {
+		.menu-on & {
 			bottom: 0.9rem;
 		}
 
@@ -770,7 +770,7 @@ html, body, .site {
 		}
 
 		/* Show menu */
-		.toggled & {
+		.menu-on & {
 			opacity: 1;
 			transform: scale(1);
 			visibility: visible;
@@ -805,6 +805,11 @@ html, body, .site {
 		/* Launch from top right */
 		transform-origin: right top !important;
 	}
+}
+
+body.menu-on {
+	/* Disable page scrolling when site nav menu is visible */
+	overflow: hidden;
 }
 
 /* Site nav - desktop
