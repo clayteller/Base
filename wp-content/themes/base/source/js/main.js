@@ -48,25 +48,33 @@
 			reversed: true
 		} ),
 
-		toggleMenu = function() {
-			// Hide menu
-			if ( $body.hasClass( 'menu-on' ) ) {
-				$body.removeClass( 'menu-on' );
-				$siteMenuButton.attr( 'aria-expanded', 'false' );
-				$siteMenu.attr( 'aria-expanded', 'false' );
-			// Show menu
-			} else {
-				$body.addClass( 'menu-on' );
-				$siteMenuButton.attr( 'aria-expanded', 'true' );
-				$siteMenu.attr( 'aria-expanded', 'true' );
-			}
+		menuActive = function() {
+			return $body.hasClass( 'menu-on' );
 		},
 
-		animateMenuIcon = function() {
-			if ( tlMenuIcon.reversed() ) {
-				tlMenuIcon.play();
+		closeMenu = function() {
+			$body.removeClass( 'menu-on' );
+			$siteMenuButton.attr( 'aria-expanded', 'false' );
+			$siteMenu.attr( 'aria-expanded', 'false' );
+			// Animate menu icon to original state
+			tlMenuIcon.reverse();
+		},
+
+		openMenu = function() {
+			$body.addClass( 'menu-on' );
+			$siteMenuButton.attr( 'aria-expanded', 'true' );
+			$siteMenu.attr( 'aria-expanded', 'true' );
+			// Animate menu icon into 'x'
+			tlMenuIcon.play();
+		},
+
+		toggleMenu = function() {
+			// Hide menu
+			if ( menuActive() ) {
+				closeMenu();
+			// Show menu
 			} else {
-				tlMenuIcon.reverse();
+				openMenu();
 			}
 		};
 
@@ -99,12 +107,18 @@
 
 	// Toggle menu on and off
 	$siteMenuButton.on( 'click', toggleMenu );
-	$siteMenuButton.on( 'click', animateMenuIcon );
+
+	// ESC key closes menu
+	$( document ).keydown( function( e ) {
+		if ( 27 == e.which && menuActive() ) {
+			closeMenu();
+		}
+	} );
 
 	// Make the clone button click trigger the original button
 	$siteMenuButtonClone.on( 'click', function() {
-			$siteMenuButton.click();
-		} );
+		$siteMenuButton.click();
+	} );
 
 	// Set menu items with submenus to aria-haspopup="true".
 	$siteSubmenu.parent( 'li' ).attr( 'aria-haspopup', 'true' );
