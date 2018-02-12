@@ -6,8 +6,8 @@
  * MIT Licensed.
 **/
 
-@import "_variables.css";
-@import "_mixins.css";
+@import "_variables";
+@import "_mixins";
 
 @media all {
 	/* Previous/next containers */

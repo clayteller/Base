@@ -44,8 +44,8 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 # Contact Form 7
 --------------------------------------------------------------*/
 
-@import "css/_variables.css";
-@import "css/_mixins.css";
+@import "css/_variables";
+@import "css/_mixins";
 
 /*--------------------------------------------------------------
 # Elements
@@ -482,73 +482,23 @@ html, body, .site {
 
 .site {
 	display: grid;
-	grid:
-		"header" auto
-		"main"   1fr
-		"footer" auto
-		/ 1fr;
-}
-
-/* Site header */
-.site-header {
-	grid-area: header;
-}
-
-/* Main content area */
-.site-main {
-	grid-area: main;
-}
-
-/* Aside */
-.site-aside {
-	grid-area: aside;
-}
-
-/* Subscribe form */
-.section-subscribe {
-	grid-area: subscribe;
-}
-
-/* Site footer */
-.site-footer {
-	grid-area: footer;
-	/* Extra padding on bottom for colophon to overlap */
-	padding-bottom: resolve($space-section + 10rem) !important;
-
-	@media (min-width: $tablet) {
-		padding-bottom: resolve($space-section + 5.5rem) !important;
-	}
-}
-
-/* Colophon, overlaps the bottom of the footer */
-.colophon {
-	grid-column: footer-start / span 1;
-   grid-row-start: footer-start;
-	align-self: end;
-	z-index: $z-colophon;
+	grid: auto 1fr / 1fr; /* rows / columns */
 }
 
 /* When an aside is displayed */
 .two-column {
-	.site {
-		grid:
-			"header" auto
-			"main"   1fr
-			"aside"  auto
-			"footer" auto
-			/ 1fr;
-	}
-
 	@media (min-width: $desktop) {
 		.site {
-			grid:
-				"header header header header" auto
-				"main   main   aside  aside"  1fr
-				"footer footer footer footer" auto
-				/ 1fr $grid-main-width $grid-aside-width 1fr;
+			grid-template-columns: 1fr $grid-main-width $grid-aside-width 1fr;
+		}
+
+		.site-header,
+		.section-subscribe {
+			grid-column: 1 / 5;
 		}
 
 		.site-main {
+			grid-column: 1 / 3;
 			justify-self: end;
 
 			.wrap {
@@ -559,50 +509,56 @@ html, body, .site {
 		}
 
 		.site-aside {
+			grid-column: 3 / 5;
+
 			.wrap {
 				padding-left: 30px;
 				padding-right: calc(100% - $grid-aside-width);
 			}
 		}
+	}
+}
 
-		.colophon {
-			grid-column-end: span 4;
+/* Colophon overlaps footer */
+@media (min-width: $tablet) {
+	.site-footer,
+	.colophon {
+		grid-column: 1 / 2;
+	   grid-row: 3;
+
+		/* When the subscribe form is displayed */
+		.has-subscribe & {
+			grid-row: 4;
+		}
+
+		/* When aside AND subscribe form are displayed */
+		.two-column.has-subscribe & {
+			grid-row: 5;
 		}
 	}
-}
 
-/* When the subscribe form is displayed */
-.has-subscribe {
-	.site {
-		grid:
-			"header"    auto
-			"main"      1fr
-			"subscribe" auto
-			"footer"    auto
-			/ 1fr;
+	/* Extra padding on bottom for colophon to overlap */
+	.site-footer {
+		padding-bottom: resolve($space-section + $colophon-height) !important;
+	}
+
+	/* Overlaps the bottom of the footer */
+	.colophon {
+		align-self: end;
+		z-index: $z-colophon;
 	}
 }
 
-/* When an aside AND subscribe form is displayed */
-.two-column.has-subscribe {
-	.site {
-		grid:
-			"header"    auto
-			"main"      1fr
-			"aside"     auto
-			"subscribe" auto
-			"footer"    auto
-			/ 1fr;
-	}
+/* Colophon overlaps footer in large-screen, two-column layout */
+@media (min-width: $desktop) {
+	.site-footer,
+	.colophon {
+		.two-column & {
+			grid-column: 1 / 5;
+		}
 
-	@media (min-width: $desktop) {
-		.site {
-			grid:
-				"header    header    header    header"    auto
-				"main      main      aside     aside"     1fr
-				"subscribe subscribe subscribe subscribe" auto
-				"footer    footer    footer    footer"    auto
-				/ 1fr $grid-main-width $grid-aside-width 1fr;
+		.two-column.has-subscribe & {
+			grid-row: 4;
 		}
 	}
 }
@@ -1022,11 +978,13 @@ html, body, .site {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	display: flex;
-	flex-flow: column;
 	height: 11rem;
-	justify-content: space-around;
 	padding-top: $masthead-height;
+
+	/* Vertical centering */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 
 	.home & {
 		height: 22rem;
@@ -1195,12 +1153,12 @@ html, body, .site {
 	@media (min-width: $phone) {
 		@mixin flexbox row, wrap, center;
 		margin: 0 resolve($space-entry / 2 * -1);
-		text-align: center;
 
 		/* Entry */
 		.hentry {
 			@mixin column-space $space-entry;
 			@mixin column 2, $space-entry;
+			text-align: left;
 		}
 
 		/* 3 entries */
@@ -1208,8 +1166,8 @@ html, body, .site {
 			@mixin column 3, $space-entry;
 		}
 
-		.post-categories {
-			justify-content: center;
+		.type-employee {
+			text-align: center;
 		}
 	}
 
@@ -1309,10 +1267,25 @@ html, body, .site {
 .type-testimonial {
 	flex-direction: column-reverse;
 	justify-content: flex-end;
+	padding-left: 2.5rem;
 
 	.entry-header {
 		margin-bottom: 0;
 		margin-top: $space-entry-child;
+	}
+
+	.entry-content {
+		position: relative;
+
+		&::before {
+			color: hsla(0, 0%, 0%, 0.2);
+			content: "\201C";
+			font-size: 6rem;
+			left: -2.9rem;
+			line-height: 1;
+			position: absolute;
+			top: -0.5rem;
+		}
 	}
 }
 
@@ -1388,14 +1361,9 @@ html, body, .site {
 
 .site-footer {
 	@mixin background-image-overlay $background-footer;
-	@mixin section-space;
+	@mixin section-space 0rem, -$space-section;
 	color: $color-footer;
 	text-align: center;
-
-	/* Footer sections */
-	.wrap > * {
-		margin-bottom: $space-section;
-	}
 
 	a {
 		color: $color-footer-link;
@@ -1409,6 +1377,13 @@ html, body, .site {
 		color: $color-footer;
 		font-size: $font-size-h3;
 		margin-bottom: 0.7em;
+	}
+
+	@media (max-width: $_tablet) {
+		/* Footer sections */
+		.wrap > * {
+			margin-bottom: $space-section;
+		}
 	}
 
 	@media (min-width: $tablet) {
@@ -1430,10 +1405,13 @@ html, body, .site {
 --------------------------------------------------------------*/
 
 .colophon {
-	@mixin section-space;
 	background: $background-colophon;
 	color: $color-footer;
 	text-align: center;
+
+	.wrap {
+		@mixin flexbox column, nowrap, flex-start, center;
+	}
 
 	a {
 		@mixin link $color-footer-link, $color-footer-link-hover;
@@ -1444,6 +1422,8 @@ html, body, .site {
 	}
 
 	@media (max-width: $_tablet) {
+		@mixin section-space;
+
 		.branding {
 			a {
 				justify-content: center;
@@ -1456,8 +1436,12 @@ html, body, .site {
 	}
 
 	@media (min-width: $tablet) {
+		background: color( $background-colophon a(90%) );
+
 		.wrap {
-			@mixin flexbox row, wrap, space-between, center;
+			flex-direction: row;
+			height: $colophon-height;
+			justify-content: space-between;
 
 			> * {
 				width: 32%;

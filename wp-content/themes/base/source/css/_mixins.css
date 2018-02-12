@@ -130,10 +130,10 @@
 	background: transparent;
 
 	@if $type == light {
-		box-shadow: inset 0 0 0 2px color( $color-white a(60%) );
+		box-shadow: inset 0 0 0 2px color( $color-white a(70%) );
 		color: color( $color-white a(90%) );
 	} @else {
-		box-shadow: inset 0 0 0 2px color( $background-button a(80%) );
+		box-shadow: inset 0 0 0 2px color( $background-button a(90%) );
 		color: $background-button;
 		text-shadow: none;
 	}

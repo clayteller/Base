@@ -96,7 +96,7 @@ $bsp-gradient-dark: color( $color-primary hue(-4) );
 $background-section-primary: linear-gradient( 135deg, $bsp-gradient-light 0%, $bsp-gradient-dark 80% );
 
 $background-footer:   linear-gradient( to bottom, hsla(0, 0%, 0%, 0.7) 20%, hsla(0, 0%, 0%, 0.7) 50%, hsla(0, 0%, 0%, 0.7) 80%);
-$background-colophon: color( $color-dark a(90%) );
+$background-colophon: $color-dark;
 
 /*--------------------------------------------------------------
 # Layout
@@ -111,6 +111,7 @@ $masthead-height:  4.2rem;
 $submenu-width:    220px;
 $grid-main-width:  630px;
 $grid-aside-width: 300px;
+$colophon-height:  5rem;
 
 $space-text:    1.5em;
 $space-heading: 0.5em;
