@@ -15,9 +15,6 @@ get_header();
 <main id="site-main" class="site-main">
 
 	<?php
-	// Partner logos
-	get_template_part( 'template-parts/section', 'partners' );
-
 	// Loop through 'flexible content' custom field
 	if ( have_rows( 'section' ) ):
 
@@ -31,6 +28,10 @@ get_header();
 				// Message section
 				case 'message':
 					get_template_part( 'template-parts/section', 'message' );
+			   	break;
+				// Partner logos section
+				case 'partners':
+					get_template_part( 'template-parts/section', 'partners' );
 			   	break;
 				// Subscribe form section
 				case 'subscribe':

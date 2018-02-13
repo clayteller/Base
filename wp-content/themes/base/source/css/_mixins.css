@@ -141,7 +141,7 @@
 	&:hover,
 	&:focus {
 		@if $type == light {
-			background: color( $background-button lightness(+6) );
+			background: color( $color-white a(10%) );
 		} @else {
 			background: $background-button;
 		}

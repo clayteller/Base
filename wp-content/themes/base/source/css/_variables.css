@@ -37,13 +37,13 @@ $line-height-heading: 1.3;
 # Color
 --------------------------------------------------------------*/
 
-$color-primary:   hsl(195, 80%, 45%);
-$color-secondary: hsl(25, 80%, 63%);
+$color-primary:   hsl(194, 83%, 44%);
+$color-secondary: hsl(227, 17%, 56%);
 $color-white:     hsl(0, 0%, 100%);
-$color-neutral:   hsl(60, 3%, 95%);
-$color-dark:      hsl(210, 5%, 21%);
+$color-neutral:   hsl(208, 3%, 95%);
+$color-dark:      hsl(208, 18%, 28%);
 
-$color-text:     hsl(0, 0%, 20%);
+$color-text:     $color-dark;
 $color-strong:   color( $color-text lightness(+5) );
 $color-heading:  $color-text;
 $color-meta:     color( $color-text lightness(+28) );
@@ -84,19 +84,21 @@ $background-button-overlay-hover: $color-white;
 /* Backgrounds
 ----------------------------------*/
 
-$bgh-gradient-light: color( $color-primary lightness(10) a(20%) );
-$bgh-gradient-dark:  color( $color-primary lightness(10) a(50%) );
-$background-header:  linear-gradient( to bottom, $bgh-gradient-light 30%, $bgh-gradient-dark 60%, $bgh-gradient-dark 72%, $bgh-gradient-light 100%);
+$bgh-gradient-top: color( $color-secondary lightness(-25) a(50%) );
+$bgh-gradient-bottom: color( $color-primary lightness(-30) a(70%) );
+$background-header:  linear-gradient( to bottom, $bgh-gradient-top 30%, $bgh-gradient-bottom 100%);
 
 $background-section:      $color-neutral;
 $background-section-dark: $color-dark;
 
-$bsp-gradient-light: color( $color-primary hue(+4) );
-$bsp-gradient-dark: color( $color-primary hue(-4) );
-$background-section-primary: linear-gradient( 135deg, $bsp-gradient-light 0%, $bsp-gradient-dark 80% );
+$bgsp-gradient-top: color( $color-secondary hue(+5) saturation(+18) lightness(-7) );
+$bgsp-gradient-bottom: color( $bgsp-gradient-top hue(-25) saturation(+13) );
+$background-section-color: linear-gradient( 140deg, $bgsp-gradient-top 0%, $bgsp-gradient-bottom 70% );
 
-$background-footer:   linear-gradient( to bottom, hsla(0, 0%, 0%, 0.7) 20%, hsla(0, 0%, 0%, 0.7) 50%, hsla(0, 0%, 0%, 0.7) 80%);
-$background-colophon: $color-dark;
+$bgf-gradient-top: hsla(234, 25%, 25%, 0.5);
+$bgf-gradient-bottom:  color( $color-primary lightness(-40) a(70%) );
+$background-footer:   linear-gradient( to bottom, $bgf-gradient-top 20%, $bgf-gradient-bottom 80%);
+$background-colophon: color( $color-dark lightness(-8) );
 
 /*--------------------------------------------------------------
 # Layout

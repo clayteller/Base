@@ -9,11 +9,12 @@
  */
 
 $show_subscribe = get_field( 'show_subscribe', 'option' );
+
+// Bail if 'Show subscribe form?' is 'No'
+if ( ! $show_subscribe ) return;
+
 $title = get_field( 'section_title', 'option' );
 $text = get_field( 'section_text', 'option' );
-
-// Bail if 'Show Subscribe Form?' is 'No'
-if ( ! $show_subscribe ) return;
 ?>
 
 <section class="section section-cta section-subscribe">
