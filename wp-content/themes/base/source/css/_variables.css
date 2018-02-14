@@ -38,7 +38,7 @@ $line-height-heading: 1.3;
 --------------------------------------------------------------*/
 
 $color-primary:   hsl(194, 83%, 44%);
-$color-secondary: hsl(227, 17%, 56%);
+$color-secondary: hsl(227, 20%, 56%);
 $color-white:     hsl(0, 0%, 100%);
 $color-neutral:   hsl(208, 3%, 95%);
 $color-dark:      hsl(208, 18%, 28%);
