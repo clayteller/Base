@@ -1256,7 +1256,7 @@ body.menu-on {
 	}
 
 	a {
-		@mixin button $color-secondary, $color-secondary, $color-secondary;
+		@mixin button color( $color-meta lightness(+10) ), $background-button, $background-button;
 		font-size: 0.75em;
 		padding: 0.6em 0.6em 0.5em;
 	}
@@ -1277,7 +1277,7 @@ body.menu-on {
 		border-radius: $border-radius; */
 
 		svg {
-			fill: color( $color-primary hue(+12) saturation(-40) lightness(+13) );
+			fill: color( $color-primary hue(+10) saturation(-24) lightness(+10) );
 			margin: 10% auto;
 			max-height: 146px;
 			max-width: 60%;
@@ -1520,11 +1520,11 @@ body.menu-on {
 
 		> :nth-child(1),
 		> :nth-child(3) {
-			fill: color( $color-primary lightness(+20) );
+			fill: color( $color-primary lightness(+21) );
 		}
 
 		> :nth-child(2) {
-			fill: color( $color-primary lightness(+40) );
+			fill: color( $color-primary lightness(+32) );
 		}
 	}
 
