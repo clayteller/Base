@@ -1266,6 +1266,34 @@ body.menu-on {
 	margin-top: -0.8em;
 }
 
+/* Employee entry
+----------------------------------*/
+
+.type-employee {
+	.email,
+	.phone {
+		a {
+			@mixin link-imitate;
+		}
+	}
+
+	.phone + .email {
+		margin-top: -$space-text;
+	}
+
+	.social-links a {
+		@mixin link color( $color-meta lightness(+20) ), $color-meta;
+	}
+
+	@media (min-width: $phone) {
+		figure img {
+			border-radius: $border-radius-circle;
+			margin: 0 auto;
+			width: 90%;
+		}
+	}
+}
+
 /* Service entry
 ----------------------------------*/
 
@@ -1533,23 +1561,6 @@ body.menu-on {
 		font-size: 1.6em;
 		font-weight: $font-weight-heading-light;
 		margin: 0;
-	}
-}
-
-.type-employee {
-	.email,
-	.phone {
-		a {
-			@mixin link-imitate;
-		}
-	}
-
-	.phone + .email {
-		margin-top: -$space-text;
-	}
-
-	.social-links a {
-		@mixin link color( $color-meta lightness(+20) ), $color-meta;
 	}
 }
 
