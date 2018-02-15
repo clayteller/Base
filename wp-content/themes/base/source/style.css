@@ -694,6 +694,8 @@ html, body, .site {
 		z-index: $z-menu-toggle;
 
 		.menu-on & {
+			/* Override :not(.scrolled) color */
+			color: $color-nav !important;
 			position: fixed;
 		}
 
@@ -1618,7 +1620,7 @@ body.menu-on {
 		}
 
 		.menu-toggle {
-			color: $color-white !important;
+			color: $color-white;
 		}
 
 		.site-nav a {
@@ -1628,9 +1630,11 @@ body.menu-on {
 			}
 		}
 
-		/* Top-level sub-menu */
-		.site-menu > .menu-item > .sub-menu {
-			background: color( $color-dark a(60%) );
+		@media (min-width: $tablet) {
+			/* Top-level sub-menu */
+			.site-menu > .menu-item > .sub-menu {
+				background: color( $color-dark a(60%) );
+			}
 		}
 	}
 
