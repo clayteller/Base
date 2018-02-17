@@ -56,6 +56,22 @@ function base_get_min_file( $file ) {
 }
 
 /**
+ * Reads SVG file and returns it as a string.
+ *
+ * @param string $path Path to svg file (from theme root directory).
+ * @return string SVG code.
+ */
+function base_inline_svg( $path ) {
+	// Use @ to suppress warning if no file exists
+	$file = @file_get_contents( THEME_PATH . $path  );
+
+	// Bail if there's no file
+	if ( ! $file ) return;
+
+	return $file;
+}
+
+/**
  * Insert a string into another string at a given point.
  *
  * @param string $original_string String we want to alter.

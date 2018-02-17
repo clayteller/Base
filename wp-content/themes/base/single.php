@@ -18,8 +18,8 @@ get_header();
 			get_template_part( 'template-parts/content', get_post_type() );
 
 			the_post_navigation( array(
-				'prev_text' => base_svg_icon( 'chevron' ) . '%title',
-            'next_text' => '%title' . base_svg_icon( 'chevron' )
+				'prev_text' => base_inline_svg( '/icons/chevron.svg' ) . '%title',
+            'next_text' => '%title' . base_inline_svg( '/icons/chevron.svg' )
 			) );
 
 			// If comments are open or we have at least one comment, load up the comment template.

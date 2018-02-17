@@ -30,7 +30,6 @@ $font-weight-bold:          700;
 $font-weight-heading:       700;
 
 $line-height:         1.65;
-$line-height-title:   1.2;
 $line-height-heading: 1.3;
 
 /*--------------------------------------------------------------
@@ -159,8 +158,10 @@ $transition:    all 0.3s;
 # Z-index
 --------------------------------------------------------------*/
 
-$z-menu-toggle:        100;
-$z-masthead:           100;
-$z-colophon:           30;
-$z-background-overlay: 10;
-$z-site-menu:          1;
+$z-lightbox-close:     7;
+$z-lightbox:           6;
+$z-menu-toggle:        5;
+$z-site-menu:          4;
+$z-masthead:           3;
+$z-colophon:           2;
+$z-background-overlay: 1;

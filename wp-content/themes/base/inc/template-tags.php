@@ -244,10 +244,10 @@ function base_entry_meta() {
 		esc_html( get_the_modified_date() )
 	);
 
-	$posted_on = base_svg_icon( 'clock' ) . $time_string;
+	$posted_on = base_inline_svg( '/icons/clock.svg' ) . $time_string;
 
 	$byline = sprintf(
-		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . base_svg_icon( 'person' ) . esc_html( get_the_author() ) . '</a></span>'
+		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . base_inline_svg( '/icons/person.svg' ) . esc_html( get_the_author() ) . '</a></span>'
 	);
 
 	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
@@ -265,7 +265,7 @@ function base_entry_categories() {
  */
 function base_entry_tags() {
 	// If single, add tag icon.
-	$icon = ( is_single() ) ? base_svg_icon( 'tag' ) : '';
+	$icon = ( is_single() ) ? base_inline_svg( '/icons/tag.svg' ) : '';
 
 	echo get_the_tag_list('<ul class="post-tags">' . $icon . '<li>','</li><li>','</li></ul>');
 }
@@ -315,7 +315,7 @@ function base_post_thumbnail() {
  */
 function base_email( $before = '', $after = '', $post_id = null, $icon = true, $echo = true ) {
  	$email = get_field( 'email', $post_id );
-	$icon = ( $icon ) ? base_svg_icon( 'mail' ) : null;
+	$icon = ( $icon ) ? base_inline_svg( '/icons/mail.svg' ) : null;
 
  	// Bail if there's no email
  	if ( ! $email ) return;
@@ -355,7 +355,7 @@ function base_email( $before = '', $after = '', $post_id = null, $icon = true, $
  */
 function base_phone( $before = '', $after = '', $post_id = null, $icon = true, $echo = true ) {
  	$phone = get_field( 'phone', $post_id );
-	$icon = ( $icon ) ? base_svg_icon( 'phone' ) : null;
+	$icon = ( $icon ) ? base_inline_svg( '/icons/phone.svg' ) : null;
 
  	// Bail if there's no phone
  	if ( ! $phone ) return;
@@ -392,7 +392,7 @@ function base_phone( $before = '', $after = '', $post_id = null, $icon = true, $
  */
 function base_address( $icon = true, $echo = true ) {
  	$address = get_field( 'address', 'option' );
-	$icon = ( $icon ) ? base_svg_icon( 'pin' ) : null;
+	$icon = ( $icon ) ? base_inline_svg( '/icons/pin.svg' ) : null;
 
  	// Bail if there's no address
  	if ( ! $address ) return;

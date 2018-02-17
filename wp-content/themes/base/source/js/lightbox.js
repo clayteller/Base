@@ -16,7 +16,7 @@
 	var
 		$gallery = $( ".gallery" ),
 		chevronIcon = baseTheme.iconChevron,
-		loadingGraphic = '<img class="loading"  alt="Loading…"src="' + baseTheme.url + '/images/loading.svg" />';
+		loadingGraphic = baseTheme.loadingGraphic;
 
 	// Initialize featherlight gallery
 	$gallery.find( "a" ).featherlightGallery( {

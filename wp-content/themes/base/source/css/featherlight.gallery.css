@@ -17,7 +17,7 @@
 		top: 0;
 		right: 0;
 		bottom: 0;
-		left: 84%;
+		left: 86%;
 		cursor: pointer;
 		/* preventing text selection */
 		user-select: none;
@@ -27,7 +27,7 @@
 
 	.featherlight-previous {
 		left: 0;
-		right: 84%;
+		right: 86%;
 	}
 
 	/* Previous/next inner container */
@@ -42,7 +42,7 @@
 
 		/* position: center */
 		position: absolute;
-		left: 60%;
+		left: 65%;
 		top: 50%;
 		transform: translate(-50%, -50%);
 
@@ -51,29 +51,31 @@
 	}
 
 	.featherlight-previous span {
-		left: 40%;
+		left: 35%;
+	}
+
+	.featherlight-next .icon-chevron,
+	.featherlight-previous .icon-chevron {
+		filter: drop-shadow(0 0 2px #222);
+		height: 1.2em;
+		stroke-width: 2px;
+		width: 1.2em;
+		transform: rotate(.75turn);
 	}
 
 	.featherlight-previous .icon-chevron {
-		filter: drop-shadow(0 0 2px #222);
 		transform: rotate(.25turn);
-	}
-
-	.featherlight-next .icon-chevron {
-		transform: rotate(.75turn);
 	}
 
 	.featherlight-next:hover span,
 	.featherlight-previous:hover span {
-		left: 55%;
+		left: 60%;
 		opacity: 1;
 		visibility: visible;
 	}
 
 	.featherlight-previous:hover span {
-		left: 45%;
-		opacity: 1;
-		visibility: visible;
+		left: 40%;
 	}
 
 	.featherlight-swipe-aware .featherlight-next,

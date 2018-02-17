@@ -22,7 +22,7 @@
 		/* dimensions: spanning the background from edge to edge */
 		position: fixed;
 		top: 0; right: 0; bottom: 0; left: 0;
-		z-index: 2147483647; /* z-index needs to be >= elements on the site. */
+		z-index: $z-lightbox; /* z-index needs to be >= elements on the site. */
 
 		/* position: centering content */
 		text-align: center;
@@ -68,7 +68,7 @@
 
 		/* styling */
 		background: #fff;
-		box-shadow: 0 0 0 3px hsla(0, 0%, 100%, 1);
+		box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.6);
 
 		/* reset white-space wrapping */
 		white-space: normal;
@@ -93,25 +93,26 @@
 		position: absolute;
 		top: 7px;
 		right: 6px;
-		z-index: 9999;
+		z-index: $z-lightbox-close;
 
 		/* dimensions */
-		line-height: 44px;
-		width: 44px;
+		line-height: 2.4rem;
+		width: 2.4rem;
 
 		/* styling */
 		background: hsla(0, 0%, 100%, 0);
 		border: none;
 		border-radius: 50%;
 		color: hsla(0, 0%, 100%, 0.8);
-		font-size: 1.3rem;
+		font-size: 1.8rem;
+		font-weight: $font-weight;
 		padding: 0;
 		text-align: center;
 		text-shadow: 0 0 1px #444;
 
 		&:hover,
 		&:focus {
-			background: hsla(0, 0%, 100%, 0.1);
+			background: hsla(0, 0%, 100%, 0);
 			color: hsla(0, 0%, 100%, 0.9);
 		}
 	}
@@ -123,7 +124,7 @@
 	}
 
 	.featherlight .featherlight-image {
-		/* Clay: Now that we're using javascript (portfolio.js) to trigger close by clicking image, use "zoom-out" cursor on image */
+		/* Since we set featherlight to close when clicking image, use "zoom-out" cursor on image */
 		cursor: zoom-out;
 		height: auto !important;
 		width: auto !important;
@@ -141,6 +142,12 @@
 	.featherlight iframe {
 		/* styling */
 		border: none;
+	}
+
+	/* Remove lightbox window styling while loading */
+	.featherlight-loading .featherlight-content {
+		background: transparent;
+		box-shadow: none;
 	}
 
 	.featherlight * { /* See https://github.com/noelboss/featherlight/issues/42 */
@@ -165,8 +172,8 @@
 	/* 'Close' button */
 	.featherlight-close-icon {
 		position: fixed;
-		top: 2%;
-		right: 2%;
+		top: 0.9rem;
+		right: 0.8rem;
 	}
 }
 

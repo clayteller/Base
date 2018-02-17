@@ -482,7 +482,7 @@ html, body, .site {
 
 .site {
 	display: grid;
-	grid: auto 1fr / 1fr; /* rows / columns */
+	grid: auto 1fr / 1fr; /* row heights / column widths */
 }
 
 /* When an aside is displayed */
@@ -1024,6 +1024,11 @@ body.menu-on {
 	@mixin section-space;
 }
 
+.section-header,
+.section-button {
+	text-align: center;
+}
+
 .section-title {
 	@mixin heading h1;
 	margin-bottom: $space-section;
@@ -1090,6 +1095,7 @@ body.menu-on {
 .section-partners {
 	@mixin section-space -0.3rem, -1rem;
 	background: $background-section-dark;
+	text-align: center;
 
 	.section-title {
 		color: color( $color-text lightness(+20) );
@@ -1097,7 +1103,6 @@ body.menu-on {
 
 	.logos {
 		@mixin flexbox row, wrap, center, center;
-		text-align: center;
 
 		/* Logo image */
 		> * {
@@ -1166,16 +1171,11 @@ body.menu-on {
 		.hentry {
 			@mixin column-space $space-entry;
 			@mixin column 2, $space-entry;
-			text-align: left;
 		}
 
 		/* 3 entries */
 		&.count-3 .hentry {
 			@mixin column 3, $space-entry;
-		}
-
-		.type-employee {
-			text-align: center;
 		}
 	}
 
@@ -1272,6 +1272,12 @@ body.menu-on {
 ----------------------------------*/
 
 .type-employee {
+	figure img {
+		border-radius: $border-radius-circle;
+		margin: 0 auto;
+		max-width: 280px;
+	}
+
 	.email,
 	.phone {
 		a {
@@ -1286,14 +1292,10 @@ body.menu-on {
 	.social-links a {
 		@mixin link color( $color-meta lightness(+20) ), $color-meta;
 	}
+}
 
-	@media (min-width: $phone) {
-		figure img {
-			border-radius: $border-radius-circle;
-			margin: 0 auto;
-			width: 90%;
-		}
-	}
+.entries .type-employee {
+	text-align: center;
 }
 
 /* Service entry
@@ -1302,16 +1304,43 @@ body.menu-on {
 .type-service {
 	/* Featured image */
 	figure {
-		/* background: $color-white;
-		box-shadow: inset 0 0 0 3px color( $color-primary a(50%) );
-		border-radius: $border-radius; */
-
 		svg {
-			fill: color( $color-primary hue(+10) saturation(-24) lightness(+10) );
-			margin: 10% auto;
-			max-height: 146px;
-			max-width: 60%;
+			fill: color( $color-primary hue(+10) saturation(-24) lightness(+4) );
+			max-width: 300px;
 		}
+	}
+}
+
+.entries .type-service {
+	display: grid;
+	grid: auto auto / repeat(4, 1fr); /* row heights / column widths */
+	margin-top: 0.6rem;
+
+	/* Featured image */
+	figure {
+		grid-column: 1 / 2;
+		grid-row: 1 / 3;
+		margin-bottom: 0;
+	}
+
+	.entry-header {
+		margin-bottom: $space-heading;
+	}
+
+	.entry-header,
+	.entry-content {
+		grid-column: 2 / 5;
+		padding-left: 2rem;
+	}
+
+	@media (max-width: $_tablet) {
+		width: 100%;
+	}
+}
+
+.entries.count-4 .type-service {
+	@media (min-width: $desktop) {
+		@mixin column 2, $space-entry;
 	}
 }
 
@@ -1319,7 +1348,7 @@ body.menu-on {
 ----------------------------------*/
 
 /* Move entry-header underneath entry-content */
-.type-testimonial {
+.entries .type-testimonial {
 	flex-direction: column-reverse;
 	justify-content: flex-end;
 	padding-left: 2.5rem;
@@ -1602,6 +1631,13 @@ body.menu-on {
 	}
 }
 
+/* Animated loading svg */
+.loading {
+	fill: $color-primary;
+	height: 80px;
+	width: 80px;
+}
+
 /*--------------------------------------------------------------
 # Home
 --------------------------------------------------------------*/
@@ -1636,10 +1672,6 @@ body.menu-on {
 				background: color( $color-dark a(60%) );
 			}
 		}
-	}
-
-	.section {
-		text-align: center;
 	}
 
 	.section-services {
@@ -1864,44 +1896,46 @@ object {
 	text-align: center;
 	width: 100%;
 
-	.gallery-columns-2 & {
-		@mixin column 2;
-	}
-
-	.gallery-columns-3 & {
-		@mixin column 3;
-	}
-
-	.gallery-columns-4 & {
-		@mixin column 4;
-	}
-
-	.gallery-columns-5 & {
-		@mixin column 5;
-	}
-
-	.gallery-columns-6 & {
-		@mixin column 6;
-	}
-
-	.gallery-columns-7 & {
-		@mixin column 7;
-	}
-
-	.gallery-columns-8 & {
-		@mixin column 8;
-	}
-
-	.gallery-columns-9 & {
-		@mixin column 9;
-	}
-
 	a {
 		cursor: zoom-in;
 	}
 
 	.size-full {
 		margin: 0;
+	}
+
+	@media (min-width: $phone) {
+		.gallery-columns-2 & {
+			@mixin column 2;
+		}
+
+		.gallery-columns-3 & {
+			@mixin column 3;
+		}
+
+		.gallery-columns-4 & {
+			@mixin column 4;
+		}
+
+		.gallery-columns-5 & {
+			@mixin column 5;
+		}
+
+		.gallery-columns-6 & {
+			@mixin column 6;
+		}
+
+		.gallery-columns-7 & {
+			@mixin column 7;
+		}
+
+		.gallery-columns-8 & {
+			@mixin column 8;
+		}
+
+		.gallery-columns-9 & {
+			@mixin column 9;
+		}
 	}
 }
 

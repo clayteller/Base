@@ -133,22 +133,6 @@ function base_get_background_image_css( $css_class, $field_name, $field_name_pos
 }
 
 /**
- * Reads SVG icon file and returns it as a string.
- *
- * @param string $name Name of icon file.
- * @return string SVG code.
- */
-function base_svg_icon( $name ) {
-	// Use @ to suppress warning if no file exists
-	$file = @file_get_contents( THEME_PATH . '/icons/' . $name . '.svg' );
-
-	// Bail if there's no file
-	if ( ! $file ) return;
-
-	return $file;
-}
-
-/**
  * Add a 'Read more' link to the excerpt.
  */
 function base_excerpt( $excerpt ) {
@@ -176,13 +160,13 @@ add_filter( 'excerpt_more', 'base_excerpt_more' );
 * Add a category icon to the category list.
 *
 * @uses base_add_string()
-* @uses base_svg_icon()
+* @uses base_inline_svg()
 */
 function base_add_category_icon( $category_list ) {
    // If not single, don't add category icon.
    if ( ! is_single() ) return $category_list;
 
-   return base_add_string( $category_list, base_svg_icon( 'folder' ), '<li' );
+   return base_add_string( $category_list, base_inline_svg( '/icons/folder.svg' ), '<li' );
 }
 add_filter( 'the_category', 'base_add_category_icon' );
 

@@ -256,7 +256,6 @@
 	font-size: $font-size-h1;
 	font-weight: $font-weight-heading;
 	margin-bottom: 0;
-	line-height: $line-height-title;
 	text-shadow: $text-shadow;
 }
 

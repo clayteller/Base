@@ -179,15 +179,15 @@ function base_scripts() {
 	wp_enqueue_script( 'base-main', THEME_URL . $file, array( 'jquery', 'base-gsap' ), false, true );
 
 	// lightbox.js (load on single post pages)
-	if ( is_singular( 'post' ) ) {
+	if ( is_singular()  ) {
 		// lightbox.js
 		$file = base_get_min_file( '/js/lightbox.min.js' );
 		wp_enqueue_script( 'base-lightbox', THEME_URL . $file, array( 'jquery', 'base-featherlight', 'base-featherlight-gallery' ), false, true );
 
 		// Pass svg icon html to lightbox.js
 		wp_localize_script( 'base-lightbox', 'baseTheme', array(
-			'url' => THEME_URL,
-			'iconChevron' => base_svg_icon( 'chevron' )
+			'iconChevron'    => base_inline_svg( '/icons/chevron.svg' ),
+			'loadingGraphic' => base_inline_svg( '/images/loading.svg' )
 		) );
 
 		// Featherlight css

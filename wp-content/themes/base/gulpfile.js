@@ -67,7 +67,7 @@ gulp.task( 'css', function() {
 		.pipe( map.write( '.' ) )
 		.pipe( gulp.dest( cssDest ) )
 		.pipe( ignore.exclude( '*.map' ) )
-		.pipe( cssnano() )
+		.pipe( cssnano( { zindex: false } ) )
 		.pipe( rename( { suffix: '.min' } ) )
 		.pipe( gulp.dest( cssDest ) )
 		.pipe( browsersync.stream() );
@@ -76,7 +76,7 @@ gulp.task( 'css', function() {
 // Images
 gulp.task( 'images', function () {
 	// SVG is not working correctly so just optimize JPG and PNG
-	gulp.src( imgSource + '.{jpg,png}' )
+	gulp.src( imgSource + '.{jpg,jpeg,png}' )
 		.pipe( imagemin( {
 			progressive: true,
 			// svgoPlugins: [{removeViewBox: false}],

@@ -34,8 +34,8 @@ get_header();
 			<?php
 
 			the_posts_pagination( array(
-				'prev_text' => base_svg_icon( 'chevron' ) . __( 'Previous', 'base' ),
-            'next_text' => __( 'Next', 'base' ) . base_svg_icon( 'chevron' )
+				'prev_text' => base_inline_svg( '/icons/chevron.svg' ) . __( 'Previous', 'base' ),
+            'next_text' => __( 'Next', 'base' ) . base_inline_svg( '/icons/chevron.svg' )
 			) );
 
 		else :
