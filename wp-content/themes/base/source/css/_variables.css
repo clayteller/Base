@@ -125,8 +125,10 @@ $space-section:         2rem;
 $space-section-desktop: 2.4rem;
 $space-entry:           1.6rem;
 $space-entry-child:     1.2rem;
+$space-gallery:         0.1rem;
 $space-box:             1.3rem;
 $space-border:          2rem;
+$space-icon:            0.4em;
 
 /*--------------------------------------------------------------
 # Media Queries

@@ -419,7 +419,7 @@ textarea {
 [class*="icon-"] {
 	fill: currentColor;
 	height: 0.95em;
-	margin-right: 0.1em;
+	margin-right: $space-icon;
 	vertical-align: -0.15em;
 	width: 0.95em;
 }
@@ -829,8 +829,8 @@ body.menu-on {
 
 		a {
 			line-height: $masthead-height;
-			padding-left: 12px;
-			padding-right: 12px;
+			padding-left: 0.8rem;
+			padding-right: 0.8rem;
 		}
 
 		.home {
@@ -1165,7 +1165,7 @@ body.menu-on {
 	/* Multi-column */
 	@media (min-width: $phone) {
 		@mixin flexbox row, wrap, center;
-		margin: 0 resolve($space-entry / 2 * -1);
+		margin: 0 resolve(-$space-entry / 2);
 
 		/* Entry */
 		.hentry {
@@ -1602,8 +1602,8 @@ body.menu-on {
 
 /* Make space for svg icon */
 .address {
-	padding-left: 1.3rem;
-	text-indent: -1.3rem;
+	padding-left: resolve(1em + $space-icon) ;
+	text-indent: resolve(-1em - $space-icon);
 }
 
 .social-links {
@@ -1885,14 +1885,18 @@ object {
 
 /* Galleries
 ----------------------------------*/
+.page-gallery .site-main .wrap {
+	max-width: $max-width-wide;
+}
 
 .gallery {
 	@mixin flexbox row, wrap, center;
 	@mixin section-space -1rem;
-	margin-bottom: $space-entry;
+	margin: 0 resolve(-$space-gallery / 2) $space-entry;
 }
 
 .gallery-item {
+	margin: 0 0 $space-gallery;
 	text-align: center;
 	width: 100%;
 
@@ -1900,14 +1904,13 @@ object {
 		cursor: zoom-in;
 	}
 
-	.size-full {
+	img {
 		margin: 0;
 	}
 
 	@media (min-width: $phone) {
-		.gallery-columns-2 & {
-			@mixin column 2;
-		}
+		@mixin column-space $space-gallery;
+		@mixin column 2, $space-gallery;
 
 		.gallery-columns-3 & {
 			@mixin column 3;
@@ -1954,6 +1957,14 @@ object {
 /* Add space to the top of the form if it follows a text */
 p + .wpcf7 {
 	margin-top: $space-section;
+}
+
+/* Loading graphic that appears when form is submitted */
+div.wpcf7 .ajax-loader {
+	background-image: url(images/loading.svg);
+	height: 2rem;
+	margin-left: 1rem;
+	width: 2rem;
 }
 
 /* Invalid form field */

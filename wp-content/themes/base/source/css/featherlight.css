@@ -90,9 +90,9 @@
 	/* 'Close' button */
 	.featherlight-close-icon {
 		/* position */
-		position: absolute;
-		top: 7px;
-		right: 6px;
+		position: fixed;
+		top: 0.9rem;
+		right: 0.8rem;
 		z-index: $z-lightbox-close;
 
 		/* dimensions */
@@ -158,22 +158,12 @@
 }
 
 /* Small screens */
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: $_tablet) {
 	.featherlight-content {
 		/* dimensions: maximize lightbox width for small screens */
 		margin-left: 3px;
 		margin-right: 3px;
 		max-height: 98%;
-	}
-}
-
-/* Large screens */
-@media only screen and (min-width: 768px) {
-	/* 'Close' button */
-	.featherlight-close-icon {
-		position: fixed;
-		top: 0.9rem;
-		right: 0.8rem;
 	}
 }
 
