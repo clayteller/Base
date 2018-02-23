@@ -686,10 +686,13 @@ html, body, .site {
 @media (max-width: $_tablet) {
 	.menu-toggle {
 		@mixin link $color-button-overlay, $color-button-overlay;
+		@mixin nav-masthead;
 		background: none !important;
+		padding-bottom: 0;
+		padding-top: 0;
 		position: absolute;
 		text-shadow: none;
-		top: resolve($masthead-height * 0.15);
+		top: 0;
 		right: $gutter;
 		z-index: $z-menu-toggle;
 
@@ -828,9 +831,7 @@ body.menu-on {
 		flex-direction: row;
 
 		a {
-			line-height: $masthead-height;
-			padding-left: 0.8rem;
-			padding-right: 0.8rem;
+			@mixin nav-masthead;
 		}
 
 		.home {
@@ -1952,11 +1953,35 @@ p + .wpcf7 {
 }
 
 /* Loading graphic that appears when form is submitted */
-div.wpcf7 .ajax-loader {
-	background-image: url(images/loading.svg);
-	height: 2rem;
-	margin-left: 1rem;
-	width: 2rem;
+div.wpcf7 .form-button {
+	position: relative;
+
+	.ajax-loader {
+		background-image: url(images/loading.svg);
+		height: 2rem;
+		position: absolute;
+		width: 2rem;
+	}
+
+	@media (max-width: $_phone) {
+		padding-bottom: 1rem;
+
+		.ajax-loader {
+			bottom: -1.8rem;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	}
+
+	@media (min-width: $phone) {
+		display: inline-block;
+
+		.ajax-loader {
+			top: 50%;
+			right: -2.6rem;
+			transform: translateY(-50%);
+		}
+	}
 }
 
 /* Invalid form field */

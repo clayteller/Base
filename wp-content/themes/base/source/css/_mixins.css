@@ -12,6 +12,7 @@
 # Heading
 # Image replacement
 # Link
+# Nav
 # Screen reader text
 # Section background
 # Section vertical spacing
@@ -298,6 +299,16 @@
 	&:active {
 		color: $color-link;
 	}
+}
+
+/*--------------------------------------------------------------
+# Nav
+--------------------------------------------------------------*/
+
+@define-mixin nav-masthead {
+	line-height: $masthead-height;
+	padding-left: 0.8rem;
+	padding-right: 0.8rem;
 }
 
 /*--------------------------------------------------------------
