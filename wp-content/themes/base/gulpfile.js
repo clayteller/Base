@@ -125,6 +125,7 @@ gulp.task( 'reload', function() {
 		'**/*.php'
 	];
 	browsersync.init( files, {
+		notify: false,
 		proxy: 'http://base.dev/'
 	} );
 } );

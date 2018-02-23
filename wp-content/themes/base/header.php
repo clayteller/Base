@@ -17,13 +17,14 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<?php get_template_part( 'template-parts/favicons' ); ?>
 	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
 <div id="site" class="site">
 	<a class="skip-link screen-reader-text" href="#site-main"><?php esc_html_e( 'Skip to content', 'base' ); ?></a>
-	<?php do_action ( 'base_before_masthead' ); ?>
+	<?php do_action( 'base_before_masthead' ); ?>
 
 	<section id="masthead" class="masthead" role="banner">
 		<div class="wrap">
@@ -51,7 +52,7 @@
 		</div><!-- .wrap -->
 	</section><!-- #masthead -->
 
-	<?php do_action ( 'base_before_header' ); ?>
+	<?php do_action( 'base_before_header' ); ?>
 	<header id="site-header" class="site-header">
 		<div class="wrap">
 			<?php base_page_title( '<h1 class="page-title">', '</h1>' ); ?>
@@ -64,4 +65,4 @@
 		</div><!-- .wrap -->
 	</header><!-- #site-header -->
 
-	<?php do_action ( 'base_before_main' ); ?>
+	<?php do_action( 'base_before_main' ); ?>

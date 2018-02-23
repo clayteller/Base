@@ -14,7 +14,7 @@
 get_template_part( 'template-parts/section', 'subscribe' );
 ?>
 
-	<?php do_action ( 'base_before_footer' ); ?>
+	<?php do_action( 'base_before_footer' ); ?>
 	<?php if ( is_active_sidebar( 'footer-left' ) || is_active_sidebar( 'footer-right' ) ) : ?>
 		<footer id="site-footer" class="site-footer" role="contentinfo">
 			<div class="wrap">

@@ -51,7 +51,7 @@ $color-subtitle: color( $color-text lightness(+10) );
 $color-border:   hsl(0, 0%, 88%);
 $color-footer:   color( $color-white a(80%) );
 
-$color-error: hsl(343, 100%, 38%);
+$color-error: hsl(355, 87%, 55%);
 
 /* Links
 ----------------------------------*/
@@ -64,7 +64,7 @@ $color-nav-active:        $color-nav-hover;
 $color-meta-link:         $color-meta;
 $color-meta-link-hover:   $color-link;
 $color-footer-link:       color( $color-footer a(+10%) );
-$color-footer-link-hover: color( $color-footer-link a(+10%) );
+$color-footer-link-hover: color( $color-footer-link a(+20%) );
 
 /* Buttons
 ----------------------------------*/
