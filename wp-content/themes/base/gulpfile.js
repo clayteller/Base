@@ -98,8 +98,10 @@ gulp.task( 'icons', function () {
 		.pipe(imagemin([
 			imagemin.svgo({
 				plugins: [
-					{removeDimensions: true},
-					{removeViewBox:    false}
+					{convertPathData:    false},
+					{convertShapeToPath: false},
+					{removeDimensions:   true},
+					{removeViewBox:      false}
 				]
 			})
 		]))
