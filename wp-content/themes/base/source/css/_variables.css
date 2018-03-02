@@ -53,6 +53,11 @@ $color-footer:   color( $color-white a(80%) );
 
 $color-error: hsl(355, 87%, 55%);
 
+$color-facebook:   #3b5999;
+$color-twitter:    #55acee;
+$color-linkedin:   #0077B5;
+$color-googleplus: #dd4b39;
+
 /* Links
 ----------------------------------*/
 
@@ -70,8 +75,8 @@ $color-footer-link-hover: color( $color-footer-link a(+20%) );
 ----------------------------------*/
 
 $background-button:        $color-primary;
-$background-button-hover:  color( $background-button saturation(-5) lightness(+5) );
-$background-button-active: color( $background-button saturation(-5) lightness(+5) );
+$background-button-hover:  color( $background-button hue(+2) saturation(+7) lightness(+7) );
+$background-button-active: color( $background-button-hover lightness(+5) );
 
 $background-button-plain:       hsl(180, 4%, 43%);
 $background-button-plain-hover: color( $background-button-plain lightness(+4) );
@@ -83,20 +88,26 @@ $background-button-overlay-hover: $color-white;
 /* Backgrounds
 ----------------------------------*/
 
-$bgh-gradient-top: color( $color-secondary lightness(-25) a(50%) );
-$bgh-gradient-bottom: color( $color-primary lightness(-30) a(70%) );
-$background-header:  linear-gradient( to bottom, $bgh-gradient-top 30%, $bgh-gradient-bottom 100%);
+$background-masthead: color( $color-white a(92%) );
+
+$bgh-top:    color( $color-secondary lightness(-25) a(50%) );
+$bgh-bottom: color( $color-primary lightness(-30) a(70%) );
+$background-header: linear-gradient( to bottom, $bgh-top 30%, $bgh-bottom 100%);
 
 $background-section:      $color-neutral;
-$background-section-dark: $color-dark;
 
-$bgsp-gradient-top: color( $color-secondary hue(+5) saturation(+18) lightness(-7) );
-$bgsp-gradient-bottom: color( $bgsp-gradient-top hue(-25) saturation(+13) );
-$background-section-color: linear-gradient( 140deg, $bgsp-gradient-top 0%, $bgsp-gradient-bottom 70% );
+$bgsd-top:    color( $color-dark lightness(-4) );
+$bgsd-bottom: color( $color-dark lightness(+0) );
+$background-section-dark: linear-gradient( 160deg, $bgsd-top 20%, $bgsd-bottom 70% );
 
-$bgf-gradient-top: hsla(234, 25%, 25%, 0.5);
-$bgf-gradient-bottom:  color( $color-primary lightness(-40) a(70%) );
-$background-footer:   linear-gradient( to bottom, $bgf-gradient-top 20%, $bgf-gradient-bottom 80%);
+$bgsc-top:    color( $color-secondary hue(+5) saturation(+18) lightness(-7) );
+$bgsc-bottom: color( $bgsc-top hue(-25) saturation(+13) );
+$background-section-color: linear-gradient( 140deg, $bgsc-top 0%, $bgsc-bottom 70% );
+
+$bgf-top:    hsla(234, 25%, 25%, 0.5);
+$bgf-bottom: color( $color-primary lightness(-40) a(70%) );
+$background-footer:   linear-gradient( to bottom, $bgf-top 20%, $bgf-bottom 80%);
+
 $background-colophon: color( $color-dark lightness(-8) );
 
 /*--------------------------------------------------------------
@@ -160,10 +171,11 @@ $transition:    all 0.3s;
 # Z-index
 --------------------------------------------------------------*/
 
-$z-lightbox-close:     7;
-$z-lightbox:           6;
-$z-menu-toggle:        5;
-$z-site-menu:          4;
-$z-masthead:           3;
+$z-lightbox-close:     8;
+$z-lightbox:           7;
+$z-menu-toggle:        6;
+$z-site-menu:          5;
+$z-masthead:           4;
+$z-submenu:            3;
 $z-colophon:           2;
 $z-background-overlay: 1;

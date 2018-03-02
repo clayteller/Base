@@ -148,6 +148,14 @@
 		}
 		color: #fff;
 	}
+
+	&:active {
+		@if $type == light {
+			background: color( $color-white a(15%) );
+		} @else {
+			background: $background-button-hover;
+		}
+	}
 }
 
 @define-mixin button-big {

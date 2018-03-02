@@ -62,15 +62,18 @@ html {
 }
 
 blockquote::before,
+q::before {
+	content: open-quote;
+}
+
 blockquote::after,
-q::before,
 q::after {
-	content: "";
+	content: close-quote;
 }
 
 blockquote,
 q {
-	quotes: "" "";
+	quotes: "“" "”" "‘" "’";
 }
 
 hr {
@@ -604,12 +607,14 @@ html, body, .site {
 --------------------------------------------------------------*/
 
 .masthead {
-	background: color( $color-white a(92%) );
+	background: $background-masthead;
 	box-shadow: 0 3px 8px hsla(0, 0%, 0%, 0.08);
 	position: absolute;
 	top: 0;
+	transition: all ease-out 400ms;
 	width: 100%;
 	z-index: $z-masthead;
+
 	.wrap {
 		@mixin flexbox;
 		height: $masthead-height;
@@ -620,17 +625,44 @@ html, body, .site {
 	}
 }
 
-/* 'Sticky' masthead on desktop */
-@media (pointer: fine) and (hover: hover), (min-width: $tablet) {
-	.site-header {
-		padding-top: $mastehead-height;
+body:not(.scrolled).home {
+	.masthead {
+		background: hsla(0, 0%, 100%, 0);
+		box-shadow: none;
 	}
 
+	.branding .site-title {
+		color: $color-white;
+		text-shadow: $text-shadow;
+	}
+
+	.menu-toggle {
+		color: $color-white;
+	}
+
+	.site-nav a {
+		@media (min-width: $tablet) {
+			color: $color-white;
+			text-shadow: $text-shadow;
+		}
+	}
+
+	@media (min-width: $tablet) {
+		/* Top-level sub-menu */
+		.site-menu > .menu-item > .sub-menu {
+			background: color( $color-dark a(60%) );
+		}
+	}
+}
+
+
+/* 'Sticky' masthead on tablets and desktop devices */
+@media (min-width: $tablet), (pointer: fine) and (hover: hover) {
 	.masthead {
-		position: fixed;
-		transition: all ease-out 400ms;
+		position: absolute;
 
 		.scrolldown & {
+			opacity: 0;
 			top: -5em;
 		}
 	}
@@ -697,7 +729,7 @@ html, body, .site {
 		z-index: $z-menu-toggle;
 
 		.menu-on & {
-			/* Override :not(.scrolled) color */
+			/* Override home page color treatment */
 			color: $color-nav !important;
 			position: fixed;
 		}
@@ -840,7 +872,8 @@ body.menu-on {
 
 		/* Top-level sub-menu */
 		> .menu-item > .sub-menu {
-			background: color( $color-white a(93%) );
+			background: $background-masthead;
+			box-shadow: $box-shadow;
 			left: 0;
 			opacity: 0;
 			padding-bottom: 0.6em;
@@ -881,7 +914,7 @@ body.menu-on {
 	}
 
 	a {
-		@mixin button hsla(0, 0%, 100%, 0.1), hsla(0, 0%, 100%, 0.2);
+		@mixin button hsla(0, 0%, 100%, 0.1), hsla(0, 0%, 100%, 0.2), hsla(0, 0%, 100%, 0.3);
 		font-size: $font-size-nav;
 		padding: 0.6em 0.6em 0.5em;
 	}
@@ -978,8 +1011,8 @@ body.menu-on {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	height: 11rem;
-	padding-top: $masthead-height;
+	padding-bottom: $space-section;
+	padding-top: resolve($masthead-height + $space-section);
 
 	/* Vertical centering */
 	display: flex;
@@ -987,7 +1020,9 @@ body.menu-on {
 	justify-content: center;
 
 	.home & {
-		height: 22rem;
+		min-height: 20rem;
+		padding-bottom: resolve($space-section + 1.8rem);
+		padding-top: resolve($masthead-height + 2.2rem);
 		text-align: center;
 
 		.button {
@@ -1001,7 +1036,7 @@ body.menu-on {
 
 	.home & {
 		font-size: resolve($font-size-h1 + 0.2em);
-		margin-bottom: 0.6em;
+		margin-bottom: 0.7em;
 	}
 
 	.search & {
@@ -1031,6 +1066,7 @@ body.menu-on {
 	& + .subtitle {
 		color: $color-subtitle;
 		font-size: $font-size-subtitle;
+		line-height: $line-height-heading;
 		margin-top: -1.6rem;
 	}
 }
@@ -1111,7 +1147,7 @@ body.menu-on {
 # Entries
 --------------------------------------------------------------*/
 
-/* Entry in section, archive and single pages
+/* Entry
 ----------------------------------*/
 
 .hentry {
@@ -1129,9 +1165,6 @@ body.menu-on {
 	}
 }
 
-/* Entry in section, archive
-----------------------------------*/
-
 .entry-header,
 .entry-content {
 	margin-bottom: $space-entry-child;
@@ -1143,6 +1176,59 @@ body.menu-on {
 	@mixin correct-bottom-space;
 }
 
+/* Entry Meta
+----------------------------------*/
+
+.entry-meta {
+	color: $color-meta;
+	font-size: $font-size-meta;
+	line-height: 1.5;
+	margin: -0.2em 0 $space-heading;
+	text-transform: uppercase;
+
+	> span {
+		display: inline-block;
+		margin: 0.2em 0.4em;
+		white-space: nowrap;
+	}
+
+	a {
+		@mixin link $color-meta-link, $color-meta-link-hover;
+	}
+
+	.facebook {
+		mask: url(icons/facebook.svg) no-repeat 50% 50%/24px;
+	}
+}
+
+/* Entry footer
+----------------------------------*/
+
+.post-categories,
+.post-tags {
+	color: $color-meta;
+	margin: 0 0 resolve($space-text - 0.7em);
+
+	li {
+		display: inline-block;
+		margin: 0.4em 0.15em;
+	}
+
+	a {
+		@mixin button color( $color-meta lightness(+10) ), $background-button, $background-button;
+		font-size: 0.75em;
+		padding: 0.6em 0.6em 0.5em;
+	}
+}
+
+.post-categories + .post-tags {
+	margin-top: -0.8em;
+}
+
+/* Entry in section, archive
+----------------------------------*/
+
+/* Entries container */
 .entries {
 	/* Featured image */
 	figure {
@@ -1209,58 +1295,6 @@ body.menu-on {
 	}
 }
 
-/* Entry Meta
-----------------------------------*/
-
-.entry-meta {
-	color: $color-meta;
-	font-size: $font-size-meta;
-	line-height: 1.5;
-	margin: 0 0 $space-heading;
-	text-transform: uppercase;
-
-	> span {
-		display: inline-block;
-		margin: 0.2em 0.4em;
-		white-space: nowrap;
-	}
-
-	a {
-		@mixin link $color-meta-link, $color-meta-link-hover;
-	}
-
-	.facebook {
-		mask: url(icons/facebook.svg) no-repeat 50% 50%/24px;
-	}
-}
-
-/* Entry content
-----------------------------------*/
-
-/* Entry footer
-----------------------------------*/
-
-.post-categories,
-.post-tags {
-	color: $color-meta;
-	margin: 0 0 resolve($space-text - 0.7em);
-
-	li {
-		display: inline-block;
-		margin: 0.4em 0.15em;
-	}
-
-	a {
-		@mixin button color( $color-meta lightness(+10) ), $background-button, $background-button;
-		font-size: 0.75em;
-		padding: 0.6em 0.6em 0.5em;
-	}
-}
-
-.post-categories + .post-tags {
-	margin-top: -0.8em;
-}
-
 /* Employee entry
 ----------------------------------*/
 
@@ -1285,8 +1319,17 @@ body.menu-on {
 	.social-links a {
 		@mixin link color( $color-meta lightness(+20) ), $color-meta;
 	}
+
+	.twitter a {
+		&:hover,
+		&:focus,
+		&:active {
+			color: $twitter;
+		}
+	}
 }
 
+/* Entry in section, archive */
 .entries .type-employee {
 	text-align: center;
 }
@@ -1296,17 +1339,15 @@ body.menu-on {
 
 .type-service {
 	/* Featured image */
-	figure {
-		svg {
-			fill: color( $color-primary hue(+10) saturation(-24) lightness(+4) );
-			max-width: 300px;
-		}
+	figure svg {
+		fill: color( $color-primary hue(+10) saturation(-24) lightness(+4) );
 	}
 }
 
+/* Entry in section, archive */
 .entries .type-service {
 	display: grid;
-	grid: auto auto / repeat(4, 1fr); /* row heights / column widths */
+	grid: max-content auto / minmax(90px, 1fr) 4fr; /* row heights / column widths */
 	margin-top: 0.6rem;
 
 	/* Featured image */
@@ -1322,8 +1363,8 @@ body.menu-on {
 
 	.entry-header,
 	.entry-content {
-		grid-column: 2 / 5;
-		padding-left: 2rem;
+		grid-column: 2 / 3;
+		margin-left: $space-entry;
 	}
 
 	@media (max-width: $_tablet) {
@@ -1331,37 +1372,84 @@ body.menu-on {
 	}
 }
 
-.entries.count-4 .type-service {
-	@media (min-width: $desktop) {
-		@mixin column 2, $space-entry;
+/* Entry in section, archive */
+.entries.count-4,
+.post-type-archive-service {
+	.type-service {
+		@media (min-width: $desktop) {
+			@mixin column 2, $space-entry;
+		}
 	}
 }
 
 /* Testimonial entry
 ----------------------------------*/
 
-/* Move entry-header underneath entry-content */
+/* Entries container in section, archive */
+.section-testimonials,
+.post-type-archive-testimonial {
+	.entries {
+		display: block;
+		max-width: resolve($max-width + 100px);
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+/* Entry in section, archive */
 .entries .type-testimonial {
-	flex-direction: column-reverse;
-	justify-content: flex-end;
-	padding-left: 2.5rem;
+	display: grid;
+	grid: max-content / 60px; /* row heights / column widths */
+	margin-left: 0;
+	margin-top: 3.2rem;
+	width: auto !important;
+
+	figure {
+		grid-row: 2 / 3;
+		margin-bottom: 0;
+
+		img {
+			border-radius: $border-radius-circle;
+		}
+	}
 
 	.entry-header {
+		grid-column: 2 / 3;
+		grid-row: 2 / 3;
 		margin-bottom: 0;
-		margin-top: $space-entry-child;
+		margin-left: 1rem;
 	}
 
 	.entry-content {
-		position: relative;
+		grid-column: 1 / 3;
+		grid-row: 1 / 2;
+		margin-bottom: $space-entry-child !important;
+	}
 
-		&::before {
-			color: hsla(0, 0%, 0%, 0.2);
-			content: "\201C";
-			font-size: 6rem;
-			left: -2.9rem;
-			line-height: 1;
-			position: absolute;
-			top: -0.5rem;
+	q {
+		display: inline-block;
+		text-indent: -0.4em;
+	}
+
+	@media (min-width: $small-phone) {
+		grid-template-columns: minmax(80px, 1fr) 4.5fr; /* row heights / column widths */
+
+		figure {
+			grid-row: 1 / 3;
+		}
+
+		.entry-header,
+		.entry-content {
+			grid-column: 2 / 3;
+			margin-left: $space-entry;
+		}
+
+		.entry-header {
+			grid-row: 2 / 3;
+		}
+
+		.entry-content {
+			grid-row: 1 / 2;
 		}
 	}
 }
@@ -1611,16 +1699,16 @@ body.menu-on {
 		mask: url(icons/facebook.svg) no-repeat 50% 50%/24px;
 	}
 
-	.twitter .icon {
-		mask: url(icons/twitter.svg) no-repeat 50% 50%/24px;
-	}
-
 	.googleplus .icon {
 		mask: url(icons/google+.svg) no-repeat 50% 50%/24px;
 	}
 
 	.linkedin .icon {
 		mask: url(icons/linkedin.svg) no-repeat 50% 50%/24px;
+	}
+
+	.twitter .icon {
+		mask: url(icons/twitter.svg) no-repeat 50% 50%/24px;
 	}
 }
 
@@ -1636,37 +1724,6 @@ body.menu-on {
 --------------------------------------------------------------*/
 
 .home {
-	/* When page hasn't been scrolled down at all */
-	&:not(.scrolled) {
-		.masthead {
-			background: hsla(0, 0%, 100%, 0);
-			box-shadow: none;
-		}
-
-		.branding .site-title {
-			color: $color-white;
-			text-shadow: $text-shadow;
-		}
-
-		.menu-toggle {
-			color: $color-white;
-		}
-
-		.site-nav a {
-			@media (min-width: $tablet) {
-				color: $color-white;
-				text-shadow: $text-shadow;
-			}
-		}
-
-		@media (min-width: $tablet) {
-			/* Top-level sub-menu */
-			.site-menu > .menu-item > .sub-menu {
-				background: color( $color-dark a(60%) );
-			}
-		}
-	}
-
 	.section-services {
 		@mixin section-background $background-section;
 	}
@@ -1899,6 +1956,11 @@ object {
 
 	img {
 		margin: 0;
+
+		&:hover,
+		&:focus {
+			opacity: 0.9;
+		}
 	}
 
 	@media (min-width: $phone) {

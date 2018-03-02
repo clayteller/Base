@@ -9,25 +9,31 @@
  * @package Base
  * @since 1.0.1
  */
+
+if ( 'employee' === get_post_type() || 'testimonial' === get_post_type() ) {
+   $img_size = 'square';
+} else {
+   $img_size = 'featured';
+}
+
+if ( 'testimonial' === get_post_type() ) {
+   $img_link = '';
+   $img_link_end = '';
+} else {
+   $img_link = '<a href="' . get_the_permalink() . '">';
+   $img_link_end = '</a>';
+}
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-   <?php
-   // Featured image (for all types except testimonial)
-   if ( 'testimonial' !== get_post_type() ) :
-      $image = get_the_post_thumbnail( null, 'entry' );
-      if ( $image ) :
-      ?>
-         <figure><a href="<?php the_permalink(); ?>"><?php echo $image; ?></a></figure>
-      <?php
-      else:
-      ?>
-         <figure class="noimage"></figure>
-      <?php
-      endif;
-   endif;
-   ?>
+   <?php if ( has_post_thumbnail() ) : ?>
+      <figure>
+         <?php echo $img_link . get_the_post_thumbnail( null, $img_size ) . $img_link_end; ?>
+      </figure>
+   <?php else : ?>
+      <figure class="noimage"></figure>
+   <?php endif; ?>
 
    <header class="entry-header">
       <?php
@@ -70,7 +76,7 @@
       <div class="entry-content">
          <?php
          if ( 'testimonial' === get_post_type() ) :
-            the_content();
+            echo '<q>' . get_the_content() . '</q>';
          else :
             the_excerpt();
          endif;

@@ -132,7 +132,7 @@
 	 * @todo Move to a recallable function
 	 */
 	$( window ).scroll( function() {
-		// After page is scrolled below original position…
+		// After page is scrolled below original header position…
 		if ( $( this ).scrollTop() > 0 ) {
 			$body.addClass( "scrolled" );
 		} else {
@@ -140,7 +140,7 @@
 			$body.removeClass( "scrollup" );
 		}
 
-		// After page is scrolled down past original header position…
+		// After page is scrolled below original header position…
 		if ( $( this ).scrollTop() > $masthead.height() ) {
 			// Downward scroll
 			if ( $( this ).scrollTop() >= scrollPosition ) {

@@ -49,10 +49,9 @@ if ( ! function_exists( 'base_setup' ) ) :
 		 */
 		add_theme_support( 'post-thumbnails' );
 
-
-      // Add image sizes for entries
-		add_image_size( 'entry', 450, 350, true );
-		add_image_size( 'entry@2x', 900, 700, true );
+      // Add image sizes for people photos
+		add_image_size( 'square', 300, 300, true );
+		add_image_size( 'square@2x', 600, 600, true );
 
       // Add image sizes for featured images
 		add_image_size( 'featured', 600, 330, true );
