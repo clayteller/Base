@@ -659,7 +659,7 @@ body:not(.scrolled).home {
 /* 'Sticky' masthead on tablets and desktop devices */
 @media (min-width: $tablet), (pointer: fine) and (hover: hover) {
 	.masthead {
-		position: absolute;
+		position: fixed;
 
 		.scrolldown & {
 			opacity: 0;
