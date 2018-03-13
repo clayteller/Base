@@ -37,6 +37,7 @@ wp-content/themes/*
 !wp-content/themes/base/
 
 # Ignore generated theme files.
+wp-content/themes/base/acf-json/
 wp-content/themes/base/css/
 wp-content/themes/base/fonts/
 wp-content/themes/base/icons/
