@@ -11,25 +11,11 @@
  */
 
 /**
- * The 'entries_type' custom field determines which post type we're displaying and if we're displaying the 'latest' entries or a 'custom' set.
- *
- * @var string Conveys the post type and display type separated by '_'. For example, 'employee_custom' or 'post_latest'.
- */
-$entries_type_field = get_sub_field( 'entries_type' );
-
-/**
- * Explode the 'entries_type' custom field value into entry type and display type.
- *
- * @var array
- */
-$entries_type_parts = explode( '_', $entries_type_field );
-
-/**
- * Type of entries.
+ * Type of entries (type of posts)
  *
  * @var string Possible values are 'posts', 'employees', 'services', etc.
  */
-$entries_type = $entries_type_parts[0];
+$entries_type = get_sub_field( 'entries_type' );
 
 /**
  * Singularize the plural $entries_type, needed for some cases below.
@@ -43,7 +29,7 @@ $entry_type = rtrim( $entries_type, 's');
  *
  * @var string Possible values are 'latest' or 'custom'
  */
-$display_type = $entries_type_parts[1];
+$display_type = get_sub_field( 'display_type' );
 
 /**
  * How many entries are being displayed.
