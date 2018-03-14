@@ -40,7 +40,7 @@ $color-primary:   hsl(203, 70%, 54%);
 $color-secondary: hsl(227, 20%, 56%);
 $color-white:     hsl(0, 0%, 100%);
 $color-neutral:   hsl(208, 3%, 95%);
-$color-dark:      hsl(208, 18%, 28%);
+$color-dark:      hsl(208, 17%, 25%);
 
 $color-text:     $color-dark;
 $color-strong:   color( $color-text lightness(+5) );

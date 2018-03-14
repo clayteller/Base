@@ -650,7 +650,7 @@ body:not(.scrolled).home {
 	@media (min-width: $tablet) {
 		/* Top-level sub-menu */
 		.site-menu > .menu-item > .sub-menu {
-			background: color( $color-dark a(60%) );
+			background: color( $color-dark a(80%) );
 		}
 	}
 }
@@ -1013,17 +1013,14 @@ body.menu-on {
 	background-size: cover;
 	padding-bottom: $space-section;
 	padding-top: resolve($masthead-height + $space-section);
-
-	/* Vertical centering */
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	text-align: center;
 
 	.home & {
-		min-height: 20rem;
+		/* Vertical centering */
+		@mixin flexbox column, wrap, center;
+		min-height: 21rem;
 		padding-bottom: resolve($space-section + 1.8rem);
 		padding-top: resolve($masthead-height + 2.2rem);
-		text-align: center;
 
 		.button {
 			@mixin button-big;
@@ -1037,6 +1034,8 @@ body.menu-on {
 	.home & {
 		font-size: resolve($font-size-h1 + 0.2em);
 		margin-bottom: 0.7em;
+		/* Temporary prevent widow */
+		max-width: 850px;
 	}
 
 	.search & {
@@ -1064,6 +1063,7 @@ body.menu-on {
 	margin-top: -0.5rem;
 
 	& + .subtitle {
+		@mixin section-margin-bottom;
 		color: $color-subtitle;
 		font-size: $font-size-subtitle;
 		line-height: $line-height-heading;
@@ -1153,7 +1153,7 @@ body.menu-on {
 .hentry {
 	@mixin flexbox column, nowrap, flex-start;
 	@mixin correct-bottom-space;
-	margin: 0 0 resolve($space-entry + 1rem);
+	margin-bottom: 3rem;
 
 	/* Featured image */
 	figure {
@@ -1250,6 +1250,7 @@ body.menu-on {
 		.hentry {
 			@mixin column-space $space-entry;
 			@mixin column 2, $space-entry;
+			margin-bottom: resolve($space-entry + 1rem);
 		}
 
 		/* 3 entries */
@@ -1348,7 +1349,6 @@ body.menu-on {
 .entries .type-service {
 	display: grid;
 	grid: max-content auto / minmax(90px, 1fr) 4fr; /* row heights / column widths */
-	margin-top: 0.6rem;
 
 	/* Featured image */
 	figure {
@@ -1401,7 +1401,7 @@ body.menu-on {
 	display: grid;
 	grid: max-content / 60px; /* row heights / column widths */
 	margin-left: 0;
-	margin-top: 3.2rem;
+	margin-top: 3rem;
 	width: auto !important;
 
 	figure {
@@ -1952,15 +1952,16 @@ object {
 
 	a {
 		cursor: zoom-in;
-	}
-
-	img {
-		margin: 0;
+		display: block;
 
 		&:hover,
 		&:focus {
 			opacity: 0.9;
 		}
+	}
+
+	img {
+		margin: 0;
 	}
 
 	@media (min-width: $phone) {
