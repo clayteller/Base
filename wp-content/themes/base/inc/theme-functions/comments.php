@@ -1,6 +1,6 @@
 <?php
 /**
- * Functions which enhance the comments by hooking into WordPress
+ * Enhance the comments
  *
  * @package Base
  * @since 1.0.1

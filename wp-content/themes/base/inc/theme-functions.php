@@ -53,55 +53,6 @@ function base_body_classes( $classes ) {
 add_filter( 'body_class', 'base_body_classes' );
 
 /**
- * Set responsive image sizes for entry featured images.
- *
- * @uses global $entries_count
- *
- * @param  string       $sizes
- * @param  array|string $size
- * @return string Sizes attribute.
- */
-function base_entry_image_responsive_sizes( $sizes, $size ) {
-   $mobile_width = '(max-width: 649px) 100vw';
-
-   // Home page
-	if ( is_front_page() ) {
-		global $entries_count;
-
-      // Set responsive image widths for multi-column display.
-      switch( $entries_count ) {
-         // 2 columns
-         case 2:
-            $desktop_width = '49vw';
-            break;
-         // 3 columns
-         case 3:
-            $desktop_width = '32vw';
-            break;
-         // 4 columns
-         case 4:
-            $desktop_width = '24vw';
-            break;
-         // Otherwise, bail
-         default:
-            return;
-      }
-
-      $sizes = $mobile_width . ', ' . $desktop_width;
-   // Archive
-	} elseif ( is_archive() ) {
-      // 3 columns
-      $sizes = $mobile_width . ', 32vw';
-   // Single pages
-   } elseif ( is_single() ) {
-      $sizes = '(max-width: 749px) 100vw, 750px';
-   }
-
-   return $sizes;
-}
-add_filter( 'wp_calculate_image_sizes', 'base_entry_image_responsive_sizes', 10 , 2 );
-
-/**
 * Add inline CSS to display a background image.
 *
 * @param string $css_class          CSS class of element being assigned a background image.
