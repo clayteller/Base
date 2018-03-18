@@ -10,12 +10,18 @@
  * @since 1.0.1
  */
 
+/**
+ * Featured image size
+ */
 if ( 'employee' === get_post_type() || 'testimonial' === get_post_type() ) {
    $img_size = 'square';
 } else {
    $img_size = 'featured';
 }
 
+/**
+ * Featured image link
+ */
 if ( 'testimonial' === get_post_type() ) {
    $img_link = '';
    $img_link_end = '';
@@ -23,9 +29,22 @@ if ( 'testimonial' === get_post_type() ) {
    $img_link = '<a href="' . get_the_permalink() . '">';
    $img_link_end = '</a>';
 }
+
+/**
+ * Add css class to control layout of entry elements
+ */
+add_filter( 'post_class', function ( $classes) {
+   if ( 'benefit' === get_post_type() || 'testimonial' === get_post_type() ) {
+      $classes[] = 'horizontal';
+   } else {
+      $classes[] = 'vertical';
+   }
+
+   return $classes;
+} );
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article <?php post_class(); ?>>
 
    <?php if ( has_post_thumbnail() ) : ?>
       <figure>
@@ -99,4 +118,4 @@ if ( 'testimonial' === get_post_type() ) {
    endif;
    ?>
 
-</article><!-- #post-<?php the_ID(); ?> -->
+</article>
