@@ -21,7 +21,7 @@ foreach ( glob( plugin_dir_path( __FILE__ ) . "inc/*.php" ) as $file ) {
 /**
  *  Edit link remove
  */
-add_filter('edit_post_link', '__return_false');
+add_filter( 'edit_post_link', '__return_false' );
 
 /**
  * Don't automatically wrap images in paragraph tags
@@ -34,7 +34,7 @@ add_filter('the_content', 'base_filter_ptags_on_images');
 /**
  * Remove unnecessary classes from post
  */
-function base_cleanup_post_classes( $classes ){
+function base_cleanup_post_classes( $classes ) {
 	global $post;
 
 	$exclude = array(
@@ -46,7 +46,7 @@ function base_cleanup_post_classes( $classes ){
 
 	return array_diff( $classes, $exclude );
 }
-add_filter('post_class', 'base_cleanup_post_classes');
+add_filter( 'post_class', 'base_cleanup_post_classes' );
 
 /**
  * Strip the prefix off Archive page titles
