@@ -11,6 +11,19 @@
  */
 
 /**
+ * Use instead of get_the_content() function to preserve the content's formatting.
+ *
+ * @return string Formatted post content.
+ */
+function base_get_the_content_formatted() {
+ 	ob_start();
+ 	the_content();
+ 	$the_content = ob_get_contents();
+ 	ob_end_clean();
+ 	return $the_content;
+}
+
+/**
  * Output or return the logo image.
  *
  * @uses Advanced Custom Fields Pro
@@ -180,8 +193,8 @@ function base_button( $field_name, $acf_get = 'get_field', $css_id = null, $befo
 		$button_link = $button[ 'link_external' ];
 	}
 
-	// Bail if there's no button label and button link
-	if ( ! $button_label && ! $button_link ) return;
+	// Bail if there's no button label or button link
+	if ( ! $button_label || ! $button_link ) return;
 
 	$html = sprintf(
 		'%1$s<a class="button"%2$s href="%3$s">%4$s</a>%5$s',

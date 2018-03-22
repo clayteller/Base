@@ -25,11 +25,11 @@ $entries_type = get_sub_field( 'entries_type' );
 $entry_type = rtrim( $entries_type, 's');
 
 /**
- * Type of display.
+ * Filter which entries are displayed.
  *
  * @var string Possible values are 'latest' or 'custom'
  */
-$display_type = get_sub_field( 'display_type' );
+$filter = get_sub_field( 'filter' );
 
 /**
  * How many entries are being displayed.
@@ -40,12 +40,12 @@ $display_type = get_sub_field( 'display_type' );
 global $entries_count;
 
 // Custom set of entries retrieved from 'relationship' custom field.
-if ( 'custom' == $display_type ) {
+if ( 'custom' == $filter ) {
 	$entries = get_sub_field( 'entries_' . $entries_type );
 	$entries_count = count( $entries );
 // Latest entries
-} elseif ( 'latest' == $display_type )  {
-	$entries_count = get_sub_field( 'entries_count' );
+} else  {
+	$entries_count = get_sub_field( 'entries_count' ) ?: '3';
 	$args = array(
 		'posts_per_page' => $entries_count,
 		'post_type'      => $entry_type,
@@ -53,7 +53,32 @@ if ( 'custom' == $display_type ) {
 	$entries = get_posts( $args );
 }
 
+/**
+ * Section subtitle.
+ *
+ * @var string
+ */
 $subtitle = get_sub_field( 'section_subtitle' );
+
+/**
+ * CSS class to determine layout of entries.
+ *
+ * @var string
+ */
+$css_class = ' columns';
+
+// 2 columns
+if ( 'benefits' == $entries_type ) {
+	$css_class .= ' columns-2';
+
+// None
+} elseif ( 'services' == $entries_type || 'testimonials' == $entries_type ) {
+	$css_class = '';
+
+// Columns depend on count
+} else {
+	$css_class .= ' columns-' . $entries_count;
+}
 ?>
 
 <section class="section section-<?php echo $entries_type; ?>">
@@ -65,12 +90,14 @@ $subtitle = get_sub_field( 'section_subtitle' );
 			<?php endif; ?>
 		</header>
 		<?php if ( $entries ) : ?>
-			<div class="entries count-<?php echo $entries_count; ?>">
+			<div class="entries<?php echo $css_class; ?>">
 				<?php
+				$i = 0;
 				foreach ( $entries as $post ): // variable must be called $post (IMPORTANT)
+					$i++;
 					setup_postdata( $post );
-					// Not using get_template_part here because we need to access variables from this file in the template part.
-					include( locate_template( 'template-parts/entry.php' ) );
+					// Include the post-format-specific template for the content. If you want to override this in a child theme, then include a file called entry-___.php (where ___ is the Post Format name) and that will be used instead.
+					get_template_part( 'template-parts/entry', get_post_format() );
 				endforeach;
 				wp_reset_postdata();
 				?>

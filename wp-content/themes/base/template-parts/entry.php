@@ -15,6 +15,8 @@
  */
 if ( 'employee' === get_post_type() || 'testimonial' === get_post_type() ) {
    $img_size = 'square';
+} elseif ( 'service' === get_post_type() ) {
+   $img_size = 'medium';
 } else {
    $img_size = 'featured';
 }
@@ -34,7 +36,7 @@ if ( 'testimonial' === get_post_type() ) {
  * Add css class to control layout of entry elements
  */
 add_filter( 'post_class', function ( $classes) {
-   if ( 'benefit' === get_post_type() || 'testimonial' === get_post_type() ) {
+   if ( 'benefit' === get_post_type() || 'service' === get_post_type() || 'testimonial' === get_post_type() ) {
       $classes[] = 'horizontal';
    } else {
       $classes[] = 'vertical';
@@ -47,7 +49,7 @@ add_filter( 'post_class', function ( $classes) {
 <article <?php post_class(); ?>>
 
    <?php if ( has_post_thumbnail() ) : ?>
-      <figure>
+      <figure class="entry-image">
          <?php echo $img_link . get_the_post_thumbnail( null, $img_size ) . $img_link_end; ?>
       </figure>
    <?php else : ?>

@@ -1,6 +1,6 @@
 <?php
 /**
-* Add theme settings (ACF options pages) to the WordPress admin
+* Add theme settings section (ACF options pages) to the WordPress admin
  *
  * @package Base Admin
  * @since 1.0.1

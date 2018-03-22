@@ -52,20 +52,24 @@ function base_responsive_image_sizes( $sizes, $size ) {
 	} elseif ( is_front_page() ) {
 		global $entries_count;
 
-      // Set responsive image widths for multi-column display.
+      // For 2, 3 or 4 column layouts
       switch( $entries_count ) {
+
          // 2 columns
          case 2:
             $width_large_screen = '49vw';
             break;
+
          // 3 columns
          case 3:
             $width_large_screen = '32vw';
             break;
+
          // 4 columns
          case 4:
             $width_large_screen = '24vw';
             break;
+
          // Otherwise, bail
          default:
             return;

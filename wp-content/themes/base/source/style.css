@@ -44,8 +44,8 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 # Contact Form 7
 --------------------------------------------------------------*/
 
-@import "css/_variables";
-@import "css/_mixins";
+@import 'css/_variables';
+@import 'css/_mixins';
 
 /*--------------------------------------------------------------
 # Elements
@@ -73,7 +73,7 @@ q::after {
 
 blockquote,
 q {
-	quotes: "“" "”" "‘" "’";
+	quotes: '“' '”' '‘' '’';
 }
 
 hr {
@@ -230,7 +230,7 @@ address {
 
 pre {
 	background: #eee;
-	font-family: "Courier 10 Pitch", Courier, monospace;
+	font-family: 'Courier 10 Pitch', Courier, monospace;
 	font-size: 15px;
 	font-size: 0.9375rem;
 	line-height: 1.6;
@@ -244,7 +244,7 @@ code,
 kbd,
 tt,
 var {
-	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+	font-family: Monaco, Consolas, 'Andale Mono', 'DejaVu Sans Mono', monospace;
 	font-size: 15px;
 	font-size: 0.9375rem;
 }
@@ -272,9 +272,9 @@ big {
 a,
 button,
 input:focus,
-input[type="button"],
-input[type="reset"],
-input[type="submit"],
+input[type='button'],
+input[type='reset'],
+input[type='submit'],
 textarea:focus,
 .button {
 	transition: $transition;
@@ -295,9 +295,9 @@ a {
 }
 
 button,
-input[type="button"],
-input[type="reset"],
-input[type="submit"],
+input[type='button'],
+input[type='reset'],
+input[type='submit'],
 .button {
 	@mixin button;
 
@@ -316,21 +316,21 @@ input[type="submit"],
 # Forms
 --------------------------------------------------------------*/
 
-input[type="text"],
-input[type="email"],
-input[type="url"],
-input[type="password"],
-input[type="search"],
-input[type="number"],
-input[type="tel"],
-input[type="range"],
-input[type="date"],
-input[type="month"],
-input[type="week"],
-input[type="time"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="color"],
+input[type='text'],
+input[type='email'],
+input[type='url'],
+input[type='password'],
+input[type='search'],
+input[type='number'],
+input[type='tel'],
+input[type='range'],
+input[type='date'],
+input[type='month'],
+input[type='week'],
+input[type='time'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='color'],
 textarea {
 	@mixin full-width-phone left;
 	color: #444;
@@ -419,7 +419,7 @@ textarea {
 # Icons
 --------------------------------------------------------------*/
 
-[class*="icon-"] {
+[class*='icon-'] {
 	fill: currentColor;
 	height: 0.95em;
 	margin-right: $space-icon;
@@ -471,11 +471,11 @@ body:not(.home) .site-main {
 	@mixin section-space;
 
 	> .wrap {
-		@mixin correct-bottom-space;
+		@mixin clear-bottom-space;
 	}
 }
 
-/* CSS grid
+/* Page layout w/ css grid
 ----------------------------------*/
 
 /* For 'sticky' footer */
@@ -566,6 +566,47 @@ html, body, .site {
 	}
 }
 
+/* Columns
+----------------------------------*/
+
+@media (min-width: $phone) {
+	/* Column container */
+	.columns {
+		@mixin flexbox row, wrap;
+		margin: 0 resolve(-$space-entry / 2);
+
+		/* Column item, 2 columns */
+		> * {
+			@mixin column-space $space-entry;
+			@mixin column-width 2, $space-entry;
+			margin-bottom: resolve($space-entry + 1rem);
+		}
+	}
+
+	/* 3 columns */
+	.columns-3 > * {
+		@mixin column-width 3, $space-entry;
+	}
+}
+
+
+@media (min-width: $desktop) {
+	/* 3 columns */
+	.columns	> * {
+		@mixin column-width 3, $space-entry;
+	}
+
+	/* 2 columns */
+	.columns-2 > * {
+		@mixin column-width 2, $space-entry;
+	}
+
+	/* 4 columns */
+	.columns-4 > * {
+		@mixin column-width 4, $space-entry;
+	}
+}
+
 /* Alignments
 ----------------------------------*/
 
@@ -593,13 +634,121 @@ html, body, .site {
 
 .clear::before,
 .clear::after {
-	content: "";
+	content: '';
 	display: table;
 	table-layout: fixed;
 }
 
 .clear::after {
 	clear: both;
+}
+
+/* Entry horizontal layout
+----------------------------------*/
+
+$horizontal-column-image: minmax(240px, 1fr);
+$horizontal-column-text: 1.7fr;
+
+.horizontal {
+	display: grid;
+	grid: max-content auto / $horizontal-column-image $horizontal-column-text; /* row heights / column widths */
+
+	/* Featured image */
+	.entry-image {
+		grid-column: 1 / 2;
+		grid-row: 1 / 3;
+		margin-right: $space-entry;
+	}
+
+	> header,
+	> div {
+		grid-column: 2 / 3;
+	}
+
+	.entry-content {
+		@mixin clear-bottom-space;
+	}
+}
+
+
+/* 'Benefit' and 'testimonial' horizontal layout modify column widths */
+.horizontal.type-benefit,
+.horizontal.type-testimonial {
+	grid-template-columns: minmax(100px, 1fr) 3fr;
+}
+
+/* 'Service' horizontal layout switch orientation every other instance */
+.horizontal.type-service:nth-of-type(even) {
+	@media (min-width: $phone) {
+		grid-template-columns: $horizontal-column-text $horizontal-column-image;
+
+		/* Featured image */
+		.entry-image {
+			grid-column: 2 / 3;
+			margin-left: $space-entry;
+			margin-right: 0;
+		}
+
+		> header,
+		> div {
+			grid-column: 1 / 2;
+		}
+	}
+}
+
+/* 'Service' horizontal layout prevent on small screen */
+.horizontal.type-service {
+	@media (max-width: $_phone) {
+		display: block;
+
+		.entry-image {
+			margin: 0 0 $space-entry-child;
+		}
+	}
+}
+
+/* 'Testimonial' horizontal layout modify position of elements */
+.horizontal.type-testimonial {
+	/* Position header underneath content */
+	header {
+		grid-row: 2 / 3;
+		margin-bottom: 0;
+	}
+
+	/* Position content above header */
+	.entry-content {
+		grid-row: 1 / 2;
+		margin-bottom: $space-entry-child;
+	}
+
+	/* Slightly adjust layout for small screen */
+	@media (max-width: $_small-phone) {
+		grid: max-content / 60px; /* row heights / column widths */
+
+		/* Position image underneath content */
+		.entry-image {
+			grid-row: 2 / 3;
+			margin-right: 1em;
+		}
+
+		/* Span content full width */
+		.entry-content {
+			grid-column: 1 / 3;
+		}
+	}
+}
+
+/* Entry vertical layout
+----------------------------------*/
+
+.vertical {
+	@mixin clear-bottom-space;
+
+	> * {
+		@mixin clear-bottom-space;
+		margin-bottom: $space-entry-child;
+	}
+
 }
 
 /*--------------------------------------------------------------
@@ -910,7 +1059,7 @@ body.menu-on {
 .site-footer .widget_nav_menu {
 	li {
 		display: inline-block;
-		margin: 0 $space-button-half $space-button-vertical;
+		margin: 0 resolve($space-button / 2) resolve($space-button * 1.8);
 	}
 
 	a {
@@ -935,7 +1084,7 @@ body.menu-on {
 	@mixin flexbox row, wrap, center, center;
 
 	> * {
-		margin: 0 $space-button-half $space-button-vertical;
+		margin: 0 resolve($space-button / 2) resolve($space-button * 1.8);
 	}
 
 	a,
@@ -1056,18 +1205,21 @@ body.menu-on {
 	text-align: center;
 }
 
-.section-title {
-	@mixin heading h1;
-	margin-bottom: $space-section;
+.section-header {
+	@mixin clear-bottom-space;
+	margin-bottom: resolve($space-section + 0.8rem) ;
 	/* Offset the top line-height spacing */
 	margin-top: -0.5rem;
+}
+
+.section-title {
+	@mixin heading h1;
 
 	& + .subtitle {
-		@mixin section-margin-bottom;
 		color: $color-subtitle;
 		font-size: $font-size-subtitle;
 		line-height: $line-height-heading;
-		margin-top: -1.6rem;
+		margin-top: -0.8rem;
 	}
 }
 
@@ -1088,14 +1240,14 @@ body.menu-on {
 	}
 
 	.section-text {
-		@mixin correct-bottom-space;
+		@mixin clear-bottom-space;
 		color: color( $color-white a(80%) );
 		font-size: $font-size-large;
 		margin-bottom: $space-section;
 	}
 
 	.button,
-	input[type="submit"] {
+	input[type='submit'] {
 		@mixin button-outline light;
 	}
 }
@@ -1151,29 +1303,16 @@ body.menu-on {
 ----------------------------------*/
 
 .hentry {
-	@mixin flexbox column, nowrap, flex-start;
-	@mixin correct-bottom-space;
-	margin-bottom: 3rem;
+	margin-bottom: resolve($space-entry * 1.8);
 
 	/* Featured image */
-	figure {
+	.entry-image {
 		img,
 		svg {
 			display: block;
 			width: 100%;
 		}
 	}
-}
-
-.entry-header,
-.entry-content {
-	margin-bottom: $space-entry-child;
-}
-
-.entry-header,
-.entry-content,
-.entry-footer {
-	@mixin correct-bottom-space;
 }
 
 /* Entry Meta
@@ -1230,49 +1369,11 @@ body.menu-on {
 
 /* Entries container */
 .entries {
-	/* Featured image */
-	figure {
-		margin-bottom: $space-entry-child;
-
-		&.noimage {
-			background: $color-neutral;
-			height: 12rem;
-			width: 100%;
-		}
-	}
-
-	/* Multi-column */
-	@media (min-width: $phone) {
-		@mixin flexbox row, wrap, center;
-		margin: 0 resolve(-$space-entry / 2);
-
-		/* Entry */
-		.hentry {
-			@mixin column-space $space-entry;
-			@mixin column 2, $space-entry;
-			margin-bottom: resolve($space-entry + 1rem);
-		}
-
-		/* 3 entries */
-		&.count-3 .hentry {
-			@mixin column 3, $space-entry;
-		}
-	}
-
-	@media (min-width: $desktop) {
-		.hentry {
-			@mixin column 3, $space-entry;
-		}
-
-		/* 2 entries */
-		&.count-2 .hentry {
-			@mixin column 2, $space-entry;
-		}
-
-		/* 4 entries */
-		&.count-4 .hentry {
-			@mixin column 4, $space-entry;
-		}
+	/* No featured image */
+	.entry-image.noimage {
+		background: $color-neutral;
+		height: 12rem;
+		width: 100%;
 	}
 }
 
@@ -1291,8 +1392,25 @@ body.menu-on {
 		margin-bottom: $space-entry;
 	}
 
-	.attachment-featured {
+	.entry-image {
 		margin-bottom: $space-section;
+	}
+}
+
+/* Benefit entry
+----------------------------------*/
+
+.type-benefit {
+	/* Featured image */
+	.entry-image svg {
+		fill: color( $color-primary hue(+10) saturation(-24) lightness(+4) );
+	}
+
+	/* Featured image in single pages */
+	.single & .entry-image svg {
+		margin-left: auto;
+		margin-right: auto;
+		width: 30%;
 	}
 }
 
@@ -1300,7 +1418,7 @@ body.menu-on {
 ----------------------------------*/
 
 .type-employee {
-	figure img {
+	.entry-image img {
 		border-radius: $border-radius-circle;
 		margin: 0 auto;
 		max-width: 280px;
@@ -1309,7 +1427,7 @@ body.menu-on {
 	.email,
 	.phone {
 		a {
-			@mixin link-imitate;
+			@mixin link-incognito;
 		}
 	}
 
@@ -1338,119 +1456,40 @@ body.menu-on {
 /* Service entry
 ----------------------------------*/
 
-.type-service {
-	/* Featured image */
-	figure svg {
-		fill: color( $color-primary hue(+10) saturation(-24) lightness(+4) );
-	}
+/* Entries container */
+.section-services .entries {
+	@mixin clear-bottom-space;
 }
 
-/* Entry in section, archive */
-.entries .type-service {
-	display: grid;
-	grid: max-content auto / minmax(90px, 1fr) 4fr; /* row heights / column widths */
-
-	/* Featured image */
-	figure {
-		grid-column: 1 / 2;
-		grid-row: 1 / 3;
-		margin-bottom: 0;
-	}
-
-	.entry-header {
-		margin-bottom: $space-heading;
-	}
-
-	.entry-header,
-	.entry-content {
-		grid-column: 2 / 3;
-		margin-left: $space-entry;
-	}
-
-	@media (max-width: $_tablet) {
-		width: 100%;
-	}
-}
-
-/* Entry in section, archive */
-.entries.count-4,
-.post-type-archive-service {
-	.type-service {
-		@media (min-width: $desktop) {
-			@mixin column 2, $space-entry;
-		}
+.type-service:not(:first-of-type) {
+	@media (min-width: $phone) {
+		@mixin border 0rem, 0.8rem;
 	}
 }
 
 /* Testimonial entry
 ----------------------------------*/
 
-/* Entries container in section, archive */
-.section-testimonials,
-.post-type-archive-testimonial {
-	.entries {
-		display: block;
-		max-width: resolve($max-width + 100px);
-		margin-left: auto;
-		margin-right: auto;
-	}
-}
+.type-testimonial {
+	margin-top: resolve($space-entry * 2);
 
-/* Entry in section, archive */
-.entries .type-testimonial {
-	display: grid;
-	grid: max-content / 60px; /* row heights / column widths */
-	margin-left: 0;
-	margin-top: 3rem;
-	width: auto !important;
-
-	figure {
-		grid-row: 2 / 3;
-		margin-bottom: 0;
-
-		img {
-			border-radius: $border-radius-circle;
-		}
-	}
-
-	.entry-header {
-		grid-column: 2 / 3;
-		grid-row: 2 / 3;
-		margin-bottom: 0;
-		margin-left: 1rem;
-	}
-
-	.entry-content {
-		grid-column: 1 / 3;
-		grid-row: 1 / 2;
-		margin-bottom: $space-entry-child !important;
+	.entry-image img {
+		border-radius: $border-radius-circle;
 	}
 
 	q {
 		display: inline-block;
 		text-indent: -0.4em;
 	}
+}
 
-	@media (min-width: $small-phone) {
-		grid-template-columns: minmax(80px, 1fr) 4.5fr; /* row heights / column widths */
-
-		figure {
-			grid-row: 1 / 3;
-		}
-
-		.entry-header,
-		.entry-content {
-			grid-column: 2 / 3;
-			margin-left: $space-entry;
-		}
-
-		.entry-header {
-			grid-row: 2 / 3;
-		}
-
-		.entry-content {
-			grid-row: 1 / 2;
-		}
+/* Entries container in section, archive */
+.section-testimonials,
+.post-type-archive-testimonial {
+	.entries {
+		max-width: resolve($max-width + 100px);
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
 
@@ -1477,7 +1516,7 @@ body.menu-on {
 
 	.contact-info {
 		a {
-			@mixin link-imitate;
+			@mixin link-incognito;
 		}
 	}
 
@@ -1634,7 +1673,7 @@ body.menu-on {
 }
 
 /* Do not show the outline on the skip link target. */
-#content[tabindex="-1"]:focus {
+#content[tabindex='-1']:focus {
 	outline: 0;
 }
 
@@ -1677,7 +1716,7 @@ body.menu-on {
 }
 
 .contact-info {
-	@mixin correct-bottom-space;
+	@mixin clear-bottom-space;
 	margin-bottom: $space-entry;
 }
 
@@ -1724,10 +1763,8 @@ body.menu-on {
 --------------------------------------------------------------*/
 
 .home {
-	.section-services {
-		@mixin section-background $background-section;
-	}
-
+	.section-benefits,
+	.section-employees,
 	.section-testimonials {
 		@mixin section-background $background-section;
 	}
@@ -1752,7 +1789,7 @@ body.menu-on {
 --------------------------------------------------------------*/
 
 .widget {
-	@mixin correct-bottom-space;
+	@mixin clear-bottom-space;
 	margin: 0 0 $space-entry;
 
 	/* Make sure select elements fit in widgets. */
@@ -1828,7 +1865,7 @@ body.menu-on {
 	margin-bottom: $space-text;
 
 	a {
-		@mixin link-imitate;
+		@mixin link-incognito;
 	}
 }
 
@@ -1918,7 +1955,7 @@ object {
 	margin-bottom: 1.5em;
 	max-width: 100%;
 
-	img[class*="wp-image-"] {
+	img[class*='wp-image-'] {
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
@@ -1930,6 +1967,8 @@ object {
 }
 
 .wp-caption-text {
+	@mixin heading h4;
+	margin: 0.8em 0 1em;
 	text-align: center;
 }
 
@@ -1966,40 +2005,36 @@ object {
 
 	@media (min-width: $phone) {
 		@mixin column-space $space-gallery;
-		@mixin column 2, $space-gallery;
+		@mixin column-width 2, $space-gallery;
 
 		.gallery-columns-3 & {
-			@mixin column 3;
+			@mixin column-width 3;
 		}
 
 		.gallery-columns-4 & {
-			@mixin column 4;
+			@mixin column-width 4;
 		}
 
 		.gallery-columns-5 & {
-			@mixin column 5;
+			@mixin column-width 5;
 		}
 
 		.gallery-columns-6 & {
-			@mixin column 6;
+			@mixin column-width 6;
 		}
 
 		.gallery-columns-7 & {
-			@mixin column 7;
+			@mixin column-width 7;
 		}
 
 		.gallery-columns-8 & {
-			@mixin column 8;
+			@mixin column-width 8;
 		}
 
 		.gallery-columns-9 & {
-			@mixin column 9;
+			@mixin column-width 9;
 		}
 	}
-}
-
-.gallery-caption {
-	display: block;
 }
 
 /*--------------------------------------------------------------
@@ -2074,7 +2109,7 @@ div.wpcf7-response-output {
 
 /* Success message */
 div.wpcf7-mail-sent-ok::before {
-	content: "👍";
+	content: '👍';
 	font-size: 1.8em;
 	padding-right: 0.3em;
 }
@@ -2082,7 +2117,7 @@ div.wpcf7-mail-sent-ok::before {
 /* Error message */
 div.wpcf7-validation-errors::before,
 div.wpcf7-mail-sent-ng::before {
-	content: "☹️";
+	content: '☹️';
 	font-size: 1.5em;
 	padding-right: 0.3em;
 }

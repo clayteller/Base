@@ -56,9 +56,9 @@
 # Bottom space correction
 --------------------------------------------------------------*/
 
-@define-mixin correct-bottom-space {
+@define-mixin clear-bottom-space {
 	> *:last-child {
-	    margin-bottom: 0 !important;
+		margin-bottom: 0 !important;
 	}
 }
 
@@ -181,7 +181,7 @@
 # Column
 --------------------------------------------------------------*/
 
-@define-mixin column $count: 3, $space: 0  {
+@define-mixin column-width $count: 3, $space: 0  {
 	$width: resolve(100 / $count);
 	@if $space == 0 {
 		width: $width%;
@@ -299,7 +299,7 @@
 	}
 }
 
-@define-mixin link-imitate  {
+@define-mixin link-incognito  {
 	color: $color-text;
 
 	&:hover,

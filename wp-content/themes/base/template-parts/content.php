@@ -9,11 +9,11 @@
 $image = get_the_post_thumbnail( null, 'featured' );
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article <?php post_class(); ?>>
 	<?php
 	if ( $image ) :
 	?>
-		<figure><?php echo $image; ?></figure>
+		<figure class="entry-image"><?php echo $image; ?></figure>
 	<?php
 	endif;
 	if ( 'post' === get_post_type() ) :
@@ -47,4 +47,4 @@ $image = get_the_post_thumbnail( null, 'featured' );
 			?>
 		</footer><!-- .entry-footer -->
 	<?php endif; ?>
-</article><!-- #post-<?php the_ID(); ?> -->
+</article>

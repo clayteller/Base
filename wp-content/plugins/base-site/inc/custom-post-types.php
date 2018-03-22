@@ -16,6 +16,10 @@ function base_register_post_type() {
 	 */
 	$post_types = array(
 		array(
+			'name' => 'benefit',
+			'dashicon' => 'awards'
+		),
+		array(
 			'name' => 'employee',
 			'dashicon' => 'groups'
 		),
@@ -26,22 +30,22 @@ function base_register_post_type() {
 		array(
 			'name' => 'testimonial',
 			'dashicon' => 'format-quote'
-		),
+		)
 	);
 
 	// Loop through each custom post type and register it.
 	foreach ( $post_types as $post_type ) {
 		$cpt          = $post_type[ 'name' ];
-		$cpt_singular = __( ucfirst( $cpt ), 'starter' );
+		$cpt_singular = __( ucfirst( $cpt ), 'base' );
 		$cpt_plural   = $cpt_singular . 's';
 
 		$labels = array(
 			'name'               => $cpt_plural,
 			'singular_name'      => $cpt_singular,
-			'add_new_item'       => __('Add New ' . $cpt_singular, 'starter' ),
-			'all_items'          => __('All ' . $cpt_plural, 'starter' ),
-			'edit_item'          => __('Edit ' . $cpt_singular, 'starter' ),
-			'new_item'           => __('New ' . $cpt_singular, 'starter' ),
+			'add_new_item'       => __('Add New ' . $cpt_singular, 'base' ),
+			'all_items'          => __('All ' . $cpt_plural, 'base' ),
+			'edit_item'          => __('Edit ' . $cpt_singular, 'base' ),
+			'new_item'           => __('New ' . $cpt_singular, 'base' ),
 			'parent_item_colon'  => '',
 			'menu_name'          => $cpt_plural,
 		);
