@@ -158,6 +158,14 @@ if ( is_admin() ) :
 	}
 	add_action( 'after_setup_theme', 'base_default_attachment' );
 
+	/**
+	 * Move Yoast SEO meta box to bottom of page
+	 */
+	function base_move_yoast_meta_down() {
+	    return 'low';
+	}
+	add_filter( 'wpseo_metabox_prio', 'base_move_yoast_meta_down' );
+
 	/* For extra security, disable the Appearance > Editor section in WordPress admin */
 	define( 'DISALLOW_FILE_EDIT', true );
 
