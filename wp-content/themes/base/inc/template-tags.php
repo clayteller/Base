@@ -11,16 +11,14 @@
  */
 
 /**
- * Use instead of get_the_content() function to preserve the content's formatting.
+ * Use instead of get_the_content() function to preserve content formatting.
  *
  * @return string Formatted post content.
  */
 function base_get_the_content_formatted() {
  	ob_start();
  	the_content();
- 	$the_content = ob_get_contents();
- 	ob_end_clean();
- 	return $the_content;
+ 	return ob_get_clean();;
 }
 
 /**
@@ -28,20 +26,26 @@ function base_get_the_content_formatted() {
  *
  * @uses Advanced Custom Fields Pro
  *
- * @param string $field_name Optional. Name of the custom field.
+ * @param string $field_name Optional. Name of the logo image custom field. Default 'logo'.
  * @param string $css_class  Optional. CSS class name.
  * @param bool   $echo       Optional. Whether to echo or return string. Default true.
- * @return string Logo image object if $echo is false.
+ * @return string Logo if $echo is false.
  */
 function base_logo( $field_name = 'logo', $css_class = 'logo', $echo = true ) {
-	// If requested logo can't be retrieved, use header logo ('logo') as fallback
-	$logo = get_field( $field_name, 'option' ) ? get_field( $field_name, 'option' ) : get_field( 'logo', 'option' );
+
+   /**
+    * Logo image array retrieved from ACF option page.
+    * @var array
+    */
+   $logo = get_field( $field_name, 'option' ) ?: get_field( 'logo', 'option' );
 
 	// Bail if there's no logo
 	if ( ! $logo ) return;
 
+   $logo = '<img class="' . $css_class . '" src="' . $logo[ 'url' ] . '" />';
+
 	if ( $echo )
-		echo '<img class="' . $css_class . '" src="' . $logo[ 'url' ] . '" />';
+		echo $logo;
 	else
 		return $logo;
 }
@@ -55,8 +59,12 @@ function base_logo( $field_name = 'logo', $css_class = 'logo', $echo = true ) {
  * @return string Site title if $echo is false.
  */
 function base_site_title( $echo = true ) {
-	// If a 'Site Title' (custom field) was set in our Theme Settings page, use that instead of default WordPress 'Site Title'
-	$title = get_field( 'site_title', 'option' ) ? get_field( 'site_title', 'option' ) : get_bloginfo( 'name' );
+
+	/**
+    * Site title retrieved from ACF option page, otherwise the WordPress 'Site Title'.
+    * @var string
+    */
+	$title = get_field( 'site_title', 'option' ) ?: get_bloginfo( 'name' );
 
 	// Bail if there's no title
 	if ( ! $title ) return;
@@ -78,32 +86,61 @@ function base_site_title( $echo = true ) {
  * @return string Page title if $echo is false.
  */
 function base_page_title( $before = '', $after = '', $echo = true ) {
+
 	// Home page
 	if ( is_front_page() ) {
-		// If 'Page Title' (custom field) was set, use that instead of  WordPress site description
-		$title = get_field( 'page_title' ) ? get_field( 'page_title' ) : get_bloginfo( 'description' );
-	// Blog
+
+      /**
+       * Page title retrieved from custom field, otherwise the WordPress 'Tagline'.
+       * @var string
+       */
+		$title = get_field( 'page_title' ) ?: get_bloginfo( 'description' );
+
+	// Posts page
 	} elseif ( is_home() ) {
-		$title = __( 'Blog', 'base' );
+
+      /**
+       * ID of the posts page.
+       * @var integer
+       */
+      $posts_page_id = get_option( 'page_for_posts' );
+
+      $title = get_field( 'page_title', $posts_page_id ) ?: get_the_title( $posts_page_id );
+
 	// Archive
 	} elseif ( is_archive() ) {
-		$title = get_the_archive_title();
+
+      /**
+      * Page title retrieved from user-added archive page custom field, otherwise the WordPress archive title.
+      * @var string
+      */
+      $title = base_archive_title( false ) ?: get_the_archive_title();
+
+   // Page
+   } elseif ( is_page() ) {
+
+      /**
+      * Page title retrieved from custom field, otherwise the WordPress page title.
+      * @var string
+      */
+      $title = get_field( 'page_title' ) ?: get_the_title();
+
 	// Single
 	} elseif ( is_singular() ) {
 		$title = get_the_title();
+
 	// Search
 	} elseif ( is_search() ) {
 		$title = sprintf(
 			esc_html__( 'Search Results for "%s"', 'base' ),
 			'<span>' . get_search_query() . '</span>'
 		);
+
 	// 404
 	} elseif ( is_404() ) {
 		$title = __( 'Oops!', 'base' );
-	// All other pages
-	} elseif ( is_page() ) {
-		// If 'Page Title' (custom field) was set, use that instead of default WordPress page title
-		$title = get_field( 'page_title' ) ? get_field( 'page_title' ) : get_the_title();
+
+   // Everything else
 	} else {
 		$title = base_site_title( false );
 	}
@@ -120,11 +157,67 @@ function base_page_title( $before = '', $after = '', $echo = true ) {
 
 	$title = $before . $title . $after;
 
+	if ( $echo )
+		echo $title;
+	else
+		return $title;
+}
+
+/**
+ * Output or return the page title from user-added archive page.
+ *
+ * @param bool $echo Whether to echo or return string. Default true.
+ * @return string Page title if $echo is false.
+ */
+function base_archive_title( $echo = true ) {
+
+   /**
+   * Page id of the relevant user-added archive page.
+   * @var integer
+   */
+   $archive_page_id = get_page_by_path( get_post_type() . 's' );
+
+   $title = get_field( 'page_title', $archive_page_id ) ?: get_the_title( $archive_page_id );;
+
+	// Bail if there's no title
+	if ( ! $title  ) return;
 
 	if ( $echo )
 		echo $title;
 	else
 		return $title;
+}
+
+/**
+ * Output or return the content from user-added archive page.
+ *
+ * @param bool $echo Whether to echo or return string. Default true.
+ * @return string Content if $echo is false.
+ */
+function base_archive_content( $before = '<div class="archive-content">', $after = '</div>', $echo = true ) {
+
+   /**
+   * Page id of the relevant user-added archive page.
+   * @var integer
+   */
+   $archive_page_id = get_page_by_path( get_post_type() . 's' );
+
+   // Posts page is using the archive template and needs to be handled differently
+   if ( is_home() ) {
+      $archive_page_id = get_option( 'page_for_posts' );
+   }
+
+   $content = get_post_field( 'post_content', $archive_page_id ) ?: the_archive_description();
+
+	// Bail if there's no content
+	if ( ! $content  ) return;
+
+   $content = $before . $content . $after;
+
+	if ( $echo )
+		echo $content;
+	else
+		return $content;
 }
 
 /**
@@ -159,7 +252,6 @@ function base_entry_title( $permalink = true, $before = '<h3 class="entry-title"
 	$title = apply_filters( 'base_entry_title', $title );
 
 	$title = $before . $title . $after;
-
 
 	if ( $echo )
 		echo $title;

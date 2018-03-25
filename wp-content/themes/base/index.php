@@ -13,16 +13,6 @@
  * @since 1.0.1
  */
 
-/**
- * Fix the issue of 'blog' page using this template instead of the archive template.
- *
- * @todo Figure out why 'blog' page doesn't use archive template.
- */
-if ( base_is_blog() ) {
-	load_template( get_archive_template() );
-	return;
-}
-
 get_header();
 ?>
 

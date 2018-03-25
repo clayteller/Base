@@ -16,34 +16,53 @@ foreach ( glob( plugin_dir_path( __FILE__ ) . "theme-functions/*.php" ) as $file
 }
 
 /**
- * Adds custom classes to the array of body classes.
+ * Add custom classes to <body> element.
  *
  * @uses Advanced Custom Fields Pro
  *
- * @param array $classes Classes for the body element.
+ * @param array $classes Default classes of <body> element.
  * @return array
  */
 function base_body_classes( $classes ) {
-   global $post;
-   $sidebar_class = 'two-column';
+
+   /**
+    * Whether subscribe form is displayed on this page.
+    * @var bool
+    */
 	$show_subscribe = get_field( 'show_subscribe', 'option' );
 
-	// Adds a class of 'hfeed' to non-singular pages.
+	// Add a class of 'hfeed' to non-singular pages
 	if ( ! is_singular() ) {
 		$classes[] = 'hfeed';
 	}
 
-    // Adds a class for pages
+    // Add a class for page names
 	if ( is_page() ) {
+      global $post;
 		$classes[] = 'page-' . $post->post_name;
 	}
 
-	// Adds a class of 'two-column' if displaying sidebar.
-	if ( base_show_sidebar() ) {
-		$classes[] = 'two-column';
-	}
+   // Add a 'wide-content' class to home page, posts page and archive
+   if ( is_front_page() || is_home() || is_archive() ) {
+      $classes[] = 'wide-content';
+   }
 
-	// Adds a class of 'has-subscribe' to pages with subscribe form.
+   // Add a page layout class to pages and posts
+   if ( is_singular() ) {
+
+      /**
+       * CSS class for page layout
+       * @var string Possible values are '', 'wide-content', 'has-aside'.
+       */
+      $page_layout = get_field( 'page_layout' );
+
+   	if ( $page_layout ) {
+   		$classes[] = $page_layout;
+   	}
+
+   }
+
+	// Add a class of 'has-subscribe' to pages with subscribe form.
 	if ( $show_subscribe ) {
 		$classes[] = 'has-subscribe';
 	}
@@ -120,34 +139,6 @@ function base_add_category_icon( $category_list ) {
    return base_add_string( $category_list, base_inline_svg( '/icons/folder.svg' ), '<li' );
 }
 add_filter( 'the_category', 'base_add_category_icon' );
-
-/**
- * Check 'show_sidebar' custom field
- *
- * @return bool True if 'show_sidebar' exists and is true.
- */
-function base_check_show_sidebar_field() {
-   $show_sidebar =  get_field( 'show_sidebar' );
-
-   return ( ! isset( $show_sidebar ) || $show_sidebar );
-}
-
-/**
- * Are we displaying a sidebar on this page?
- *
- * @return bool True if is_active_sidebar() and 'show_sidebar' custom field is true.
- */
-function base_show_sidebar() {
-   // Contact page
-   if ( is_page( 'contact' ) ) {
-      return ( is_active_sidebar( 'sidebar-contact' ) && base_check_show_sidebar_field() );
-   // Pages and posts
-   } elseif ( ( base_is_page() || is_singular( 'post' ) ) && ! is_page( 'contact' ) ) {
-      return ( is_active_sidebar( 'sidebar' ) && base_check_show_sidebar_field() );
-   } else {
-      return false;
-   }
-}
 
 /**
  * Add a pingback url auto-discovery header for singularly identifiable articles.

@@ -51,10 +51,10 @@ add_filter( 'post_class', 'base_cleanup_post_classes' );
 /**
  * Strip the prefix off Archive page titles
  */
-function base_archive_title( $title ) {
+function base_cleanup_archive_title( $title ) {
    return preg_replace('/^\w+: /', '', $title);
 }
-add_filter( 'get_the_archive_title', 'base_archive_title' );
+add_filter( 'get_the_archive_title', 'base_cleanup_archive_title' );
 
 /**
  * Don't paginate custom post types archives
@@ -65,3 +65,16 @@ function base_cpt_posts_per_page( $query ) {
   }
 }
 add_action( 'pre_get_posts', 'base_cpt_posts_per_page' );
+
+/**
+ * Remove 'hentry' css class from pages
+ *
+ * @todo Prevent 'hentry' being removed from entries listed on a page
+ */
+function base_remove_hentry( $classes ) {
+    if ( is_page() ) {
+        $classes = array_diff( $classes, array( 'hentry' ) );
+    }
+    return $classes;
+}
+// add_filter( 'post_class', 'base_remove_hentry' );

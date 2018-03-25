@@ -9,10 +9,15 @@
  */
 
 /**
- * Constants used in this theme.
+ * Theme directory URL.
+ * @var string
  */
 define( 'THEME_URL', get_stylesheet_directory_uri() );
-define( 'THEME_PATH', get_stylesheet_directory() );
+
+/**
+ * Theme directory file path.
+ * @var string
+ */define( 'THEME_PATH', get_stylesheet_directory() );
 
 if ( ! function_exists( 'base_setup' ) ) :
 	/**

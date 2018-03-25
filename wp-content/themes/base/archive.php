@@ -37,7 +37,8 @@ get_header();
 		<?php
 		if ( have_posts() ) :
 
-			the_archive_description( '<div class="archive-description">', '</div>' );
+			base_archive_content();
+
 			?>
 			<div class="entries<?php echo $css_class; ?>">
 				<?php
