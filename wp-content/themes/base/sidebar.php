@@ -14,7 +14,7 @@
 $page_layout = get_field( 'page_layout' );
 
 // Bail if there's no sidebar
-if ( ! $page_layout = 'has-aside' ) return;
+if ( 'has-aside' != $page_layout ) return;
 
 // Get the correct sidebar
 if ( is_page( 'contact' ) ) {

@@ -74,14 +74,18 @@ add_filter( 'body_class', 'base_body_classes' );
 /**
 * Add inline CSS to display a background image.
 *
-* @param string $css_class          CSS class of element being assigned a background image.
-* @param string $field_name         Field name of background image custom field.
-* @param bool   $field_name_post_id Optional. Post id of custom field.
+* @param string $css_class  CSS class of element being assigned a background image.
+* @param string $field_name Field name of background image custom field.
+* @param bool   $post_id    Optional. Post id of custom field.
 * @return string Inline CSS rules.
 */
-function base_get_background_image_css( $css_class, $field_name, $field_name_post_id = false ) {
-	// If there's no 'page' background image, use the 'site' background image
-	$image = get_field( $field_name, $field_name_post_id ) ? get_field( $field_name, $field_name_post_id ) : get_field( $field_name, 'option' );
+function base_get_background_image_css( $css_class, $field_name, $post_id = false ) {
+
+   /**
+    * Background image retrieved from custom field, otherwise ACF option page.
+    * @var array
+    */
+	$image = get_field( $field_name, $post_id ) ?: get_field( $field_name, 'option' );
 
 	// Bail if there's no image
 	if ( ! $image ) return;
