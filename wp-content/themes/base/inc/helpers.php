@@ -9,17 +9,6 @@
  */
 
 /**
- * Is the query for the blog page?
- *
- * To be used when 'Homepage' and 'Posts page' are set to static pages in 'Settings > Reading'.
- *
- * @return bool
- */
-function base_is_blog() {
-	return is_home() && ! is_front_page();
-}
-
-/**
  * Is the query for a non-home and non-blog page?
  *
  * @return bool
