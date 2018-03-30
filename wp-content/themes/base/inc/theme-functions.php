@@ -16,6 +16,22 @@ foreach ( glob( plugin_dir_path( __FILE__ ) . "theme-functions/*.php" ) as $file
 }
 
 /**
+ * Limit the number of post revisions stored in the database.
+ *
+ * Keep zero revisions for the home page to prevent the congestion of ACF flexible fields in wp_postmeta
+ *
+ * @param integer $num  Number of revisions to keep.
+ * @param object  $post WP_Post object of the current post.
+ * @return integer Number of revisions to keep.
+ */
+function base_control_revisions( $num, $post ) {
+	// 0 revisions for home page, 5 for all other posts/pages
+	$num = ( 'home' == $post->post_name ) ? 0 : 5;
+	return $num;
+}
+add_filter( 'wp_revisions_to_keep', 'base_control_revisions', 10, 2 );
+
+/**
  * Add custom classes to <body> element.
  *
  * @uses Advanced Custom Fields Pro
