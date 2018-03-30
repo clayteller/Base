@@ -266,7 +266,7 @@ function base_entry_title( $permalink = true, $before = '<h3 class="entry-title"
  *
  * @param string $field_name Name of the ACF field.
  * @param string $acf_get    Optional. ACF function name to retrieve button data. Default 'get_field'.
- * @param string $css_id     Optional. CSS id attribute. Allows Google Tag Manager to track button clicks.
+ * @param string $css_id     Optional. Typically used for Google Tag Manager to track button clicks.
  * @param string $before     Optional. Markup to prepend to the title. Default empty.
  * @param string $after      Optional. Markup to append to the title. Default empty.
  * @param bool   $echo       Optional. Whether to echo or return string. Default true.
@@ -276,7 +276,7 @@ function base_button( $field_name, $acf_get = 'get_field', $css_id = null, $befo
 	$button = $acf_get( $field_name );
 	$button_label = $button[ 'button_label' ];
 	$button_link = null;
-	$css_id ? $css_id = ' id="' . $css_id . '"' : $css_id = '';
+	$css_id = $css_id ? ' id="' . $css_id . '"' : '';
 
 	if ( 'internal' == $button[ 'link_type' ] ) {
 		$button_link = $button[ 'link_internal' ];
@@ -370,7 +370,7 @@ function base_entry_categories() {
  */
 function base_entry_tags() {
 	// If single, add tag icon.
-	$icon = ( is_single() ) ? base_inline_svg( '/icons/tag.svg' ) : '';
+	$icon = is_single() ? base_inline_svg( '/icons/tag.svg' ) : '';
 
 	echo get_the_tag_list('<ul class="post-tags">' . $icon . '<li>','</li><li>','</li></ul>');
 }
@@ -420,7 +420,7 @@ function base_post_thumbnail() {
  */
 function base_email( $before = '', $after = '', $post_id = null, $icon = true, $echo = true ) {
  	$email = get_field( 'email', $post_id );
-	$icon = ( $icon ) ? base_inline_svg( '/icons/mail.svg' ) : null;
+	$icon = $icon ? base_inline_svg( '/icons/mail.svg' ) : null;
 
  	// Bail if there's no email
  	if ( ! $email ) return;
@@ -460,7 +460,7 @@ function base_email( $before = '', $after = '', $post_id = null, $icon = true, $
  */
 function base_phone( $before = '', $after = '', $post_id = null, $icon = true, $echo = true ) {
  	$phone = get_field( 'phone', $post_id );
-	$icon = ( $icon ) ? base_inline_svg( '/icons/phone.svg' ) : null;
+	$icon = $icon ? base_inline_svg( '/icons/phone.svg' ) : null;
 
  	// Bail if there's no phone
  	if ( ! $phone ) return;
@@ -497,7 +497,7 @@ function base_phone( $before = '', $after = '', $post_id = null, $icon = true, $
  */
 function base_address( $icon = true, $echo = true ) {
  	$address = get_field( 'address', 'option' );
-	$icon = ( $icon ) ? base_inline_svg( '/icons/pin.svg' ) : null;
+	$icon = $icon ? base_inline_svg( '/icons/pin.svg' ) : null;
 
  	// Bail if there's no address
  	if ( ! $address ) return;

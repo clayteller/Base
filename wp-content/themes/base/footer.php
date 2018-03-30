@@ -18,12 +18,12 @@ get_template_part( 'template-parts/section', 'subscribe' );
 	<?php if ( is_active_sidebar( 'footer-left' ) || is_active_sidebar( 'footer-right' ) ) : ?>
 		<footer id="site-footer" class="site-footer" role="contentinfo">
 			<div class="wrap">
-				<section class="footer-left">
+				<div class="footer-left">
 					<?php dynamic_sidebar( 'footer-left' ); ?>
-				</section>
-				<section class="footer-right">
+				</div>
+				<div class="footer-right">
 					<?php dynamic_sidebar( 'footer-right' ); ?>
-				</section>
+				</div>
 			</div>
 		</footer><!-- #site-footer -->
 	<?php endif; ?>

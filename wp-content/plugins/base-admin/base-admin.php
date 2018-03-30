@@ -3,27 +3,26 @@
 Plugin Name: Base Admin
 Description: Custom functionality only for Wordpress admin.
 Version: 0.1
-License: GPL
 Author: Clay Teller
 Author URI: http://clayteller.com
+Text Domain: base
+Domain Path: /languages
+License: GPL2
 */
 
 // Abort if accessed outside WordPress
-defined( 'ABSPATH' ) or die();
-
-// Bail if not in admin area
-if ( ! is_admin() ) return;
+defined( 'WPINC' ) or die();
 
 /**
-* Include files
-*/
+ * Include files
+ */
 foreach ( glob( plugin_dir_path( __FILE__ ) . "inc/*.php" ) as $file ) {
 	require $file;
 }
 
 /**
-* Enqueue scripts and styles.
-*/
+ * Enqueue scripts and styles.
+ */
 function base_admin_scripts() {
 	wp_register_style( 'base_admin_stylesheet', plugins_url( '/css/admin.css', __FILE__ ) );
 	wp_enqueue_style( 'base_admin_stylesheet' );
@@ -31,8 +30,8 @@ function base_admin_scripts() {
 add_action( 'admin_enqueue_scripts', 'base_admin_scripts' );
 
 /**
-* Admin styles for TinyMCE
-*/
+ * Admin styles for TinyMCE
+ */
 function base_mce_css($wp) {
 	$wp .= ',' . plugins_url( '/css/admin.css', __FILE__ );
 	return $wp;
@@ -40,8 +39,8 @@ function base_mce_css($wp) {
 add_filter( 'mce_css', 'base_mce_css' );
 
 /**
-* Admin menu for non-administrators
-*/
+ * Admin menu for non-administrators
+ */
 function base_remove_menu_items() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		// Dashboard > Home
@@ -67,8 +66,8 @@ function base_remove_menu_items() {
 add_action( 'admin_menu', 'base_remove_menu_items', 999 );
 
 /**
-* Dashboard for non-administrators
-*/
+ * Dashboard for non-administrators
+ */
 function base_remove_dashboard_widgets() {
 	$user = wp_get_current_user();
 	if ( ! current_user_can( 'manage_options' ) ) {
@@ -91,8 +90,8 @@ function base_remove_dashboard_widgets() {
 add_action( 'wp_dashboard_setup', 'base_remove_dashboard_widgets' );
 
 /**
-* Meta boxes remove
-*/
+ * Meta boxes remove
+ */
 function base_remove_meta_boxes() {
 	$post_types = array( 'portfolio', 'service' );
 	foreach ( $post_types as $post_type ) {
@@ -103,8 +102,8 @@ function base_remove_meta_boxes() {
 add_action( 'admin_menu', 'base_remove_meta_boxes' );
 
 /**
-* Pages table columns
-*/
+ * Pages table columns
+ */
 function base_pages_columns( $columns ) {
 	unset( $columns[ 'comments' ] );
 	return $columns;
@@ -112,8 +111,8 @@ function base_pages_columns( $columns ) {
 add_action( 'manage_pages_columns', 'base_pages_columns' );
 
 /**
-* Posts table columns
-*/
+ * Posts table columns
+ */
 function base_posts_columns( $columns ) {
 	unset( $columns[ 'tags' ] );
 	return $columns;
@@ -121,8 +120,8 @@ function base_posts_columns( $columns ) {
 add_action( 'manage_posts_columns', 'base_posts_columns' );
 
 /**
-* Widgets
-*/
+ * Widgets
+ */
 function base_remove_widgets() {
 	unregister_widget('WP_Widget_Pages');
 	// unregister_widget('WP_Widget_Calendar');
@@ -137,8 +136,8 @@ function base_remove_widgets() {
 add_action('widgets_init', 'base_remove_widgets', 11);
 
 /**
-* TinyMCE text editor
-*/
+ * TinyMCE text editor
+ */
 function base_custom_tinymce( $init ) {
 	// CSS formatting options
 	$init['theme_advanced_blockformats'] = 'h2,h3,h4,p';
@@ -149,8 +148,8 @@ function base_custom_tinymce( $init ) {
 add_filter('tiny_mce_before_init', 'base_custom_tinymce');
 
 /**
-* Media attachment defaults
-*/
+ * Media attachment defaults
+ */
 function base_default_attachment() {
 	update_option( 'image_default_link_type', 'none' );
 }
@@ -179,5 +178,8 @@ function base_move_yoast_meta_down() {
 }
 add_filter( 'wpseo_metabox_prio', 'base_move_yoast_meta_down' );
 
-/* For extra security, disable the Appearance > Editor section in WordPress admin */
+/**
+ * For extra security, disable the Appearance > Editor section in WordPress admin
+ * @var bool
+ */
 define( 'DISALLOW_FILE_EDIT', true );

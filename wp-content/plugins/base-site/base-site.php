@@ -3,13 +3,15 @@
 Plugin Name: Base Site
 Description: Custom functionality for this site.
 Version: 0.1
-License: GPL
 Author: Clay Teller
 Author URI: http://clayteller.com
+Text Domain: base
+Domain Path: /languages
+License: GPL2
 */
 
 // Abort if accessed outside WordPress
-defined( 'ABSPATH' ) or die();
+defined( 'WPINC' ) or die();
 
 /**
 * Include files
