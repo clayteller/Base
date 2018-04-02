@@ -17,7 +17,7 @@ $title = get_field( 'section_title', 'option' );
 $text = get_field( 'section_text', 'option' );
 ?>
 
-<section class="section section-cta section-subscribe">
+<section class="section section-message section-feature-2 section-subscribe">
 	<div class="wrap">
 
 		<?php if ( $title ) : ?>
@@ -25,7 +25,7 @@ $text = get_field( 'section_text', 'option' );
 		<?php endif; ?>
 
 		<?php if ( $text ) : ?>
-			<div class="section-text"><?php echo $text; ?></div>
+			<div class="section-content"><?php echo $text; ?></div>
 		<?php endif; ?>
 
 		<?php echo do_shortcode( '[contact-form-7 id="134" title="Subscribe"]' ); ?>

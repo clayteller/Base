@@ -570,7 +570,7 @@ html, body, .site {
 @media (min-width: $phone) {
 	/* Column container */
 	.columns {
-		@mixin flexbox row, wrap;
+		@mixin flexbox;
 		margin: 0 resolve(-$space-entry / 2);
 
 		/* Column item, 2 columns */
@@ -763,7 +763,7 @@ $horizontal-column-text: 1.7fr;
 	z-index: $z-masthead;
 
 	.wrap {
-		@mixin flexbox;
+		@mixin flexbox row, wrap, space-between;
 		height: $masthead-height;
 	}
 
@@ -1221,27 +1221,19 @@ body.menu-on {
 	}
 }
 
-/* CTA section
+/* Feature section
 ----------------------------------*/
 
-.section-cta {
-	@mixin section-space 0.8rem, 0.8rem;
-	background: $background-section-color;
-	text-align: center;
+.section-feature,
+.section-feature-2 {
+	background: $background-section-feature;
 
 	.section-title {
 		color: color( $color-white a(90%) );
-		font-size: $font-size-h2;
-		font-weight: $font-weight;
-		margin-bottom: resolve($space-section - 0.6rem);
-		margin-top: -0.2rem;
 	}
 
-	.section-text {
-		@mixin clear-bottom-space;
+	.section-content {
 		color: color( $color-white a(80%) );
-		font-size: $font-size-large;
-		margin-bottom: $space-section;
 	}
 
 	.button,
@@ -1250,22 +1242,56 @@ body.menu-on {
 	}
 }
 
+.section-feature-2 {
+	background: $background-section-feature-2;
+}
+
 /* Message section
 ----------------------------------*/
 
 .section-message {
-	/* One-line layout if no description text */
-	&.notext {
-		@media (min-width: $tablet) {
-			.wrap {
-				@mixin flexbox row, nowrap, space-between, center;
-			}
+	@mixin section-space 0.8rem, 0.8rem;
+	text-align: center;
 
-			.section-title {
-				margin-bottom: 0;
-			}
+	.wrap {
+		@mixin clear-bottom-space;
+	}
+
+	.section-title {
+		font-size: resolve($font-size-h1 - 0.3em);
+		font-weight: $font-weight;
+		margin-bottom: resolve($space-section - 0.6rem);
+		margin-top: -0.2rem;
+	}
+
+	.section-content {
+		@mixin clear-bottom-space;
+		font-size: $font-size-large;
+		margin-bottom: $space-section;
+	}
+}
+
+/* Needed extra specificity */
+.site-main .section-message .wrap {
+	max-width: resolve($max-width + 250px);
+}
+
+/* One-line layout */
+.section-slim {
+	@media (min-width: $tablet) {
+		.wrap {
+			@mixin flexbox row, nowrap, space-between, center;
+		}
+
+		.section-title {
+			margin-bottom: 0;
 		}
 	}
+}
+
+/* Needed extra specificity */
+.site-main .section-slim .wrap {
+	max-width: $max-width-wide;
 }
 
 /* Partner logos section
@@ -1531,18 +1557,7 @@ body.menu-on {
 	}
 
 	.map {
-		height: 0;
-		overflow: hidden;
-		padding-bottom: 350px;
-		position: relative;
-
-		& iframe {
-			height: 100%;
-			left: 0;
-			position: absolute;
-			top: 0;
-			width: 100%;
-		}
+		@mixin frame 325px;
 	}
 
 	@media (min-width: $phone) and (max-width: $_desktop) {
@@ -1551,7 +1566,7 @@ body.menu-on {
 		}
 
 		.contact-info {
-			@mixin flexbox;
+			@mixin flexbox row, wrap, space-between;
 		}
 	}
 
@@ -1597,6 +1612,18 @@ body.menu-on {
 		margin-bottom: 0.7em;
 	}
 
+	/* "trust" badge examples */
+	.widget_media_image {
+		display: inline-block;
+		margin-right: 1.4em;
+		width: 145px;
+	}
+
+	.widget_media_image + .widget_media_image {
+		margin-right: 0;
+		width: 125px;
+	}
+
 	@media (max-width: $_tablet) {
 		/* Footer sections */
 		.wrap > * {
@@ -1608,7 +1635,7 @@ body.menu-on {
 		text-align: left;
 
 		.wrap {
-			@mixin flexbox;
+			@mixin flexbox row, wrap, space-between;
 
 			/* Footer sections */
 			> * {
@@ -1766,6 +1793,11 @@ body.menu-on {
 	fill: $color-primary;
 	height: 80px;
 	width: 80px;
+}
+
+.video {
+	@mixin frame;
+	margin-top: 2.5rem;
 }
 
 /*--------------------------------------------------------------
@@ -1985,7 +2017,7 @@ object {
 /* Galleries
 ----------------------------------*/
 .gallery {
-	@mixin flexbox row, wrap;
+	@mixin flexbox;
 	@mixin section-space -1rem;
 	margin: 0 resolve(-$space-gallery / 2) $space-entry;
 }

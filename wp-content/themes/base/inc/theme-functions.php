@@ -123,6 +123,38 @@ function base_get_background_image_css( $css_class, $field_name, $post_id = fals
 }
 
 /**
+ * Add formatting parameters to video embed query string.
+ *
+ * @link https://www.advancedcustomfields.com/resources/oembed/
+ *
+ * @param  string $video HTML to display embedded video.
+ * @return string        HTML to display embedded video..
+ */
+function base_format_video( $video ) {
+
+   // Bail if there's no video
+   if ( ! $video ) return;
+
+   // Use preg_match to find iframe src
+   preg_match( '/src="(.+?)"/', $video, $matches );
+   $src = $matches[1];
+
+   // Add extra params to iframe src
+   $params = array(
+      'showinfo' => 0
+   );
+   $new_src = add_query_arg( $params, $src );
+   $video = str_replace( $src, $new_src, $video );
+
+   // Add extra attributes to iframe html
+   $attributes = '';
+   $video = str_replace( '></iframe>', ' ' . $attributes . '></iframe>', $video );
+
+   return $video;
+
+}
+
+/**
  * Add a 'Read more' link to the excerpt.
  */
 function base_excerpt( $excerpt ) {

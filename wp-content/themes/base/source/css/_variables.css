@@ -74,13 +74,16 @@ $color-footer-link-hover: color( $color-footer-link a(+20%) );
 /* Buttons
 ----------------------------------*/
 
+/* Default button */
 $background-button:        $color-primary;
 $background-button-hover:  color( $background-button hue(+2) saturation(+7) lightness(+7) );
 $background-button-active: color( $background-button-hover lightness(+5) );
 
+/* Plain button */
 $background-button-plain:       hsl(180, 4%, 43%);
 $background-button-plain-hover: color( $background-button-plain lightness(+4) );
 
+/* Overlay button */
 $color-button-overlay:            hsl(0, 0%, 40%);
 $background-button-overlay:       color( $color-white a(90%) );
 $background-button-overlay-hover: $color-white;
@@ -90,24 +93,35 @@ $background-button-overlay-hover: $color-white;
 
 $background-masthead: color( $color-white a(92%) );
 
+/* Header background */
 $bgh-top:    color( $color-secondary lightness(-25) a(50%) );
 $bgh-bottom: color( $color-primary lightness(-30) a(70%) );
 $background-header: linear-gradient( to bottom, $bgh-top 30%, $bgh-bottom 100%);
 
-$background-section:      $color-neutral;
+/* Section background */
+$background-section: $color-neutral;
 
+/* Section dark background */
 $bgsd-top:    color( $color-dark lightness(-4) );
 $bgsd-bottom: color( $color-dark lightness(+0) );
 $background-section-dark: linear-gradient( 160deg, $bgsd-top 20%, $bgsd-bottom 70% );
 
-$bgsc-top:    color( $color-secondary hue(+5) saturation(+18) lightness(-7) );
-$bgsc-bottom: color( $bgsc-top hue(-25) saturation(+13) );
-$background-section-color: linear-gradient( 140deg, $bgsc-top 0%, $bgsc-bottom 70% );
+/* Section feature background */
+$bgsf-top:    color( $color-primary hue(+7) saturation(+14) lightness(-12) );
+$bgsf-bottom: color( $bgsf-top hue(-15) saturation(+8) lightness(-2) );
+$background-section-feature: linear-gradient( 140deg, $bgsf-top 0%, $bgsf-bottom 70% );
 
+/* Section feature 2 background */
+$bgsf2-top:    color( $color-secondary hue(+5) saturation(+18) lightness(-7) );
+$bgsf2-bottom: color( $bgsf2-top hue(-22) saturation(+13) );
+$background-section-feature-2: linear-gradient( 140deg, $bgsf2-top 0%, $bgsf2-bottom 70% );
+
+/* Footer background */
 $bgf-top:    hsla(234, 25%, 25%, 0.5);
 $bgf-bottom: color( $color-primary lightness(-40) a(70%) );
 $background-footer:   linear-gradient( to bottom, $bgf-top 20%, $bgf-bottom 80%);
 
+/* Colophon background */
 $background-colophon: color( $color-dark lightness(-8) );
 
 /*--------------------------------------------------------------

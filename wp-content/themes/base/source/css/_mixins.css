@@ -8,6 +8,7 @@
 # Button
 # Column
 # Flexbox
+# Frame
 # Full width
 # Heading
 # Image replacement
@@ -199,10 +200,13 @@
 # Flexbox
 --------------------------------------------------------------*/
 
-@define-mixin flexbox $direction: row, $wrap: wrap, $justify: space-between, $align: normal {
+@define-mixin flexbox $direction: row, $wrap: wrap, $justify: flex-start, $align: normal {
 	display: flex;
 	flex-flow: $direction $wrap;
-	justify-content: $justify;
+
+	@if $justify != flex-start {
+		justify-content: $justify;
+	}
 
 	@if $align != normal {
 		align-items: $align;
@@ -217,6 +221,25 @@
 	margin-left: 0;
 	text-align: $text-align;
 	width: 100%;
+}
+
+/*--------------------------------------------------------------
+# Frame
+--------------------------------------------------------------*/
+
+@define-mixin frame $height: 56.25% /* 16:9 */ {
+	height: 0;
+	overflow: hidden;
+	padding-bottom: $height;
+	position: relative;
+
+	& iframe {
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
 }
 
 @define-mixin full-width-phone $text-align: center  {
