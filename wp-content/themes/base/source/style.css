@@ -186,6 +186,7 @@ strong {
 .entry-content {
 	a {
 		text-decoration: underline;
+		word-wrap: break-word;
 	}
 
 	ul,
