@@ -1,7 +1,8 @@
 <?php
 /**
-* Add theme settings section (ACF options pages) to the WordPress admin
+ * Add options pages for theme settings.
  *
+ * @uses Advanced Custom Fields Pro
  * @package Base Admin
  * @since 1.0.1
  */

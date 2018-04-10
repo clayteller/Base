@@ -1,9 +1,4 @@
-/* Text editor */
+/* WYSIWYG post editor */
 body#tinymce {
-	font-size: 16px;
-}
-
-/* Contact icon */
-#adminmenu #toplevel_page_wpcf7 div.wp-menu-image:before {
-	content: "\f465";
+	font-size: 18px;
 }

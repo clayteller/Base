@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Base Admin
-Description: Custom functionality only for Wordpress admin.
+Description: Custom functionality for Wordpress admin.
 Version: 0.1
 Author: Clay Teller
 Author URI: http://clayteller.com
@@ -65,25 +65,27 @@ function base_remove_dashboard_widgets() {
 add_action( 'wp_dashboard_setup', 'base_remove_dashboard_widgets' );
 
 /**
- * Pages table columns
+ * Manage pages list table columns
  */
 function base_pages_columns( $columns ) {
+	// Remove 'comments' column
 	unset( $columns[ 'comments' ] );
 	return $columns;
 }
 add_action( 'manage_pages_columns', 'base_pages_columns' );
 
 /**
- * Posts table columns
+ * Manage posts list table columns
  */
 function base_posts_columns( $columns ) {
+	// Remove 'tags' column
 	unset( $columns[ 'tags' ] );
 	return $columns;
 }
 add_action( 'manage_posts_columns', 'base_posts_columns' );
 
 /**
- * Widgets
+ * Widgets removal
  */
 function base_remove_widgets() {
 	unregister_widget('WP_Widget_Pages');
@@ -99,7 +101,7 @@ function base_remove_widgets() {
 add_action('widgets_init', 'base_remove_widgets', 11);
 
 /**
- * TinyMCE text editor
+ * TinyMCE text editor config
  */
 function base_custom_tinymce( $init ) {
 	// CSS formatting options
@@ -114,12 +116,13 @@ add_filter('tiny_mce_before_init', 'base_custom_tinymce');
  * Media attachment defaults
  */
 function base_default_attachment() {
+	// Set default link type to 'none'
 	update_option( 'image_default_link_type', 'none' );
 }
 add_action( 'after_setup_theme', 'base_default_attachment' );
 
 /**
- * Add the content editor to the posts page edit screen.
+ * Add the content editor to the 'posts page' edit screen.
  *
  * @param Object $post
  * @return void
