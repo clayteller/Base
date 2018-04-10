@@ -44,16 +44,8 @@ add_filter( 'mce_css', 'base_mce_css' );
 function base_remove_dashboard_widgets() {
 	$user = wp_get_current_user();
 	if ( ! current_user_can( 'manage_options' ) ) {
-		// Recent Comments
-		remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal');
-		// Incoming Links
-		remove_meta_box('dashboard_incoming_links', 'dashboard', 'normal');
-		// Plugins
-		remove_meta_box('dashboard_plugins', 'dashboard', 'normal');
 		// Quick Press
 		remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
-		// Recent Drafts
-		remove_meta_box('dashboard_recent_drafts', 'dashboard', 'side');
 		// WordPress Blog
 		remove_meta_box('dashboard_primary', 'dashboard', 'side');
 		// Other WordPress News
