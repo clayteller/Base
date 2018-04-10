@@ -9,12 +9,12 @@
 /**
  * CSS class for page layout
  *
- * @var string Possible values are '', 'wide-content', 'has-aside'.
+ * @var string Possible values are 'one-column', 'wide-content', 'aside-on'.
  */
 $page_layout = get_field( 'page_layout' );
 
 // Bail if there's no sidebar
-if ( 'has-aside' != $page_layout ) return;
+if ( 'aside-on' != $page_layout ) return;
 
 // Get the correct sidebar
 if ( is_page( 'contact' ) ) {

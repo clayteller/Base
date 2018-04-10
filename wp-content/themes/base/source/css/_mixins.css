@@ -78,7 +78,7 @@
 	}
 
 	text-align: center;
-	transition: $transition;
+	transition: all $transition;
 
 	@if $type == linked {
 		&:hover {

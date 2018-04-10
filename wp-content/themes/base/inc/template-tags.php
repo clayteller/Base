@@ -11,14 +11,32 @@
  */
 
 /**
- * Use instead of get_the_content() function to preserve content formatting.
+ * Output or return post content outside the loop.
  *
- * @return string Formatted post content.
+ * @uses the_content()
+ *
+ * @param int    $id             Optional. Post ID.
+ * @param string $more_link_text Optional. Content for when there is more text.
+ * @param bool   $stripteaser    Optional. Strip teaser content before the more text. Default is false.
+ * @param bool   $echo           Whether to echo or return string. Default true.
+ * @return string Content if $echo is false.
  */
-function base_get_the_content_formatted() {
- 	ob_start();
- 	the_content();
- 	return ob_get_clean();;
+function base_the_content_by_id( $post_id = 0, $more_link_text = null, $stripteaser = false, $echo = true ) {
+    global $post;
+    $post = get_post( $post_id );
+
+    setup_postdata( $post, $more_link_text, $stripteaser );
+
+    ob_start();
+    the_content();
+    $content = ob_get_clean();
+
+    wp_reset_postdata( $post );
+
+ 	if ( $echo )
+ 		echo $content;
+ 	else
+ 		return $content;
 }
 
 /**
@@ -189,7 +207,11 @@ function base_archive_title( $echo = true ) {
 }
 
 /**
- * Output or return the content from user-added archive page.
+ * Output or return archive content.
+ *
+ * Get the content from user-added archive page; otherwise get the category, tag, term, or author description.
+ *
+ * @uses base_the_content_by_id()
  *
  * @param bool $echo Whether to echo or return string. Default true.
  * @return string Content if $echo is false.
@@ -197,7 +219,7 @@ function base_archive_title( $echo = true ) {
 function base_archive_content( $before = '<div class="archive-content">', $after = '</div>', $echo = true ) {
 
    /**
-   * Page id of the relevant user-added archive page.
+   * Page id of the relevant user-added archive page. The slug of the user-added archive page must match the post type.
    * @var integer
    */
    $archive_page_id = get_page_by_path( get_post_type() . 's' );
@@ -207,7 +229,7 @@ function base_archive_content( $before = '<div class="archive-content">', $after
       $archive_page_id = get_option( 'page_for_posts' );
    }
 
-   $content = get_post_field( 'post_content', $archive_page_id ) ?: the_archive_description();
+   $content = base_the_content_by_id( $archive_page_id, null, false, false ) ?: the_archive_description();
 
 	// Bail if there's no content
 	if ( ! $content  ) return;

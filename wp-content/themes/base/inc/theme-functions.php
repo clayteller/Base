@@ -68,7 +68,7 @@ function base_body_classes( $classes ) {
 
       /**
        * CSS class for page layout
-       * @var string Possible values are '', 'wide-content', 'has-aside'.
+       * @var string Possible values are 'one-column', 'wide-content', 'aside-on'.
        */
       $page_layout = get_field( 'page_layout' );
 
@@ -78,9 +78,9 @@ function base_body_classes( $classes ) {
 
    }
 
-	// Add a class of 'has-subscribe' to pages with subscribe form.
+	// Add a class of 'subscribe-on' to pages with subscribe form.
 	if ( $show_subscribe ) {
-		$classes[] = 'has-subscribe';
+		$classes[] = 'subscribe-on';
 	}
 
 	return $classes;

@@ -278,7 +278,7 @@ input[type='reset'],
 input[type='submit'],
 textarea:focus,
 .button {
-	transition: $transition;
+	transition: all $transition;
 }
 
 a {
@@ -488,7 +488,7 @@ html, body, .site {
 }
 
 /* When an aside is displayed */
-.has-aside {
+.aside-on {
 	@media (min-width: $desktop) {
 		.site {
 			grid-template-columns: 1fr $grid-main-width $grid-aside-width 1fr;
@@ -529,12 +529,12 @@ html, body, .site {
 	   grid-row: 3;
 
 		/* When the subscribe form is displayed */
-		.has-subscribe & {
+		.subscribe-on & {
 			grid-row: 4;
 		}
 
 		/* When aside AND subscribe form are displayed */
-		.has-aside.has-subscribe & {
+		.aside-on.subscribe-on & {
 			grid-row: 5;
 		}
 	}
@@ -551,15 +551,15 @@ html, body, .site {
 	}
 }
 
-/* Colophon overlaps footer in large-screen, has-aside layout */
+/* Colophon overlaps footer in large-screen, aside-on layout */
 @media (min-width: $desktop) {
 	.site-footer,
 	.colophon {
-		.has-aside & {
+		.aside-on & {
 			grid-column: 1 / 5;
 		}
 
-		.has-aside.has-subscribe & {
+		.aside-on.subscribe-on & {
 			grid-row: 4;
 		}
 	}
@@ -773,6 +773,7 @@ $horizontal-column-text: 1.7fr;
 	}
 }
 
+/* Translucent masthead on home page (when not scrolled) */
 body:not(.scrolled).home {
 	.masthead {
 		background: hsla(0, 0%, 100%, 0);
@@ -820,10 +821,11 @@ body:not(.scrolled).home {
 # Navigation
 --------------------------------------------------------------*/
 
-/* Site nav – all screen sizes
+/* Site nav
 ----------------------------------*/
 
 .site-menu {
+	/* Vertical layout */
 	@mixin flexbox column, nowrap, center;
 
 	/* Menu list item */
@@ -856,30 +858,33 @@ body:not(.scrolled).home {
 /* Site nav – mobile
 ----------------------------------*/
 
-@media (max-width: $_small-phone) {
-	/* Hide 'Menu' text */
-	.menu-toggle span {
-		display: none;
-	}
-}
-
 @media (max-width: $_tablet) {
 	.menu-toggle {
 		@mixin link $color-button-overlay, $color-button-overlay;
 		@mixin nav-masthead;
 		background: none !important;
+		outline: none;
 		padding-bottom: 0;
 		padding-top: 0;
 		position: absolute;
 		text-shadow: none;
 		top: 0;
+		transition: none;
 		right: $gutter;
 		z-index: $z-menu-toggle;
 
 		.menu-on & {
-			/* Override home page color treatment */
-			color: $color-nav !important;
+			background: $color-secondary !important;
+			border-radius: 0;
+			box-shadow: 0 1px 0 0 $color-border-menu-mobile;
+			/* Override home page color */
+			color: $color-white !important;
+			left: 0;
+			padding-right: calc($gutter + 0.8rem);
 			position: fixed;
+			right: 0;
+			text-align: right;
+			width: 100%;
 		}
 
 		.icon-menu {
@@ -916,9 +921,12 @@ body:not(.scrolled).home {
 			bottom: 0.9rem;
 		}
 
-		/* Make sure the button doesn't hide when menu is open. */
-		.menu-on & {
+		/* Show when menu is opened using this toggle */
+		.menu-on.scrollup & {
+			background: $color-secondary;
 			bottom: 0.9rem;
+			box-shadow: 0 0 0 1px $color-border-menu-mobile;
+			color: $color-white;
 		}
 
 		.icon-menu {
@@ -931,28 +939,21 @@ body:not(.scrolled).home {
 		}
 	}
 
-	.site-menu {
-		background: color( $color-white a(95%) );
+	/* Full-screen, scrollable menu container */
+	.site-menu-container {
+		background: $background-menu-mobile;
 		bottom: 0;
-		box-shadow: 0 1px 5px 2px hsla(0, 0%, 0%, 0.13);
 		left: 0;
 		opacity: 0;
-		padding: 1em 0 4.7em;
+		overflow-y: scroll;
+		padding: 4.1rem 0;
 		position: fixed;
 		right: 0;
 		top: 0;
-		transform: scale(0);
-		/* Launch from top right */
-		transform-origin: right top;
-		/* @link http://easings.net/#easeInOutQuint */
-		transition: all 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+		transform: scale(0.98);
+		transition: all $transition-menu-mobile;
 		visibility: hidden;
 		z-index: $z-site-menu;
-
-		/* Launch from bottom when bottom menu toggle is present */
-		.scrollup & {
-			transform-origin: bottom;
-		}
 
 		/* Show menu */
 		.menu-on & {
@@ -960,17 +961,34 @@ body:not(.scrolled).home {
 			transform: scale(1);
 			visibility: visible;
 		}
+	}
 
+	.site-menu {
+		/* Menu link */
 		a {
-			border-bottom: 1px solid $color-border;
+			@mixin link $color-white, $color-white;
+			border-bottom: 1px solid $color-border-menu-mobile;
 			font-size: $font-size-nav-mobile;
 			line-height: 3;
 			margin: 0 auto;
-			width: 320px;
+			padding-left: 1.4rem;
+			padding-right: 1.4rem;
+			width: 100%;
+
+			&:hover,
+			&:focus,
+			&:active {
+				background: hsla(0, 0%, 100%, 0.1);
+			}
 		}
 
-		> .menu-item:last-of-type > a {
-			border: 0;
+		> .menu-item:first-of-type > a {
+			border-top: 1px solid $color-border-menu-mobile;
+		}
+
+		/* Link to current page */
+		.current-menu-item > a {
+			color: $color-white;
 		}
 
 		/* 2nd-level link */
@@ -980,15 +998,22 @@ body:not(.scrolled).home {
 	}
 }
 
+/* Hide 'Menu' text on small screens */
+@media (max-width: $_small-phone) {
+	.menu-toggle {
+		.icon-menu {
+			margin-right: 0;
+		}
+		span {
+			display: none;
+		}
+	}
+}
+
 /* Don't show fixed menu toggle button if not a touch device */
 @media (pointer: fine) and (hover: hover) {
 	.menu-toggle-clone {
 		display: none;
-	}
-
-	.site-menu {
-		/* Launch from top right */
-		transform-origin: right top !important;
 	}
 }
 
@@ -1008,6 +1033,7 @@ body.menu-on {
 	}
 
 	.site-menu {
+		/* Horizontal layout */
 		flex-direction: row;
 
 		a {
