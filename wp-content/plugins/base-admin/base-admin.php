@@ -55,18 +55,6 @@ function base_remove_dashboard_widgets() {
 add_action( 'wp_dashboard_setup', 'base_remove_dashboard_widgets' );
 
 /**
- * Meta boxes remove
- */
-function base_remove_meta_boxes() {
-	$post_types = array( 'portfolio', 'service' );
-	foreach ( $post_types as $post_type ) {
-		remove_meta_box( 'commentstatusdiv', $post_type, 'normal' );
-		remove_meta_box( 'commentsdiv', $post_type, 'normal' );
-	}
-}
-add_action( 'admin_menu', 'base_remove_meta_boxes' );
-
-/**
  * Pages table columns
  */
 function base_pages_columns( $columns ) {
