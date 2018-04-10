@@ -39,33 +39,6 @@ function base_mce_css($wp) {
 add_filter( 'mce_css', 'base_mce_css' );
 
 /**
- * Admin menu for non-administrators
- */
-function base_remove_menu_items() {
-	if ( ! current_user_can( 'manage_options' ) ) {
-		// Dashboard > Home
-		remove_submenu_page( 'index.php', 'index.php' );
-		// Dashboard > Updates
-		remove_submenu_page( 'index.php', 'update-core.php' );
-		// Appearance > Themes
-		remove_submenu_page( 'themes.php', 'themes.php' );
-		// Appearance > Customize
-		remove_submenu_page( 'themes.php', 'customize.php' );
-		// Appearance > Widget Areas
-		remove_submenu_page( 'themes.php', 'edit.php?post_type=sidebar' );
-		// Appearance > Background
-		remove_submenu_page( 'themes.php', 'custom-background.php' );
-		// Appearance > Editor
-		remove_submenu_page( 'themes.php', 'theme-editor.php' );
-		// Tools
-		remove_menu_page( 'tools.php' );
-		// Genesis
-		remove_menu_page( 'genesis' );
-	}
-}
-add_action( 'admin_menu', 'base_remove_menu_items', 999 );
-
-/**
  * Dashboard for non-administrators
  */
 function base_remove_dashboard_widgets() {
