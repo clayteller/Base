@@ -39,7 +39,17 @@ function base_mce_css($wp) {
 add_filter( 'mce_css', 'base_mce_css' );
 
 /**
- * Dashboard for non-administrators
+ * Hide WordPress update notification from non-adin users.
+ */
+function base_hide_update_notice_from_non_admins() {
+	if ( ! current_user_can( 'update_core' ) ) {
+		remove_action( 'admin_notices', 'update_nag', 3 );
+	}
+}
+add_action( 'admin_head', 'base_hide_update_notice_from_non_admins', 1 );
+
+/**
+ * Dashboard setup for non-administrators
  */
 function base_remove_dashboard_widgets() {
 	$user = wp_get_current_user();
