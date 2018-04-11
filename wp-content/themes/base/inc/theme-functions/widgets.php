@@ -1,6 +1,6 @@
 <?php
 /**
- * Register widgets for this theme.
+ * Register widgets.
  *
  * @package Base Site
  * @since 1.0.1

@@ -1,6 +1,6 @@
 <?php
 /**
- * Register shortcodes for this theme.
+ * Register shortcodes.
  *
  * @package Base Site
  * @since 1.0.1
