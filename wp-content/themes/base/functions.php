@@ -31,8 +31,6 @@ if ( ! function_exists( 'base_setup' ) ) :
 		/*
 		 * Make theme available for translation.
 		 * Translations can be filed in the /languages/ directory.
-		 * If you're building a theme based on Base, use a find and replace
-		 * to change 'base' to the name of your theme in all the template files.
 		 */
 		load_theme_textdomain( 'base', get_template_directory() . '/languages' );
 
