@@ -45,7 +45,7 @@
 					'container_class' => 'site-menu-container',
 					'menu_class'      => 'site-menu',
 					'menu_id'         => 'site-menu',
-					'theme_location'  => 'menu-site',
+					'theme_location'  => 'primary',
 				) );
 				?>
 			</nav><!-- #site-nav -->

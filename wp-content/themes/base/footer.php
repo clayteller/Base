@@ -36,7 +36,7 @@ get_template_part( 'template-parts/section', 'subscribe' );
 					<h1 class="site-title"><?php base_site_title(); ?></h1>
 				</a>
 			</div><!-- .branding -->
-			<div class="copyright">&copy; 2017 Base Theme</div>
+			<div class="copyright">&copy; <?php echo date("Y"); ?> <?php base_site_title(); ?></div>
 			<?php base_social_links( 'option' ); ?>
 		</div><!-- .wrap -->
 	</section><!-- #colophon -->

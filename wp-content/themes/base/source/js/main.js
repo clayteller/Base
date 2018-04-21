@@ -28,8 +28,8 @@
 		$siteMenuButtonClone = $siteMenuButton
 			.clone()
 			.insertAfter( $siteMenuButton )
-			.removeClass( "menu-toggle" )
-			.addClass( "menu-toggle-clone" ),
+			.removeClass( 'menu-toggle' )
+			.addClass( 'menu-toggle-clone' ),
 		// Menu icon bars (to be animated)
 		$menuIconBar1 = $siteNav.find( 'rect:nth-child(1)' ),
 		$menuIconBar2 = $siteNav.find( 'rect:nth-child(2)' ),
@@ -120,11 +120,11 @@
 		$siteMenuButton.click();
 	} );
 
-	// Set menu items with submenus to aria-haspopup="true".
+	// Set menu items with submenus to aria-haspopup='true'.
 	$siteSubmenu.parent( 'li' ).attr( 'aria-haspopup', 'true' );
 
 	// Hide menu toggle initially
-	$siteMenuButtonClone.addClass( "hide" );
+	$siteMenuButtonClone.addClass( 'hide' );
 
 	/**
 	 * Add 'scrolled', 'scrolldown', and 'scrollup' classes to body on scroll event. Used by stylesheet to style/position masthead and site menu toggle button.
@@ -134,10 +134,10 @@
 	$( window ).scroll( function() {
 		// After page is scrolled below original header position…
 		if ( $( this ).scrollTop() > 0 ) {
-			$body.addClass( "scrolled" );
+			$body.addClass( 'scrolled' );
 		} else {
-			$body.removeClass( "scrolled" );
-			$body.removeClass( "scrollup" );
+			$body.removeClass( 'scrolled' );
+			$body.removeClass( 'scrollup' );
 		}
 
 		// After page is scrolled below original header position…
@@ -146,16 +146,16 @@
 			if ( $( this ).scrollTop() >= scrollPosition ) {
 				scrollDirection = 'down';
 				if ( scrollDirection !== previous ) {
-					$body.addClass( "scrolldown" );
-					$body.removeClass( "scrollup" );
+					$body.addClass( 'scrolldown' );
+					$body.removeClass( 'scrollup' );
 					previous = scrollDirection;
 				}
 			// Upward scroll
 			} else {
 				scrollDirection = 'up';
 				if ( scrollDirection !== previous ) {
-					$body.addClass( "scrollup" );
-					$body.removeClass( "scrolldown" );
+					$body.addClass( 'scrollup' );
+					$body.removeClass( 'scrolldown' );
 					previous = scrollDirection;
 				}
 			}
@@ -163,6 +163,6 @@
 		scrollPosition = $( this ).scrollTop();
 	} );
 
-	$body.removeClass( "scrolldown scrollup" );
+	$body.removeClass( 'scrolldown scrollup' );
 
 } )( jQuery );

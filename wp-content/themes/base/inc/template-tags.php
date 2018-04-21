@@ -296,26 +296,27 @@ function base_entry_title( $permalink = true, $before = '<h3 class="entry-title"
  */
 function base_button( $field_name, $acf_get = 'get_field', $css_id = null, $before = '', $after = '', $echo = true ) {
 	$button = $acf_get( $field_name );
-	$button_label = $button[ 'button_label' ];
-	$button_link = null;
+	$label = $button[ 'button_label' ];
+	$link = null;
 	$css_id = $css_id ? ' id="' . $css_id . '"' : '';
 
 	if ( 'internal' == $button[ 'link_type' ] ) {
-		$button_link = $button[ 'link_internal' ];
+		$link = $button[ 'link_internal' ];
 	}
+
 	if ( 'external' == $button[ 'link_type' ] ) {
-		$button_link = $button[ 'link_external' ];
+		$link = $button[ 'link_external' ];
 	}
 
 	// Bail if there's no button label or button link
-	if ( ! $button_label || ! $button_link ) return;
+	if ( ! $label || ! $link ) return;
 
 	$html = sprintf(
 		'%1$s<a class="button"%2$s href="%3$s">%4$s</a>%5$s',
 		$before,
 		$css_id,
-		$button_link,
-		$button_label,
+		$link,
+		$label,
 		$after
 	);
 

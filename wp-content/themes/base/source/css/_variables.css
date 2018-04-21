@@ -1,3 +1,18 @@
+/*
+Description: Variables imported into style.css.
+*/
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS
+----------------------------------------------------------------
+# Typography
+# Color
+# Layout
+# Effects
+# Z-index
+# Media Queries
+--------------------------------------------------------------*/
+
 /*--------------------------------------------------------------
 # Typography
 --------------------------------------------------------------*/
@@ -16,13 +31,13 @@ $font-size-h2:         1.8em;
 $font-size-h3:         1.4em;
 $font-size-h4:         resolve($font-size + 0.1em);
 $font-size-h5:         $font-size;
-$font-size-subtitle:   resolve($font-size + 0.35em);
-$font-size-large:      $font-size-subtitle;
+$font-size-medium:     resolve($font-size + 0.2em);
+$font-size-large:      resolve($font-size + 0.35em);
 $font-size-medium:     resolve($font-size + 0.2em);
 $font-size-meta:       0.85em;
 $font-size-nav:        19px;
 $font-size-nav-mobile: 1.2em;
-$font-size-field:      resolve($font-size + 0.1em);;
+$font-size-field:      resolve($font-size + 0.1em);
 $font-size-button:     1.2em;
 
 $font-weight:               400;
@@ -31,6 +46,10 @@ $font-weight-heading:       700;
 
 $line-height:         1.65;
 $line-height-heading: 1.3;
+
+$space-text:        1.5em;
+$space-heading:     0.5em;
+$space-heading-top: resolve($space-heading * 2);
 
 /*--------------------------------------------------------------
 # Color
@@ -42,17 +61,26 @@ $color-white:     hsl(0, 0%, 100%);
 $color-neutral:   hsl(208, 3%, 95%);
 $color-dark:      hsl(208, 17%, 25%);
 
+/* Text
+----------------------------------*/
+
 $color-text:     $color-dark;
 $color-strong:   color( $color-text lightness(+5) );
 $color-heading:  $color-text;
 $color-meta:     color( $color-text lightness(+28) );
 $color-title:    color( $color-white a(95%) );
 $color-subtitle: color( $color-text lightness(+10) );
-$color-border:   hsl(0, 0%, 88%);
-$color-border-menu-mobile: hsla(0, 0%, 100%, 0.3);
 $color-footer:   color( $color-white a(80%) );
 
+/* Misc
+----------------------------------*/
+
+$color-border: hsl(0, 0%, 88%);
+$color-border-menu-mobile: hsla(0, 0%, 100%, 0.3);
 $color-error: hsl(355, 87%, 55%);
+
+/* Social
+----------------------------------*/
 
 $color-facebook:   #3b5999;
 $color-twitter:    #55acee;
@@ -132,7 +160,7 @@ $background-colophon: color( $color-dark lightness(-8) );
 
 $gutter:         4%;
 $max-width:      750px;
-$max-width-wide: 1300px;
+$max-width-wide: calc($gutter * 2 + 1300px); /* 1300px */
 
 $masthead-height:  4.2rem;
 $submenu-width:    220px;
@@ -140,11 +168,9 @@ $grid-main-width:  630px;
 $grid-aside-width: 300px;
 $colophon-height:  5rem;
 
-$space-text:    1.5em;
-$space-heading: 0.5em;
-
-$space-button: 0.6em;
-$space-icon:   0.4em;
+$space-button:    0.6em;
+$space-icon:      0.4em;
+$space-menu-item: 0.8em;
 
 $space-section:         2rem;
 $space-section-desktop: 2.4rem;
@@ -160,7 +186,7 @@ $space-border:          2rem;
 
 $border-radius:          8px;
 $border-radius-circle:   999px;
-$border-radius-field:    8px;
+$border-radius-field:    $border-radius;
 $box-shadow:             0 0 5px 0 hsla(0, 0%, 0%, 0.1);
 $box-shadow-on:          0 0 15px 0 hsla(0, 0%, 0%, 0.13);
 $text-shadow:            1px 1px hsla(0, 0%, 0%, 0.15);

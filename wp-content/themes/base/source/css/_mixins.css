@@ -1,3 +1,7 @@
+/*
+Description: Mixins imported into style.css.
+*/
+
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS
 ----------------------------------------------------------------
@@ -336,10 +340,10 @@
 # Nav
 --------------------------------------------------------------*/
 
-@define-mixin nav-masthead {
+@define-mixin menu-item-spacing {
 	line-height: $masthead-height;
-	padding-left: 0.8rem;
-	padding-right: 0.8rem;
+	padding-left: $space-menu-item;
+	padding-right: $space-menu-item;
 }
 
 /*--------------------------------------------------------------

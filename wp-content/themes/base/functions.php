@@ -17,7 +17,8 @@ define( 'THEME_URL', get_stylesheet_directory_uri() );
 /**
  * Theme directory file path.
  * @var string
- */define( 'THEME_PATH', get_stylesheet_directory() );
+ */
+define( 'THEME_PATH', get_stylesheet_directory() );
 
 if ( ! function_exists( 'base_setup' ) ) :
 	/**
@@ -62,8 +63,8 @@ if ( ! function_exists( 'base_setup' ) ) :
 
 		// This theme uses wp_nav_menu().
 		register_nav_menus( array(
-			'menu-site'   => esc_html__( 'Masthead', 'base' ),
-			'menu-footer' => esc_html__( 'Footer', 'base' )
+			'primary' => esc_html__( 'Masthead', 'base' ),
+			'footer'  => esc_html__( 'Footer', 'base' )
 		) );
 
 		/*

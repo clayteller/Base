@@ -1,6 +1,6 @@
 <?php
 /**
- * Enhance the comments
+ * Customize WordPress comments.
  *
  * @package Base
  * @since 1.0.1

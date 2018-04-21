@@ -45,6 +45,7 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 # Contact Form 7
 --------------------------------------------------------------*/
 
+/* Import variables and mixins */
 @import 'css/_variables';
 @import 'css/_mixins';
 
@@ -174,7 +175,8 @@ h6 {
 p {
 	margin: 0 0 $space-text;
 
-	&.intro {
+	&.intro,
+	&.large {
 		font-size: $font-size-large;
 	}
 }
@@ -185,6 +187,14 @@ strong {
 }
 
 .entry-content {
+	h2, h3, h4 {
+		margin-top: $space-heading-top;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
 	a {
 		text-decoration: underline;
 		word-wrap: break-word;
@@ -613,19 +623,19 @@ html, body, .site {
 .alignleft {
 	display: inline;
 	float: left;
-	margin-right: 1.5em;
+	margin: $space-text $space-text $space-text 0;
 }
 
 .alignright {
 	display: inline;
 	float: right;
-	margin-left: 1.5em;
+	margin: $space-text 0 $space-text $space-text;
 }
 
 .aligncenter {
 	clear: both;
 	display: block;
-	margin-left: auto;
+	margin: $space-text auto;
 	margin-right: auto;
 }
 
@@ -862,7 +872,7 @@ body:not(.scrolled).home {
 @media (max-width: $_tablet) {
 	.menu-toggle {
 		@mixin link $color-button-overlay, $color-button-overlay;
-		@mixin nav-masthead;
+		@mixin menu-item-spacing;
 		background: none !important;
 		outline: none;
 		padding-bottom: 0;
@@ -881,7 +891,7 @@ body:not(.scrolled).home {
 			/* Override home page color */
 			color: $color-white !important;
 			left: 0;
-			padding-right: calc($gutter + 0.8rem);
+			padding-right: calc($gutter + $space-menu-item);
 			position: fixed;
 			right: 0;
 			text-align: right;
@@ -940,14 +950,14 @@ body:not(.scrolled).home {
 		}
 	}
 
-	/* Full-screen, scrollable menu container */
+	/* Required for full-screen, scrollable mobile menu */
 	.site-menu-container {
 		background: $background-menu-mobile;
 		bottom: 0;
 		left: 0;
 		opacity: 0;
 		overflow-y: scroll;
-		padding: 4.1rem 0;
+		padding: $masthead-height 0;
 		position: fixed;
 		right: 0;
 		top: 0;
@@ -1038,7 +1048,7 @@ body.menu-on {
 		flex-direction: row;
 
 		a {
-			@mixin nav-masthead;
+			@mixin menu-item-spacing;
 		}
 
 		.home {
@@ -1192,7 +1202,7 @@ body.menu-on {
 
 	.home & {
 		/* Vertical centering */
-		@mixin flexbox column, wrap, center;
+		@mixin flexbox column, nowrap, center;
 		min-height: 21rem;
 		padding-bottom: resolve($space-section + 1.8rem);
 		padding-top: resolve($masthead-height + 2.2rem);
@@ -1213,6 +1223,7 @@ body.menu-on {
 		max-width: 850px;
 	}
 
+	/* Search page */
 	.search & {
 		font-size: resolve($font-size-h1 - 0.2em);
 	}
@@ -1243,7 +1254,7 @@ body.menu-on {
 
 	& + .subtitle {
 		color: $color-subtitle;
-		font-size: $font-size-subtitle;
+		font-size: $font-size-large;
 		line-height: $line-height-heading;
 		margin-top: -0.8rem;
 	}
@@ -1756,6 +1767,7 @@ body.menu-on {
 		@mixin flexbox row, wrap, flex-start, center;
 	}
 
+	/* Logo graphic */
 	.logo {
 		margin-right: 0.7rem;
 		height: 1.6rem;
@@ -1772,6 +1784,7 @@ body.menu-on {
 		}
 	}
 
+	/* Logo text */
 	.site-title {
 		font-family: $font-family-heading;
 		font-size: 1.6em;
