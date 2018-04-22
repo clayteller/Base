@@ -336,7 +336,7 @@ function base_button( $field_name, $acf_get = 'get_field', $css_id = null, $befo
  * @return string HTML if $echo is false.
  */
 function base_social_links( $post_id = null, $echo = true ) {
-	// Bail if there's no contact info
+	// Bail if there's no social links
 	if ( ! have_rows( 'social_links', $post_id ) ) return;
 
    $html = '<ul class="social-links">';

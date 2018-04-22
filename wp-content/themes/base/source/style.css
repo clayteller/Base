@@ -1817,7 +1817,11 @@ body.menu-on {
 	}
 
 	.googleplus .icon {
-		mask: url(icons/google+.svg) no-repeat 50% 50%/24px;
+		mask: url(icons/googleplus.svg) no-repeat 50% 50%/24px;
+	}
+
+	.instagram .icon {
+		mask: url(icons/instagram.svg) no-repeat 50% 50%/24px;
 	}
 
 	.linkedin .icon {
