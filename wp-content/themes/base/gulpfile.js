@@ -19,35 +19,28 @@ var
 	rename         = require( 'gulp-rename' ),
 	responsivetype = require( 'postcss-responsive-type' ),
 	uglify         = require( 'gulp-uglify' ),
+	wpPot          = require( 'gulp-wp-pot' ),
 
 	// Source and destination directories
-	jsSource       = 'source/js/**/*.js',
-	jsDest         = 'js',
+	cssDest        = './',
 	cssSource      = 'source/**/[^_]*.css',
 	cssSourceWatch = 'source/**/*.css',
-	cssDest        = './',
-	imgSource      = 'source/images/**/*',
-	imgDest        = 'images',
+	iconDest       = 'icons',
 	iconSource     = 'source/icons/**/*',
-	iconDest       = 'icons';
+	imgDest        = 'images',
+	imgSource      = 'source/images/**/*',
+	jsDest         = 'js',
+	jsSource       = 'source/js/**/*.js',
+	phpSource      = [
+		'./*.php',
+		'inc/**/*.php',
+		'template-parts/**/*.php',
+		],
 
-var onError = function ( err ) {
+	onError = function ( err ) {
 		gutil.beep( 2 );
 		gutil.log( gutil.colors.white( err ) );
 	};
-
-// JavaScript
-gulp.task( 'js', function() {
-	gulp.src( jsSource )
-		.pipe( plumber( {
-			errorHandler: onError
-		} ) )
-		.pipe( changed( jsDest ) )
-		.pipe( gulp.dest( jsDest ) )
-		.pipe( uglify() )
-		.pipe( rename( { suffix: '.min' } ) )
-		.pipe( gulp.dest( jsDest ) );
-} );
 
 // CSS
 gulp.task( 'css', function() {
@@ -74,23 +67,6 @@ gulp.task( 'css', function() {
 		.pipe( browsersync.stream() );
 } );
 
-// Images
-gulp.task( 'images', function () {
-	gulp.src( imgSource )
-		.pipe(imagemin([
-			imagemin.gifsicle({interlaced: true}),
-			imagemin.jpegtran({progressive: true}),
-			imagemin.optipng({optimizationLevel: 5}),
-			imagemin.svgo({
-				plugins: [
-					{removeDimensions: true},
-					{removeViewBox:    false}
-				]
-			})
-		]))
-		.pipe( gulp.dest( imgDest ) );
-} );
-
 // Icons
 // @todo figure out how to "combine" Images and Icons tasks
 gulp.task( 'icons', function () {
@@ -108,12 +84,55 @@ gulp.task( 'icons', function () {
 		.pipe( gulp.dest( iconDest ) );
 } );
 
+// Images
+gulp.task( 'images', function () {
+	gulp.src( imgSource )
+		.pipe(imagemin([
+			imagemin.gifsicle({interlaced: true}),
+			imagemin.jpegtran({progressive: true}),
+			imagemin.optipng({optimizationLevel: 5}),
+			imagemin.svgo({
+				plugins: [
+					{removeDimensions: true},
+					{removeViewBox:    false}
+				]
+			})
+		]))
+		.pipe( gulp.dest( imgDest ) );
+} );
+
+// JavaScript
+gulp.task( 'js', function() {
+	gulp.src( jsSource )
+		.pipe( plumber( {
+			errorHandler: onError
+		} ) )
+		.pipe( changed( jsDest ) )
+		.pipe( gulp.dest( jsDest ) )
+		.pipe( uglify() )
+		.pipe( rename( { suffix: '.min' } ) )
+		.pipe( gulp.dest( jsDest ) );
+} );
+
+// Translate
+gulp.task( 'translate', function() {
+	gulp.src( phpSource )
+		.pipe( plumber( {
+			errorHandler: onError
+		} ) )
+		.pipe( wpPot( {
+			 domain: 'base',
+			 package: 'Base theme'
+		} ) )
+		.pipe( gulp.dest( 'languages/base.pot' ) );
+} );
+
 // Watch for changes
 gulp.task( 'watch', function() {
-	gulp.watch( jsSource, [ 'js' ] );
 	gulp.watch( cssSourceWatch, [ 'css' ] );
-	gulp.watch( imgSource, [ 'images' ] );
 	gulp.watch( iconSource, [ 'icons' ] );
+	gulp.watch( imgSource, [ 'images' ] );
+	gulp.watch( jsSource, [ 'js' ] );
 } );
 
 // Reload browser when files change
@@ -133,4 +152,4 @@ gulp.task( 'reload', function() {
 } );
 
 // Default task
-gulp.task( 'default', [ 'js', 'css', 'images', 'icons', 'watch', 'reload' ] );
+gulp.task( 'default', [ 'css', 'icons', 'images', 'js', 'reload', 'translate', 'watch' ] );
