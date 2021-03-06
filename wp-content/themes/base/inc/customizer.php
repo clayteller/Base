@@ -4,16 +4,16 @@
  *
  * @package Base
  * @since 1.0.1
-*/
+ */
 
  /**
  * Remove the 'Additional CSS' and 'Static Front Page' sections from Customizer
  */
- function themename_customize_register($wp_customize) {
+ function base_remove_from_customizer($wp_customize) {
 	 $wp_customize->remove_section( 'custom_css' );
 	 $wp_customize->remove_section( 'static_front_page' );
  }
- add_action('customize_register', 'themename_customize_register');
+ add_action('customize_register', 'base_remove_from_customizer');
 
 /**
  * Add postMessage support for site title and description for the Theme Customizer.

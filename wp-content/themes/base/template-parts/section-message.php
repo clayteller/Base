@@ -41,7 +41,8 @@ $css_class .= ( $content || $video ) ? '' : ' section-slim';
 				echo $content;
 				if ( $video ) :
 					echo '<div class="video">' . base_format_video( $video ) . '</div>';
-				endif;				?>
+				endif;
+				?>
 			</div>
 		<?php
 		endif;

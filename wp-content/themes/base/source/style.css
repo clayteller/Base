@@ -15,7 +15,7 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 */
 
 /*--------------------------------------------------------------
->>> TABLE OF CONTENTS
+TABLE OF CONTENTS
 ----------------------------------------------------------------
 # Elements
 # Typography
@@ -122,7 +122,7 @@ table {
 }
 
 /*--------------------------------------------------------------
-	# Typography
+# Typography
 --------------------------------------------------------------*/
 
 html {
@@ -198,6 +198,15 @@ strong {
 	a {
 		text-decoration: underline;
 		word-wrap: break-word;
+
+		&:focus {
+			outline: thin dotted;
+		}
+
+		&:hover,
+		&:active {
+			outline: 0;
+		}
 	}
 
 	ul,
@@ -295,15 +304,6 @@ textarea:focus,
 a {
 	@mixin link;
 	text-decoration: none;
-
-	&:focus {
-		outline: thin dotted;
-	}
-
-	&:hover,
-	&:active {
-		outline: 0;
-	}
 }
 
 button,
@@ -345,28 +345,47 @@ input[type='datetime-local'],
 input[type='color'],
 textarea {
 	@mixin full-width-phone left;
-	color: #444;
+	color: $color-input;
 	border: 1px solid #ccc;
 	border-radius: $border-radius-field;
 	font-family: $font-family;
 	font-size: $font-size-field;
-	padding: 10px 15px;
+	line-height: 1;
+	max-width: 100%;
+	padding: 0.8em 0.9em;
 }
 
 select {
 	border: 1px solid #ccc;
+	max-width: 100%;
 }
 
 textarea {
+	line-height: $line-height;
+	padding-top: 0.7em;
 	width: 100%;
 }
 
+::placeholder {
+	color: color( $color-input a(60%) );
+}
+
 :focus::placeholder {
-	color: #bbb;
+	color: color( $color-input a(30%) );
 }
 
 .field {
 	margin-bottom: $space-text;
+}
+
+label {
+	font-size: $font-size-small;
+	font-weight: $font-weight-bold;
+}
+
+*[disabled] {
+	cursor: default;
+	opacity: 0.4;
 }
 
 /* Search form
@@ -507,7 +526,7 @@ html, body, .site {
 
 		.site-header,
 		.section-subscribe {
-			grid-column: 1 / 5;
+			grid-column: 1 / -1; /* Span all columns */
 		}
 
 		.site-main {
@@ -661,7 +680,8 @@ $horizontal-column-text: 1.7fr;
 
 .horizontal {
 	display: grid;
-	grid: max-content auto / $horizontal-column-image $horizontal-column-text; /* row heights / column widths */
+	grid-template-columns: $horizontal-column-image $horizontal-column-text;
+	grid-template-rows: max-content auto;
 
 	/* Featured image */
 	.entry-image {
@@ -874,7 +894,7 @@ body:not(.scrolled).home {
 		@mixin link $color-button-overlay, $color-button-overlay;
 		@mixin menu-item-spacing;
 		background: none !important;
-		outline: none;
+		outline: 0;
 		padding-bottom: 0;
 		padding-top: 0;
 		position: absolute;
@@ -912,7 +932,7 @@ body:not(.scrolled).home {
 		box-shadow: 0 1px 5px 2px hsla(0, 0%, 0%, 0.25);
 		color: $color-button-overlay;
 		left: 50%;
-		outline: none;
+		outline: 0;
 		padding: 0.7em;
 		position: fixed;
 		text-shadow: none;
@@ -1878,11 +1898,6 @@ body.menu-on {
 .widget {
 	@mixin clear-bottom-space;
 	margin: 0 0 $space-entry;
-
-	/* Make sure select elements fit in widgets. */
-	select {
-		max-width: 100%;
-	}
 }
 
 /*--------------------------------------------------------------
@@ -1953,6 +1968,10 @@ body.menu-on {
 
 	a {
 		@mixin link-incognito;
+	}
+
+	.says {
+		display: none;
 	}
 }
 

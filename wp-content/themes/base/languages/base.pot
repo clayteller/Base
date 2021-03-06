@@ -1,4 +1,4 @@
-# Copyright (C) 2018 Base theme
+# Copyright (C) 2020 Base theme
 # This file is distributed under the same license as the Base theme package.
 msgid ""
 msgstr ""

@@ -246,8 +246,8 @@ function base_archive_content( $before = '<div class="archive-content">', $after
  * Output or return the entry title.
  *
  * @param string $permalink Optional. Whether to add permalink. Default true.
- * @param string $before    Optional. Markup to prepend to the title. Default empty.
- * @param string $after     Optional. Markup to append to the title. Default empty.
+ * @param string $before    Optional. Markup to prepend to the title.
+ * @param string $after     Optional. Markup to append to the title.
  * @param bool   $echo      Whether to echo or return string. Default true.
  * @return string Entry title if $echo is false.
  */
@@ -536,4 +536,30 @@ function base_address( $icon = true, $echo = true ) {
  		echo $html;
  	else
  		return $html;
+}
+
+/**
+ * Link to another WordPress page using the page title.
+ *
+ * @param string $title e.g. 'About'
+ * @return string URL.
+ */
+function base_link_to( $title ) {
+	return get_page_link( get_page_by_title( $title )->ID );
+}
+
+/**
+ * Reads SVG file and returns it as a string.
+ *
+ * @param string $path Path to svg file (from theme root directory).
+ * @return string SVG code.
+ */
+function base_inline_svg( $path ) {
+	// Use @ to suppress warning if no file exists
+	$file = @file_get_contents( THEME_PATH . $path  );
+
+	// Bail if there's no file
+	if ( ! $file ) return;
+
+	return $file;
 }

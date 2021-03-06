@@ -39,7 +39,7 @@ function base_mce_css($wp) {
 add_filter( 'mce_css', 'base_mce_css' );
 
 /**
- * Hide WordPress update notification from non-adin users.
+ * Hide WordPress update notification from non-admin users.
  */
 function base_hide_update_notice_from_non_admins() {
 	if ( ! current_user_can( 'update_core' ) ) {
@@ -51,7 +51,7 @@ add_action( 'admin_head', 'base_hide_update_notice_from_non_admins', 1 );
 /**
  * Dashboard setup for non-administrators
  */
-function base_remove_dashboard_widgets() {
+function base_remove_dashboard_meta_boxes() {
 	$user = wp_get_current_user();
 	if ( ! current_user_can( 'manage_options' ) ) {
 		// Quick Press
@@ -62,7 +62,7 @@ function base_remove_dashboard_widgets() {
 		remove_meta_box('dashboard_secondary', 'dashboard', 'side');
 	}
 }
-add_action( 'wp_dashboard_setup', 'base_remove_dashboard_widgets' );
+add_action( 'wp_dashboard_setup', 'base_remove_dashboard_meta_boxes' );
 
 /**
  * Manage pages list table columns

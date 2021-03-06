@@ -24,7 +24,8 @@
 <body <?php body_class(); ?>>
 <div id="site" class="site">
 	<a class="skip-link screen-reader-text" href="#site-main"><?php esc_html_e( 'Skip to content', 'base' ); ?></a>
-	<?php do_action( 'base_before_masthead' ); ?>
+
+	<?php do_action( 'base_masthead_before' ); ?>
 
 	<section id="masthead" class="masthead" role="banner">
 		<div class="wrap">
@@ -52,7 +53,8 @@
 		</div><!-- .wrap -->
 	</section><!-- #masthead -->
 
-	<?php do_action( 'base_before_header' ); ?>
+	<?php do_action( 'base_header_before' ); ?>
+
 	<header id="site-header" class="site-header">
 		<div class="wrap">
 			<?php base_page_title( '<h1 class="page-title">', '</h1>' ); ?>
@@ -65,4 +67,4 @@
 		</div><!-- .wrap -->
 	</header><!-- #site-header -->
 
-	<?php do_action( 'base_before_main' ); ?>
+	<?php do_action( 'base_main_before' ); ?>

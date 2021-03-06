@@ -33,7 +33,7 @@ if ( ! function_exists( 'base_setup' ) ) :
 		 * Make theme available for translation.
 		 * Translations can be filed in the /languages/ directory.
 		 */
-		load_theme_textdomain( 'base', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'base', THEME_PATH . '/languages' );
 
 		// Add default posts and comments RSS feed links to head.
 		add_theme_support( 'automatic-feed-links' );
@@ -85,7 +85,7 @@ add_action( 'after_setup_theme', 'base_setup' );
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *
- * Priority 0 to make it available to lower priority callbacks.
+ * This value controls the max width of media elements like oEmbeds. Priority 0 to make it available to lower priority callbacks.
  *
  * @global int $content_width
  */
@@ -97,26 +97,26 @@ add_action( 'after_setup_theme', 'base_content_width', 0 );
 /**
  * Custom template tags for this theme.
  */
-require get_template_directory() . '/inc/template-tags.php';
+require THEME_PATH . '/inc/template-tags.php';
 
 /**
  * Functions which enhance the theme by hooking into WordPress.
  */
-require get_template_directory() . '/inc/theme-functions.php';
+require THEME_PATH . '/inc/theme-functions.php';
 
 /**
  * Customizer additions.
  */
-require get_template_directory() . '/inc/customizer.php';
+require THEME_PATH . '/inc/customizer.php';
 
 /**
  * Load Jetpack compatibility file.
  */
 if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
+	require THEME_PATH . '/inc/jetpack.php';
 }
 
 /**
  * Helper functions for this theme.
  */
-require get_template_directory() . '/inc/helpers.php';
+require THEME_PATH . '/inc/helpers.php';

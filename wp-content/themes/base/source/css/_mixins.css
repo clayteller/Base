@@ -3,7 +3,7 @@ Description: Mixins imported into style.css.
 */
 
 /*--------------------------------------------------------------
->>> TABLE OF CONTENTS
+TABLE OF CONTENTS
 ----------------------------------------------------------------
 # Background image color overlay
 # Border
@@ -188,10 +188,12 @@ Description: Mixins imported into style.css.
 
 @define-mixin column-width $count: 3, $space: 0  {
 	$width: resolve(100 / $count);
+	$width: $width%;
+
 	@if $space == 0 {
-		width: $width%;
+		width: $width;
 	} @else {
-		width: calc($width% - $space);
+		width: calc($width - $space);
 	}
 }
 

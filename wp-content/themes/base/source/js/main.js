@@ -1,5 +1,5 @@
 /**
- * Sitewide javascript
+ * Sitewide javascript.
  *
  * @requires jquery.js
  * @requires TweenMax.js
@@ -20,7 +20,7 @@
 		$siteNav = $( '#site-nav' ),
 		// Site nav menu
 		$siteMenu = $siteNav.find( '#site-menu' ),
-		// Site nav menu
+		// Site nav submenu
 		$siteSubmenu = $siteMenu.find( 'ul' ),
 		// Menu toggle button
 		$siteMenuButton = $siteNav.find( '.menu-toggle' ),
@@ -132,7 +132,7 @@
 	 * @todo Move to a recallable function
 	 */
 	$( window ).scroll( function() {
-		// After page is scrolled below original header position…
+		// After page is scrolled below original position…
 		if ( $( this ).scrollTop() > 0 ) {
 			$body.addClass( 'scrolled' );
 		} else {
