@@ -1,6 +1,9 @@
-/*
-Description: Mixins imported into style.css.
-*/
+/**
+ * PostCSS mixins imported into stylesheets.
+ *
+ * @package Base
+ * @author  Clay Teller
+ */
 
 /*--------------------------------------------------------------
 TABLE OF CONTENTS
@@ -27,12 +30,12 @@ TABLE OF CONTENTS
 # Background image color overlay
 --------------------------------------------------------------*/
 
-@define-mixin background-image-overlay $background-color {
+@mixin background-image-overlay( $background-color ) {
 	position: relative;
 
 	&::after {
 		background: $background-color;
-		content: '';
+		content: "";
 		bottom: 0;
 		left: 0;
 		position: absolute;
@@ -43,7 +46,7 @@ TABLE OF CONTENTS
 
 	.wrap {
 		position: relative;
-		z-index: resolve($z-background-overlay + 1);
+		z-index: calc( $z-background-overlay + 1 );
 	}
 }
 
@@ -51,17 +54,17 @@ TABLE OF CONTENTS
 # Border
 --------------------------------------------------------------*/
 
-@define-mixin border $margin-adjust: 0rem, $padding-adjust: 0rem {
+@mixin border( $margin-adjust: 0rem, $padding-adjust: 0rem ) {
 	border-top: 1px solid $color-border;
-	margin-top: resolve( $space-border + $margin-adjust );
-	padding-top: resolve( $space-border + $padding-adjust );
+	margin-top: calc( $space-border + $margin-adjust );
+	padding-top: calc( $space-border + $padding-adjust );
 }
 
 /*--------------------------------------------------------------
 # Bottom space correction
 --------------------------------------------------------------*/
 
-@define-mixin clear-bottom-space {
+@mixin clear-bottom-space {
 	> *:last-child {
 		margin-bottom: 0 !important;
 	}
@@ -71,7 +74,7 @@ TABLE OF CONTENTS
 # Box
 --------------------------------------------------------------*/
 
-@define-mixin box $type: default, $space: $space-box {
+@mixin box( $type: default, $space: 1.3rem ) {
 	$box-padding: 15px;
 	background: #fff;
 	box-shadow: $box-shadow;
@@ -100,12 +103,17 @@ TABLE OF CONTENTS
 # Button
 --------------------------------------------------------------*/
 
-@define-mixin button $background: $background-button,  $background-hover: $background-button-hover, $background-active: $background-button-active {
-	background: $background;
+@mixin button( $background: false,  $background-hover: false, $background-active: false ) {
+	@if $background {
+		background: $background;
+	} @else {
+		background: $background-button;
+	}
+
 	border-radius: $border-radius;
 	border: 0;
 	box-shadow: none;
-	color: color( $color-white a(90%) );
+	color: color( $color-white a( 90% ) );
 	cursor: pointer;
 	display: inline-block;
 	font-family: $font-family-heading;
@@ -122,24 +130,34 @@ TABLE OF CONTENTS
 
 	&:hover,
 	&:focus {
-		background: $background-hover;
+		@if $background-hover {
+			background: $background-hover;
+		} @else {
+			background: $background-button-hover;
+		}
+
 		color: $color-white;
 	}
 
 	&:active {
-		background: $background-active;
+		@if $background-hover {
+			background: $background-active;
+		} @else {
+			background: $background-button-active;
+		}
+
 		color: $color-white;
 	}
 }
 
-@define-mixin button-outline $type: default {
+@mixin button-outline( $type: default ) {
 	background: transparent;
 
 	@if $type == light {
-		box-shadow: inset 0 0 0 2px color( $color-white a(70%) );
-		color: color( $color-white a(90%) );
+		box-shadow: inset 0 0 0 2px color( $color-white a( 70% ) );
+		color: color( $color-white a( 90% ) );
 	} @else {
-		box-shadow: inset 0 0 0 2px color( $background-button a(90%) );
+		box-shadow: inset 0 0 0 2px color( $background-button a( 90% ) );
 		color: $background-button;
 		text-shadow: none;
 	}
@@ -147,7 +165,7 @@ TABLE OF CONTENTS
 	&:hover,
 	&:focus {
 		@if $type == light {
-			background: color( $color-white a(10%) );
+			background: color( $color-white a( 10% ) );
 		} @else {
 			background: $background-button;
 		}
@@ -156,23 +174,23 @@ TABLE OF CONTENTS
 
 	&:active {
 		@if $type == light {
-			background: color( $color-white a(15%) );
+			background: color( $color-white a( 15% ) );
 		} @else {
 			background: $background-button-hover;
 		}
 	}
 }
 
-@define-mixin button-big {
-	font-size: resolve( $font-size-button + 0.1em );
+@mixin button-big {
+	font-size: calc( $font-size-button + 0.1em );
 }
 
-@define-mixin button-small $font-reduce: 0.1em {
-	font-size: resolve( $font-size-button - $font-reduce );
+@mixin button-small( $font-reduce: 0.1em ) {
+	font-size: calc( $font-size-button - $font-reduce );
 	padding: 0.6em 0.7em 0.6em;
 }
 
-@define-mixin button-plain {
+@mixin button-plain {
 	background: $background-button-plain;
 
 	&:hover,
@@ -186,27 +204,27 @@ TABLE OF CONTENTS
 # Column
 --------------------------------------------------------------*/
 
-@define-mixin column-width $count: 3, $space: 0  {
-	$width: resolve(100 / $count);
+@mixin column-width( $count: 3, $space: 0  ) {
+	$width: calc( 100 / $count );
 	$width: $width%;
 
 	@if $space == 0 {
 		width: $width;
 	} @else {
-		width: calc($width - $space);
+		width: calc( $width - $space );
 	}
 }
 
-@define-mixin column-space $space {
-	margin-left: resolve($space / 2);
-	margin-right: resolve($space / 2);
+@mixin column-space( $space ) {
+	margin-left: calc( $space / 2 );
+	margin-right: calc( $space / 2 );
 }
 
 /*--------------------------------------------------------------
 # Flexbox
 --------------------------------------------------------------*/
 
-@define-mixin flexbox $direction: row, $wrap: wrap, $justify: flex-start, $align: normal {
+@mixin flexbox( $direction: row, $wrap: wrap, $justify: flex-start, $align: normal ) {
 	display: flex;
 	flex-flow: $direction $wrap;
 
@@ -223,7 +241,7 @@ TABLE OF CONTENTS
 # Full width
 --------------------------------------------------------------*/
 
-@define-mixin full-width $text-align: center  {
+@mixin full-width( $text-align: center  ) {
 	margin-left: 0;
 	text-align: $text-align;
 	width: 100%;
@@ -233,7 +251,7 @@ TABLE OF CONTENTS
 # Frame
 --------------------------------------------------------------*/
 
-@define-mixin frame $height: 56.25% /* 16:9 */ {
+@mixin frame( $height: 56.25% /* 16:9 */ ) {
 	height: 0;
 	overflow: hidden;
 	padding-bottom: $height;
@@ -248,9 +266,9 @@ TABLE OF CONTENTS
 	}
 }
 
-@define-mixin full-width-phone $text-align: center  {
-	@media (max-width: $_phone) {
-		@mixin full-width $text-align;
+@mixin full-width-phone( $text-align: center  ) {
+	@media ( max-width: $_phone ) {
+		@include full-width( $text-align );
 	}
 }
 
@@ -258,7 +276,7 @@ TABLE OF CONTENTS
 # Heading
 --------------------------------------------------------------*/
 
-@define-mixin heading $level {
+@mixin heading( $level ) {
 	color: $color-heading;
 	font-family: $font-family-heading;
 	font-weight: $font-weight-heading;
@@ -288,7 +306,7 @@ TABLE OF CONTENTS
 	}
 }
 
-@define-mixin title {
+@mixin title {
 	color: $color-title;
 	font-family: $font-family-heading;
 	font-size: $font-size-h1;
@@ -301,7 +319,7 @@ TABLE OF CONTENTS
 # Image replacement
 --------------------------------------------------------------*/
 
-@define-mixin image-replacement $height: auto, $width: auto  {
+@mixin image-replacement( $height: auto, $width: auto  ) {
 	display: block;
 	height: $height;
 	overflow: hidden;
@@ -314,21 +332,29 @@ TABLE OF CONTENTS
 # Link
 --------------------------------------------------------------*/
 
-@define-mixin link $color: $color-link, $color-hover: $color-link-hover, $decoration: none  {
-	color: $color;
+@mixin link( $color: false, $color-hover: false, $decoration: false ) {
+	@if $color {
+		color: $color;
+	} @else {
+		color: $color-link;
+	}
 
-	@if $decoration != none {
+	@if $decoration {
 		text-decoration: $decoration;
 	}
 
 	&:hover,
 	&:focus,
 	&:active {
-		color: $color-hover;
+		@if $color-hover {
+			color: $color-hover;
+		} @else {
+			color: $color-link-hover;
+		}
 	}
 }
 
-@define-mixin link-incognito  {
+@mixin link-incognito {
 	color: $color-text;
 
 	&:hover,
@@ -342,7 +368,7 @@ TABLE OF CONTENTS
 # Nav
 --------------------------------------------------------------*/
 
-@define-mixin menu-item-spacing {
+@mixin menu-item-spacing {
 	line-height: $masthead-height;
 	padding-left: $space-menu-item;
 	padding-right: $space-menu-item;
@@ -351,8 +377,8 @@ TABLE OF CONTENTS
 /*--------------------------------------------------------------
 # Screen reader text
 --------------------------------------------------------------*/
-@define-mixin screen-reader-text {
-	clip: rect(1px, 1px, 1px, 1px);
+@mixin screen-reader-text {
+	clip: rect( 1px, 1px, 1px, 1px );
 	position: absolute !important;
 	height: 1px;
 	width: 1px;
@@ -362,7 +388,7 @@ TABLE OF CONTENTS
 	&:focus {
 		background-color: #f1f1f1;
 		border-radius: 3px;
-		box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+		box-shadow: 0 0 2px 2px rgba( 0, 0, 0, 0.6 );
 		clip: auto !important;
 		color: #21759b;
 		display: block;
@@ -384,7 +410,7 @@ TABLE OF CONTENTS
 # Section background
 --------------------------------------------------------------*/
 
-@define-mixin section-background $background {
+@mixin section-background( $background ) {
 	background: $background;
 	border-bottom: 1px solid $color-border;
 	border-top: 1px solid $color-border;
@@ -394,20 +420,20 @@ TABLE OF CONTENTS
 # Section vertical spacing
 --------------------------------------------------------------*/
 
-@define-mixin section-space $top-adjust: 0rem, $bottom-adjust: 0rem {
-	padding-bottom: resolve( $space-section + $bottom-adjust );
-	padding-top: resolve( $space-section + $top-adjust );
+@mixin section-space( $top-adjust: 0rem, $bottom-adjust: 0rem ) {
+	padding-bottom: calc( $space-section + $bottom-adjust );
+	padding-top: calc( $space-section + $top-adjust );
 
-	@media (min-width: $tablet) {
-		padding-bottom: resolve( $space-section-desktop + $bottom-adjust );
-		padding-top: resolve( $space-section-desktop + $top-adjust );
+	@media ( min-width: $tablet ) {
+		padding-bottom: calc( $space-section-desktop + $bottom-adjust );
+		padding-top: calc( $space-section-desktop + $top-adjust );
 	}
 }
 
-@define-mixin section-margin-bottom $adjust: 0rem {
-	margin-bottom: resolve( $space-section + $adjust );
+@mixin section-margin-bottom( $adjust: 0rem ) {
+	margin-bottom: calc( $space-section + $adjust );
 
-	@media (min-width: $tablet) {
-		margin-bottom: resolve( $space-section-desktop + $adjust );
+	@media ( min-width: $tablet ) {
+		margin-bottom: calc( $space-section-desktop + $adjust );
 	}
 }

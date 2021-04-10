@@ -10,13 +10,9 @@
  * Enqueue scripts and styles.
  */
 function base_scripts() {
-   // normalize.css
-	$file = base_get_min_file( '/css/normalize.min.css' );
-	wp_enqueue_style( 'base-normalize-css', THEME_URL . $file );
-
 	// style.css
-	$file = base_get_min_file( '/style.min.css' );
-	wp_enqueue_style( 'base-style', THEME_URL . $file, array( 'base-normalize-css' ) );
+	$file = base_get_min_file( '/assets/css/style.min.css' );
+	wp_enqueue_style( 'base-style', THEME_URL . $file );
 
    // Add inline css to display the "Header Background Image" (custom field)
    $header_background_image_css = base_get_background_image_css( 'site-header', 'header_background_image' );
@@ -31,13 +27,13 @@ function base_scripts() {
    // wp_add_inline_style( 'base-style', $background_image_css );
 
    // main.js
-	$file = base_get_min_file( '/js/main.min.js' );
+	$file = base_get_min_file( '/assets/js/main.min.js' );
 	wp_enqueue_script( 'base-main', THEME_URL . $file, array( 'jquery', 'base-gsap' ), false, true );
 
 	// lightbox.js (load on single post pages)
 	if ( is_singular()  ) {
 		// lightbox.js
-		$file = base_get_min_file( '/js/lightbox.min.js' );
+		$file = base_get_min_file( '/assets/js/lightbox.min.js' );
 		wp_enqueue_script( 'base-lightbox', THEME_URL . $file, array( 'jquery', 'base-featherlight', 'base-featherlight-gallery' ), false, true );
 
 		// Pass svg icon html to lightbox.js
@@ -47,21 +43,21 @@ function base_scripts() {
 		) );
 
 		// Featherlight css
-		$file = base_get_min_file( '/css/featherlight.min.css' );
+		$file = base_get_min_file( '/assets/css/featherlight.min.css' );
 		wp_enqueue_style( 'base-featherlight-style', THEME_URL . $file );
 		// Featherlight gallery css
-		$file = base_get_min_file( '/css/featherlight.gallery.min.css' );
+		$file = base_get_min_file( '/assets/css/featherlight.gallery.min.css' );
 		wp_enqueue_style( 'base-featherlight-gallery-style', THEME_URL . $file );
 
 		// Featherlight js
-		$file = base_get_min_file( '/js/lib/featherlight.min.js' );
+		$file = base_get_min_file( '/assets/js/lib/featherlight.min.js' );
 		wp_enqueue_script( 'base-featherlight', THEME_URL . $file, array( 'base-swipe' ), false, true );
 		// Featherlight gallery js
-		$file = base_get_min_file( '/js/lib/featherlight.gallery.min.js' );
+		$file = base_get_min_file( '/assets/js/lib/featherlight.gallery.min.js' );
 		wp_enqueue_script( 'base-featherlight-gallery', THEME_URL . $file, array( 'base-swipe' ), false, true );
 
 		// jQuery swipe
-		$file = base_get_min_file( '/js/lib/jquery.detect_swipe.min.js' );
+		$file = base_get_min_file( '/assets/js/lib/jquery.detect_swipe.min.js' );
 		wp_enqueue_script( 'base-swipe', THEME_URL . $file, array( 'jquery' ), '20151215', true );
 	}
 

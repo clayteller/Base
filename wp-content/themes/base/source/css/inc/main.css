@@ -1,18 +1,12 @@
-/*
-Theme Name: Base
-Theme URI: http://underscores.me/
-Author: Clay Teller
-Author URI: http://clayteller.com
-Description: Clay Teller's base theme.
-Version: 1.0.0
-License: GNU General Public License v2 or later
-License URI: LICENSE
-Text Domain: base
-Tags:
+/**
+ * The main theme styles imported into style.css.
+ *
+ * @package Base
+ * @author  Clay Teller
+ */
 
-Base is based on Underscores https://underscores.me/, (C) 2012-2017 Automattic, Inc.
-Underscores is distributed under the terms of the GNU GPL v2 or later.
-*/
+ @import "variables";
+ @import "mixins";
 
 /*--------------------------------------------------------------
 TABLE OF CONTENTS
@@ -24,6 +18,8 @@ TABLE OF CONTENTS
 # Icons
 # Classes
 # Layout
+
+# SECTIONS
 # Masthead
 # Navigation
 # Header
@@ -32,22 +28,12 @@ TABLE OF CONTENTS
 # Aside
 # Footer
 # Accessibility
-# CONTENT
+
+# PAGES
 # Components
 # Home
 # 404
-# WORDPRESS
-# Widgets
-# Posts and pages
-# Comments
-# Media
-# PLUGINS
-# Contact Form 7
 --------------------------------------------------------------*/
-
-/* Import variables and mixins */
-@import 'css/_variables';
-@import 'css/_mixins';
 
 /*--------------------------------------------------------------
 # Elements
@@ -75,7 +61,7 @@ q::after {
 
 blockquote,
 q {
-	quotes: '“' '”' '‘' '’';
+	quotes: "“" "”" "‘" "’";
 }
 
 hr {
@@ -126,7 +112,7 @@ table {
 --------------------------------------------------------------*/
 
 html {
-	/* postcss-responsive-type (next 2 lines) */
+	/* postcss-responsive-type ( next 2 lines ) */
 	font-size: responsive $responsive-type-font-min $responsive-type-font-max; /* min-size, max-size */
    font-range: $responsive-type-screen-min $responsive-type-screen-max; /* viewport widths between which font-size is fluid */
 }
@@ -149,27 +135,27 @@ textarea {
 }
 
 h1 {
-	@mixin heading h1;
+	@include heading( h1 );
 }
 
 h2 {
-	@mixin heading h2;
+	@include heading( h2 );
 }
 
 h3 {
-	@mixin heading h3;
+	@include heading( h3 );
 }
 
 h4 {
-	@mixin heading h4;
+	@include heading( h4 );
 }
 
 h5 {
-	@mixin heading h5;
+	@include heading( h5 );
 }
 
 h6 {
-	@mixin heading h6;
+	@include heading( h6 );
 }
 
 p {
@@ -251,7 +237,7 @@ address {
 
 pre {
 	background: #eee;
-	font-family: 'Courier 10 Pitch', Courier, monospace;
+	font-family: "Courier 10 Pitch", Courier, monospace;
 	font-size: 15px;
 	font-size: 0.9375rem;
 	line-height: 1.6;
@@ -265,7 +251,7 @@ code,
 kbd,
 tt,
 var {
-	font-family: Monaco, Consolas, 'Andale Mono', 'DejaVu Sans Mono', monospace;
+	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 	font-size: 15px;
 	font-size: 0.9375rem;
 }
@@ -293,58 +279,58 @@ big {
 a,
 button,
 input:focus,
-input[type='button'],
-input[type='reset'],
-input[type='submit'],
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
 textarea:focus,
 .button {
 	transition: all $transition;
 }
 
 a {
-	@mixin link;
+	@include link;
 	text-decoration: none;
 }
 
 button,
-input[type='button'],
-input[type='reset'],
-input[type='submit'],
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
 .button {
-	@mixin button;
+	@include button;
 
 	.site-main &,
 	.site-aside &,
 	.section-cta & {
-		@mixin full-width-phone;
+		@include full-width-phone;
 	}
 }
 
 .button-big {
-	@mixin button-big;
+	@include button-big;
 }
 
 /*--------------------------------------------------------------
 # Forms
 --------------------------------------------------------------*/
 
-input[type='text'],
-input[type='email'],
-input[type='url'],
-input[type='password'],
-input[type='search'],
-input[type='number'],
-input[type='tel'],
-input[type='range'],
-input[type='date'],
-input[type='month'],
-input[type='week'],
-input[type='time'],
-input[type='datetime'],
-input[type='datetime-local'],
-input[type='color'],
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"],
 textarea {
-	@mixin full-width-phone left;
+	@include full-width-phone( left );
 	color: $color-input;
 	border: 1px solid #ccc;
 	border-radius: $border-radius-field;
@@ -367,11 +353,11 @@ textarea {
 }
 
 ::placeholder {
-	color: color( $color-input a(60%) );
+	color: color( $color-input a( 60% ) );
 }
 
 :focus::placeholder {
-	color: color( $color-input a(30%) );
+	color: color( $color-input a( 30% ) );
 }
 
 .field {
@@ -397,22 +383,22 @@ label {
 
 .site-main {
 	.search-form {
-		@mixin section-space;
+		@include section-space;
 	}
 
-	@media (max-width: $_phone) {
+	@media ( max-width: $_phone ) {
 		.search-field {
 			margin-bottom: $space-text;
 		}
 	}
 
-	@media (min-width: $phone) {
+	@media ( min-width: $phone ) {
 		.search-field {
 			width: 330px;
 		}
 	}
 
-	@media (min-width: $tablet) {
+	@media ( min-width: $tablet ) {
 		.search-field {
 			width: 420px;
 		}
@@ -423,7 +409,7 @@ label {
 ----------------------------------*/
 
 .section-subscribe {
-	@media (min-width: $phone) {
+	@media ( min-width: $phone ) {
 		.field,
 		.form-button {
 			display: inline-block;
@@ -439,7 +425,7 @@ label {
 		}
 	}
 
-	@media (min-width: $tablet) {
+	@media ( min-width: $tablet ) {
 		.field input {
 			width: 420px;
 		}
@@ -450,7 +436,7 @@ label {
 # Icons
 --------------------------------------------------------------*/
 
-[class*='icon-'] {
+[class*="icon-"] {
 	fill: currentColor;
 	height: 0.95em;
 	margin-right: $space-icon;
@@ -496,11 +482,11 @@ label {
 }
 
 /* Non-home page main content areas need section spacing  */
-body:not(.home) .site-main {
-	@mixin section-space;
+body:not( .home ) .site-main {
+	@include section-space;
 
 	> .wrap {
-		@mixin clear-bottom-space;
+		@include clear-bottom-space;
 	}
 }
 
@@ -519,7 +505,7 @@ html, body, .site {
 
 /* When an aside is displayed */
 .aside-on {
-	@media (min-width: $desktop) {
+	@media ( min-width: $desktop ) {
 		.site {
 			grid-template-columns: 1fr $grid-main-width $grid-aside-width 1fr;
 		}
@@ -535,7 +521,7 @@ html, body, .site {
 
 			.wrap {
 				max-width: 100%;
-				padding-left: calc(100% - $grid-main-width);
+				padding-left: calc( 100% - $grid-main-width );
 				padding-right: 30px;
 			}
 		}
@@ -545,14 +531,14 @@ html, body, .site {
 
 			.wrap {
 				padding-left: 30px;
-				padding-right: calc(100% - $grid-aside-width);
+				padding-right: calc( 100% - $grid-aside-width );
 			}
 		}
 	}
 }
 
 /* Colophon overlaps footer */
-@media (min-width: $tablet) {
+@media ( min-width: $tablet ) {
 	.site-footer,
 	.colophon {
 		grid-column: 1 / 2;
@@ -571,7 +557,7 @@ html, body, .site {
 
 	/* Extra padding on bottom for colophon to overlap */
 	.site-footer {
-		padding-bottom: resolve($space-section + $colophon-height) !important;
+		padding-bottom: calc( $space-section + $colophon-height ) !important;
 	}
 
 	/* Overlaps the bottom of the footer */
@@ -582,7 +568,7 @@ html, body, .site {
 }
 
 /* Colophon overlaps footer in large-screen, aside-on layout */
-@media (min-width: $desktop) {
+@media ( min-width: $desktop ) {
 	.site-footer,
 	.colophon {
 		.aside-on & {
@@ -598,41 +584,41 @@ html, body, .site {
 /* Columns
 ----------------------------------*/
 
-@media (min-width: $phone) {
+@media ( min-width: $phone ) {
 	/* Column container */
 	.columns {
-		@mixin flexbox;
-		margin: 0 resolve(-$space-entry / 2);
+		@include flexbox;
+		margin: 0 calc( -$space-entry / 2 );
 
 		/* Column item, 2 columns */
 		> * {
-			@mixin column-space $space-entry;
-			@mixin column-width 2, $space-entry;
-			margin-bottom: resolve($space-entry + 1rem);
+			@include column-space( $space-entry );
+			@include column-width( 2, $space-entry );
+			margin-bottom: calc( $space-entry + 1rem );
 		}
 	}
 
 	/* 3 columns */
 	.columns-3 > * {
-		@mixin column-width 3, $space-entry;
+		@include column-width( 3, $space-entry );
 	}
 }
 
 
-@media (min-width: $desktop) {
+@media ( min-width: $desktop ) {
 	/* 3 columns */
 	.columns	> * {
-		@mixin column-width 3, $space-entry;
+		@include column-width( 3, $space-entry );
 	}
 
 	/* 2 columns */
 	.columns-2 > * {
-		@mixin column-width 2, $space-entry;
+		@include column-width( 2, $space-entry );
 	}
 
 	/* 4 columns */
 	.columns-4 > * {
-		@mixin column-width 4, $space-entry;
+		@include column-width( 4, $space-entry );
 	}
 }
 
@@ -663,7 +649,7 @@ html, body, .site {
 
 .clear::before,
 .clear::after {
-	content: '';
+	content: "";
 	display: table;
 	table-layout: fixed;
 }
@@ -675,7 +661,7 @@ html, body, .site {
 /* Entry horizontal layout
 ----------------------------------*/
 
-$horizontal-column-image: minmax(240px, 1fr);
+$horizontal-column-image: minmax( 240px, 1fr );
 $horizontal-column-text: 1.7fr;
 
 .horizontal {
@@ -696,7 +682,7 @@ $horizontal-column-text: 1.7fr;
 	}
 
 	.entry-content {
-		@mixin clear-bottom-space;
+		@include clear-bottom-space;
 	}
 }
 
@@ -704,12 +690,12 @@ $horizontal-column-text: 1.7fr;
 /* 'Benefit' and 'testimonial' horizontal layout modify column widths */
 .horizontal.type-benefit,
 .horizontal.type-testimonial {
-	grid-template-columns: minmax(100px, 1fr) 3fr;
+	grid-template-columns: minmax( 100px, 1fr ) 3fr;
 }
 
 /* 'Service' horizontal layout switch orientation every other instance */
-.horizontal.type-service:nth-of-type(even) {
-	@media (min-width: $phone) {
+.horizontal.type-service:nth-of-type( even ) {
+	@media ( min-width: $phone ) {
 		grid-template-columns: $horizontal-column-text $horizontal-column-image;
 
 		/* Featured image */
@@ -728,7 +714,7 @@ $horizontal-column-text: 1.7fr;
 
 /* 'Service' horizontal layout prevent on small screen */
 .horizontal.type-service {
-	@media (max-width: $_phone) {
+	@media ( max-width: $_phone ) {
 		display: block;
 
 		.entry-image {
@@ -752,7 +738,7 @@ $horizontal-column-text: 1.7fr;
 	}
 
 	/* Slightly adjust layout for small screen */
-	@media (max-width: $_small-phone) {
+	@media ( max-width: $_small-phone ) {
 		grid: max-content / 60px; /* row heights / column widths */
 
 		/* Position image underneath content */
@@ -772,14 +758,18 @@ $horizontal-column-text: 1.7fr;
 ----------------------------------*/
 
 .vertical {
-	@mixin clear-bottom-space;
+	@include clear-bottom-space;
 
 	> * {
-		@mixin clear-bottom-space;
+		@include clear-bottom-space;
 		margin-bottom: $space-entry-child;
 	}
 
 }
+
+/*--------------------------------------------------------------
+# SECTIONS
+--------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
 # Masthead
@@ -787,7 +777,7 @@ $horizontal-column-text: 1.7fr;
 
 .masthead {
 	background: $background-masthead;
-	box-shadow: 0 3px 8px hsla(0, 0%, 0%, 0.08);
+	box-shadow: 0 3px 8px hsla( 0, 0%, 0%, 0.08 );
 	position: absolute;
 	top: 0;
 	transition: all ease-out 400ms;
@@ -795,7 +785,7 @@ $horizontal-column-text: 1.7fr;
 	z-index: $z-masthead;
 
 	.wrap {
-		@mixin flexbox row, wrap, space-between;
+		@include flexbox( row, wrap, space-between );
 		height: $masthead-height;
 	}
 
@@ -804,10 +794,10 @@ $horizontal-column-text: 1.7fr;
 	}
 }
 
-/* Translucent masthead on home page (when not scrolled) */
-body:not(.scrolled).home {
+/* Translucent masthead on home page ( when not scrolled ) */
+body:not( .scrolled ).home {
 	.masthead {
-		background: hsla(0, 0%, 100%, 0);
+		background: hsla( 0, 0%, 100%, 0 );
 		box-shadow: none;
 	}
 
@@ -821,23 +811,23 @@ body:not(.scrolled).home {
 	}
 
 	.site-nav a {
-		@media (min-width: $tablet) {
+		@media ( min-width: $tablet ) {
 			color: $color-white;
 			text-shadow: $text-shadow;
 		}
 	}
 
-	@media (min-width: $tablet) {
+	@media ( min-width: $tablet ) {
 		/* Top-level sub-menu */
 		.site-menu > .menu-item > .sub-menu {
-			background: color( $color-dark a(80%) );
+			background: color( $color-dark a( 80% ) );
 		}
 	}
 }
 
 
 /* 'Sticky' masthead on tablets and desktop devices */
-@media (min-width: $tablet), (pointer: fine) and (hover: hover) {
+@media ( min-width: $tablet ), ( pointer: fine ) and ( hover: hover ) {
 	.masthead {
 		position: fixed;
 
@@ -857,7 +847,7 @@ body:not(.scrolled).home {
 
 .site-menu {
 	/* Vertical layout */
-	@mixin flexbox column, nowrap, center;
+	@include flexbox( column, nowrap, center );
 
 	/* Menu list item */
 	.menu-item {
@@ -866,7 +856,7 @@ body:not(.scrolled).home {
 
 	/* Menu link */
 	a {
-		@mixin link $color-nav, $color-nav-hover;
+		@include link( $color-nav, $color-nav-hover );
 		display: block;
 		font-family: $font-family-heading;
 		font-weight: $font-weight-heading;
@@ -889,10 +879,10 @@ body:not(.scrolled).home {
 /* Site nav – mobile
 ----------------------------------*/
 
-@media (max-width: $_tablet) {
+@media ( max-width: $_tablet ) {
 	.menu-toggle {
-		@mixin link $color-button-overlay, $color-button-overlay;
-		@mixin menu-item-spacing;
+		@include link( $color-button-overlay, $color-button-overlay );
+		@include menu-item-spacing;
 		background: none !important;
 		outline: 0;
 		padding-bottom: 0;
@@ -911,7 +901,7 @@ body:not(.scrolled).home {
 			/* Override home page color */
 			color: $color-white !important;
 			left: 0;
-			padding-right: calc($gutter + $space-menu-item);
+			padding-right: calc( $gutter + $space-menu-item );
 			position: fixed;
 			right: 0;
 			text-align: right;
@@ -929,14 +919,14 @@ body:not(.scrolled).home {
 		border-radius: $border-radius-circle;
 		/* Hide initially */
 		bottom: -3.4rem;
-		box-shadow: 0 1px 5px 2px hsla(0, 0%, 0%, 0.25);
+		box-shadow: 0 1px 5px 2px hsla( 0, 0%, 0%, 0.25 );
 		color: $color-button-overlay;
 		left: 50%;
 		outline: 0;
 		padding: 0.7em;
 		position: fixed;
 		text-shadow: none;
-		transform: translate(-50%);
+		transform: translate( -50% );
 		transition: all ease-out 400ms;
 		z-index: $z-menu-toggle;
 
@@ -981,7 +971,7 @@ body:not(.scrolled).home {
 		position: fixed;
 		right: 0;
 		top: 0;
-		transform: scale(0.98);
+		transform: scale( 0.98 );
 		transition: all $transition-menu-mobile;
 		visibility: hidden;
 		z-index: $z-site-menu;
@@ -989,7 +979,7 @@ body:not(.scrolled).home {
 		/* Show menu */
 		.menu-on & {
 			opacity: 1;
-			transform: scale(1);
+			transform: scale( 1 );
 			visibility: visible;
 		}
 	}
@@ -997,7 +987,7 @@ body:not(.scrolled).home {
 	.site-menu {
 		/* Menu link */
 		a {
-			@mixin link $color-white, $color-white;
+			@include link( $color-white, $color-white );
 			border-bottom: 1px solid $color-border-menu-mobile;
 			font-size: $font-size-nav-mobile;
 			line-height: 3;
@@ -1009,7 +999,7 @@ body:not(.scrolled).home {
 			&:hover,
 			&:focus,
 			&:active {
-				background: hsla(0, 0%, 100%, 0.1);
+				background: hsla( 0, 0%, 100%, 0.1 );
 			}
 		}
 
@@ -1024,13 +1014,13 @@ body:not(.scrolled).home {
 
 		/* 2nd-level link */
 		.sub-menu a::before {
-			content: '– ';
+			content: "– ";
 		}
 	}
 }
 
 /* Hide 'Menu' text on small screens */
-@media (max-width: $_small-phone) {
+@media ( max-width: $_small-phone ) {
 	.menu-toggle {
 		.icon-menu {
 			margin-right: 0;
@@ -1042,7 +1032,7 @@ body:not(.scrolled).home {
 }
 
 /* Don't show fixed menu toggle button if not a touch device */
-@media (pointer: fine) and (hover: hover) {
+@media ( pointer: fine ) and ( hover: hover ) {
 	.menu-toggle-clone {
 		display: none;
 	}
@@ -1056,7 +1046,7 @@ body.menu-on {
 /* Site nav - desktop
 ----------------------------------*/
 
-@media (min-width: $tablet) {
+@media ( min-width: $tablet ) {
 	/* Menu toggles */
 	.menu-toggle,
 	.menu-toggle-clone {
@@ -1068,7 +1058,7 @@ body.menu-on {
 		flex-direction: row;
 
 		a {
-			@mixin menu-item-spacing;
+			@include menu-item-spacing;
 		}
 
 		.home {
@@ -1097,7 +1087,7 @@ body.menu-on {
 
 			/* 2nd-level link */
 			.sub-menu a::before {
-				content: '– ';
+				content: "– ";
 			}
 		}
 
@@ -1115,11 +1105,11 @@ body.menu-on {
 .site-footer .widget_nav_menu {
 	li {
 		display: inline-block;
-		margin: 0 resolve($space-button / 2) resolve($space-button * 1.8);
+		margin: 0 calc( $space-button / 2 ) calc( $space-button * 1.8 );
 	}
 
 	a {
-		@mixin button hsla(0, 0%, 100%, 0.1), hsla(0, 0%, 100%, 0.2), hsla(0, 0%, 100%, 0.3);
+		@include button( hsla( 0, 0%, 100%, 0.1 ), hsla( 0, 0%, 100%, 0.2 ), hsla( 0, 0%, 100%, 0.3 ) );
 		font-size: $font-size-nav;
 		padding: 0.6em 0.6em 0.5em;
 	}
@@ -1132,22 +1122,22 @@ body.menu-on {
 .pagination,
 /* Single post navigation */
 .post-navigation {
-	@mixin section-margin-bottom;
+	@include section-margin-bottom;
 }
 
 /* Both archive and single post pagination/navigation */
 .nav-links {
-	@mixin flexbox row, wrap, center, center;
+	@include flexbox( row, wrap, center, center );
 
 	> * {
-		margin: 0 resolve($space-button / 2) resolve($space-button * 1.8);
+		margin: 0 calc( $space-button / 2 ) calc( $space-button * 1.8 );
 	}
 
 	a,
 	span {
-		@mixin button;
-		@mixin button-outline;
-		@mixin button-small;
+		@include button;
+		@include button-outline;
+		@include button-small;
 	}
 
 	.icon-chevron {
@@ -1157,7 +1147,7 @@ body.menu-on {
 	.prev,
 	.nav-previous {
 		.icon-chevron {
-			transform: rotate(.25turn);
+			transform: rotate( .25turn );
 		}
 	}
 
@@ -1165,7 +1155,7 @@ body.menu-on {
 	.nav-next {
 		.icon-chevron {
 			margin-left: 0.1em;
-			transform: rotate(.75turn);
+			transform: rotate( .75turn );
 		}
 	}
 }
@@ -1197,11 +1187,11 @@ body.menu-on {
 		white-space: nowrap;
 	}
 
-	@media (max-width: $_phone) {
+	@media ( max-width: $_phone ) {
 		flex: 0 0 100%;
 
 		a {
-			@mixin full-width;
+			@include full-width;
 		}
 	}
 }
@@ -1211,33 +1201,33 @@ body.menu-on {
 --------------------------------------------------------------*/
 
 .site-header {
-	@mixin background-image-overlay $background-header;
-	/* background-image is set inline (functions.php) with WordPress */
+	@include background-image-overlay( $background-header );
+	/* background-image is set inline ( functions.php ) with WordPress */
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
 	padding-bottom: $space-section;
-	padding-top: resolve($masthead-height + $space-section);
+	padding-top: calc( $masthead-height + $space-section );
 	text-align: center;
 
 	.home & {
 		/* Vertical centering */
-		@mixin flexbox column, nowrap, center;
+		@include flexbox( column, nowrap, center );
 		min-height: 21rem;
-		padding-bottom: resolve($space-section + 1.8rem);
-		padding-top: resolve($masthead-height + 2.2rem);
+		padding-bottom: calc( $space-section + 1.8rem );
+		padding-top: calc( $masthead-height + 2.2rem );
 
 		.button {
-			@mixin button-big;
+			@include button-big;
 		}
 	}
 }
 
 .page-title {
-	@mixin title;
+	@include title;
 
 	.home & {
-		font-size: resolve($font-size-h1 + 0.2em);
+		font-size: calc( $font-size-h1 + 0.2em );
 		margin-bottom: 0.7em;
 		/* Temporary prevent widow */
 		max-width: 850px;
@@ -1245,7 +1235,7 @@ body.menu-on {
 
 	/* Search page */
 	.search & {
-		font-size: resolve($font-size-h1 - 0.2em);
+		font-size: calc( $font-size-h1 - 0.2em );
 	}
 }
 
@@ -1254,7 +1244,7 @@ body.menu-on {
 --------------------------------------------------------------*/
 
 .section {
-	@mixin section-space;
+	@include section-space;
 }
 
 .section-header,
@@ -1263,14 +1253,14 @@ body.menu-on {
 }
 
 .section-header {
-	@mixin clear-bottom-space;
-	margin-bottom: resolve($space-section + 0.8rem) ;
+	@include clear-bottom-space;
+	margin-bottom: calc( $space-section + 0.8rem ) ;
 	/* Offset the top line-height spacing */
 	margin-top: -0.5rem;
 }
 
 .section-title {
-	@mixin heading h1;
+	@include heading( h1 );
 
 	& + .subtitle {
 		color: $color-subtitle;
@@ -1288,16 +1278,16 @@ body.menu-on {
 	background: $background-section-feature;
 
 	.section-title {
-		color: color( $color-white a(90%) );
+		color: color( $color-white a( 90% ) );
 	}
 
 	.section-content {
-		color: color( $color-white a(80%) );
+		color: color( $color-white a( 80% ) );
 	}
 
 	.button,
-	input[type='submit'] {
-		@mixin button-outline light;
+	input[type="submit"] {
+		@include button-outline( light );
 	}
 }
 
@@ -1309,22 +1299,22 @@ body.menu-on {
 ----------------------------------*/
 
 .section-message {
-	@mixin section-space 0.8rem, 0.8rem;
+	@include section-space( 0.8rem, 0.8rem );
 	text-align: center;
 
 	.wrap {
-		@mixin clear-bottom-space;
+		@include clear-bottom-space;
 	}
 
 	.section-title {
-		font-size: resolve($font-size-h1 - 0.3em);
+		font-size: calc( $font-size-h1 - 0.3em );
 		font-weight: $font-weight;
-		margin-bottom: resolve($space-section - 0.6rem);
+		margin-bottom: calc( $space-section - 0.6rem );
 		margin-top: -0.2rem;
 	}
 
 	.section-content {
-		@mixin clear-bottom-space;
+		@include clear-bottom-space;
 		font-size: $font-size-large;
 		margin-bottom: $space-section;
 	}
@@ -1332,14 +1322,14 @@ body.menu-on {
 
 /* Needed extra specificity */
 .site-main .section-message .wrap {
-	max-width: resolve($max-width + 250px);
+	max-width: calc( $max-width + 250px );
 }
 
 /* One-line layout */
 .section-slim {
-	@media (min-width: $tablet) {
+	@media ( min-width: $tablet ) {
 		.wrap {
-			@mixin flexbox row, nowrap, space-between, center;
+			@include flexbox( row, nowrap, space-between, center );
 		}
 
 		.section-title {
@@ -1357,20 +1347,20 @@ body.menu-on {
 ----------------------------------*/
 
 .section-partners {
-	@mixin section-space -0.3rem, -1rem;
+	@include section-space( -0.3rem, -1rem );
 	background: $background-section-dark;
 	text-align: center;
 
 	.section-title {
-		color: color( $color-text lightness(+20) );
+		color: color( $color-text lightness( +20 ) );
 	}
 
 	.logos {
-		@mixin flexbox row, wrap, center, center;
+		@include flexbox( row, wrap, center, center );
 
 		/* Logo image */
 		> * {
-			fill: color($color-dark lightness(+40) );
+			fill: color( $color-dark lightness( +40 ) );
 			height: 1.7rem;
 			margin: 0.4rem 1rem 1.3rem;
 			max-width: 100%;
@@ -1386,7 +1376,7 @@ body.menu-on {
 ----------------------------------*/
 
 .hentry {
-	margin-bottom: resolve($space-entry * 1.8);
+	margin-bottom: calc( $space-entry * 1.8 );
 
 	/* Featured image */
 	.entry-image {
@@ -1415,11 +1405,11 @@ body.menu-on {
 	}
 
 	a {
-		@mixin link $color-meta-link, $color-meta-link-hover;
+		@include link( $color-meta-link, $color-meta-link-hover );
 	}
 
 	.facebook {
-		mask: url(icons/facebook.svg) no-repeat 50% 50%/24px;
+		mask: url( icons/facebook.svg ) no-repeat 50% 50%/24px;
 	}
 }
 
@@ -1429,7 +1419,7 @@ body.menu-on {
 .hentry .post-categories,
 .hentry .post-tags {
 	color: $color-meta;
-	margin: 0 0 resolve($space-text - 0.7em);
+	margin: 0 0 calc( $space-text - 0.7em );
 	padding: 0;
 
 	li {
@@ -1438,7 +1428,7 @@ body.menu-on {
 	}
 
 	a {
-		@mixin button color( $color-meta lightness(+10) ), $background-button, $background-button;
+		@include button( color( $color-meta lightness( +10 ) ), $background-button, $background-button );
 		font-size: 0.75em;
 		padding: 0.6em 0.6em 0.5em;
 	}
@@ -1492,7 +1482,7 @@ body.menu-on {
 .type-benefit {
 	/* Featured image */
 	.entry-image svg {
-		fill: color( $color-primary hue(+10) saturation(-24) lightness(+4) );
+		fill: color( $color-primary hue( +10 ) saturation( -24 ) lightness( +4 ) );
 	}
 
 	/* Featured image in single pages */
@@ -1516,7 +1506,7 @@ body.menu-on {
 	.email,
 	.phone {
 		a {
-			@mixin link-incognito;
+			@include link-incognito;
 		}
 	}
 
@@ -1530,7 +1520,7 @@ body.menu-on {
 		padding: 0;
 
 		a {
-			@mixin link color( $color-meta lightness(+20) ), $color-meta;
+			@include link( color( $color-meta lightness( +20 ) ), $color-meta );
 		}
 	}
 
@@ -1538,7 +1528,7 @@ body.menu-on {
 		&:hover,
 		&:focus,
 		&:active {
-			color: $twitter;
+			color: $color-twitter;
 		}
 	}
 }
@@ -1553,12 +1543,12 @@ body.menu-on {
 
 /* Entries container */
 .section-services .entries {
-	@mixin clear-bottom-space;
+	@include clear-bottom-space;
 }
 
-.type-service:not(:first-of-type) {
-	@media (min-width: $phone) {
-		@mixin border 0rem, 0.8rem;
+.type-service:not( :first-of-type ) {
+	@media ( min-width: $phone ) {
+		@include border( 0rem, 0.8rem );
 	}
 }
 
@@ -1566,7 +1556,7 @@ body.menu-on {
 ----------------------------------*/
 
 .type-testimonial {
-	margin-top: resolve($space-entry * 2);
+	margin-top: calc( $space-entry * 2 );
 
 	.entry-image img {
 		border-radius: $border-radius-circle;
@@ -1582,7 +1572,7 @@ body.menu-on {
 .section-testimonials,
 .post-type-archive-testimonial {
 	.entries {
-		max-width: resolve($max-width + 100px);
+		max-width: calc( $max-width + 100px );
 		margin-left: auto;
 		margin-right: auto;
 	}
@@ -1593,8 +1583,8 @@ body.menu-on {
 --------------------------------------------------------------*/
 
 .site-aside {
-	@mixin section-space;
-	@mixin section-background $background-section;
+	@include section-space;
+	@include section-background( $background-section );
 
 	.widget-title {
 		font-size: $font-size-h3;
@@ -1602,7 +1592,7 @@ body.menu-on {
 	}
 
 	.search-form {
-		@mixin section-margin-bottom;
+		@include section-margin-bottom;
 	}
 
 	.search-field {
@@ -1611,25 +1601,25 @@ body.menu-on {
 
 	.contact-info {
 		a {
-			@mixin link-incognito;
+			@include link-incognito;
 		}
 	}
 
 	.map {
-		@mixin frame 325px;
+		@include frame( 325px );
 	}
 
-	@media (min-width: $phone) and (max-width: $_desktop) {
+	@media ( min-width: $phone ) and ( max-width: $_desktop ) {
 		.search-field {
 			margin-bottom: 0;
 		}
 
 		.contact-info {
-			@mixin flexbox row, wrap, space-between;
+			@include flexbox( row, wrap, space-between );
 		}
 	}
 
-	@media (min-width: $desktop) {
+	@media ( min-width: $desktop ) {
 		background: $background-section;
 		border-left: 1px solid $color-border;
 
@@ -1638,7 +1628,7 @@ body.menu-on {
 		}
 
 		.search-submit {
-			@mixin full-width;
+			@include full-width;
 		}
 	}
 }
@@ -1648,9 +1638,9 @@ body.menu-on {
 --------------------------------------------------------------*/
 
 .site-footer {
-	@mixin background-image-overlay $background-footer;
-	@mixin section-space 0rem, -$space-section;
-	/* background-image is set inline (functions.php) with WordPress */
+	@include background-image-overlay( $background-footer );
+	@include section-space( 0rem, -$space-section );
+	/* background-image is set inline ( functions.php ) with WordPress */
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -1683,18 +1673,18 @@ body.menu-on {
 		width: 125px;
 	}
 
-	@media (max-width: $_tablet) {
+	@media ( max-width: $_tablet ) {
 		/* Footer sections */
 		.wrap > * {
 			margin-bottom: $space-section;
 		}
 	}
 
-	@media (min-width: $tablet) {
+	@media ( min-width: $tablet ) {
 		text-align: left;
 
 		.wrap {
-			@mixin flexbox row, wrap, space-between;
+			@include flexbox( row, wrap, space-between );
 
 			/* Footer sections */
 			> * {
@@ -1714,19 +1704,19 @@ body.menu-on {
 	text-align: center;
 
 	.wrap {
-		@mixin flexbox column, nowrap, flex-start, center;
+		@include flexbox( column, nowrap, flex-start, center );
 	}
 
 	a {
-		@mixin link $color-footer-link, $color-footer-link-hover;
+		@include link( $color-footer-link, $color-footer-link-hover );
 	}
 
 	.site-title {
 		color: $color-footer;
 	}
 
-	@media (max-width: $_tablet) {
-		@mixin section-space;
+	@media ( max-width: $_tablet ) {
+		@include section-space;
 
 		.branding {
 			a {
@@ -1739,8 +1729,8 @@ body.menu-on {
 		}
 	}
 
-	@media (min-width: $tablet) {
-		background: color( $background-colophon a(60%) );
+	@media ( min-width: $tablet ) {
+		background: color( $background-colophon a( 60% ) );
 
 		.wrap {
 			flex-direction: row;
@@ -1765,16 +1755,16 @@ body.menu-on {
 
 /* Text meant only for screen readers. */
 .screen-reader-text {
-	@mixin screen-reader-text;
+	@include screen-reader-text;
 }
 
 /* Do not show the outline on the skip link target. */
-#content[tabindex='-1']:focus {
+#content[tabindex="-1"]:focus {
 	outline: 0;
 }
 
 /*--------------------------------------------------------------
-# CONTENT
+# PAGES
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
@@ -1784,7 +1774,7 @@ body.menu-on {
 /* Logo and site title */
 .branding {
 	a {
-		@mixin flexbox row, wrap, flex-start, center;
+		@include flexbox( row, wrap, flex-start, center );
 	}
 
 	/* Logo graphic */
@@ -1794,13 +1784,13 @@ body.menu-on {
 		position: relative;
 		top: -0.1rem;
 
-		> :nth-child(1),
-		> :nth-child(3) {
-			fill: color( $color-primary lightness(+21) );
+		> :nth-child( 1 ),
+		> :nth-child( 3 ) {
+			fill: color( $color-primary lightness( +21 ) );
 		}
 
-		> :nth-child(2) {
-			fill: color( $color-primary lightness(+32) );
+		> :nth-child( 2 ) {
+			fill: color( $color-primary lightness( +32 ) );
 		}
 	}
 
@@ -1808,48 +1798,48 @@ body.menu-on {
 	.site-title {
 		font-family: $font-family-heading;
 		font-size: 1.6em;
-		font-weight: $font-weight-heading-light;
+		font-weight: $font-weight-heading;
 		margin: 0;
 	}
 }
 
 .contact-info {
-	@mixin clear-bottom-space;
+	@include clear-bottom-space;
 	margin-bottom: $space-entry;
 }
 
 /* Make space for svg icon */
 .address {
-	padding-left: resolve(1em + $space-icon) ;
-	text-indent: resolve(-1em - $space-icon);
+	padding-left: calc( 1em + $space-icon ) ;
+	text-indent: calc( -1em - $space-icon );
 }
 
 .social-links {
-	@mixin flexbox row, wrap, center;
+	@include flexbox( row, wrap, center );
 
 	.icon {
-		@mixin image-replacement auto, 40px;
+		@include image-replacement( auto, 40px );
 		background: currentColor;
 	}
 
 	.facebook .icon {
-		mask: url(icons/facebook.svg) no-repeat 50% 50%/24px;
+		mask: url( icons/facebook.svg ) no-repeat 50% 50%/24px;
 	}
 
 	.googleplus .icon {
-		mask: url(icons/googleplus.svg) no-repeat 50% 50%/24px;
+		mask: url( icons/googleplus.svg ) no-repeat 50% 50%/24px;
 	}
 
 	.instagram .icon {
-		mask: url(icons/instagram.svg) no-repeat 50% 50%/24px;
+		mask: url( icons/instagram.svg ) no-repeat 50% 50%/24px;
 	}
 
 	.linkedin .icon {
-		mask: url(icons/linkedin.svg) no-repeat 50% 50%/24px;
+		mask: url( icons/linkedin.svg ) no-repeat 50% 50%/24px;
 	}
 
 	.twitter .icon {
-		mask: url(icons/twitter.svg) no-repeat 50% 50%/24px;
+		mask: url( icons/twitter.svg ) no-repeat 50% 50%/24px;
 	}
 }
 
@@ -1861,7 +1851,7 @@ body.menu-on {
 }
 
 .video {
-	@mixin frame;
+	@include frame;
 	margin-top: 2.5rem;
 }
 
@@ -1873,7 +1863,7 @@ body.menu-on {
 	.section-benefits,
 	.section-employees,
 	.section-testimonials {
-		@mixin section-background $background-section;
+		@include section-background( $background-section );
 	}
 }
 
@@ -1885,342 +1875,4 @@ body.menu-on {
 	.site-main {
 		text-align: center;
 	}
-}
-
-/*--------------------------------------------------------------
-# WORDPRESS
---------------------------------------------------------------*/
-
-/*--------------------------------------------------------------
-# Widgets
---------------------------------------------------------------*/
-
-.widget {
-	@mixin clear-bottom-space;
-	margin: 0 0 $space-entry;
-}
-
-/*--------------------------------------------------------------
-# Posts and pages
---------------------------------------------------------------*/
-
-.sticky {
-	display: block;
-}
-
-.updated:not(.published) {
-	display: none;
-}
-
-.page-links {
-	clear: both;
-	margin: 0 0 1.5em;
-}
-
-/*--------------------------------------------------------------
-# Comments
---------------------------------------------------------------*/
-
-/* Parent container of comments list and comment form */
-.comments-area {
-	ol {
-		list-style: none;
-	}
-}
-
-.comment-reply-link,
-#cancel-comment-reply-link {
-	@mixin button;
-	@mixin button-outline;
-	@mixin button-small 0.2em;
-}
-
-/* Comments list
-----------------------------------*/
-
-/* Comments list title */
-.comments-title {
-	@mixin border;
-	margin-bottom: $space-text;
-}
-
-/* Comments list */
-.comment-list {
-	/* Commenter photo */
-	.avatar {
-		float: left;
-		margin-right: 1rem;
-	}
-
-	/* Nested comment replies */
-	.children {
-		margin-left: 50px;
-
-		& .children {
-			margin-left: 0;
-		}
-	}
-}
-
-/* Comments author and date */
-.comment-meta {
-	margin-bottom: $space-text;
-
-	a {
-		@mixin link-incognito;
-	}
-
-	.says {
-		display: none;
-	}
-}
-
-.comment-metadata {
-	color: $color-meta;
-
-	a {
-		color: $color-meta;
-	}
-}
-
-.comment-awaiting-moderation {
-	font-weight: $font-weight-bold;
-	margin-top: $space-text;
-}
-
-/* The comment */
-.comment-body {
-	@mixin section-margin-bottom;
-}
-
-.comment-content a {
-	word-wrap: break-word;
-}
-
-.bypostauthor {
-	display: block;
-}
-
-/* Comment form
-----------------------------------*/
-
-/* Parent container of comment form */
-.comment-respond {
-	@mixin border;
-}
-
-/* Comment form */
-.comment-form {
-	label {
-		@mixin screen-reader-text;
-	}
-
-	textarea {
-		height: 8rem;
-	}
-}
-
-/* Cancel reply link wrapper */
-.comment-reply-title small {
-	font-size: 1rem;
-}
-
-/* Cancel reply link  */
-#cancel-comment-reply-link {
-	float: right;
-}
-
-/*--------------------------------------------------------------
-# Media
---------------------------------------------------------------*/
-
-.page-content .wp-smiley,
-.entry-content .wp-smiley,
-.comment-content .wp-smiley {
-	border: none;
-	margin-bottom: 0;
-	margin-top: 0;
-	padding: 0;
-}
-
-/* Make sure embeds and iframes fit their containers. */
-embed,
-iframe,
-object {
-	max-width: 100%;
-}
-
-.size-full {
-	margin-bottom: $space-text;
-}
-
-/* Captions
-----------------------------------*/
-
-.wp-caption {
-	margin-bottom: 1.5em;
-	max-width: 100%;
-
-	img[class*='wp-image-'] {
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.wp-caption-text {
-		margin: 0.8075em 0;
-	}
-}
-
-.wp-caption-text {
-	@mixin heading h4;
-	margin: 0.8em 0 1em;
-	text-align: center;
-}
-
-/* Galleries
-----------------------------------*/
-.gallery {
-	@mixin flexbox;
-	@mixin section-space -1rem;
-	margin: 0 resolve(-$space-gallery / 2) $space-entry;
-}
-
-.gallery-item {
-	margin: 0 0 $space-gallery;
-	text-align: center;
-	width: 100%;
-
-	a {
-		cursor: zoom-in;
-		display: block;
-
-		&:hover,
-		&:focus {
-			opacity: 0.9;
-		}
-	}
-
-	img {
-		margin: 0;
-		width: 100%;
-	}
-
-	@media (min-width: $phone) {
-		@mixin column-space $space-gallery;
-		@mixin column-width 2, $space-gallery;
-
-		.gallery-columns-3 & {
-			@mixin column-width 3, $space-gallery;
-		}
-
-		.gallery-columns-4 & {
-			@mixin column-width 4, $space-gallery;
-		}
-
-		.gallery-columns-5 & {
-			@mixin column-width 5, $space-gallery;
-		}
-
-		.gallery-columns-6 & {
-			@mixin column-width 6, $space-gallery;
-		}
-
-		.gallery-columns-7 & {
-			@mixin column-width 7, $space-gallery;
-		}
-
-		.gallery-columns-8 & {
-			@mixin column-width 8, $space-gallery;
-		}
-
-		.gallery-columns-9 & {
-			@mixin column-width 9, $space-gallery;
-		}
-	}
-}
-
-/*--------------------------------------------------------------
-# PLUGINS
---------------------------------------------------------------*/
-
-/*--------------------------------------------------------------
-# Contact Form 7
---------------------------------------------------------------*/
-
-/* Add space to the top of the form if it follows a text */
-p + .wpcf7 {
-	margin-top: $space-section;
-}
-
-/* Loading graphic that appears when form is submitted */
-div.wpcf7 .form-button {
-	position: relative;
-
-	.ajax-loader {
-		background-image: url(images/loading.svg);
-		height: 2rem;
-		position: absolute;
-		width: 2rem;
-	}
-
-	@media (max-width: $_phone) {
-		padding-bottom: 1rem;
-
-		.ajax-loader {
-			bottom: -1.8rem;
-			left: 50%;
-			transform: translateX(-50%);
-		}
-	}
-
-	@media (min-width: $phone) {
-		display: inline-block;
-
-		.ajax-loader {
-			top: 50%;
-			right: -2.6rem;
-			transform: translateY(-50%);
-		}
-	}
-}
-
-/* Invalid form field */
-.wpcf7-not-valid {
-	box-shadow: inset 0	0 0 2px color( $color-error a(60%) );
-}
-
-/* Message displayed under invalid form field */
-span.wpcf7-not-valid-tip {
-	color: $color-error;
-	margin-top: .5em;
-}
-
-/* Prevent layout break when 'span.not-valid-tip' is displayed */
-.wpcf7-form .form-button {
-	vertical-align: top;
-}
-
-/* Message displayed at the bottom of the form */
-div.wpcf7-response-output {
-	border: 0;
-	margin: $space-section 0 0;
-	padding: $space-box;
-	background: hsla(0, 0%, 90%, 0.7);
-	border-radius: 5px;
-}
-
-/* Success message */
-div.wpcf7-mail-sent-ok::before {
-	content: '👍';
-	font-size: 1.8em;
-	padding-right: 0.3em;
-}
-
-/* Error message */
-div.wpcf7-validation-errors::before,
-div.wpcf7-mail-sent-ng::before {
-	content: '☹️';
-	font-size: 1.5em;
-	padding-right: 0.3em;
 }

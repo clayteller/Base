@@ -1,0 +1,267 @@
+/**
+ * WordPress core styles imported into style.css
+ *
+ * @package Base
+ * @author  Clay Teller
+ */
+
+ @import "variables";
+ @import "mixins";
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS
+----------------------------------------------------------------
+# Widgets
+# Posts/pages
+# Comments
+# Media
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Widgets
+--------------------------------------------------------------*/
+
+.widget {
+	@include clear-bottom-space;
+	margin: 0 0 $space-entry;
+}
+
+/*--------------------------------------------------------------
+# Posts/pages
+--------------------------------------------------------------*/
+
+.sticky {
+	display: block;
+}
+
+.updated:not( .published ) {
+	display: none;
+}
+
+.page-links {
+	clear: both;
+	margin: 0 0 1.5em;
+}
+
+/*--------------------------------------------------------------
+# Comments
+--------------------------------------------------------------*/
+
+/* Parent container of comments list and comment form */
+.comments-area {
+	ol {
+		list-style: none;
+	}
+}
+
+.comment-reply-link,
+#cancel-comment-reply-link {
+	@include button;
+	@include button-outline;
+	@include button-small( 0.2em );
+}
+
+/* Comments list
+----------------------------------*/
+
+/* Comments list title */
+.comments-title {
+	@include border;
+	margin-bottom: $space-text;
+}
+
+/* Comments list */
+.comment-list {
+	/* Commenter photo */
+	.avatar {
+		float: left;
+		margin-right: 1rem;
+	}
+
+	/* Nested comment replies */
+	.children {
+		margin-left: 50px;
+
+		& .children {
+			margin-left: 0;
+		}
+	}
+}
+
+/* Comments author and date */
+.comment-meta {
+	margin-bottom: $space-text;
+
+	a {
+		@include link-incognito;
+	}
+
+	.says {
+		display: none;
+	}
+}
+
+.comment-metadata {
+	color: $color-meta;
+
+	a {
+		color: $color-meta;
+	}
+}
+
+.comment-awaiting-moderation {
+	font-weight: $font-weight-bold;
+	margin-top: $space-text;
+}
+
+/* The comment */
+.comment-body {
+	@include section-margin-bottom;
+}
+
+.comment-content a {
+	word-wrap: break-word;
+}
+
+.bypostauthor {
+	display: block;
+}
+
+/* Comment form
+----------------------------------*/
+
+/* Parent container of comment form */
+.comment-respond {
+	@include border;
+}
+
+/* Comment form */
+.comment-form {
+	label {
+		@include screen-reader-text;
+	}
+
+	textarea {
+		height: 8rem;
+	}
+}
+
+/* Cancel reply link wrapper */
+.comment-reply-title small {
+	font-size: 1rem;
+}
+
+/* Cancel reply link  */
+#cancel-comment-reply-link {
+	float: right;
+}
+
+/*--------------------------------------------------------------
+# Media
+--------------------------------------------------------------*/
+
+.page-content .wp-smiley,
+.entry-content .wp-smiley,
+.comment-content .wp-smiley {
+	border: none;
+	margin-bottom: 0;
+	margin-top: 0;
+	padding: 0;
+}
+
+/* Make sure embeds and iframes fit their containers. */
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+.size-full {
+	margin-bottom: $space-text;
+}
+
+/* Captions
+----------------------------------*/
+
+.wp-caption {
+	margin-bottom: 1.5em;
+	max-width: 100%;
+
+	img[class*="wp-image-"] {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.wp-caption-text {
+		margin: 0.8075em 0;
+	}
+}
+
+.wp-caption-text {
+	@include heading( h4 );
+	margin: 0.8em 0 1em;
+	text-align: center;
+}
+
+/* Galleries
+----------------------------------*/
+.gallery {
+	@include flexbox;
+	@include section-space( -1rem );
+	margin: 0 calc( -$space-gallery / 2 ) $space-entry;
+}
+
+.gallery-item {
+	margin: 0 0 $space-gallery;
+	text-align: center;
+	width: 100%;
+
+	a {
+		cursor: zoom-in;
+		display: block;
+
+		&:hover,
+		&:focus {
+			opacity: 0.9;
+		}
+	}
+
+	img {
+		margin: 0;
+		width: 100%;
+	}
+
+	@media ( min-width: $phone ) {
+		@include column-space( $space-gallery );
+		@include column-width( 2, $space-gallery );
+
+		.gallery-columns-3 & {
+			@include column-width( 3, $space-gallery );
+		}
+
+		.gallery-columns-4 & {
+			@include column-width( 4, $space-gallery );
+		}
+
+		.gallery-columns-5 & {
+			@include column-width( 5, $space-gallery );
+		}
+
+		.gallery-columns-6 & {
+			@include column-width( 6, $space-gallery );
+		}
+
+		.gallery-columns-7 & {
+			@include column-width( 7, $space-gallery );
+		}
+
+		.gallery-columns-8 & {
+			@include column-width( 8, $space-gallery );
+		}
+
+		.gallery-columns-9 & {
+			@include column-width( 9, $space-gallery );
+		}
+	}
+}

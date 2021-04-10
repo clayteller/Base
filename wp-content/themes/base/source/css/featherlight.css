@@ -6,8 +6,7 @@
  * MIT Licensed.
 **/
 
-@import "_variables";
-@import "_mixins";
+@import "inc/variables";
 
 @media all {
 	html.with-featherlight {
@@ -41,7 +40,7 @@
 
 		/* position: trick to center content vertically */
 		&::before {
-			content: '';
+			content: "";
 			display: inline-block;
 			height: 100%;
 			vertical-align: middle;
